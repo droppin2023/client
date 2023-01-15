@@ -1,6 +1,7 @@
 import { Button, Text } from '@chakra-ui/react'
 
 import SectionHeader from '@components/landing/SectionHeader'
+import Ornament from '@components/shared/Ornament'
 
 import { orange, primary, primaryHighlight } from '@constants/colors'
 import * as sty from './JoinSection.styles'
@@ -8,6 +9,7 @@ import * as sty from './JoinSection.styles'
 const JoinSection = () => {
   return (
     <div css={[sty.background]}>
+      <Ornament variant="stars" top="-200px" right="-500px" />
       <div css={[sty.container]}>
         <div>
           <SectionHeader

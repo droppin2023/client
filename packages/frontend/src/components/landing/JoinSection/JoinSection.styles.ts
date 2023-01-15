@@ -5,6 +5,7 @@ export const background = css`
   display: flex;
   justify-content: center;
   padding: 48px 0;
+  position: relative;
 `
 
 export const container = css`
