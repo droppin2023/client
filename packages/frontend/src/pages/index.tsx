@@ -1,27 +1,23 @@
-import { HomePageTitle } from '@components/home/HomePageTitle'
-import { HomeTopBar } from '@components/home/HomeTopBar'
-import { CenterBody } from '@components/layout/CenterBody'
-import { GreeterContractInteractions } from '@components/web3/GreeterContractInteractions'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { VStack } from '@chakra-ui/react'
+import ActiveMembersSection from '@components/landing/ActiveMembersSection'
+import CoverSection from '@components/landing/CoverSection'
+import DiscoverSection from '@components/landing/DiscoverSection'
+import JoinSection from '@components/landing/JoinSection'
+import QuestSection from '@components/landing/QuestSection'
+
 import type { NextPage } from 'next'
 import 'twin.macro'
 
 const HomePage: NextPage = () => {
   return (
     <>
-      {/* Top Bar */}
-      <HomeTopBar />
-
-      <CenterBody tw="mt-20 mb-10 px-5">
-        {/* Title */}
-        <HomePageTitle />
-
-        {/* Rainbowkit Connect Button */}
-        <ConnectButton />
-
-        {/* Greeter.sol Contract Interactions */}
-        <GreeterContractInteractions />
-      </CenterBody>
+      <CoverSection />
+      <VStack margin="100px 0">
+        <DiscoverSection />
+        <JoinSection />
+        <QuestSection />
+        <ActiveMembersSection />
+      </VStack>
     </>
   )
 }

@@ -9,6 +9,7 @@ const customStyles = css`
   body {
     ${tw`bg-black text-white`}
     ${tw`relative h-screen min-h-screen`}
+    overflow-x: hidden;
   }
 
   #__next,
