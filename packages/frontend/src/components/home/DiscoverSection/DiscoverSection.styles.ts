@@ -1,7 +1,7 @@
 import { css } from 'twin.macro'
 
 export const background = css`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   padding: 200px 0 120px 0;
