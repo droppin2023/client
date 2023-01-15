@@ -1,3 +1,4 @@
+import { VStack } from '@chakra-ui/react'
 import ActiveMembersSection from '@components/landing/ActiveMembersSection'
 import CoverSection from '@components/landing/CoverSection'
 import DiscoverSection from '@components/landing/DiscoverSection'
@@ -11,10 +12,12 @@ const HomePage: NextPage = () => {
   return (
     <>
       <CoverSection />
-      <DiscoverSection />
-      <JoinSection />
-      <QuestSection />
-      <ActiveMembersSection />
+      <VStack margin="100px 0">
+        <DiscoverSection />
+        <JoinSection />
+        <QuestSection />
+        <ActiveMembersSection />
+      </VStack>
     </>
   )
 }

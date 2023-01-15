@@ -15,6 +15,7 @@ import Router from 'next/router'
 import NProgress from 'nprogress'
 import { WagmiConfig } from 'wagmi'
 
+import Footer from '@components/shared/Footer'
 import Navbar from '@components/shared/Navbar'
 
 // Router Loading Animation with @tanem/react-nprogress
@@ -64,6 +65,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <BaseLayout>
                   <Navbar />
                   <Component {...pageProps} />
+                  <Footer />
                 </BaseLayout>
               </RainbowKitProvider>
             </WagmiConfig>

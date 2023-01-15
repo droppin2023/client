@@ -4,7 +4,7 @@ export const background = css`
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 200px 0 120px 0;
+  padding: 48px 0;
 `
 
 export const container = css`
