@@ -8,8 +8,6 @@ export const container = css`
   justify-content: center;
   align-items: center;
   position: relative;
-
-  background: red;
 `
 export const bannerOrnament = css`
   position: absolute;
