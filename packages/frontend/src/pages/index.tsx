@@ -1,7 +1,7 @@
-import CoverSection from '@components/home/CoverSection'
-import DiscoverSection from '@components/home/DiscoverSection'
-import JoinSection from '@components/home/JoinSection'
-import QuestSection from '@components/home/QuestSection'
+import CoverSection from '@components/landing/CoverSection'
+import DiscoverSection from '@components/landing/DiscoverSection'
+import JoinSection from '@components/landing/JoinSection'
+import QuestSection from '@components/landing/QuestSection'
 
 import type { NextPage } from 'next'
 import 'twin.macro'

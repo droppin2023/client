@@ -5,7 +5,7 @@ import People from '@components/icons/People'
 import SideScrollRight from '@components/icons/SideScrollRight'
 import DAOCard from '@components/shared/DAOCard'
 
-import SectionHeader from '@components/home/SectionHeader'
+import SectionHeader from '@components/landing/SectionHeader'
 
 import { primaryHighlight } from '@constants/colors'
 import * as sty from './DiscoverSection.styles'

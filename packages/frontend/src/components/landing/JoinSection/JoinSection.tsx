@@ -1,6 +1,6 @@
 import { Button, Text } from '@chakra-ui/react'
 
-import SectionHeader from '@components/home/SectionHeader'
+import SectionHeader from '@components/landing/SectionHeader'
 
 import { orange, primary, primaryHighlight } from '@constants/colors'
 import * as sty from './JoinSection.styles'
