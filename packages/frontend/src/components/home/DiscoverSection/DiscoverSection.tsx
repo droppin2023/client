@@ -1,40 +1,49 @@
 // import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { HStack, Text } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 
+import People from '@components/icons/People'
+import SideScrollRight from '@components/icons/SideScrollRight'
 import DAOCard from '@components/shared/DAOCard'
 
 import SectionHeader from '@components/home/SectionHeader'
 
+import { primaryHighlight } from '@constants/colors'
 import * as sty from './DiscoverSection.styles'
+import { MOCK_DAO_LIST } from './mockData'
 
 const DiscoverSection = () => {
-  const renderCTAIcon = () => (
-    <div css={[sty.ctaIcon]}>
-      <div />
-      <div />
-      <div></div>
-    </div>
-  )
-
   return (
     <div css={[sty.background]}>
       <div css={[sty.container]}>
         <SectionHeader
-          title="Discover most active DAOs"
-          subtitle="droppin allows you to evaluate different DAOs based on real-time activities."
+          title={
+            <HStack spacing={2}>
+              <People />
+              <div>Discover most active Communities</div>
+            </HStack>
+          }
+          subtitle="Droppin allows you to evaluate different Communities based on real-time activities"
         />
         <div css={[sty.carouselSection]}>
           <HStack spacing="16px">
-            <DAOCard name="Lepak DAO" memberCount={190} repScore={3.5} order={1} />
-            <DAOCard name="Mamak DAO" memberCount={290} repScore={3.5} order={2} />
-            <DAOCard name="Makan DAO" memberCount={390} repScore={3.5} order={3} />
+            {MOCK_DAO_LIST.map((item, index) => (
+              <DAOCard
+                name={item.name}
+                key={index}
+                memberCount={item.memberCount}
+                memberList={item.members}
+                repScore={item.repScore}
+                repUnit={item.repUnit}
+                order={index + 1}
+              />
+            ))}
           </HStack>
-          <div>
-            <Text fontSize={'3xl'} as="b">
-              Try droppin to see more !
-            </Text>
-            {renderCTAIcon()}
-          </div>
+          <Button variant="ghost" bg="transparent" _hover={{ color: primaryHighlight }}>
+            <HStack spacing="24px">
+              <SideScrollRight width="48px" height="48px" />
+              <Text fontSize={'3xl'}>Try droppin to see more !</Text>
+            </HStack>
+          </Button>
         </div>
       </div>
     </div>

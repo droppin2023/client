@@ -1,24 +1,22 @@
 import { css } from 'twin.macro'
 
-import bannerOrnamentImg from './assets/banner-ornament.svg'
-
 export const container = css`
   width: 100vw;
-  height: 50vh;
+  height: auto;
+  padding: 50px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 `
 export const bannerOrnament = css`
-  background-image: url(${bannerOrnamentImg});
   position: absolute;
-  top: -140px;
+  top: -100px;
   left: 0;
   z-index: 0;
 `
 export const content = css`
-  width: 90%;
+  width: 85%;
   z-index: 5;
 `
 

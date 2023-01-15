@@ -4,6 +4,7 @@ export const background = '#000000'
 
 // app colors
 export const primary = '#0CC993'
+export const primaryHighlight = '#9FF9E0'
 export const primaryWeak = 'rgba(1, 116, 83, 0.47)'
 
 export const orange = '#FFA900'

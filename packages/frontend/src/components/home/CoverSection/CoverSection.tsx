@@ -14,14 +14,13 @@ const CoverSection = () => {
       <Image src={bannerOrnamentImg} alt="banner" css={[sty.bannerOrnament]} />
       <div css={[sty.content]}>
         <Flex justifyContent={'space-between'} alignItems="center">
-          <VStack spacing="12px" alignItems={'left'}>
+          <VStack spacing="12px" alignItems={'left'} width="60%">
             <Text fontSize="4xl" as="b" lineHeight={1.2}>
-              Explore, Join DAOs and get Rewards from activities.
+              Explore, Join Communities and Get Reward from Activity
             </Text>
             <Text fontSize="lg" lineHeight={1.2}>
-              Discover new and interesting DAOs and join them with simple but secure zk-based
-              claims. And get different rewards to enjoy on-chain native social life! – XP, Badges,
-              SBTs.
+              Discover new and interesting communities and join them with simple but secure zk based
+              quests. And get different rewards to enjoy on-chain native social life! – DROP, Badges
             </Text>
             <HStack spacing={5}>
               <Button
@@ -38,7 +37,7 @@ const CoverSection = () => {
               </Button>
             </HStack>
           </VStack>
-          <Image src={coverImg} alt="Cover Image" width={400} height={375} />
+          <Image src={coverImg} alt="Cover Image" width={450} height={421} />
         </Flex>
       </div>
     </div>
