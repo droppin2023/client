@@ -1,3 +1,4 @@
+import ActiveMembersSection from '@components/landing/ActiveMembersSection'
 import CoverSection from '@components/landing/CoverSection'
 import DiscoverSection from '@components/landing/DiscoverSection'
 import JoinSection from '@components/landing/JoinSection'
@@ -13,6 +14,7 @@ const HomePage: NextPage = () => {
       <DiscoverSection />
       <JoinSection />
       <QuestSection />
+      <ActiveMembersSection />
     </>
   )
 }
