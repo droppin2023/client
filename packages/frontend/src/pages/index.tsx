@@ -12,7 +12,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <CoverSection />
-      <VStack margin="100px 0">
+      <VStack margin="100px 0" overflowX={'hidden'}>
         <DiscoverSection />
         <JoinSection />
         <QuestSection />

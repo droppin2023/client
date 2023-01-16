@@ -20,7 +20,11 @@ const Navbar = () => {
         <InputLeftElement pointerEvents={'none'}>
           <Search />
         </InputLeftElement>
-        <Input variant="filled" placeholder="Search droppin" bgColor={primaryWeak} />
+        <Input
+          variant="filled"
+          placeholder="Search communities or address..."
+          bgColor={primaryWeak}
+        />
       </InputGroup>
       <HStack spacing="24px">
         <Button variant="ghost">Explore</Button>

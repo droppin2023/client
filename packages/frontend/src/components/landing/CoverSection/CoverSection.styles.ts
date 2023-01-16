@@ -1,7 +1,7 @@
 import { css } from 'twin.macro'
 
 export const container = css`
-  width: 100%;
+  width: 100vw;
   height: auto;
   padding: 50px 0;
   display: flex;
@@ -10,6 +10,7 @@ export const container = css`
   position: relative;
 `
 export const bannerOrnament = css`
+  width: 100%;
   position: absolute;
   top: -100px;
   left: 0;
