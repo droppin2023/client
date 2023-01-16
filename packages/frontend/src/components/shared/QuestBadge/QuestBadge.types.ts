@@ -5,6 +5,7 @@ export interface QuestBadgeProps {
   img?: StaticImageData
   name: string
   recentActivity?: string
+  minter?: string
   isLocked: boolean
   lockedMessage?: string
 }

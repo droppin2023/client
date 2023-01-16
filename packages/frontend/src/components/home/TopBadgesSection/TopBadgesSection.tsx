@@ -3,29 +3,28 @@ import { Button, HStack } from '@chakra-ui/react'
 import { primaryHighlight } from '@constants/colors'
 
 import SideScrollRight from '@components/icons/SideScrollRight'
-import DAOCard from '@components/shared/DAOCard'
+import QuestBadge from '@components/shared/QuestBadge'
 import SectionHeader from '@components/shared/SectionHeader'
 
-import * as sty from './TopCommunitySection.styles'
+import * as sty from './TopBadgesSection.styles'
 
 // TODO: integrate real data
-import { MOCK_DAO_LIST } from '@mockData'
+import { MOCK_BADGE_LIST } from '@mockData'
 
-const TopCommunitySection = () => {
+const TopBadgesSection = () => {
   return (
     <div css={[sty.container]}>
-      <SectionHeader title="Top communities" subtitle="" />
+      <SectionHeader title="Top badges" subtitle="" />
       <HStack marginTop="36px">
-        <HStack spacing={5}>
-          {MOCK_DAO_LIST.slice(0, 5).map((item, index) => (
-            <DAOCard
-              name={item.name}
+        <HStack spacing={4}>
+          {MOCK_BADGE_LIST.slice(0, 5).map((item, index) => (
+            <QuestBadge
               key={index}
-              memberCount={item.memberCount}
-              memberList={item.members}
-              repScore={item.repScore}
-              repUnit={item.repUnit}
-              description={item.description.substring(0, 40) + '...'}
+              daoName={item.daoName}
+              name={item.name}
+              recentActivity={item.recentActivity}
+              isLocked={item.isLocked}
+              minter={item.minter}
             />
           ))}
         </HStack>
@@ -45,4 +44,4 @@ const TopCommunitySection = () => {
   )
 }
 
-export default TopCommunitySection
+export default TopBadgesSection

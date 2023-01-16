@@ -12,7 +12,7 @@ export interface DAOCardProps {
   memberList: MemberListItem[]
   repScore: number
   repUnit?: string
-  order: number
+  order?: number
   showBorder?: boolean
   description?: string
 }
