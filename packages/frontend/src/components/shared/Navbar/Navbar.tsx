@@ -1,7 +1,7 @@
 import { Button, Flex, HStack, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 
 import { background, orange, orangeHighlight, primaryWeak } from '@constants/colors'
-
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 import DroppinLogo from '@components/icons/DroppinLogo'
 import Search from '@components/icons/Search'
 
@@ -24,9 +24,10 @@ const Navbar = () => {
       </InputGroup>
       <HStack spacing="24px">
         <Button variant="ghost">Explore</Button>
-        <Button variant="filled" bgColor={orange} _hover={{ bg: orangeHighlight }}>
+        {/* <Button variant="filled" bgColor={orange} _hover={{ bg: orangeHighlight }}>
           Connect Wallet
-        </Button>
+        </Button> */}
+        <ConnectButton />
       </HStack>
     </Flex>
   )
