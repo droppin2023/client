@@ -110,6 +110,90 @@ export const MOCK_DAO_LIST = [
       },
     ],
   },
+  {
+    name: 'Makan DAO',
+    memberCount: 10,
+    repScore: 35235636,
+    repUnit: 'EATS',
+    members: [
+      {
+        name: 'John',
+        img: mockAvatar1,
+      },
+      {
+        name: 'William',
+        img: mockAvatar2,
+      },
+      {
+        name: 'Sally',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Mona',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Albert',
+        img: mockAvatar1,
+      },
+    ],
+  },
+  {
+    name: 'Makan DAO',
+    memberCount: 10,
+    repScore: 35235636,
+    repUnit: 'EATS',
+    members: [
+      {
+        name: 'John',
+        img: mockAvatar1,
+      },
+      {
+        name: 'William',
+        img: mockAvatar2,
+      },
+      {
+        name: 'Sally',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Mona',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Albert',
+        img: mockAvatar1,
+      },
+    ],
+  },
+  {
+    name: 'Makan DAO',
+    memberCount: 10,
+    repScore: 35235636,
+    repUnit: 'EATS',
+    members: [
+      {
+        name: 'John',
+        img: mockAvatar1,
+      },
+      {
+        name: 'William',
+        img: mockAvatar2,
+      },
+      {
+        name: 'Sally',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Mona',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Albert',
+        img: mockAvatar1,
+      },
+    ],
+  },
 ]
 
 export const MOCK_BADGE_LIST = [

@@ -2,9 +2,9 @@ import { css } from 'twin.macro'
 
 import { foreground } from '@constants/colors'
 
-export const imgSlot = css`
+export const imgSlot = (showBorder: boolean) => css`
   border-radius: 8px;
-  border: 2px dotted ${foreground};
+  ${showBorder ? `border: 2px dotted ${foreground};` : ''}
 
   position: relative;
 

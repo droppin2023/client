@@ -17,11 +17,12 @@ const DAOCard = ({
   repScore,
   repUnit = 'REP',
   order,
+  showBorder = false,
 }: DAOCardProps) => {
   return (
     <Card variant="unstyled" width="200px">
       <CardBody>
-        <div css={[sty.imgSlot]}>
+        <div css={[sty.imgSlot(showBorder)]}>
           <Image src={imgUrl} alt="DAO Image" width={200} height={200} css={[sty.img]} />
           <Text
             fontSize="2xl"

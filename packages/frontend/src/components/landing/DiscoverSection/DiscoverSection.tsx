@@ -37,6 +37,7 @@ const DiscoverSection = () => {
                 repScore={item.repScore}
                 repUnit={item.repUnit}
                 order={index + 1}
+                showBorder
               />
             ))}
           </HStack>
