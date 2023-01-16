@@ -5,10 +5,12 @@ import People from '@components/icons/People'
 import SideScrollRight from '@components/icons/SideScrollRight'
 import DAOCard from '@components/shared/DAOCard'
 
-import SectionHeader from '@components/landing/SectionHeader'
+import SectionHeader from '@components/shared/SectionHeader'
 
 import { primaryHighlight } from '@constants/colors'
 import * as sty from './DiscoverSection.styles'
+
+// TODO: integrate real data
 import { MOCK_DAO_LIST } from './mockData'
 
 const DiscoverSection = () => {

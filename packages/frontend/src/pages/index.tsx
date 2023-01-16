@@ -8,7 +8,7 @@ import QuestSection from '@components/landing/QuestSection'
 import type { NextPage } from 'next'
 import 'twin.macro'
 
-const HomePage: NextPage = () => {
+const LandingPage: NextPage = () => {
   return (
     <>
       <CoverSection />
@@ -22,4 +22,4 @@ const HomePage: NextPage = () => {
   )
 }
 
-export default HomePage
+export default LandingPage
