@@ -10,15 +10,15 @@ import 'twin.macro'
 
 const LandingPage: NextPage = () => {
   return (
-    <>
+    <VStack spacing="120px">
       <CoverSection />
-      <VStack margin="100px 0" overflowX={'hidden'}>
+      <VStack margin="200px 0" overflowX={'hidden'}>
         <DiscoverSection />
         <JoinSection />
         <QuestSection />
         <ActiveMembersSection />
       </VStack>
-    </>
+    </VStack>
   )
 }
 

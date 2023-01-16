@@ -28,7 +28,7 @@ const DiscoverSection = () => {
         />
         <div css={[sty.carouselSection]}>
           <HStack spacing="16px">
-            {MOCK_DAO_LIST.map((item, index) => (
+            {MOCK_DAO_LIST.slice(0, 3).map((item, index) => (
               <DAOCard
                 name={item.name}
                 key={index}
