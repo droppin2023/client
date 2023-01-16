@@ -1,6 +1,7 @@
 // basic colors
 export const foreground = '#ffffff'
 export const background = '#000000'
+export const background2 = '#000000'
 
 // app colors
 export const primary = '#0CC993'
