@@ -1,12 +1,14 @@
 import type { NextPage } from 'next'
-import 'twin.macro'
+
+import { VStack } from '@chakra-ui/react'
+import TopCommunitySection from '@components/home/TopCommunitySection'
 
 const HomePage: NextPage = () => {
   return (
     <>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident autem nisi exercitationem
-      veritatis corrupti rem esse ipsam suscipit. Non recusandae voluptas similique doloremque enim
-      accusantium quos illo minima consequuntur consectetur.
+      <VStack width="85%" alignSelf={'center'}>
+        <TopCommunitySection />
+      </VStack>
     </>
   )
 }

@@ -11,7 +11,7 @@ import { primaryHighlight } from '@constants/colors'
 import * as sty from './DiscoverSection.styles'
 
 // TODO: integrate real data
-import { MOCK_DAO_LIST } from './mockData'
+import { MOCK_DAO_LIST } from '@mockData'
 
 const DiscoverSection = () => {
   return (
