@@ -15,7 +15,7 @@ const TopCommunitySection = () => {
   return (
     <div css={[sty.container]}>
       <SectionHeader title="Top communities" subtitle="" />
-      <HStack>
+      <HStack marginTop="36px">
         <HStack spacing={5}>
           {MOCK_DAO_LIST.slice(0, 6).map((item, index) => (
             <DAOCard
@@ -25,7 +25,7 @@ const TopCommunitySection = () => {
               memberList={item.members}
               repScore={item.repScore}
               repUnit={item.repUnit}
-              order={index + 1}
+              description={item.description.substring(0, 40) + '...'}
             />
           ))}
         </HStack>

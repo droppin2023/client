@@ -14,4 +14,5 @@ export interface DAOCardProps {
   repUnit?: string
   order: number
   showBorder?: boolean
+  description?: string
 }

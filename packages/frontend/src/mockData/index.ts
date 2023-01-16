@@ -31,6 +31,8 @@ export const MOCK_DAO_LIST = [
     memberCount: 125,
     repScore: 235235636,
     repUnit: 'LEP',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
     members: [
       {
         name: 'John',
@@ -59,6 +61,8 @@ export const MOCK_DAO_LIST = [
     memberCount: 190,
     repScore: 5562636,
     repUnit: 'MAM',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
     members: [
       {
         name: 'John',
@@ -87,6 +91,8 @@ export const MOCK_DAO_LIST = [
     memberCount: 10,
     repScore: 35235636,
     repUnit: 'EATS',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
     members: [
       {
         name: 'John',
@@ -115,6 +121,8 @@ export const MOCK_DAO_LIST = [
     memberCount: 10,
     repScore: 35235636,
     repUnit: 'EATS',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
     members: [
       {
         name: 'John',
@@ -143,6 +151,8 @@ export const MOCK_DAO_LIST = [
     memberCount: 10,
     repScore: 35235636,
     repUnit: 'EATS',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
     members: [
       {
         name: 'John',
@@ -171,6 +181,68 @@ export const MOCK_DAO_LIST = [
     memberCount: 10,
     repScore: 35235636,
     repUnit: 'EATS',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
+    members: [
+      {
+        name: 'John',
+        img: mockAvatar1,
+      },
+      {
+        name: 'William',
+        img: mockAvatar2,
+      },
+      {
+        name: 'Sally',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Mona',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Albert',
+        img: mockAvatar1,
+      },
+    ],
+  },
+  {
+    name: 'Makan DAO',
+    memberCount: 10,
+    repScore: 35235636,
+    repUnit: 'EATS',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
+    members: [
+      {
+        name: 'John',
+        img: mockAvatar1,
+      },
+      {
+        name: 'William',
+        img: mockAvatar2,
+      },
+      {
+        name: 'Sally',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Mona',
+        img: mockAvatar3,
+      },
+      {
+        name: 'Albert',
+        img: mockAvatar1,
+      },
+    ],
+  },
+  {
+    name: 'Makan DAO',
+    memberCount: 10,
+    repScore: 35235636,
+    repUnit: 'EATS',
+    description:
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
     members: [
       {
         name: 'John',
