@@ -30,7 +30,7 @@ const CoverSection = () => {
                 _hover={{ bg: orangeHighlight }}
                 width="30%"
               >
-                Try it now
+                Explore now
               </Button>
               <Button variant="link" color={foreground}>
                 Do you want to create your own community?
