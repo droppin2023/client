@@ -21,7 +21,7 @@ const DaoCard = ({
   description,
 }: DaoCardProps) => {
   return (
-    <Card variant="unstyled" width="200px" minWidth={'160px'}>
+    <Card variant="unstyled" width="200px" minWidth={'160px'} textAlign="left">
       <CardBody>
         <div css={[sty.imgSlot(showBorder)]}>
           <Image src={imgUrl} alt="DAO Image" width={200} height={200} css={[sty.img]} />

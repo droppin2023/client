@@ -16,7 +16,7 @@ import { MOCK_DAO_LIST } from '@mockData'
 const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
   return (
     <VStack alignItems={'flex-start'} spacing={8}>
-      <SimpleGrid columns={4} gap={8}>
+      <SimpleGrid columns={5} gap={8}>
         {badges.map((item, index) => (
           <QuestBadge key={index} name={item.name} isLocked={false} />
         ))}
