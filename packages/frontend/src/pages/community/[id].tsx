@@ -1,5 +1,6 @@
 import { VStack } from '@chakra-ui/react'
 
+import DaoBadgesSection from '@components/daoPage/DaoBadgesSection'
 import DaoOverview from '@components/daoPage/DaoOverview'
 
 import { Categories } from '@types/categories'
@@ -28,6 +29,18 @@ const DaoPage = ({ id }: { id: number }) => {
         repScore={0}
         repUnit={mockDao.repUnit}
         description={mockDao.description}
+      />
+      {/* TODO: better type def for badges */}
+      <DaoBadgesSection
+        badges={
+          mockDao.badges as {
+            daoName: string
+            name: string
+            recentActivity: string
+            minter: string
+            isLocked: false
+          }[]
+        }
       />
     </VStack>
   )
