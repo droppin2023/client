@@ -8,18 +8,18 @@ import QuestSection from '@components/landing/QuestSection'
 import type { NextPage } from 'next'
 import 'twin.macro'
 
-const HomePage: NextPage = () => {
+const LandingPage: NextPage = () => {
   return (
-    <>
+    <VStack spacing="120px">
       <CoverSection />
-      <VStack margin="100px 0">
+      <VStack margin="200px 0" overflowX={'hidden'}>
         <DiscoverSection />
         <JoinSection />
         <QuestSection />
         <ActiveMembersSection />
       </VStack>
-    </>
+    </VStack>
   )
 }
 
-export default HomePage
+export default LandingPage

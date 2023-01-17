@@ -16,21 +16,26 @@ const DAOCard = ({
   memberList,
   repScore,
   repUnit = 'REP',
-  order,
+  order = 0,
+  showBorder = false,
+  description,
 }: DAOCardProps) => {
   return (
-    <Card variant="unstyled" width="200px">
+    <Card variant="unstyled" width="200px" minWidth={'160px'}>
       <CardBody>
-        <div css={[sty.imgSlot]}>
+        <div css={[sty.imgSlot(showBorder)]}>
           <Image src={imgUrl} alt="DAO Image" width={200} height={200} css={[sty.img]} />
-          <Text
-            fontSize="2xl"
-            as="b"
-            textColor={foreground}
-            position="absolute"
-            top={0}
-            left="8px"
-          >{`#${order}`}</Text>
+          {order > 0 && (
+            <Text
+              fontSize="2xl"
+              as="b"
+              textColor={foreground}
+              position="absolute"
+              top={0}
+              left="8px"
+            >{`#${order}`}</Text>
+          )}
+
           <HStack position="absolute" zIndex="5" bottom={2} right="8px" alignItems={'center'}>
             <HStack spacing="-12px">
               {memberList.slice(0, 3).map((item, index) => (
@@ -47,6 +52,11 @@ const DAOCard = ({
           <Text fontSize={'2xl'} lineHeight={1.8} as="b">
             {name}
           </Text>
+          {description && (
+            <Text fontSize={'md'} color={foreground}>
+              {description}
+            </Text>
+          )}
           <Text fontSize={'md'} as="b" color={primary}>{`${memberCount.toString()} members`}</Text>
           <Text fontSize={'md'} as="b" color={orange}>{`${repScore.toString()} ${repUnit}`}</Text>
         </VStack>

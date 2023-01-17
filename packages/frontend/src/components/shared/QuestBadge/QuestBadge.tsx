@@ -16,6 +16,7 @@ const QuestBadge = ({
   recentActivity = '',
   isLocked,
   lockedMessage = '',
+  minter,
 }: QuestBadgeProps) => {
   return (
     <VStack width="200px">
@@ -28,9 +29,14 @@ const QuestBadge = ({
       <Text fontSize="2xl" lineHeight={1.2} as="b">
         {name}
       </Text>
-      <Text fontSize="md" lineHeight={1} color={secondary}>
+      <Text fontSize="md" lineHeight={1} color={secondary} as="b">
         {recentActivity}
       </Text>
+      {minter && (
+        <Text fontSize="md" lineHeight={1} color={secondary} alignSelf="flex-end">
+          minted by {minter}
+        </Text>
+      )}
     </VStack>
   )
 }

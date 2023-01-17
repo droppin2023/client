@@ -6,12 +6,12 @@ import Award from '@components/icons/Award'
 import SideScrollRight from '@components/icons/SideScrollRight'
 import QuestBadge from '@components/shared/QuestBadge'
 
-import SectionHeader from '@components/landing/SectionHeader'
+import SectionHeader from '@components/shared/SectionHeader'
 
 import * as sty from './QuestSection.styles'
 
 // TODO: integrate real data
-import { MOCK_BADGE_LIST } from './mockData'
+import { MOCK_BADGE_LIST } from '@mockData'
 
 const QuestSection = () => {
   return (

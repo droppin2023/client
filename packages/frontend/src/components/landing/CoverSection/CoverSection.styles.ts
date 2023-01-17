@@ -1,17 +1,20 @@
 import { css } from 'twin.macro'
 
 export const container = css`
-  width: 100%;
+  width: 100vw;
   height: auto;
   padding: 50px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+
+  background-image: url('/assets/banner-ornament.svg');
 `
 export const bannerOrnament = css`
+  width: 100%;
   position: absolute;
-  top: -100px;
+  top: -240px;
   left: 0;
   z-index: 0;
 `

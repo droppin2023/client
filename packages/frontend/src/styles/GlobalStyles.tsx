@@ -3,12 +3,19 @@ import 'nprogress/nprogress.css'
 import tw, { css, GlobalStyles as BaseStyles } from 'twin.macro'
 
 const customStyles = css`
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   html {
     ${tw`scroll-smooth antialiased`}
   }
   body {
     ${tw`bg-black text-white`}
     ${tw`relative h-screen min-h-screen`}
+    
     overflow-x: hidden;
   }
 

@@ -5,11 +5,13 @@ import People from '@components/icons/People'
 import SideScrollRight from '@components/icons/SideScrollRight'
 import DAOCard from '@components/shared/DAOCard'
 
-import SectionHeader from '@components/landing/SectionHeader'
+import SectionHeader from '@components/shared/SectionHeader'
 
 import { primaryHighlight } from '@constants/colors'
 import * as sty from './DiscoverSection.styles'
-import { MOCK_DAO_LIST } from './mockData'
+
+// TODO: integrate real data
+import { MOCK_DAO_LIST } from '@mockData'
 
 const DiscoverSection = () => {
   return (
@@ -26,7 +28,7 @@ const DiscoverSection = () => {
         />
         <div css={[sty.carouselSection]}>
           <HStack spacing="16px">
-            {MOCK_DAO_LIST.map((item, index) => (
+            {MOCK_DAO_LIST.slice(0, 3).map((item, index) => (
               <DAOCard
                 name={item.name}
                 key={index}
@@ -35,6 +37,7 @@ const DiscoverSection = () => {
                 repScore={item.repScore}
                 repUnit={item.repUnit}
                 order={index + 1}
+                showBorder
               />
             ))}
           </HStack>

@@ -1,14 +1,14 @@
 import { HStack, Text } from '@chakra-ui/react'
 
 import SideScrollRight from '@components/icons/SideScrollRight'
-import SectionHeader from '@components/landing/SectionHeader'
 import MemberCard from '@components/shared/MemberCard'
+import SectionHeader from '@components/shared/SectionHeader'
 import { orange } from '@constants/colors'
 
 import * as sty from './ActiveMembersSection.styles'
 
 // TODO: integrate real data
-import { MOCK_USER_LIST } from './mockData'
+import { MOCK_USER_LIST } from '@mockData'
 
 const ActiveMembersSection = () => {
   return (

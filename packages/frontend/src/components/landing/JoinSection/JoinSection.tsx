@@ -1,7 +1,7 @@
 import { Button, Text } from '@chakra-ui/react'
 
-import SectionHeader from '@components/landing/SectionHeader'
 import Ornament from '@components/shared/Ornament'
+import SectionHeader from '@components/shared/SectionHeader'
 
 import { orange, primary, primaryHighlight } from '@constants/colors'
 import * as sty from './JoinSection.styles'
