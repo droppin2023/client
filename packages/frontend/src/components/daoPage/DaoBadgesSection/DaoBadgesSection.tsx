@@ -4,10 +4,14 @@ import { DISCORD, LINK } from '@constants/categories'
 import { discordPurple, pink, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
 
 import Award from '@components/icons/Award'
+import DaoCard from '@components/shared/DaoCard'
 import QuestBadge from '@components/shared/QuestBadge'
 import QuestCard from './components/QuestCard'
 
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
+
+// TODO: integrate real data
+import { MOCK_DAO_LIST } from '@mockData'
 
 const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
   return (
@@ -71,6 +75,24 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
             ))}
         </SimpleGrid>
       </VStack>
+      <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
+        <span>You might also like</span>
+      </Text>
+      <HStack marginTop="36px">
+        <HStack spacing={5}>
+          {MOCK_DAO_LIST.slice(0, 5).map((item, index) => (
+            <DaoCard
+              name={item.name}
+              key={index}
+              memberCount={item.memberCount}
+              memberList={item.members}
+              repScore={item.repScore}
+              repUnit={item.repUnit}
+              description={item.description.substring(0, 40) + '...'}
+            />
+          ))}
+        </HStack>
+      </HStack>
     </VStack>
   )
 }

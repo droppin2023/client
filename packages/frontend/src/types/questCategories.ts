@@ -1,1 +1,1 @@
-export type questCategories = 'Discord' | 'Submit Link'
+export type QuestCategories = 'Discord' | 'Submit Link'

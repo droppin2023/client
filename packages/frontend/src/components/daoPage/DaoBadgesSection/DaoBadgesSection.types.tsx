@@ -1,4 +1,6 @@
-// TODO: better type definition for badges
+import type { QuestCategories } from '@types/questCategories'
+
+// TODO: better type definition for badges and quests
 export interface DaoBadgesSectionProps {
   badges: {
     daoName: string
@@ -6,5 +8,10 @@ export interface DaoBadgesSectionProps {
     recentActivity: string
     minter: string
     isLocked: false
+  }[]
+  quests: {
+    name: string
+    type: QuestCategories
+    reward: number
   }[]
 }
