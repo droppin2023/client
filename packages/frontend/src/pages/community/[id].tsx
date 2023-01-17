@@ -10,12 +10,13 @@ import 'twin.macro'
 
 // TODO: integrate real data
 import { MOCK_DAO_LIST } from '@mockData'
+import { QuestCategories } from '@types/questCategories'
 
 const DaoPage = ({ id }: { id: number }) => {
   const mockDao = MOCK_DAO_LIST[0]
 
   return (
-    <VStack spacing="120px">
+    <VStack spacing="120px" marginBottom="100px">
       <DaoOverview
         name={mockDao.name}
         imgUrl={mockDao.img}
@@ -30,7 +31,7 @@ const DaoPage = ({ id }: { id: number }) => {
         repUnit={mockDao.repUnit}
         description={mockDao.description}
       />
-      {/* TODO: better type def for badges */}
+      {/* TODO: better type def for badges and Quests */}
       <DaoBadgesSection
         badges={
           mockDao.badges as {
@@ -39,6 +40,13 @@ const DaoPage = ({ id }: { id: number }) => {
             recentActivity: string
             minter: string
             isLocked: false
+          }[]
+        }
+        quests={
+          mockDao.quests as {
+            name: string
+            type: QuestCategories
+            reward: number
           }[]
         }
       />

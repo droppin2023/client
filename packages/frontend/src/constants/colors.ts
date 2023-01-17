@@ -15,3 +15,7 @@ export const secondaryWeak = '#1E1E27'
 
 export const danger = '#ff4141'
 export const dangerHighlight = '#FFADAD'
+
+export const discordPurple = '#7289DA'
+
+export const pink = '#FB507C'

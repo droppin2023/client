@@ -124,17 +124,17 @@ export const MOCK_DAO_LIST = [
     quests: [
       {
         name: 'Join the discord server',
-        type: 'discord',
+        type: 'Discord',
         reward: 500,
       },
       {
         name: 'Earn the beginner role in discord',
-        type: 'discord',
+        type: 'Discord',
         reward: 200,
       },
       {
         name: 'Join a hackathon',
-        type: 'manual',
+        type: 'Submit Link',
         reward: 500,
       },
     ],
