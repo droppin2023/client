@@ -8,11 +8,13 @@ export const container = css`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  background-image: url('/assets/banner-ornament.svg');
 `
 export const bannerOrnament = css`
   width: 100%;
   position: absolute;
-  top: -100px;
+  top: -240px;
   left: 0;
   z-index: 0;
 `
