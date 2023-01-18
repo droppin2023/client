@@ -5,7 +5,9 @@ import { Badge, Box, Button, Flex, HStack, IconButton, Text, VStack } from '@cha
 import DiscordIcon from '@components/icons/DiscordIcon'
 import WebsiteIcon from '@components/icons/WebsiteIcon'
 import AvatarPreview from '@components/shared/AvatarPreview'
-import { background, foreground, orange, secondary } from '@constants/colors'
+
+import { background, foreground, orange, orangeHighlight, secondary } from '@constants/colors'
+import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Settings from '@components/icons/Settings'
 import bannerOrnament from './assets/banner-ornament.svg'
@@ -14,7 +16,6 @@ import type { DaoOverviewProps } from './DaoOverview.types'
 
 import placeholderImg from './assets/placeholder.jpeg'
 
-// TODO: admin mode stuff
 const DaoOverview = ({
   name = 'Drop DAO',
   minter = 'Droppin Team',
@@ -25,10 +26,11 @@ const DaoOverview = ({
   chain = '',
   category = 'NFT',
   repScore = 0,
-  repUnit = 'REP',
   description = '',
   imgUrl = placeholderImg,
 }: DaoOverviewProps) => {
+  const { isAdmin, repUnit } = useDaoPageContext()
+
   return (
     <Box width="100vw" height="auto" position="relative">
       <Image src={bannerOrnament} alt="banner ornament" css={[sty.bannerOrnament]} />
@@ -57,9 +59,16 @@ const DaoOverview = ({
                   borderRadius="6px"
                 >{`${repScore} ${repUnit}`}</Badge>
               </HStack>
-              <Button leftIcon={<Settings />} bg={background} _hover={{ bg: secondary }}>
-                Edit
-              </Button>
+              {!isAdmin && (
+                <Button leftIcon={<Text>+</Text>} bg={orange} _hover={{ bg: orangeHighlight }}>
+                  Join
+                </Button>
+              )}
+              {isAdmin && (
+                <Button leftIcon={<Settings />} bg={background} _hover={{ bg: secondary }}>
+                  Edit
+                </Button>
+              )}
             </Flex>
             <HStack spacing={5}>
               <Text>

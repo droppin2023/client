@@ -18,12 +18,15 @@ import {
 import type { MemberTableRow } from './DaoMembersSection.types'
 
 // TODO: integrate real data via props and context API
-// TODO: integrate reputation unit via context API
 import { orange, primary } from '@constants/colors'
+import { useDaoPageContext } from '@context/DaoPageContext'
+
 import { MOCK_BADGE_LIST, MOCK_USER_LIST } from '@mockData'
 
 // TODO: notifications
 const DaoMembersSection = () => {
+  const { repUnit } = useDaoPageContext()
+
   const renderTableRow = ({
     number,
     name,
@@ -75,7 +78,7 @@ const DaoMembersSection = () => {
               number: index + 1,
               name: item.name,
               img: item.img,
-              repScore: '375 LEP',
+              repScore: `375 ${repUnit}`,
               quests: 0,
               karma: 0,
               badges: (

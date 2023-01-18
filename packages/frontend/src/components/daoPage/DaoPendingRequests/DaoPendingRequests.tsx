@@ -3,12 +3,14 @@ import Image from 'next/image'
 import { Box, HStack, Table, TableContainer, Tbody, Td, Text, Tr, VStack } from '@chakra-ui/react'
 
 import { orange, primary, secondaryWeak } from '@constants/colors'
+import { useDaoPageContext } from '@context/DaoPageContext'
 
 import wipIllustration from './assets/wip-illustration.svg'
 import type { DaoPendingRequestsProps, PendingRequestsTableRow } from './DaoPendingRequests.types'
 
 const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
-  // TODO: use context api to get the rep unit
+  const { repUnit } = useDaoPageContext()
+
   const renderTableRow = ({
     name,
     img,
@@ -57,7 +59,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
                       name: item.user.name,
                       img: item.user.img,
                       questName: item.quest.name,
-                      questReward: item.quest.reward,
+                      questReward: `${item.quest.reward} ${repUnit}`,
                       questStatus: item.status,
                     }),
                 )}

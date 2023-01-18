@@ -13,7 +13,6 @@ export interface DaoOverviewProps {
   chain: string
   category: Categories
   repScore: number
-  repUnit: string
   website?: string
   discord?: string
   description: string

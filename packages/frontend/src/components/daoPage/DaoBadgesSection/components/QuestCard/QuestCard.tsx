@@ -1,13 +1,15 @@
 import { Flex, Text } from '@chakra-ui/react'
 
 import { orange, primary, secondaryWeak } from '@constants/colors'
+import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Done from '@components/icons/Done'
 
 import type { QuestCardProps } from './QuestCard.types'
 
-// TODO: get reputation unit from context later
 const QuestCard = ({ name, reward, isCompleted = false }: QuestCardProps) => {
+  const { repUnit } = useDaoPageContext()
+
   return (
     <Flex
       position="relative"
@@ -26,7 +28,7 @@ const QuestCard = ({ name, reward, isCompleted = false }: QuestCardProps) => {
       )}
       <Text as="b">{name}</Text>
       <Text as="b" color={isCompleted ? primary : orange}>
-        {reward}
+        {`${reward} ${repUnit}`}
       </Text>
     </Flex>
   )
