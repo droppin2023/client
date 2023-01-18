@@ -1,2 +1,2 @@
-export * from './NewQuestForm'
-export { default } from './NewQuestForm'
+export * from './QuestForm'
+export { default } from './QuestForm'

@@ -54,6 +54,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
   }
 
   const handleSubmit = () => {
+    // TODO: add a POST operation to server
     console.log({
       schemaHash,
       questTitle,
