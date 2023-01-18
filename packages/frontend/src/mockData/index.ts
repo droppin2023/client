@@ -27,6 +27,45 @@ export const MOCK_USER_LIST = [
   },
 ]
 
+export const MOCK_PENDING_REQUESTS = [
+  {
+    user: {
+      name: 'John',
+      img: mockAvatar1,
+    },
+    quest: {
+      name: 'Join the discord server',
+      type: 'Discord',
+      reward: 500,
+    },
+    status: 'Pending',
+  },
+  {
+    user: {
+      name: 'John',
+      img: mockAvatar1,
+    },
+    quest: {
+      name: 'Join the discord server',
+      type: 'Discord',
+      reward: 500,
+    },
+    status: 'Pending',
+  },
+  {
+    user: {
+      name: 'John',
+      img: mockAvatar1,
+    },
+    quest: {
+      name: 'Join the discord server',
+      type: 'Discord',
+      reward: 500,
+    },
+    status: 'Pending',
+  },
+]
+
 export const MOCK_DAO_LIST = [
   {
     name: 'Lepak DAO',
@@ -46,26 +85,36 @@ export const MOCK_DAO_LIST = [
         name: 'John',
         img: mockAvatar1,
         repScore: 241414,
+        karma: 1.2,
+        quests: 10,
       },
       {
         name: 'William',
         img: mockAvatar2,
         repScore: 347230,
+        karma: 1.2,
+        quests: 1,
       },
       {
         name: 'Sally',
         img: mockAvatar3,
         repScore: 241414,
+        karma: 1.2,
+        quests: 5,
       },
       {
         name: 'Mona',
         img: mockAvatar3,
         repScore: 241414,
+        karma: 1.2,
+        quests: 3,
       },
       {
         name: 'Albert',
         img: mockAvatar1,
         repScore: 241414,
+        karma: 1.2,
+        quests: 20,
       },
     ],
     badges: [

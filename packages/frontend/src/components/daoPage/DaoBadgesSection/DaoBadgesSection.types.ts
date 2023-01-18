@@ -1,4 +1,4 @@
-import type { QuestCategories } from '@types/questCategories'
+import type { QuestCategories } from '@types/quest'
 
 // TODO: better type definition for badges and quests
 export interface DaoBadgesSectionProps {

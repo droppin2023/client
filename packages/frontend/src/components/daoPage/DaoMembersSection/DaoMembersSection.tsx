@@ -19,8 +19,10 @@ import type { MemberTableRow } from './DaoMembersSection.types'
 
 // TODO: integrate real data via props and context API
 // TODO: integrate reputation unit via context API
+import { orange, primary } from '@constants/colors'
 import { MOCK_BADGE_LIST, MOCK_USER_LIST } from '@mockData'
 
+// TODO: notifications
 const DaoMembersSection = () => {
   const renderTableRow = ({
     number,
@@ -33,16 +35,22 @@ const DaoMembersSection = () => {
   }: MemberTableRow) => {
     return (
       <Tr>
-        <Td isNumeric>{number}</Td>
+        <Td isNumeric color={primary}>
+          {number}
+        </Td>
         <Td>
           <HStack>
             <Image src={img} alt={name} width={24} height={24} />
-            <Text>{name}</Text>
+            <Text color={primary}>{name}</Text>
           </HStack>
         </Td>
-        <Td>{repScore}</Td>
-        <Td isNumeric>{quests}</Td>
-        <Td isNumeric>{karma}</Td>
+        <Td color={orange}>{repScore}</Td>
+        <Td isNumeric color={primary}>
+          {quests}
+        </Td>
+        <Td isNumeric color={primary}>
+          {karma}
+        </Td>
         <Td>{badges}</Td>
       </Tr>
     )
@@ -74,7 +82,7 @@ const DaoMembersSection = () => {
                 <Wrap>
                   {MOCK_BADGE_LIST.map((item, index) => (
                     <WrapItem key={index}>
-                      <Badge>{item.name}</Badge>
+                      <Badge color={primary}>{item.name}</Badge>
                     </WrapItem>
                   ))}
                 </Wrap>

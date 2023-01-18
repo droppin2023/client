@@ -3,6 +3,7 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui
 import DaoBadgesSection from '@components/daoPage/DaoBadgesSection'
 import DaoMembersSection from '@components/daoPage/DaoMembersSection'
 import DaoOverview from '@components/daoPage/DaoOverview'
+import DaoPendingRequests from '@components/daoPage/DaoPendingRequests'
 
 import { primary } from '@constants/colors'
 import { Categories } from '@types/categories'
@@ -11,14 +12,14 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 // TODO: integrate real data
-import { MOCK_DAO_LIST } from '@mockData'
-import { QuestCategories } from '@types/questCategories'
+import { MOCK_DAO_LIST, MOCK_PENDING_REQUESTS } from '@mockData'
+import { QuestCategories } from '@types/quest'
 
 const DaoPage = ({ id }: { id: number }) => {
   const mockDao = MOCK_DAO_LIST[0]
 
   // TODO: this is a temporary flag, real flag would be calculated with context api and back end data
-  const isAdmin = false
+  const isAdmin = true
 
   return (
     <VStack spacing="40px" marginBottom="100px">
@@ -37,7 +38,7 @@ const DaoPage = ({ id }: { id: number }) => {
         description={mockDao.description}
       />
 
-      <Box width="80%">
+      <Box width="80%" minHeight="512px">
         <Tabs isLazy align="center" variant="unstyled">
           <TabList>
             <Tab
@@ -60,16 +61,18 @@ const DaoPage = ({ id }: { id: number }) => {
             >
               Members
             </Tab>
-            <Tab
-              fontWeight={'bold'}
-              _selected={{
-                color: primary,
-                fontWeight: 'bold',
-                borderBottom: `3px solid ${primary}`,
-              }}
-            >
-              Pending Quests
-            </Tab>
+            {isAdmin && (
+              <Tab
+                fontWeight={'bold'}
+                _selected={{
+                  color: primary,
+                  fontWeight: 'bold',
+                  borderBottom: `3px solid ${primary}`,
+                }}
+              >
+                Pending Quests
+              </Tab>
+            )}
           </TabList>
 
           <TabPanels>
@@ -98,9 +101,11 @@ const DaoPage = ({ id }: { id: number }) => {
               {/* TODO: better type def for badges and Quests, also integrate real data*/}
               <DaoMembersSection />
             </TabPanel>
-            <TabPanel>
-              <p>Pending Quests</p>
-            </TabPanel>
+            {isAdmin && (
+              <TabPanel>
+                <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
+              </TabPanel>
+            )}
           </TabPanels>
         </Tabs>
       </Box>
