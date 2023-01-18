@@ -187,6 +187,16 @@ export const MOCK_DAO_LIST = [
         reward: 200,
       },
       {
+        name: 'Join the discord server',
+        type: 'Discord',
+        reward: 500,
+      },
+      {
+        name: 'Earn the beginner role in discord',
+        type: 'Discord',
+        reward: 200,
+      },
+      {
         name: 'Join a hackathon',
         type: 'Submit Link',
         reward: 500,
