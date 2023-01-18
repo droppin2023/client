@@ -45,22 +45,27 @@ export const MOCK_DAO_LIST = [
       {
         name: 'John',
         img: mockAvatar1,
+        repScore: 241414,
       },
       {
         name: 'William',
         img: mockAvatar2,
+        repScore: 347230,
       },
       {
         name: 'Sally',
         img: mockAvatar3,
+        repScore: 241414,
       },
       {
         name: 'Mona',
         img: mockAvatar3,
+        repScore: 241414,
       },
       {
         name: 'Albert',
         img: mockAvatar1,
+        repScore: 241414,
       },
     ],
     badges: [
