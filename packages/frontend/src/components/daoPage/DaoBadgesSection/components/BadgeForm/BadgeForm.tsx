@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Button,
   Flex,
@@ -23,11 +25,15 @@ import {
 
 import { foreground, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
 
+import UploadImage from '@components/shared/UploadImage'
+
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
 import * as sty from './BadgeForm.styles'
 import type { BadgeFormProps } from './BadgeForm.types'
 
 const BadgeForm = ({ isOpen, onClose, repUnit }: BadgeFormProps) => {
+  const [localImgUrl, setLocalImgUrl] = useState('')
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -35,10 +41,9 @@ const BadgeForm = ({ isOpen, onClose, repUnit }: BadgeFormProps) => {
         <ModalHeader>Create New Badge</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          {/* TODO: make a file upload component */}
           <FormControl>
             <FormLabel>Badge logo</FormLabel>
-            <Input type="file" placeholder="First name" />
+            <UploadImage onFileLoad={(img) => setLocalImgUrl(img)} />
           </FormControl>
           <FormControl mt={4}>
             <FormLabel>Title</FormLabel>
