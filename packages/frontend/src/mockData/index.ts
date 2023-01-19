@@ -452,3 +452,80 @@ export const MOCK_BADGE_LIST = [
     isLocked: false,
   },
 ]
+
+export const GET_CLAIMED_MOCK_BADGE = {
+  badgeName: 'NewBie',
+  badgeSymbol: 'NB',
+  issuedCommunityId: 2,
+  description: 'NewBie badge is for default badge in Lepak DAO',
+  isDefault: true,
+  // should we have to get onchain data through contact? or backend
+  badgeDetail: {
+    contractAddress: '0xawgaweewagewagwe',
+    tokenId: 2,
+    tokenStandard: 'ERC-20',
+    chain: 'polygon',
+    communityEarning: 12,
+  },
+  badgeHolder: {
+    totalNummber: 5,
+    holderList: [
+      {
+        userId: 1,
+        userName: 'pia',
+      },
+      {
+        userId: 2,
+        userName: 'pia2',
+      },
+      {
+        userId: 3,
+        userName: 'pia3',
+      },
+      {
+        userId: 6,
+        userName: 'pia4',
+      },
+      {
+        userId: 10,
+        userName: 'pia5',
+      },
+    ],
+  },
+  claimConditions: [
+    {
+      type: 'quest',
+      detail: [
+        {
+          questId: 1,
+          questNmae: 'Join 1 Hackathon',
+          questReward: 100,
+        },
+        {
+          questId: 2,
+          questNmae: 'Win a prize in Hackathon',
+          questReward: 100,
+        },
+        {
+          questId: 3,
+          questNmae: 'Join a Github Organization',
+          questReward: 200,
+        },
+      ],
+    },
+    {
+      type: 'engageScore',
+      detail: {
+        threshold: 400,
+        unit: 'LPD',
+      },
+    },
+    {
+      type: 'price',
+      detail: {
+        number: 4,
+        unit: 'MATIC',
+      },
+    },
+  ],
+}
