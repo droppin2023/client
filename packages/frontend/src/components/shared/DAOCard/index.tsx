@@ -1,2 +1,2 @@
-export * from './DAOCard'
-export { default } from './DAOCard'
+export * from './DaoCard'
+export { default } from './DaoCard'

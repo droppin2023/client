@@ -14,7 +14,7 @@ export const container = css`
 export const bannerOrnament = css`
   width: 100%;
   position: absolute;
-  top: -240px;
+  top: -180px;
   left: 0;
   z-index: 0;
 `

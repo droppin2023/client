@@ -3,7 +3,7 @@ import { Button, HStack, Text } from '@chakra-ui/react'
 
 import People from '@components/icons/People'
 import SideScrollRight from '@components/icons/SideScrollRight'
-import DAOCard from '@components/shared/DAOCard'
+import DaoCard from '@components/shared/DaoCard'
 
 import SectionHeader from '@components/shared/SectionHeader'
 
@@ -29,7 +29,7 @@ const DiscoverSection = () => {
         <div css={[sty.carouselSection]}>
           <HStack spacing="16px">
             {MOCK_DAO_LIST.slice(0, 3).map((item, index) => (
-              <DAOCard
+              <DaoCard
                 name={item.name}
                 key={index}
                 memberCount={item.memberCount}
@@ -37,6 +37,7 @@ const DiscoverSection = () => {
                 repScore={item.repScore}
                 repUnit={item.repUnit}
                 order={index + 1}
+                imgUrl={item?.img}
                 showBorder
               />
             ))}

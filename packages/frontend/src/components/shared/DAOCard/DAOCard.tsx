@@ -4,12 +4,12 @@ import { Card, CardBody, HStack, Text, VStack } from '@chakra-ui/react'
 
 import { foreground, orange, primary } from '@constants/colors'
 
+import AvatarPreview from '../AvatarPreview'
 import placeholderImg from './assets/placeholder.jpeg'
-import AvatarPreview from './components/AvatarPreview'
-import * as sty from './DAOCard.styles'
-import type { DAOCardProps } from './DAOCard.types'
+import * as sty from './DaoCard.styles'
+import type { DaoCardProps } from './DaoCard.types'
 
-const DAOCard = ({
+const DaoCard = ({
   imgUrl = placeholderImg,
   name,
   memberCount,
@@ -19,9 +19,9 @@ const DAOCard = ({
   order = 0,
   showBorder = false,
   description,
-}: DAOCardProps) => {
+}: DaoCardProps) => {
   return (
-    <Card variant="unstyled" width="200px" minWidth={'160px'}>
+    <Card variant="unstyled" width="200px" minWidth={'160px'} textAlign="left">
       <CardBody>
         <div css={[sty.imgSlot(showBorder)]}>
           <Image src={imgUrl} alt="DAO Image" width={200} height={200} css={[sty.img]} />
@@ -65,4 +65,4 @@ const DAOCard = ({
   )
 }
 
-export default DAOCard
+export default DaoCard

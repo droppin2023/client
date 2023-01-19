@@ -5,7 +5,7 @@ interface MemberListItem {
   img: StaticImageData
 }
 
-export interface DAOCardProps {
+export interface DaoCardProps {
   imgUrl?: StaticImageData | string
   name: string
   memberCount: number

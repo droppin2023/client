@@ -2,6 +2,8 @@ import mockAvatar1 from './assets/mock-avatar-1.png'
 import mockAvatar2 from './assets/mock-avatar-2.png'
 import mockAvatar3 from './assets/mock-avatar-3.png'
 
+import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
+
 export const MOCK_USER_LIST = [
   {
     name: 'John',
@@ -25,34 +27,179 @@ export const MOCK_USER_LIST = [
   },
 ]
 
+export const MOCK_PENDING_REQUESTS = [
+  {
+    user: {
+      name: 'John',
+      img: mockAvatar1,
+    },
+    quest: {
+      name: 'Join the discord server',
+      type: 'Discord',
+      reward: 500,
+    },
+    status: 'Pending',
+  },
+  {
+    user: {
+      name: 'John',
+      img: mockAvatar1,
+    },
+    quest: {
+      name: 'Join the discord server',
+      type: 'Discord',
+      reward: 500,
+    },
+    status: 'Pending',
+  },
+  {
+    user: {
+      name: 'John',
+      img: mockAvatar1,
+    },
+    quest: {
+      name: 'Join the discord server',
+      type: 'Discord',
+      reward: 500,
+    },
+    status: 'Pending',
+  },
+]
+
 export const MOCK_DAO_LIST = [
   {
     name: 'Lepak DAO',
+    img: sampleDaoAvatar1,
+    minter: 'TheLepakGuys',
     memberCount: 125,
     repScore: 235235636,
+    earnings: 3.4,
+    chain: 'Polygon',
     repUnit: 'LEP',
+    created: new Date('2021-03-25'),
+    category: 'Social',
     description:
       'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
     members: [
       {
         name: 'John',
         img: mockAvatar1,
+        repScore: 241414,
+        karma: 1.2,
+        quests: 10,
       },
       {
         name: 'William',
         img: mockAvatar2,
+        repScore: 347230,
+        karma: 1.2,
+        quests: 1,
       },
       {
         name: 'Sally',
         img: mockAvatar3,
+        repScore: 241414,
+        karma: 1.2,
+        quests: 5,
       },
       {
         name: 'Mona',
         img: mockAvatar3,
+        repScore: 241414,
+        karma: 1.2,
+        quests: 3,
       },
       {
         name: 'Albert',
         img: mockAvatar1,
+        repScore: 241414,
+        karma: 1.2,
+        quests: 20,
+      },
+    ],
+    badges: [
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+      {
+        daoName: 'Lepak DAO',
+        name: 'NewBie',
+        recentActivity: 'mint by @carlos',
+        minter: '@carlos',
+        isLocked: false,
+      },
+    ],
+    quests: [
+      {
+        name: 'Join the discord server',
+        type: 'Discord',
+        reward: 500,
+      },
+      {
+        name: 'Earn the beginner role in discord',
+        type: 'Discord',
+        reward: 200,
+      },
+      {
+        name: 'Join the discord server',
+        type: 'Discord',
+        reward: 500,
+      },
+      {
+        name: 'Earn the beginner role in discord',
+        type: 'Discord',
+        reward: 200,
+      },
+      {
+        name: 'Join a hackathon',
+        type: 'Submit Link',
+        reward: 500,
       },
     ],
   },
