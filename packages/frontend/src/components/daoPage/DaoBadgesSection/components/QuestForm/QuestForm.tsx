@@ -121,16 +121,12 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
               ))}
             </Select>
           </FormControl>
+
+          {/* TODO: add condition details */}
         </ModalBody>
 
         <ModalFooter bg={secondaryWeak}>
-          <Button
-            onClick={handleSubmit}
-            size="lg"
-            bg={primary}
-            _hover={{ bg: primaryHighlight }}
-            mr={3}
-          >
+          <Button onClick={handleSubmit} size="lg" bg={primary} _hover={{ bg: primaryHighlight }}>
             Create Quest
           </Button>
         </ModalFooter>

@@ -4,20 +4,25 @@ import { Badge, Button, Flex, HStack, SimpleGrid, Text, VStack } from '@chakra-u
 
 import { DISCORD, LINK } from '@constants/categories'
 import { discordPurple, pink, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
 import DaoCard from '@components/shared/DaoCard'
 import QuestBadge from '@components/shared/QuestBadge'
 import QuestCard from './components/QuestCard'
 
-import NewQuestForm from './components/QuestForm/QuestForm'
+import BadgeForm from './components/BadgeForm'
+import QuestForm from './components/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
 // TODO: integrate real data
 import { MOCK_DAO_LIST } from '@mockData'
 
 const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
+  const { repUnit } = useDaoPageContext()
+
   const [isCreateQuestOpen, setIsCreateQuestOpen] = useState(false)
+  const [isCreateBadgeOpen, setIsCreateBadgeOpen] = useState(false)
 
   return (
     <>
@@ -26,8 +31,6 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
           {badges.map((item, index) => (
             <QuestBadge key={index} name={item.name} isLocked={false} />
           ))}
-
-          {/* TODO: onclick functionality */}
           <Flex
             bg={secondaryWeak}
             color={primary}
@@ -38,6 +41,7 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
             direction="column"
             alignItems="center"
             justifyContent="center"
+            onClick={() => setIsCreateBadgeOpen(true)}
           >
             <Text fontSize="6xl">+</Text>
             <Text>Create badge</Text>
@@ -101,7 +105,12 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
           </HStack>
         </HStack>
       </VStack>
-      <NewQuestForm isOpen={isCreateQuestOpen} onClose={() => setIsCreateQuestOpen(false)} />
+      <QuestForm isOpen={isCreateQuestOpen} onClose={() => setIsCreateQuestOpen(false)} />
+      <BadgeForm
+        isOpen={isCreateBadgeOpen}
+        onClose={() => setIsCreateBadgeOpen(false)}
+        repUnit={repUnit}
+      />
     </>
   )
 }
