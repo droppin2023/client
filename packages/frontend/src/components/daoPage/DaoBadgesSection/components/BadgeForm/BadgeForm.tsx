@@ -43,7 +43,7 @@ const BadgeForm = ({ isOpen, onClose, repUnit }: BadgeFormProps) => {
         <ModalBody pb={6}>
           <FormControl>
             <FormLabel>Badge logo</FormLabel>
-            <UploadImage onFileLoad={(img) => setLocalImgUrl(img)} />
+            <UploadImage onFileLoad={(img: string) => setLocalImgUrl(img)} />
           </FormControl>
           <FormControl mt={4}>
             <FormLabel>Title</FormLabel>
