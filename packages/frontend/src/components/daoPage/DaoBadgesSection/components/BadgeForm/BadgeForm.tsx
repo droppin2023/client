@@ -6,6 +6,7 @@ import {
   Checkbox,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
   FormLabel,
   Input,
@@ -36,31 +37,40 @@ import type { BadgeFormProps } from './BadgeForm.types'
 // TODO: checks for inputs
 const BadgeForm = ({ isOpen, onClose, repUnit, quests }: BadgeFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState('')
-  const [checkedQuest, setCheckedQuest] = useState<typeof quests>([])
+  const [checkedQuestList, setCheckedQuestList] = useState<typeof quests>([])
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [engagement, setEngagement] = useState(0)
   const [price, setPrice] = useState(0)
   const [priceUnit, setPriceUnit] = useState('ETH')
 
+  const [checkedQuestError, setCheckedQuestError] = useState('')
+
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    const checkedList = [...checkedQuest]
+    const tempCheckedList = [...checkedQuestList]
     if (e.target.checked) {
-      checkedList.push(JSON.parse(e.target.value))
+      if (tempCheckedList.length >= 5) {
+        setCheckedQuestError('Maximum of 5 quests only.')
+        e.target.checked = false
+        return
+      }
+      tempCheckedList.push(JSON.parse(e.target.value))
     } else {
-      checkedList.splice(checkedList.indexOf(JSON.parse(e.target.value)), 1)
+      tempCheckedList.splice(tempCheckedList.indexOf(JSON.parse(e.target.value)), 1)
     }
 
-    setCheckedQuest(checkedList)
+    setCheckedQuestError('')
+    setCheckedQuestList(tempCheckedList)
   }
 
   const handleSubmit = () => {
     // TODO: submissionlogic
+    if (checkedQuestList.length >= 5) return
 
     console.log({
       title,
       img: localImgUrl,
-      checkedQuest,
+      checkedQuestList,
       description,
       engagement,
       price,
@@ -104,8 +114,9 @@ const BadgeForm = ({ isOpen, onClose, repUnit, quests }: BadgeFormProps) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </FormControl>
-          <FormControl mt={4}>
-            <FormLabel>Claim condition</FormLabel>
+
+          <FormControl mt={4} isInvalid={checkedQuestError.length > 0}>
+            <FormLabel>Required quests</FormLabel>
             <FormHelperText css={[sty.helperText]}>
               Set the required quest conditions to claim the badge
             </FormHelperText>
@@ -117,6 +128,13 @@ const BadgeForm = ({ isOpen, onClose, repUnit, quests }: BadgeFormProps) => {
                 </Checkbox>
               ))}
             </VStack>
+            {checkedQuestError.length > 0 && (
+              <FormErrorMessage>{checkedQuestError}</FormErrorMessage>
+            )}
+          </FormControl>
+
+          <FormControl mt={4}>
+            <FormLabel>Claim conditions</FormLabel>
             <FormHelperText css={[sty.helperText]}>
               Set the required engagement conditions to claim a badge
             </FormHelperText>

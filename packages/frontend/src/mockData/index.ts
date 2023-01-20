@@ -202,6 +202,11 @@ export const MOCK_DAO_LIST = [
         type: 'Submit Link',
         reward: 500,
       },
+      {
+        name: 'Make a contribution to our GitHub',
+        type: 'Submit Link',
+        reward: 500,
+      },
     ],
   },
   {
