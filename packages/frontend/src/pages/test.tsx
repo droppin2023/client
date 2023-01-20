@@ -1,5 +1,5 @@
 import { useContract } from 'wagmi'
-import badgeContractAbi from '../config/abis/BadgeFacet.json'
+import badgeContractAbi from '@shared/abis/BadgeFacet.json'
 
 import type { NextPage } from 'next'
 import 'twin.macro'
