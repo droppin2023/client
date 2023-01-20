@@ -32,7 +32,7 @@ const DaoOverview = ({
   const { isAdmin, repUnit } = useDaoPageContext()
 
   return (
-    <Box width="100vw" height="auto" position="relative">
+    <Box width="100%" height="auto" position="relative">
       <Image src={bannerOrnament} alt="banner ornament" css={[sty.bannerOrnament]} />
       <Box
         position="absolute"

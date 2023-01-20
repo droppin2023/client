@@ -42,6 +42,9 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
             alignItems="center"
             justifyContent="center"
             onClick={() => setIsCreateBadgeOpen(true)}
+            _hover={{
+              cursor: 'pointer',
+            }}
           >
             <Text fontSize="6xl">+</Text>
             <Text>Create badge</Text>
@@ -110,6 +113,7 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
         isOpen={isCreateBadgeOpen}
         onClose={() => setIsCreateBadgeOpen(false)}
         repUnit={repUnit}
+        quests={quests}
       />
     </>
   )
