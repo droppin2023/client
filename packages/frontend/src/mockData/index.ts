@@ -27,6 +27,7 @@ export const MOCK_USER_LIST = [
 
 export const MOCK_DAO_LIST = [
   {
+    daoId: 1,
     name: 'Lepak DAO',
     memberCount: 125,
     repScore: 235235636,
@@ -308,8 +309,9 @@ export const MOCK_BADGE_LIST = [
 
 export const GET_CLAIMED_MOCK_BADGE = {
   badgeName: 'NewBie',
+  badgeImg: 'https://via.placeholder.com/300',
   badgeSymbol: 'NB',
-  issuedCommunityId: 2,
+  daoId: 2,
   description: 'NewBie badge is for default badge in Lepak DAO',
   isDefault: true,
   // should we have to get onchain data through contact? or backend
@@ -378,6 +380,91 @@ export const GET_CLAIMED_MOCK_BADGE = {
       detail: {
         number: 4,
         unit: 'MATIC',
+      },
+    },
+  ],
+}
+
+export const MOCK_USER = {
+  name: 'pia',
+  description: '21 | Builder in Crypto \n Love reading writing coding stuff. Engineer but Thinker.',
+  img: 'https://via.placeholder.com/300',
+  badges: [
+    {
+      badgeId: 1,
+      badgeImg: 'https://via.placeholder.com/300',
+      badgeName: 'Newbie',
+    },
+    {
+      badgeId: 2,
+      badgeImg: 'https://via.placeholder.com/300',
+      badgeName: 'Newbie',
+    },
+    {
+      badgeId: 3,
+      badgeImg: 'https://via.placeholder.com/300',
+      badgeName: 'Newbie',
+    },
+  ],
+  communities: [
+    {
+      daoId: 1,
+      badges: [
+        {
+          badgeId: 1,
+          badgeImg: 'https://via.placeholder.com/300',
+          badgeName: 'Newbie',
+          isClaimed: true,
+        },
+        {
+          badgeId: 2,
+          badgeImg: 'https://via.placeholder.com/300',
+          badgeName: 'Newbie2',
+          isClaimed: true,
+        },
+      ],
+    },
+    {
+      daoId: 2,
+      badges: [
+        {
+          badgeId: 1,
+          badgeImg: 'https://via.placeholder.com/300',
+          badgeName: 'Newbie4',
+          isClaimed: true,
+        },
+        {
+          badgeId: 2,
+          badgeImg: 'https://via.placeholder.com/300',
+          badgeName: 'Newbie3',
+          isClaimed: false,
+        },
+      ],
+    },
+  ],
+  engagements: [
+    {
+      dao: {
+        daoId: 1,
+        img: 'https://via.placeholder.com/300',
+        name: 'Lepak DAO',
+        unit: 'LDP',
+      },
+      balance: {
+        basic: 1988,
+        compare: 190000,
+      },
+    },
+    {
+      dao: {
+        daoId: 2,
+        img: 'https://via.placeholder.com/300',
+        name: 'Lepak DAO',
+        unit: 'LDP',
+      },
+      balance: {
+        basic: 1988,
+        compare: 190000,
       },
     },
   ],
