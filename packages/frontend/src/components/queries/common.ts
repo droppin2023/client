@@ -45,3 +45,11 @@ export enum Category {
   Defi = 'DeFi',
   Music = 'Music',
 }
+
+export enum Status {
+  noStatus = 'No Status',
+  pending = 'Pending',
+  accepted = 'Accepted',
+  rejected = 'Rejected',
+  claimed = 'Claimed',
+}

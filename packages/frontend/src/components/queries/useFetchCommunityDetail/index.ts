@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import type {
+import {
+  Category,
   FetchCommunityDetailParams,
   FetchCommunityDetailResponse,
 } from './useFetchCommunityDetail.types'
@@ -17,7 +18,7 @@ const normalizeData = (
     id: data?.id || 0,
     logo: data?.logo || '',
     name: data?.name || '',
-    category: data?.category || '',
+    category: data?.category || Category.Other,
     discord: data?.discord || undefined,
     description: data?.description || '',
     owner: data?.owner || {
