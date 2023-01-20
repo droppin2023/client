@@ -19,7 +19,7 @@ import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 import { MOCK_DAO_LIST } from '@mockData'
 
 const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
-  const { repUnit } = useDaoPageContext()
+  const { repUnit, isAdmin } = useDaoPageContext()
 
   const [isCreateQuestOpen, setIsCreateQuestOpen] = useState(false)
   const [isCreateBadgeOpen, setIsCreateBadgeOpen] = useState(false)
@@ -31,24 +31,26 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
           {badges.map((item, index) => (
             <QuestBadge key={index} name={item.name} isLocked={false} />
           ))}
-          <Flex
-            bg={secondaryWeak}
-            color={primary}
-            width="200px"
-            height="200px"
-            borderRadius="20px"
-            border={`2px dashed ${primary}`}
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            onClick={() => setIsCreateBadgeOpen(true)}
-            _hover={{
-              cursor: 'pointer',
-            }}
-          >
-            <Text fontSize="6xl">+</Text>
-            <Text>Create badge</Text>
-          </Flex>
+          {isAdmin && (
+            <Flex
+              bg={secondaryWeak}
+              color={primary}
+              width="200px"
+              height="200px"
+              borderRadius="20px"
+              border={`2px dashed ${primary}`}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              onClick={() => setIsCreateBadgeOpen(true)}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              <Text fontSize="6xl">+</Text>
+              <Text>Create badge</Text>
+            </Flex>
+          )}
         </SimpleGrid>
         <Flex justifyContent={'space-between'} alignItems="center" width="100%">
           <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
@@ -57,15 +59,17 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
               <span>Quests</span>
             </HStack>
           </Text>
-          <Button
-            leftIcon={<Text>+</Text>}
-            variant="filled"
-            bgColor={primary}
-            _hover={{ bg: primaryHighlight }}
-            onClick={() => setIsCreateQuestOpen(true)}
-          >
-            Add Quest
-          </Button>
+          {isAdmin && (
+            <Button
+              leftIcon={<Text>+</Text>}
+              variant="filled"
+              bgColor={primary}
+              _hover={{ bg: primaryHighlight }}
+              onClick={() => setIsCreateQuestOpen(true)}
+            >
+              Add Quest
+            </Button>
+          )}
         </Flex>
         <VStack spacing={5} alignItems="flex-start">
           <Badge fontSize="xl" bg={discordPurple} padding="4px 16px" borderRadius="6px">
