@@ -10,7 +10,7 @@ export interface FetchCommunityDetailResponse {
   id: number
   logo: string
   name: string
-  category: string
+  category: Category
   discord?: Discord
   description: string
   owner: User
@@ -36,6 +36,7 @@ export interface Badge {
 }
 
 export enum Category {
+  Other = 'Other',
   Education = 'Education',
   NFT = 'NFT',
   Gaming = 'Gaming',
