@@ -1,5 +1,7 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
+import { EngageScore, Link, Quests, User } from '@components/queries/commonType'
+
 export interface FetchCommunityDetailParams {
   communityId: number
 }
@@ -12,8 +14,7 @@ export interface FetchCommunityDetailResponse {
   discord?: Discord
   description: string
   owner: User
-  totalEngage: number
-  engageUnit: string
+  totalEngage: EngageScore
   members: User[]
   totalMember: number
   blockchain: string
@@ -27,38 +28,11 @@ export interface Discord {
   guildId: number
 }
 
-export interface User {
-  id: number
-  account: string
-  image: string
-}
-
-export interface Link {
-  id: number
-  name: string
-  link: string
-}
-
 export interface Badge {
   id: number
   logo: string
   name: string
   description: string
-}
-
-export interface Quests {
-  questType: number
-  questList: Quest[]
-}
-
-export interface Quest {
-  id: number
-  name: string
-  engageScore: number
-}
-export enum questType {
-  discord = 'Discord',
-  form = 'Submit Form',
 }
 
 export enum Category {
