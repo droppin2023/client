@@ -61,7 +61,7 @@ const normalizeData = (
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchCommunityList = ({ communityId }: FetchCommunityDetailParams) => {
+const useFetchCommunityDetail = ({ communityId }: FetchCommunityDetailParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchCommunityDetailResponse>(
     normalizeData(undefined) as FetchCommunityDetailResponse,
@@ -89,4 +89,4 @@ const useFetchCommunityList = ({ communityId }: FetchCommunityDetailParams) => {
   return { data: normalizeData(data), isLoading, error }
 }
 
-export default useFetchCommunityList
+export default useFetchCommunityDetail

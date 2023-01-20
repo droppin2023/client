@@ -1,0 +1,1 @@
+import useFetchCommunity from './useFetchCommunityDetail'
