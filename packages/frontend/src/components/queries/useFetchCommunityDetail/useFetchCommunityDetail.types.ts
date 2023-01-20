@@ -23,6 +23,11 @@ export interface FetchCommunityDetailResponse {
   quests: Quests[]
 }
 
+export interface Discord {
+  link: string
+  guildId: number
+}
+
 export interface Badge {
   id: number
   logo: string

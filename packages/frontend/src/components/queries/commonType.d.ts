@@ -16,13 +16,6 @@ export interface Link {
   link: string
 }
 
-export interface Badge {
-  id: number
-  logo: string
-  name: string
-  description: string
-}
-
 export interface Quests {
   questType: number
   questList: Quest[]
