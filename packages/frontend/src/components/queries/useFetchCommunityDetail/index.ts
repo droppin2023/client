@@ -20,18 +20,19 @@ const normalizeData = (
     category: data?.category || '',
     discord: data?.discord || undefined,
     description: data?.description || '',
-    engageUnit: data?.engageUnit || '',
     owner: data?.owner || {
       id: 0,
-      account: '',
+      address: '',
       image: '',
+      name: '',
     },
-    totalEngage: data?.totalEngage || 0,
+    totalEngage: data?.totalEngage || { number: 0, unit: '' },
     members: data?.members || [
       {
         id: 0,
-        account: '',
+        address: '',
         image: '',
+        name: '',
       },
     ],
     totalMember: data?.totalMember || 0,

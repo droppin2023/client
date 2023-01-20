@@ -1,37 +1,29 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
+import { EngageScore, Price, Quests, User } from '@components/queries/commonType'
+
 export interface FetchBadgeDetailParams {
   badgeId: number
 }
 
 export interface FetchBadgeDetailResponse {
   id: number
+  name: string
+  symbol: string
+  logo: string
+  community: Community
   description: string
-  name: string
-  badgePrice: number
-  priceUnit: string
-  engagePointThreshold: number
-  requiredQuests: Quests[]
+  isDefault: boolean
   address: string
-  nftInitBaseURI: string
-  nftSymbol: string
-  //group
-  groupId: number
-  groupName: string
-  engageUnit: string
+  holderList: User[]
+  requiredQuests: Quests[]
+  requiredEngageScore: EngageScore
+  requiredPrice: Price
 }
 
-export interface Quests {
-  questType: number
-  questList: Quest[]
-}
-
-export interface Quest {
+export interface Community {
   id: number
+  account: string
+  image: string
   name: string
-  engageScore: number
-}
-export enum questType {
-  discord = 'Discord',
-  form = 'Submit Form',
 }
