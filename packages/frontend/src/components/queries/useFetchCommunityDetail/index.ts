@@ -45,6 +45,9 @@ const normalizeData = (
         logo: '',
         name: '',
         description: '',
+        groupId: 0,
+        isClaimed: false,
+        groupName: 'Lepak DAO',
       },
     ],
     quests: data?.quests || [

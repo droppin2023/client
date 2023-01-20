@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { EngageScore, Link, Quests, User } from '@components/queries/common'
+import { Badge, EngageScore, Link, Quests, User } from '@components/queries/common'
 
 export interface FetchCommunityDetailParams {
   communityId: number
@@ -26,13 +26,6 @@ export interface FetchCommunityDetailResponse {
 export interface Discord {
   link: string
   guildId: number
-}
-
-export interface Badge {
-  id: number
-  logo: string
-  name: string
-  description: string
 }
 
 export enum Category {

@@ -25,7 +25,7 @@ const normalizeData = (data: FetchBadgeDetailResponse | undefined): FetchBadgeDe
     symbol: data?.symbol || '',
     community: data?.community || {
       id: 0,
-      account: '',
+      address: '',
       image: '',
       name: '',
     },

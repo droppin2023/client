@@ -16,6 +16,25 @@ export interface Link {
   link: string
 }
 
+// COMMUNITY
+export interface Community {
+  id: number
+  address: string
+  image: string
+  name: string
+}
+
+export interface Badge {
+  id: number
+  logo: string
+  name: string
+  description: string
+  isClaimed: boolean
+  groupId: number
+  groupName: string
+}
+
+// QUEST
 export interface Quests {
   questType: number
   questList: Quest[]
@@ -31,6 +50,8 @@ export enum questType {
   discord = 'Discord',
   form = 'Submit Form',
 }
+
+//ENGAGESCORE
 
 export interface EngageScore {
   number: number
