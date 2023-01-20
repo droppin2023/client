@@ -24,6 +24,25 @@ export interface Community {
   name: string
 }
 
+export interface CommunityExploreComponent {
+  id: number
+  logo: string
+  name: string
+  category: Category
+  discord?: Discord
+  description: string
+  owner: User
+  totalEngage: EngageScore
+  members: User[]
+  totalMember: number
+  links?: Link[]
+}
+
+export interface Discord {
+  link: string
+  guildId: number
+}
+
 export interface Badge {
   id: number
   logo: string
@@ -65,6 +84,7 @@ export enum Category {
   Infrastructure = 'Infrastructure',
   Defi = 'DeFi',
   Music = 'Music',
+  Other = 'Other',
 }
 
 export enum Status {
