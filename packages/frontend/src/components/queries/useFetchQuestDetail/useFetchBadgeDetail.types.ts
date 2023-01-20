@@ -24,10 +24,3 @@ export interface Condtion {
   type: string
   detailType: number
 }
-
-export interface Community {
-  id: number
-  account: string
-  image: string
-  name: string
-}
