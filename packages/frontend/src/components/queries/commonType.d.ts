@@ -1,13 +1,3 @@
-export interface Discord {
-  link: string
-  guildId: number
-}
-
-export interface Price {
-  number: number
-  unit: string
-}
-
 export interface User {
   id: number
   address: string
