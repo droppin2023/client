@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { EngageScore, Link, Quests, User } from '@components/queries/commonType'
+import { EngageScore, Link, Quests, User } from '@components/queries/common'
 
 export interface FetchCommunityDetailParams {
   communityId: number
