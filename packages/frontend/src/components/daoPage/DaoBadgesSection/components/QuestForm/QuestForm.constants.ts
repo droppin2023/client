@@ -1,12 +1,12 @@
-import { DISCORD, LINK } from '@constants/categories'
+import { questType } from '@components/queries/common'
 
 export const QUEST_CONDITION_OPTIONS = [
   {
     message: 'Submit Link',
-    value: LINK,
+    value: questType.form,
   },
   {
     message: 'Connect Discord',
-    value: DISCORD,
+    value: questType.discord,
   },
 ]
