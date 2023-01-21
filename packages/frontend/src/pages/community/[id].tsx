@@ -23,7 +23,7 @@ const DaoPage = ({ id }: { id: number }) => {
 
   return (
     <VStack spacing="40px" marginBottom="100px">
-      <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.totalEngage.unit}>
+      <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.totalEngage.unit} id={id}>
         {/* TODO: refactor member list, quests, and badges as context */}
         <DaoOverview
           name={mockDao.name}

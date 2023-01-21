@@ -4,9 +4,11 @@ import type { DaoPageContextValue, DaoPageProviderProps } from './DaoPageContext
 
 const DaoPageContext = createContext<DaoPageContextValue | undefined>(undefined)
 
-const DaoPageProvider = ({ children, isAdmin = false, repUnit }: DaoPageProviderProps) => {
+const DaoPageProvider = ({ children, isAdmin = false, repUnit, id }: DaoPageProviderProps) => {
   // do the fun stuff
-  return <DaoPageContext.Provider value={{ isAdmin, repUnit }}>{children}</DaoPageContext.Provider>
+  return (
+    <DaoPageContext.Provider value={{ isAdmin, repUnit, id }}>{children}</DaoPageContext.Provider>
+  )
 }
 
 const useDaoPageContext = () => {

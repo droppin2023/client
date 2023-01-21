@@ -7,6 +7,140 @@ import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 import { Category, Status } from '@components/queries/common'
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
+import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
+
+export const ONE_USER_DETAIL: FetchUserDetailResponse = {
+  id: 0,
+  name: '',
+  description: '',
+  image: '',
+  badges: [
+    {
+      id: 0,
+      logo: 'todo',
+      name: 'NewBie',
+      description: 'todo',
+      isClaimed: false,
+      groupId: 0,
+      groupName: 'todo',
+    },
+    {
+      id: 0,
+      logo: 'todo',
+      name: 'Novice',
+      description: 'todo',
+      isClaimed: false,
+      groupId: 0,
+      groupName: 'todo',
+    },
+    {
+      id: 1,
+      logo: 'todo',
+      name: 'todo',
+      description: 'todo',
+      isClaimed: false,
+      groupId: 0,
+      groupName: 'todo',
+    },
+    {
+      id: 2,
+      logo: 'todo',
+      name: 'todo',
+      description: 'todo',
+      isClaimed: false,
+      groupId: 0,
+      groupName: 'todo',
+    },
+  ],
+  communitiesWithBadge: [
+    {
+      community: {
+        id: 0,
+        name: 'LepakDAO',
+        address: '0x73437205253',
+        image: 'https://via.placeholder.com/300',
+      },
+      badges: [
+        {
+          id: 0,
+          logo: 'todo',
+          name: 'NewBie',
+          description: 'todo',
+          isClaimed: false,
+          groupId: 0,
+          groupName: 'todo',
+        },
+        {
+          id: 1,
+          logo: 'todo',
+          name: 'Novice',
+          description: 'todo',
+          isClaimed: false,
+          groupId: 0,
+          groupName: 'todo',
+        },
+      ],
+    },
+  ],
+  engageScoresAndCommunity: [
+    {
+      engageScore: {
+        number: 425,
+        unit: 'LPD',
+      },
+      community: {
+        id: 0,
+        name: 'Lepak DAO',
+        address: '0x73437205253',
+        image: 'https://via.placeholder.com/300',
+      },
+    },
+    {
+      engageScore: {
+        number: 425,
+        unit: 'GED',
+      },
+      community: {
+        id: 1,
+        name: 'Gedomazou DAO',
+        address: '0x73437205253',
+        image: 'https://via.placeholder.com/300',
+      },
+    },
+  ],
+  userQuests: [
+    {
+      status: Status.noStatus,
+      quests: [
+        {
+          id: 1,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 2,
+          name: 'Verify on Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      status: Status.pending,
+      quests: [
+        {
+          id: 3,
+          name: 'Join Hackathon',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Join our live gatherinf',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+  ],
+}
 
 export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
   id: 0,
@@ -39,7 +173,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
     image: 'https://via.placeholder.com/300',
     name: 'Via',
   },
-  id: 1,
+  id: 0,
   totalEngage: {
     number: 42352525,
     unit: 'LPD',
