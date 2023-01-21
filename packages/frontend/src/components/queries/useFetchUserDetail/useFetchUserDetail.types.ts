@@ -15,6 +15,7 @@ export interface FetchUserDetailResponse {
   communitiesWithBadge: CommunityWithBadge[]
   engageScoresAndCommunity: EngageScoreAndCommunity[]
   userQuests: UserQuest[]
+  discord: string
 }
 
 export interface CommunityWithBadge {
