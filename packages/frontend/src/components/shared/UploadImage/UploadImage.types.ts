@@ -3,4 +3,5 @@ export interface UploadImageProps {
   width?: string
   height?: string
   margin?: string
+  loaded?: string
 }

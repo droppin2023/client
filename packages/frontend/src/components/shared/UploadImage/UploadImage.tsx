@@ -24,8 +24,9 @@ const UploadImage = ({
   width = '200px',
   height = '200px',
   margin,
+  loaded = '',
 }: UploadImageProps) => {
-  const [loadedImg, setLoadedImg] = useState<string>('')
+  const [loadedImg, setLoadedImg] = useState<string>(loaded)
 
   const hiddenInputRef = useRef<HTMLInputElement>(null)
 
@@ -56,6 +57,7 @@ const UploadImage = ({
           cursor: 'pointer',
         }}
       >
+        {/* TODO: URL and staticimagedata conversion */}
         <Image
           src={loadedImg.length > 0 ? loadedImg : placeholder}
           alt="Uploaded Image"
