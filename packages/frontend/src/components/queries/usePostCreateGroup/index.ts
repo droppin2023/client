@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
 import coreContractAbi from '@shared/abis/CoreFacet.json'
-import type { CreateGroupParams } from './useCreateBadge.types'
-import { CREATE_GROUP } from './useCreateBadge.constants'
+import type { CreateGroupParams } from './usePostCreateBadge.types'
+import { CREATE_GROUP } from './usePostCreateBadge.constants'
 import { useContract, useSigner } from 'wagmi'
 
-const useCreateGroup = () => {
+const usePostCreateGroup = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
   const { data: signer } = useSigner()
@@ -48,4 +48,4 @@ const useCreateGroup = () => {
   return { createGroup, isLoading, error }
 }
 
-export default useCreateGroup
+export default usePostCreateGroup

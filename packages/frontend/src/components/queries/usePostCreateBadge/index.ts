@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
 import badgeContractAbi from '@shared/abis/BadgeFacet.json'
-import type { CreateBadgeParams } from './useCreateBadge.types'
-import { CREATE_BADGE } from './useCreateBadge.constants'
+import type { CreateBadgeParams } from './usePostCreateBadge.types'
+import { CREATE_BADGE } from './usePostCreateBadge.constants'
 import { useContract, useSigner } from 'wagmi'
 
-const useCreateBadge = () => {
+const usePostCreateBadge = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
   const { data: signer } = useSigner()
@@ -48,4 +48,4 @@ const useCreateBadge = () => {
   return { postForm, isLoading, error }
 }
 
-export default useCreateBadge
+export default usePostCreateBadge
