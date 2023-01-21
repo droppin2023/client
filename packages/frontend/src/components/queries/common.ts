@@ -65,7 +65,7 @@ export interface Quest {
   engageScore: number
 }
 
-export enum questType {
+export enum QuestType {
   discord = 'Discord',
   form = 'Submit Form',
 }

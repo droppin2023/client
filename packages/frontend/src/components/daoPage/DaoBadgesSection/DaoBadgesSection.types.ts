@@ -1,4 +1,4 @@
-import type { QuestCategories } from '@types/quest'
+import type { QuestType } from '@components/queries/common'
 
 // TODO: better type definition for badges and quests
 export interface DaoBadgesSectionProps {
@@ -11,7 +11,7 @@ export interface DaoBadgesSectionProps {
   }[]
   quests: {
     name: string
-    type: QuestCategories
+    type: QuestType
     reward: number
   }[]
 }

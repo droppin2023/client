@@ -29,8 +29,7 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 import * as globalSty from '@styles'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
-import { questType } from '@components/queries/common'
-import { QuestCategories } from '@types/quest'
+import { QuestType } from '@components/queries/common'
 import { QUEST_CONDITION_OPTIONS } from './QuestForm.constants'
 import type { QuestFormProps } from './QuestForm.types'
 
@@ -38,7 +37,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
   const [schemaHash, setSchemaHash] = useState('')
   const [questTitle, setQuestTitle] = useState('')
   const [reward, setReward] = useState(0)
-  const [questCondition, setQuestCondition] = useState<questType>(questType.form)
+  const [questCondition, setQuestCondition] = useState<QuestType>(QuestType.form)
 
   const { repUnit } = useDaoPageContext()
 
@@ -73,10 +72,10 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader bg={background2}>Create New Quest</ModalHeader>
+      <ModalContent bg={background2}>
+        <ModalHeader>Create New Quest</ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6} bg={background2}>
+        <ModalBody pb={6}>
           <FormControl>
             <FormLabel>Schema Hash</FormLabel>
             <Input
@@ -118,7 +117,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
           <FormControl mt={4}>
             <FormLabel>Quest Condition</FormLabel>
             <Select
-              onChange={(e) => setQuestCondition(e.target.value as QuestCategories)}
+              onChange={(e) => setQuestCondition(e.target.value as QuestType)}
               variant="filled"
             >
               {QUEST_CONDITION_OPTIONS.map((item, index) => (
@@ -130,7 +129,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
           </FormControl>
 
           {/* TODO: add condition details */}
-          {questCondition === questType.form && (
+          {questCondition === QuestType.form && (
             <FormControl mt={4}>
               <FormLabel>Condition detail</FormLabel>
               <FormHelperText css={[globalSty.helperText]}>
@@ -143,7 +142,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
             </FormControl>
           )}
 
-          {questCondition === questType.discord && (
+          {questCondition === QuestType.discord && (
             <>
               <FormControl mt={4}>
                 <FormLabel>Connect Discord</FormLabel>
@@ -201,7 +200,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
           )}
         </ModalBody>
 
-        <ModalFooter bg={background2}>
+        <ModalFooter>
           <Button onClick={handleSubmit} size="lg" bg={primary} _hover={{ bg: primaryHighlight }}>
             Create Quest
           </Button>

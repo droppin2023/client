@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import { Badge, Button, Flex, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 
-import { DISCORD, LINK } from '@constants/categories'
 import { background2, discordPurple, pink, primary, primaryHighlight } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
@@ -16,6 +15,7 @@ import QuestForm from './components/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
 // TODO: integrate real data
+import { QuestType } from '@components/queries/common'
 import { MOCK_DAO_LIST } from '@mockData'
 
 const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
@@ -77,9 +77,14 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
           </Badge>
           <SimpleGrid columns={4} gap={6} width="100%">
             {quests
-              .filter((item) => item.type === DISCORD)
+              .filter((item) => item.type === QuestType.discord)
               .map((item, index) => (
-                <QuestCard key={index} name={item.name} reward={item.reward} />
+                <QuestCard
+                  key={index}
+                  name={item.name}
+                  reward={item.reward}
+                  questType={QuestType.discord}
+                />
               ))}
           </SimpleGrid>
           <Badge fontSize="xl" bg={pink} padding="4px 16px" borderRadius="6px">
@@ -87,9 +92,14 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
           </Badge>
           <SimpleGrid columns={4} gap={6} width="100%">
             {quests
-              .filter((item) => item.type === LINK)
+              .filter((item) => item.type === QuestType.form)
               .map((item, index) => (
-                <QuestCard key={index} name={item.name} reward={item.reward} />
+                <QuestCard
+                  key={index}
+                  name={item.name}
+                  reward={item.reward}
+                  questType={QuestType.form}
+                />
               ))}
           </SimpleGrid>
         </VStack>

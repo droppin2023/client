@@ -194,17 +194,17 @@ export const MOCK_DAO_LIST = [
       },
       {
         name: 'Join our GitHub',
-        type: 'Submit Link',
+        type: 'Submit Form',
         reward: 200,
       },
       {
         name: 'Join a hackathon',
-        type: 'Submit Link',
+        type: 'Submit Form',
         reward: 500,
       },
       {
         name: 'Make a contribution to our GitHub',
-        type: 'Submit Link',
+        type: 'Submit Form',
         reward: 500,
       },
     ],

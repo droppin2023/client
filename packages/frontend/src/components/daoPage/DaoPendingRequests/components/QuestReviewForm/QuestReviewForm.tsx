@@ -58,7 +58,7 @@ const QuestReviewForm = ({ isOpen, onClose }: QuestReviewFormProps) => {
             <Button>View Profile</Button>
           </Flex>
 
-          <VStack spacing={3} align="left" mt={4}>
+          <VStack spacing={2} align="left" mt={4}>
             <VStack align="left">
               <Text color={secondary}>Schema Hash</Text>
               <Text as="b">0x3236206269afe3</Text>
