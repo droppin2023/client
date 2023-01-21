@@ -1,15 +1,20 @@
+import { useState } from 'react'
+
 import Image from 'next/image'
 
 import { Box, HStack, Table, TableContainer, Tbody, Td, Text, Tr, VStack } from '@chakra-ui/react'
 
-import { orange, primary, secondaryWeak } from '@constants/colors'
+import { background2, orange, primary } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
+
+import QuestReviewForm from './components/QuestReviewForm'
 
 import wipIllustration from './assets/wip-illustration.svg'
 import type { DaoPendingRequestsProps, PendingRequestsTableRow } from './DaoPendingRequests.types'
 
 const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
   const { repUnit } = useDaoPageContext()
+  const [isShowReviewModal, setIsShowReviewModal] = useState(false)
 
   const renderTableRow = ({
     name,
@@ -19,7 +24,13 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
     questStatus,
   }: PendingRequestsTableRow) => {
     return (
-      <Box borderRadius="16px" backgroundColor={secondaryWeak} width="100%">
+      <Box
+        borderRadius="16px"
+        backgroundColor={background2}
+        width="100%"
+        cursor="pointer"
+        onClick={() => setIsShowReviewModal(true)}
+      >
         <Tr display="flex" justifyContent={'space-between'}>
           <Td>
             <HStack>
@@ -68,6 +79,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
           </Table>
         </TableContainer>
       )}
+      <QuestReviewForm isOpen={isShowReviewModal} onClose={() => setIsShowReviewModal(false)} />
     </>
   )
 }

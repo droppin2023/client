@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Badge, Button, Flex, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 
 import { DISCORD, LINK } from '@constants/categories'
-import { discordPurple, pink, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { background2, discordPurple, pink, primary, primaryHighlight } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
@@ -33,7 +33,7 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
           ))}
           {isAdmin && (
             <Flex
-              bg={secondaryWeak}
+              bg={background2}
               color={primary}
               width="200px"
               height="200px"

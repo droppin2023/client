@@ -1,5 +1,5 @@
 import { Box, chakra, CheckboxProps, Text, useCheckbox } from '@chakra-ui/react'
-import { orange, secondaryWeak } from '@constants/colors'
+import { background2, orange } from '@constants/colors'
 
 const DroppinCheckbox = (props: CheckboxProps) => {
   const { children } = props
@@ -11,7 +11,7 @@ const DroppinCheckbox = (props: CheckboxProps) => {
       <input {...getInputProps()} hidden />
       <Box
         padding="4px 16px"
-        bg={state.isChecked ? orange : secondaryWeak}
+        bg={state.isChecked ? orange : background2}
         border={`2px solid ${orange}`}
         borderRadius="8px"
         {...getCheckboxProps()}

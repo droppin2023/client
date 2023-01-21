@@ -26,7 +26,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 
-import { foreground, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { background2, foreground, primary, primaryHighlight } from '@constants/colors'
 
 import UploadImage from '@components/shared/UploadImage'
 
@@ -81,7 +81,7 @@ const BadgeForm = ({ isOpen, onClose, repUnit, quests }: BadgeFormProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent bg={secondaryWeak}>
+      <ModalContent bg={background2}>
         <ModalHeader>Create New Badge</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>

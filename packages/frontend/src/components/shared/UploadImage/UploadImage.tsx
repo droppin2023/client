@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 
 import { Flex, Input } from '@chakra-ui/react'
 
-import { primary, secondaryWeak } from '@constants/colors'
+import { background2, primary } from '@constants/colors'
 
 import placeholder from './assets/placeholder.svg'
 import * as sty from './UploadImage.styles'
@@ -41,7 +41,7 @@ const UploadImage = ({
   return (
     <>
       <Flex
-        bg={secondaryWeak}
+        bg={background2}
         color={primary}
         width={width}
         height={height}

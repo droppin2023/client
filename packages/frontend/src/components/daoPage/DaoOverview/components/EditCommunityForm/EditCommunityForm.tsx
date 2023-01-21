@@ -31,7 +31,7 @@ import DroppinCheckbox from '@components/shared/DroppinCheckbox'
 import UploadImage from '@components/shared/UploadImage'
 
 import { DAO_CATEGORIES, NETWORKS } from '@constants/categories'
-import { discordPurple, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 
 import BadgeSelectRadioGroup from './components/BadgeSelectRadioGroup'
 import { URL_PREFIX } from './EditCommunityForm.constants'
@@ -79,7 +79,7 @@ const EditCommunityForm = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent bg={secondaryWeak}>
+      <ModalContent bg={background2}>
         <ModalHeader>Edit Community</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
