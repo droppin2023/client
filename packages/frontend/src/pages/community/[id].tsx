@@ -12,8 +12,8 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 // TODO: integrate real data
+import { QuestType } from '@components/queries/common'
 import { MOCK_PENDING_REQUESTS, ONE_COMMUNITY } from '@mockData'
-import { QuestCategories } from '@types/quest'
 
 const DaoPage = ({ id }: { id: number }) => {
   const mockDao = ONE_COMMUNITY
@@ -79,21 +79,12 @@ const DaoPage = ({ id }: { id: number }) => {
             <TabPanels>
               <TabPanel>
                 <DaoBadgesSection
-                  badges={
-                    mockDao.badges as {
-                      daoName: string
-                      name: string
-                      recentActivity: string
-                      minter: string
-                      isLocked: false
-                    }[]
+                  badges={mockDao.badges}
+                  questsDiscord={
+                    mockDao.quests.filter((item) => item.questType === QuestType.discord)[0]
                   }
-                  quests={
-                    mockDao.quests as {
-                      name: string
-                      type: QuestCategories
-                      reward: number
-                    }[]
+                  questsSubmitForm={
+                    mockDao.quests.filter((item) => item.questType === QuestType.form)[0]
                   }
                 />
               </TabPanel>

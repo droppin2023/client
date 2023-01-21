@@ -35,7 +35,13 @@ import * as sty from './BadgeForm.styles'
 import type { BadgeFormProps } from './BadgeForm.types'
 
 // TODO: checks for inputs
-const BadgeForm = ({ isOpen, onClose, repUnit, quests }: BadgeFormProps) => {
+const BadgeForm = ({
+  isOpen,
+  onClose,
+  repUnit,
+  questsDiscord,
+  questsSubmitForm,
+}: BadgeFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState('')
   const [checkedQuestList, setCheckedQuestList] = useState<typeof quests>([])
   const [title, setTitle] = useState('')
@@ -122,7 +128,7 @@ const BadgeForm = ({ isOpen, onClose, repUnit, quests }: BadgeFormProps) => {
             </FormHelperText>
 
             <VStack maxHeight="256px" overflowY="scroll" alignItems="flex-start">
-              {quests.map((item, index) => (
+              {[...questsDiscord.questList, ...questsSubmitForm.questList].map((item, index) => (
                 <Checkbox value={JSON.stringify(item)} key={index} onChange={handleQuestCheck}>
                   {item.name}
                 </Checkbox>

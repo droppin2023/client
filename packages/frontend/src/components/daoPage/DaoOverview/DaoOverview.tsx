@@ -81,6 +81,9 @@ const DaoOverview = ({
                 )}
               </Flex>
               <HStack spacing={5}>
+                <Text>
+                  by <Text as="b">{owner.name}</Text>
+                </Text>
                 <HStack spacing={3}>
                   <IconButton
                     aria-label="website"
