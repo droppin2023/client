@@ -18,7 +18,8 @@ const normalizeData = (
         logo: '',
         name: '',
         category: Category.Other,
-        discord: undefined,
+        discord: '',
+        link: '',
         description: '',
         owner: {
           id: 0,
@@ -36,7 +37,6 @@ const normalizeData = (
           },
         ],
         totalMember: 0,
-        links: undefined,
       },
     ],
   }

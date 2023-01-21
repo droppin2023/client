@@ -10,12 +10,6 @@ export interface Price {
   unit: string
 }
 
-export interface Link {
-  id: number
-  name: string
-  link: string
-}
-
 // COMMUNITY
 export interface Community {
   id: number
@@ -29,18 +23,13 @@ export interface CommunityExploreComponent {
   logo: string
   name: string
   category: Category
-  discord?: Discord
+  discord?: string
   description: string
   owner: User
   totalEngage: EngageScore
   members: User[]
   totalMember: number
-  links?: Link[]
-}
-
-export interface Discord {
-  link: string
-  guildId: number
+  link?: string
 }
 
 export interface Badge {

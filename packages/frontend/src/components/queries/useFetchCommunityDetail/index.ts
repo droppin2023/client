@@ -19,7 +19,7 @@ const normalizeData = (
     logo: data?.logo || '',
     name: data?.name || '',
     category: data?.category || Category.Other,
-    discord: data?.discord || undefined,
+    discord: data?.discord || '',
     description: data?.description || '',
     owner: data?.owner || {
       id: 0,
@@ -38,7 +38,7 @@ const normalizeData = (
     ],
     totalMember: data?.totalMember || 0,
     blockchain: data?.blockchain || '',
-    links: data?.links || undefined,
+    link: data?.link || '',
     badges: data?.badges || [
       {
         id: 0,
