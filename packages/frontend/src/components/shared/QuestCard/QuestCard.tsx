@@ -6,7 +6,7 @@ import { background2, orange, primary } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Done from '@components/icons/Done'
-import QuestDetailModal from '@components/shared/QuestDetailModal'
+import QuestDetailModal from '@components/shared/QuestCard/components/QuestDetailModal'
 
 import type { QuestCardProps } from './QuestCard.types'
 

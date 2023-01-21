@@ -8,9 +8,9 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 import Award from '@components/icons/Award'
 import DaoCard from '@components/shared/DaoCard'
 import QuestBadge from '@components/shared/QuestBadge'
-import QuestCard from './components/QuestCard'
+import QuestCard from '../../shared/QuestCard'
 
-import BadgeForm from './components/BadgeForm'
+import BadgeForm from '../../shared/BadgeForm'
 import QuestForm from './components/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 

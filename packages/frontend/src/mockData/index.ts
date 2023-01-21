@@ -4,6 +4,122 @@ import mockAvatar3 from './assets/mock-avatar-3.png'
 
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
+import { Category } from '@components/queries/common'
+import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
+
+export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
+  logo: 'https://via.placeholder.com/300',
+  name: 'Lepak DAO',
+  category: Category.Other,
+  discord: {
+    link: 'https://via.discord.com/300', // if true
+    guildId: 223523,
+  },
+  description: 'Lepak DAO Lepak DAOLepak DAO',
+  owner: {
+    id: 1,
+    address: '0xaegewgwewgeew',
+    image: 'https://via.placeholder.com/300',
+    name: 'Via',
+  },
+  id: 1,
+  totalEngage: {
+    number: 42352525,
+    unit: 'LPD',
+  },
+  members: [
+    {
+      id: 2,
+      address: '0xaegewgwewgeew',
+      image: 'https://via.placeholder.com/300',
+      name: 'John',
+    },
+    {
+      id: 3,
+      address: '0xaegewgwewgeew',
+      image: 'https://via.placeholder.com/300',
+      name: 'Clark',
+    },
+    {
+      id: 4,
+      address: '0xaegewgwewgeew',
+      image: 'https://via.placeholder.com/300',
+      name: 'May',
+    },
+  ],
+  // offchain
+  totalMember: 120,
+  blockchain: 'Polygon',
+  links: [
+    {
+      id: 0,
+      name: 'website',
+      link: 'yoursite.io',
+    },
+  ],
+  badges: [
+    {
+      id: 1,
+      logo: 'https://aegwgwagew.dageew',
+      name: 'Newbie',
+      description: 'Newbie is Newbie',
+      isClaimed: false,
+      groupId: 0,
+      groupName: 'todo',
+    },
+    {
+      id: 2,
+      logo: 'https://aegwgwagew.dageew',
+      name: 'Newbie',
+      description: 'Newbie is Newbie',
+      isClaimed: false,
+      groupId: 0,
+      groupName: 'todo',
+    },
+    {
+      id: 3,
+      logo: 'https://aegwgwagew.dageew',
+      name: 'Newbie',
+      description: 'Newbie is Newbie',
+      isClaimed: false,
+      groupId: 0,
+      groupName: 'todo',
+    },
+  ],
+  quests: [
+    {
+      questType: 0, // DISCORD
+      questList: [
+        {
+          id: 1,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 2,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      questType: 1, // FORM
+      questList: [
+        {
+          id: 3,
+          name: 'Join Hackathon',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Win a prize',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+  ],
+}
+
 export const MOCK_USER_LIST = [
   {
     name: 'John',
@@ -460,7 +576,7 @@ export const MOCK_BADGE_LIST = [
 ]
 
 export const GET_CLAIMED_MOCK_BADGE = {
-  badgeName: 'NewBie',
+  name: 'NewBie',
   badgeImg: 'https://via.placeholder.com/300',
   badgeSymbol: 'NB',
   daoId: 2,
@@ -504,19 +620,19 @@ export const GET_CLAIMED_MOCK_BADGE = {
       type: 'quest',
       detail: [
         {
-          questId: 1,
+          id: 1,
           questNmae: 'Join 1 Hackathon',
-          questReward: 100,
+          engageScore: 100,
         },
         {
-          questId: 2,
+          id: 2,
           questNmae: 'Win a prize in Hackathon',
-          questReward: 100,
+          engageScore: 100,
         },
         {
-          questId: 3,
+          id: 3,
           questNmae: 'Join a Github Organization',
-          questReward: 200,
+          engageScore: 200,
         },
       ],
     },
@@ -543,19 +659,19 @@ export const MOCK_USER = {
   img: 'https://via.placeholder.com/300',
   badges: [
     {
-      badgeId: 1,
+      id: 1,
       badgeImg: 'https://via.placeholder.com/300',
-      badgeName: 'Newbie',
+      name: 'Newbie',
     },
     {
-      badgeId: 2,
+      id: 2,
       badgeImg: 'https://via.placeholder.com/300',
-      badgeName: 'Newbie',
+      name: 'Newbie',
     },
     {
-      badgeId: 3,
+      id: 3,
       badgeImg: 'https://via.placeholder.com/300',
-      badgeName: 'Newbie',
+      name: 'Newbie',
     },
   ],
   communities: [
@@ -563,15 +679,15 @@ export const MOCK_USER = {
       daoId: 1,
       badges: [
         {
-          badgeId: 1,
+          id: 1,
           badgeImg: 'https://via.placeholder.com/300',
-          badgeName: 'Newbie',
+          name: 'Newbie',
           isClaimed: true,
         },
         {
-          badgeId: 2,
+          id: 2,
           badgeImg: 'https://via.placeholder.com/300',
-          badgeName: 'Newbie2',
+          name: 'Newbie2',
           isClaimed: true,
         },
       ],
@@ -580,15 +696,15 @@ export const MOCK_USER = {
       daoId: 2,
       badges: [
         {
-          badgeId: 1,
+          id: 1,
           badgeImg: 'https://via.placeholder.com/300',
-          badgeName: 'Newbie4',
+          name: 'Newbie4',
           isClaimed: true,
         },
         {
-          badgeId: 2,
+          id: 2,
           badgeImg: 'https://via.placeholder.com/300',
-          badgeName: 'Newbie3',
+          name: 'Newbie3',
           isClaimed: false,
         },
       ],

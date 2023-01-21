@@ -120,7 +120,7 @@ const BadgeForm = ({ isOpen, onClose, repUnit, quests }: BadgeFormProps) => {
             <FormHelperText css={[sty.helperText]}>
               Set the required quest conditions to claim the badge
             </FormHelperText>
-            {/* TODO: implement proper functionality */}
+
             <VStack maxHeight="256px" overflowY="scroll" alignItems="flex-start">
               {quests.map((item, index) => (
                 <Checkbox value={JSON.stringify(item)} key={index} onChange={handleQuestCheck}>

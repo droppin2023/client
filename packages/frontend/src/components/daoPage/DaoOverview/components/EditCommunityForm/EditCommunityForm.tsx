@@ -9,8 +9,6 @@ import {
   FormLabel,
   HStack,
   Input,
-  InputGroup,
-  InputLeftAddon,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -33,8 +31,7 @@ import UploadImage from '@components/shared/UploadImage'
 import { DAO_CATEGORIES, NETWORKS } from '@constants/categories'
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 
-import BadgeSelectRadioGroup from './components/BadgeSelectRadioGroup'
-import { URL_PREFIX } from './EditCommunityForm.constants'
+import QuestBadge from '@components/shared/QuestBadge'
 import * as sty from './EditCommunityForm.styles'
 import { EditCommunityFormProps } from './EditCommunityForm.types'
 
@@ -48,6 +45,7 @@ const EditCommunityForm = ({
   description: currentDescription,
   website: currentWebsite,
   category,
+  owner,
 }: EditCommunityFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState(img)
   const [name, setName] = useState(currentName)
@@ -85,7 +83,7 @@ const EditCommunityForm = ({
         <ModalBody pb={6}>
           <FormControl>
             <FormLabel>Logo image</FormLabel>
-            <UploadImage onFileLoad={(uploaded: string) => setLocalImgUrl(uploaded)} />
+            <UploadImage loaded={img} onFileLoad={(uploaded: string) => setLocalImgUrl(uploaded)} />
           </FormControl>
 
           <FormControl mt={4}>
@@ -98,21 +96,6 @@ const EditCommunityForm = ({
             />
           </FormControl>
 
-          <FormControl mt={4}>
-            <FormLabel>URL</FormLabel>
-            <FormHelperText css={[sty.helperText]}>
-              Customize your URL on Droppin. Must only contain lowercase letters, numbers, and
-              hyphens
-            </FormHelperText>
-            <InputGroup>
-              <InputLeftAddon>{URL_PREFIX}</InputLeftAddon>
-              <Input
-                variant="filled"
-                placeholder="yourlink"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </InputGroup>
-          </FormControl>
           <FormControl mt={4}>
             <FormLabel>Description</FormLabel>
             <FormHelperText css={[sty.helperText]}>Briefly describe your community</FormHelperText>
@@ -154,7 +137,7 @@ const EditCommunityForm = ({
                   <WebsiteIcon />
                   <Text>Website</Text>
                 </HStack>
-                <Input placeholder="yoursite.io" ml={8} variant="filled" />
+                <Input value={website} placeholder="yoursite.io" ml={8} variant="filled" />
               </Flex>
             </VStack>
           </FormControl>
@@ -169,7 +152,7 @@ const EditCommunityForm = ({
               {/* TODO: this should be a radio version */}
               {NETWORKS.map((item, index) => (
                 <WrapItem key={index}>
-                  <DroppinCheckbox>{item}</DroppinCheckbox>
+                  <DroppinCheckbox isChecked={true}>{item}</DroppinCheckbox>
                 </WrapItem>
               ))}
             </Wrap>
@@ -177,12 +160,10 @@ const EditCommunityForm = ({
 
           <FormControl mt={4}>
             <FormLabel>Default joining badge</FormLabel>
-            <BadgeSelectRadioGroup
-              badges={badges}
-              onChange={(value) => setDefaultBadge(value)}
-              value={defaultBadge}
-              defaultValue={defaultBadge}
-            />
+            <FormHelperText css={[sty.helperText]}>
+              Your new members would get the &quot;NewBie&quot; badge upon joining.
+            </FormHelperText>
+            <QuestBadge name="NewBie" isLocked={false} />
           </FormControl>
 
           <FormControl mt={4}>
@@ -190,18 +171,11 @@ const EditCommunityForm = ({
             <FormHelperText css={[sty.helperText]}>
               Admin can modify community settings
             </FormHelperText>
-            <Wrap>
-              {members.map((item, index) => (
-                <WrapItem key={index}>
-                  <DroppinCheckbox>
-                    <HStack spacing={3}>
-                      <Image src={item.img} alt={name} css={[sty.userImage]} />
-                      <Text>{item.name}</Text>
-                    </HStack>
-                  </DroppinCheckbox>
-                </WrapItem>
-              ))}
-            </Wrap>
+
+            <HStack spacing={3}>
+              <Image src={owner.image} alt={name} css={[sty.userImage]} width={32} height={32} />
+              <Text>{owner.name}</Text>
+            </HStack>
           </FormControl>
         </ModalBody>
 

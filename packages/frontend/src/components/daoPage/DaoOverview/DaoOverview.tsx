@@ -13,6 +13,7 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Settings from '@components/icons/Settings'
 
+import { Category } from '@components/queries/common'
 import bannerOrnament from './assets/banner-ornament.svg'
 import EditCommunityForm from './components/EditCommunityForm'
 import * as sty from './DaoOverview.styles'
@@ -20,16 +21,16 @@ import type { DaoOverviewProps } from './DaoOverview.types'
 
 const DaoOverview = ({
   name = 'Drop DAO',
-  minter = 'Droppin Team',
   memberCount = 0,
   memberList = [],
-  created = new Date(),
-  chain = '',
-  category = 'NFT',
+  category = Category.Other,
   repScore = 0,
   description = '',
+  chain = 'Polygon',
   imgUrl = './assets/placeholder.jpeg',
   badges,
+  owner,
+  website,
 }: DaoOverviewProps) => {
   const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(false)
 
@@ -49,10 +50,10 @@ const DaoOverview = ({
           justifyContent={'center'}
           alignItems="center"
         >
-          <Flex alignItems="flex-start" gap="32px" maxWidth="80%">
+          <HStack alignItems="flex-start" gap="32px" width="77vw">
             <Image src={imgUrl} alt={name} width={200} height={200} css={[sty.daoImage]} />
-            <VStack alignItems={'flex-start'}>
-              <Flex alignItems={'center'} justifyContent="space-between" width="100%">
+            <VStack alignItems={'flex-start'} width="100%">
+              <Flex alignItems={'center'} justifyContent="space-between" width="100%" flex={1}>
                 <HStack spacing={5}>
                   <Text fontSize="4xl" lineHeight={1.2} as="b">
                     {name}
@@ -64,12 +65,7 @@ const DaoOverview = ({
                     borderRadius="6px"
                   >{`${repScore} ${repUnit}`}</Badge>
                 </HStack>
-                {!isAdmin && (
-                  <Button leftIcon={<Text>+</Text>} bg={orange} _hover={{ bg: orangeHighlight }}>
-                    Join
-                  </Button>
-                )}
-                {isAdmin && (
+                {isAdmin ? (
                   <Button
                     leftIcon={<Settings />}
                     bg={background}
@@ -78,12 +74,13 @@ const DaoOverview = ({
                   >
                     Edit
                   </Button>
+                ) : (
+                  <Button leftIcon={<Text>+</Text>} bg={orange} _hover={{ bg: orangeHighlight }}>
+                    Join
+                  </Button>
                 )}
               </Flex>
               <HStack spacing={5}>
-                <Text>
-                  by <Text as="b">{minter}</Text>
-                </Text>
                 <HStack spacing={3}>
                   <IconButton
                     aria-label="website"
@@ -105,21 +102,18 @@ const DaoOverview = ({
               </HStack>
               <Text>{description}</Text>
               <HStack>
-                <HStack spacing="-12px">
-                  {memberList.slice(0, 3).map((item, index) => (
-                    <AvatarPreview key={index} ringColor={orange} img={item.img} />
-                  ))}
+                <HStack spacing={3}>
+                  <HStack spacing="-12px">
+                    {memberList.slice(0, 3).map((item, index) => (
+                      <AvatarPreview key={index} ringColor={orange} img={item.img} />
+                    ))}
+                  </HStack>
+
+                  <Text>
+                    Members <strong>{memberCount}</strong>
+                  </Text>
                 </HStack>
-                <Text>
-                  Members <strong>{memberCount}</strong>
-                </Text>
-                <Text>&#x2022;</Text>
-                <Text>
-                  Created{' '}
-                  <strong>
-                    {created.toLocaleDateString('en-us', { year: 'numeric', month: 'short' })}
-                  </strong>
-                </Text>
+
                 <Text>&#x2022;</Text>
                 <Text>
                   Chain <strong>{chain}</strong>
@@ -131,7 +125,7 @@ const DaoOverview = ({
               </HStack>
               <Flex></Flex>
             </VStack>
-          </Flex>
+          </HStack>
         </Box>
       </Box>
       <EditCommunityForm
@@ -144,8 +138,9 @@ const DaoOverview = ({
         description={description}
         chain={chain}
         discord={''}
-        website={''}
+        website={website as string}
         category={category}
+        owner={owner}
       />
     </>
   )

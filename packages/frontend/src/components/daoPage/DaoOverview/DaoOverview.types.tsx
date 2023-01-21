@@ -1,25 +1,17 @@
-import type { Categories } from '@types/categories'
-import { StaticImageData } from 'next/image'
+import { Badge, Category, User } from '@components/queries/common'
 
 // TODO: better type definition for memberList
 export interface DaoOverviewProps {
   name: string
   imgUrl?: string
-  minter: string
   memberCount: number
-  memberList: { name: string; img: StaticImageData }[]
-  created: Date
-  chain: string
-  category: Categories
+  memberList: User[]
+  category: Category
   repScore: number
+  chain: string
   website?: string
   discord?: string
   description: string
-  badges: {
-    daoName: string
-    name: string
-    recentActivity: string
-    minter: string
-    isLocked: false
-  }[]
+  badges: Badge[]
+  owner: User
 }

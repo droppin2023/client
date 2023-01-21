@@ -7,45 +7,36 @@ import DaoPendingRequests from '@components/daoPage/DaoPendingRequests'
 
 import { primary } from '@constants/colors'
 import { DaoPageProvider } from '@context/DaoPageContext'
-import { Categories } from '@types/categories'
 
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 // TODO: integrate real data
-import { MOCK_DAO_LIST, MOCK_PENDING_REQUESTS } from '@mockData'
+import { MOCK_PENDING_REQUESTS, ONE_COMMUNITY } from '@mockData'
 import { QuestCategories } from '@types/quest'
 
 const DaoPage = ({ id }: { id: number }) => {
-  const mockDao = MOCK_DAO_LIST[0]
+  const mockDao = ONE_COMMUNITY
 
   // TODO: this is a temporary flag, real flag would be calculated with context api and back end data
   const isAdmin = true
 
   return (
     <VStack spacing="40px" marginBottom="100px">
-      <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.repUnit}>
+      <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.totalEngage.unit}>
         {/* TODO: refactor member list, quests, and badges as context */}
         <DaoOverview
           name={mockDao.name}
-          imgUrl={mockDao.img}
-          minter={mockDao.minter as string}
-          memberCount={mockDao.memberCount}
+          imgUrl={mockDao.logo}
+          memberCount={mockDao.totalMember}
           memberList={mockDao.members}
-          created={mockDao.created as Date}
-          chain={mockDao.chain || ''}
-          category={mockDao.category as Categories}
-          repScore={0}
+          chain={mockDao.blockchain}
+          category={mockDao.category}
+          repScore={mockDao.totalEngage.number}
           description={mockDao.description}
-          badges={
-            mockDao.badges as {
-              daoName: string
-              name: string
-              recentActivity: string
-              minter: string
-              isLocked: false
-            }[]
-          }
+          badges={mockDao.badges}
+          owner={mockDao.owner}
+          website={mockDao.links?.filter((item) => item.name === 'website')[0].link}
         />
 
         <Box width="80%" minHeight="512px">
@@ -87,7 +78,6 @@ const DaoPage = ({ id }: { id: number }) => {
 
             <TabPanels>
               <TabPanel>
-                {/* TODO: better type def for badges and Quests*/}
                 <DaoBadgesSection
                   badges={
                     mockDao.badges as {
@@ -108,7 +98,6 @@ const DaoPage = ({ id }: { id: number }) => {
                 />
               </TabPanel>
               <TabPanel>
-                {/* TODO: better type def for badges and Quests, also integrate real data*/}
                 <DaoMembersSection />
               </TabPanel>
               {isAdmin && (
