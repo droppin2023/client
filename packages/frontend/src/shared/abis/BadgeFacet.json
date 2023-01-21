@@ -1,0 +1,116 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_groupId",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256[3]",
+            "name": "requiredQuests",
+            "type": "uint256[3]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reputationThreshold",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "badgePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "NFT",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibBadgeFacet.BadgeData",
+        "name": "_badgeData",
+        "type": "tuple"
+      },
+      {
+        "internalType": "string",
+        "name": "_nftSymbol",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_nftInitBaseURI",
+        "type": "string"
+      }
+    ],
+    "name": "addBadge",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_badgeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimBadge",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_badgeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBadge",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256[3]",
+            "name": "requiredQuests",
+            "type": "uint256[3]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "reputationThreshold",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "badgePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "NFT",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct LibBadgeFacet.BadgeData",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
