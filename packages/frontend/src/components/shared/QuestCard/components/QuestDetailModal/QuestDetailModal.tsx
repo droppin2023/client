@@ -20,11 +20,21 @@ import DiscordIcon from '@components/icons/DiscordIcon'
 import { QuestType } from '@components/queries/common'
 
 import { background2, discordPurple, primary, primaryHighlight, secondary } from '@constants/colors'
+import { ONE_QUEST_DETAIL } from '@mockData'
 import * as globalSty from '@styles'
 
 import type { QuestDetailModalProps } from './QuestDetailModal.types'
 
-const QuestDetailModal = ({ isOpen, onClose, questType, questTitle }: QuestDetailModalProps) => {
+const QuestDetailModal = ({
+  isOpen,
+  onClose,
+  questType,
+  questTitle,
+  questID,
+}: QuestDetailModalProps) => {
+  // TODO: fetch the quest details here
+  const data = ONE_QUEST_DETAIL
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -35,15 +45,15 @@ const QuestDetailModal = ({ isOpen, onClose, questType, questTitle }: QuestDetai
           <VStack spacing={2} align="left" mt={4}>
             <Flex justifyContent="space-between">
               <Text color={secondary}>Schema Hash</Text>
-              <Text as="b">0x3236206269afe3</Text>
+              <Text as="b">{data.schemaHash}</Text>
             </Flex>
 
             <Flex justifyContent="space-between">
               <Text color={secondary}>Reward Engagement</Text>
               <Text as="b">
-                1000{' '}
+                {data.engageScore.number}{' '}
                 <Text as="span" color={primary}>
-                  LPD
+                  {data.engageScore.unit}
                 </Text>
               </Text>
             </Flex>
@@ -51,13 +61,7 @@ const QuestDetailModal = ({ isOpen, onClose, questType, questTitle }: QuestDetai
 
           <VStack align="left" mt={4}>
             <Text color={secondary}>Description</Text>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla modi, distinctio
-              nostrum blanditiis, laborum quibusdam veritatis cupiditate sed magnam iure optio
-              consectetur? Cum corrupti unde laudantium sunt dolores quibusdam totam in quam
-              asperiores voluptas ut velit dolore nostrum reiciendis omnis, harum molestias
-              voluptatum esse quas necessitatibus! Hic labore blanditiis temporibus?
-            </Text>
+            <Text>{data.description}</Text>
           </VStack>
 
           {questType === QuestType.form && (

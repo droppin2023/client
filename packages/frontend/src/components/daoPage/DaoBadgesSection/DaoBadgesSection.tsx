@@ -79,6 +79,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
             {questsDiscord.questList.map((item, index) => (
               <QuestCard
                 key={index}
+                id={item.id}
                 name={item.name}
                 reward={item.engageScore.number}
                 questType={QuestType.discord}
@@ -92,6 +93,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
             {questsSubmitForm.questList.map((item, index) => (
               <QuestCard
                 key={index}
+                id={item.id}
                 name={item.name}
                 reward={item.engageScore.number}
                 questType={QuestType.form}

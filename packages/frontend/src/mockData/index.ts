@@ -4,8 +4,25 @@ import mockAvatar3 from './assets/mock-avatar-3.png'
 
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
-import { Category } from '@components/queries/common'
+import { Category, Status } from '@components/queries/common'
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
+import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
+
+export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
+  id: 0,
+  schemaHash: '0x34723d5f238357',
+  title: 'Join a Hackathon',
+  engageScore: {
+    number: 400,
+    unit: 'LPD',
+  },
+  condition: {
+    type: 'todo',
+    detailType: 0,
+  },
+  description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
+  status: Status.noStatus,
+}
 
 export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
   logo: 'https://via.placeholder.com/300',

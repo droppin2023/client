@@ -10,7 +10,7 @@ import QuestDetailModal from '@components/shared/QuestCard/components/QuestDetai
 
 import type { QuestCardProps } from './QuestCard.types'
 
-const QuestCard = ({ name, reward, questType, isCompleted = false }: QuestCardProps) => {
+const QuestCard = ({ name, reward, questType, id, isCompleted = false }: QuestCardProps) => {
   const { repUnit } = useDaoPageContext()
 
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
@@ -44,6 +44,7 @@ const QuestCard = ({ name, reward, questType, isCompleted = false }: QuestCardPr
         onClose={() => setIsDetailModalOpen(false)}
         questType={questType}
         questTitle={name}
+        questID={id}
       />
     </>
   )

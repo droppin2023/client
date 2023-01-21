@@ -4,4 +4,5 @@ import { ModalProps } from '@types/modal'
 export type QuestDetailModalProps = ModalProps & {
   questType: QuestType
   questTitle: string
+  questID: number
 }
