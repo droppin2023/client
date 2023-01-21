@@ -25,6 +25,7 @@ const DaoPage = ({ id }: { id: number }) => {
   return (
     <VStack spacing="40px" marginBottom="100px">
       <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.repUnit}>
+        {/* TODO: refactor member list, quests, and badges as context */}
         <DaoOverview
           name={mockDao.name}
           imgUrl={mockDao.img}
@@ -32,11 +33,19 @@ const DaoPage = ({ id }: { id: number }) => {
           memberCount={mockDao.memberCount}
           memberList={mockDao.members}
           created={mockDao.created as Date}
-          earnings={mockDao.earnings || 0}
           chain={mockDao.chain || ''}
           category={mockDao.category as Categories}
           repScore={0}
           description={mockDao.description}
+          badges={
+            mockDao.badges as {
+              daoName: string
+              name: string
+              recentActivity: string
+              minter: string
+              isLocked: false
+            }[]
+          }
         />
 
         <Box width="80%" minHeight="512px">

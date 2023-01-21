@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react'
 
 import { LINK } from '@constants/categories'
-import { primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { background2, primary, primaryHighlight } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import { QuestCategories } from '@types/quest'
@@ -67,9 +67,9 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader bg={secondaryWeak}>Create New Quest</ModalHeader>
+        <ModalHeader bg={background2}>Create New Quest</ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6} bg={secondaryWeak}>
+        <ModalBody pb={6} bg={background2}>
           <FormControl>
             <FormLabel>Schema Hash</FormLabel>
             <Input
@@ -125,7 +125,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
           {/* TODO: add condition details */}
         </ModalBody>
 
-        <ModalFooter bg={secondaryWeak}>
+        <ModalFooter bg={background2}>
           <Button onClick={handleSubmit} size="lg" bg={primary} _hover={{ bg: primaryHighlight }}>
             Create Quest
           </Button>

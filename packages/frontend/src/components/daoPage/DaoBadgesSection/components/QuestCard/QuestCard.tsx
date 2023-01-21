@@ -1,6 +1,6 @@
 import { Flex, Text } from '@chakra-ui/react'
 
-import { orange, primary, secondaryWeak } from '@constants/colors'
+import { background2, orange, primary } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Done from '@components/icons/Done'
@@ -18,7 +18,7 @@ const QuestCard = ({ name, reward, isCompleted = false }: QuestCardProps) => {
       border={`2px solid ${isCompleted ? primary : orange}`}
       borderRadius="20px"
       padding="16px"
-      bg={secondaryWeak}
+      bg={background2}
       direction="column"
       alignItems="center"
       justifyContent={'center'}
