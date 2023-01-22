@@ -25,12 +25,7 @@ const usePostCreateGroup = () => {
       console.log({ transactionHash })
       const { data, status } = await axios.post(CREATE_GROUP, {
         transactionHash,
-        link: params.link,
-        logo: params.logo,
-        name: params.name,
-        description: params.description,
-        category: params.category,
-        discord: params.discord,
+        ...params,
       })
 
       if (status === 200) {

@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { EngageScore, QuestType, Status } from '@components/queries/common'
+import { Condition, EngageScore, Status } from '@components/queries/common'
 
 export interface FetchQuestDetailParams {
   groupId: number
@@ -18,14 +18,4 @@ export interface FetchQuestDetailResponse {
   status: Status
   message?: string
   answer?: string
-}
-
-export interface Condition {
-  type: QuestType
-  conditionDetail?: DiscordRoleCondition
-}
-
-export interface DiscordRoleCondition {
-  guildId: number
-  roleId: number
 }

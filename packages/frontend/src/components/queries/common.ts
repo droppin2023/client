@@ -59,6 +59,17 @@ export enum QuestType {
   form = 1,
 }
 
+// Quest Contdition
+export interface Condition {
+  type: QuestType
+  conditionDetail?: DiscordRoleCondition
+}
+
+export interface DiscordRoleCondition {
+  guildId: number
+  roleId: number
+}
+
 //ENGAGESCORE
 
 export interface EngageScore {

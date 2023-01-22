@@ -1,11 +1,11 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { Condtion } from '../common'
+import { Condition } from '../common'
 
 export interface CreateQuestParams {
   contract: onChainQuest
   schemaHash: string
-  condition: Condtion
+  condition: Condition
   detail: string
 }
 export interface onChainQuest {

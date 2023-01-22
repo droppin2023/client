@@ -19,7 +19,10 @@ const normalizeData = (
     logo: data?.logo || '',
     name: data?.name || '',
     category: data?.category || Category.Other,
-    discord: data?.discord || '',
+    discord: data?.discord || {
+      link: '',
+      guildId: 0,
+    },
     description: data?.description || '',
     owner: data?.owner || {
       id: 0,
@@ -57,7 +60,10 @@ const normalizeData = (
           {
             id: 0,
             name: '',
-            engageScore: 0,
+            engageScore: {
+              number: 0,
+              unit: 'LPD',
+            },
           },
         ],
       },
