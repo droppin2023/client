@@ -1,23 +1,16 @@
-import { Categories } from '@types/categories'
-import { StaticImageData } from 'next/image'
+import { Badge, Category, User } from '@components/queries/common'
 
 export interface EditCommunityFormProps {
   isOpen: boolean
   onClose: () => void
-  badges: {
-    daoName: string
-    img?: StaticImageData
-    name: string
-    recentActivity: string
-    minter: string
-    isLocked: false
-  }[]
-  members: { name: string; img: StaticImageData }[]
+  badges: Badge[]
+  members: User[]
   name: string
   discord: string
   website: string
   img: string
   description: string
   chain: string
-  category: Categories
+  category: Category
+  owner: User
 }

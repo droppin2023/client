@@ -2,23 +2,23 @@ import { useState } from 'react'
 
 import { Badge, Button, Flex, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 
-import { DISCORD, LINK } from '@constants/categories'
 import { background2, discordPurple, pink, primary, primaryHighlight } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
 import DaoCard from '@components/shared/DaoCard'
 import QuestBadge from '@components/shared/QuestBadge'
-import QuestCard from './components/QuestCard'
+import QuestCard from '../../shared/QuestCard'
 
-import BadgeForm from './components/BadgeForm'
+import BadgeForm from '../../shared/BadgeForm'
 import QuestForm from './components/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
 // TODO: integrate real data
+import { QuestType } from '@components/queries/common'
 import { MOCK_DAO_LIST } from '@mockData'
 
-const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
+const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadgesSectionProps) => {
   const { repUnit, isAdmin } = useDaoPageContext()
 
   const [isCreateQuestOpen, setIsCreateQuestOpen] = useState(false)
@@ -76,21 +76,29 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
             Discord
           </Badge>
           <SimpleGrid columns={4} gap={6} width="100%">
-            {quests
-              .filter((item) => item.type === DISCORD)
-              .map((item, index) => (
-                <QuestCard key={index} name={item.name} reward={item.reward} />
-              ))}
+            {questsDiscord.questList.map((item, index) => (
+              <QuestCard
+                key={index}
+                id={item.id}
+                name={item.name}
+                reward={item.engageScore.number}
+                questType={QuestType.discord}
+              />
+            ))}
           </SimpleGrid>
           <Badge fontSize="xl" bg={pink} padding="4px 16px" borderRadius="6px">
             Submit Link
           </Badge>
           <SimpleGrid columns={4} gap={6} width="100%">
-            {quests
-              .filter((item) => item.type === LINK)
-              .map((item, index) => (
-                <QuestCard key={index} name={item.name} reward={item.reward} />
-              ))}
+            {questsSubmitForm.questList.map((item, index) => (
+              <QuestCard
+                key={index}
+                id={item.id}
+                name={item.name}
+                reward={item.engageScore.number}
+                questType={QuestType.form}
+              />
+            ))}
           </SimpleGrid>
         </VStack>
         <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
@@ -117,7 +125,8 @@ const DaoBadgesSection = ({ badges, quests }: DaoBadgesSectionProps) => {
         isOpen={isCreateBadgeOpen}
         onClose={() => setIsCreateBadgeOpen(false)}
         repUnit={repUnit}
-        quests={quests}
+        questsDiscord={questsDiscord}
+        questsSubmitForm={questsSubmitForm}
       />
     </>
   )
