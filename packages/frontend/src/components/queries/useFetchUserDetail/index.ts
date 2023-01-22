@@ -15,6 +15,7 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
     description: data?.description || '',
     name: data?.name || '',
     image: data?.image || '',
+    discord: data?.discord || '',
     badges: data?.badges || [
       {
         id: 0,

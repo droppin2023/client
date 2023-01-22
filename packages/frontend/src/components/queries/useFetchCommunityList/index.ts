@@ -3,11 +3,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import {
-  FetchCommunityListParams,
-  FetchCommunityListResponse,
-} from './useFetchCommunityDetail.types'
-import { GET_COMMUNITY } from './userFetchCommunityDetail.constants'
+import { FetchCommunityListParams, FetchCommunityListResponse } from './useFetchCommunityList.types'
+import { GET_COMMUNITY } from './userFetchCommunityList.constants'
 import { Category } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
@@ -21,7 +18,8 @@ const normalizeData = (
         logo: '',
         name: '',
         category: Category.Other,
-        discord: undefined,
+        discord: '',
+        link: '',
         description: '',
         owner: {
           id: 0,
@@ -39,7 +37,6 @@ const normalizeData = (
           },
         ],
         totalMember: 0,
-        links: undefined,
       },
     ],
   }
