@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { Condtion, EngageScore, Status } from '@components/queries/common'
+import { EngageScore, Status } from '@components/queries/common'
 
 export interface FetchQuestDetailParams {
   groupId: number
@@ -13,9 +13,14 @@ export interface FetchQuestDetailResponse {
   schemaHash: string
   title: string
   engageScore: EngageScore
-  condition: Condtion
+  condition: Condition
   description: string
   status: Status
   message?: string
   answer?: string
+}
+
+export interface Condition {
+  type: string
+  detailType: number
 }

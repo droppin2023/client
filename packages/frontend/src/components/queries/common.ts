@@ -51,17 +51,12 @@ export interface Quests {
 export interface Quest {
   id: number
   name: string
-  engageScore: number
+  engageScore: EngageScore
 }
 
-export interface Condtion {
-  type: string
-  detailType: number
-}
-
-export enum questType {
-  discord = 'Discord',
-  form = 'Submit Form',
+export enum QuestType {
+  discord = 0,
+  form = 1,
 }
 
 //ENGAGESCORE

@@ -15,27 +15,22 @@ import {
   WrapItem,
 } from '@chakra-ui/react'
 
-import type { MemberTableRow } from './DaoMembersSection.types'
+import type { DaoMemberSectionProps, MemberTableRow } from './DaoMembersSection.types'
 
 // TODO: integrate real data via props and context API
 import { orange, primary } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
-import { MOCK_BADGE_LIST, MOCK_USER_LIST } from '@mockData'
+import { ONE_USER_DETAIL } from '@mockData'
 
 // TODO: notifications
-const DaoMembersSection = () => {
-  const { repUnit } = useDaoPageContext()
+const DaoMembersSection = ({ members }: DaoMemberSectionProps) => {
+  const { id } = useDaoPageContext()
 
-  const renderTableRow = ({
-    number,
-    name,
-    img,
-    repScore,
-    quests,
-    karma,
-    badges,
-  }: MemberTableRow) => {
+  // TODO: need to fetching for each member info
+  const memberListDetailed = [ONE_USER_DETAIL, ONE_USER_DETAIL]
+
+  const renderTableRow = ({ number, name, img, repScore, quests, badges }: MemberTableRow) => {
     return (
       <Tr>
         <Td isNumeric color={primary}>
@@ -51,9 +46,6 @@ const DaoMembersSection = () => {
         <Td isNumeric color={primary}>
           {quests}
         </Td>
-        <Td isNumeric color={primary}>
-          {karma}
-        </Td>
         <Td>{badges}</Td>
       </Tr>
     )
@@ -68,30 +60,48 @@ const DaoMembersSection = () => {
             <Th>Member</Th>
             <Th>Reputation</Th>
             <Th isNumeric>Quests</Th>
-            <Th isNumeric>Karma</Th>
             <Th>Badges</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {MOCK_USER_LIST.map((item, index) =>
-            renderTableRow({
+          {memberListDetailed.map((memberDetails, index) => {
+            const engagement = memberDetails.engageScoresAndCommunity.filter(
+              (item) => item.community.id === id,
+            )[0].engageScore
+
+            console.log(
+              'PEPPA PIG',
+              id,
+              memberDetails.communitiesWithBadge.filter((item) => item.community.id === id),
+            )
+
+            const badges = memberDetails.communitiesWithBadge.filter(
+              (item) => item.community.id === id,
+            )[0].badges
+
+            // compute total quests
+            let totalQuests = 0
+            for (const questGroup of memberDetails.userQuests) {
+              totalQuests += questGroup.quests.length
+            }
+
+            return renderTableRow({
               number: index + 1,
-              name: item.name,
-              img: item.img,
-              repScore: `375 ${repUnit}`,
-              quests: 0,
-              karma: 0,
+              name: memberDetails.name,
+              img: memberDetails.image,
+              repScore: `${engagement.number} ${engagement.unit}`,
+              quests: totalQuests,
               badges: (
                 <Wrap>
-                  {MOCK_BADGE_LIST.map((item, index) => (
+                  {badges.map((item, index) => (
                     <WrapItem key={index}>
                       <Badge color={primary}>{item.name}</Badge>
                     </WrapItem>
                   ))}
                 </Wrap>
               ),
-            }),
-          )}
+            })
+          })}
         </Tbody>
       </Table>
     </TableContainer>
