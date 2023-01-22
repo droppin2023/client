@@ -4,7 +4,7 @@ import mockAvatar3 from './assets/mock-avatar-3.png'
 
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
-import { Category, Status } from '@components/queries/common'
+import { Category, QuestType, Status } from '@components/queries/common'
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
@@ -14,6 +14,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   name: '',
   description: '',
   image: '',
+  discord: '',
   badges: [
     {
       id: 0,
@@ -151,8 +152,8 @@ export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
     unit: 'LPD',
   },
   condition: {
-    type: 'todo',
-    detailType: 0,
+    type: QuestType.discord,
+    conditionDetail: { guildId: 0, roleId: 0 },
   },
   description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
   status: Status.noStatus,
@@ -201,13 +202,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
   // offchain
   totalMember: 120,
   blockchain: 'Polygon',
-  links: [
-    {
-      id: 0,
-      name: 'website',
-      link: 'yoursite.io',
-    },
-  ],
+  link: 'yoursite.io',
   badges: [
     {
       id: 1,

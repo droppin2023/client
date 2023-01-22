@@ -117,7 +117,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
           <FormControl mt={4}>
             <FormLabel>Quest Condition</FormLabel>
             <Select
-              onChange={(e) => setQuestCondition(e.target.value as QuestType)}
+              onChange={(e) => setQuestCondition(e.target.value as unknown as QuestType)}
               variant="filled"
             >
               {QUEST_CONDITION_OPTIONS.map((item, index) => (

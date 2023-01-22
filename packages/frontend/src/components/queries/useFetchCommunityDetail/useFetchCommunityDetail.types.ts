@@ -11,7 +11,7 @@ export interface FetchCommunityDetailResponse {
   logo: string
   name: string
   category: Category
-  discord?: string
+  discord?: Discord
   description: string
   owner: User
   totalEngage: EngageScore
