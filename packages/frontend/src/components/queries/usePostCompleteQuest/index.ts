@@ -3,7 +3,7 @@ import coreContractAbi from '@shared/abis/CoreFacet.json'
 import type { PostCompleteQuestParams } from './usePostCompleteQuest.types'
 import { useContract, useSigner } from 'wagmi'
 
-const usePostClaimBadge = () => {
+const usePostCompleteQuest = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
   const { data: signer } = useSigner()
@@ -13,7 +13,7 @@ const usePostClaimBadge = () => {
     abi: coreContractAbi,
     signerOrProvider: signer,
   })
-  const claimBadge = async (params: PostCompleteQuestParams) => {
+  const completeQuest = async (params: PostCompleteQuestParams) => {
     setIsLoading(true)
 
     try {
@@ -28,7 +28,7 @@ const usePostClaimBadge = () => {
     }
   }
 
-  return { claimBadge, isLoading, error }
+  return { completeQuest, isLoading, error }
 }
 
-export default usePostClaimBadge
+export default usePostCompleteQuest
