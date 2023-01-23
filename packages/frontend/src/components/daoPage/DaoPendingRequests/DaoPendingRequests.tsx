@@ -10,6 +10,7 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 import QuestReviewForm from './components/QuestReviewForm'
 
 import wipIllustration from './assets/wip-illustration.svg'
+import * as sty from './DaoPendingRequests.styles'
 import type { DaoPendingRequestsProps, PendingRequestsTableRow } from './DaoPendingRequests.types'
 
 const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
@@ -34,7 +35,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
         <Tr display="flex" justifyContent={'space-between'}>
           <Td>
             <HStack>
-              <Image src={img} alt={name} width={24} height={24} />
+              <Image src={img} alt={name} width={24} height={24} css={[sty.memberImage]} />
               <Text color={primary}>{name}</Text>
             </HStack>
           </Td>
