@@ -56,12 +56,14 @@ const BadgeForm = ({
   const [priceUnit, setPriceUnit] = useState('ETH')
   const { createBadge, isLoading, error } = usePostCreateBadge()
   const [checkedQuestError, setCheckedQuestError] = useState('')
-
+  //TODO: handleQuestCheck is not properly working when after get CheckedQuestError. Have to Fix it
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
     const tempCheckedList = [...checkedQuestList]
+    console.log(tempCheckedList)
     if (e.target.checked) {
       if (tempCheckedList.length >= 3) {
         setCheckedQuestError('Maximum of 3 quests only.')
+        console.log(e.target.checked)
         e.target.checked = false
         return
       }
@@ -76,7 +78,7 @@ const BadgeForm = ({
 
   const handleSubmit = async () => {
     // TODO: submissionlogic
-    if (checkedQuestList.length >= 3) return
+    if (checkedQuestList.length >= 4) return
     const params = {
       contract: {
         requiredQuests: checkedQuestList.map((quest: { id: number }) => quest.id),
