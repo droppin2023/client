@@ -17,10 +17,12 @@ import {
 
 import type { DaoMemberSectionProps, MemberTableRow } from './DaoMembersSection.types'
 
-// TODO: integrate real data via props and context API
 import { orange, primary } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
+import * as sty from './DaoMembersSection.styles'
+
+// TODO: integrate real data via props and context API
 import { ONE_USER_DETAIL } from '@mockData'
 
 // TODO: notifications
@@ -38,7 +40,7 @@ const DaoMembersSection = ({ members }: DaoMemberSectionProps) => {
         </Td>
         <Td>
           <HStack>
-            <Image src={img} alt={name} width={24} height={24} />
+            <Image src={img} alt={name} width={24} height={24} css={[sty.memberImage]} />
             <Text color={primary}>{name}</Text>
           </HStack>
         </Td>
@@ -68,12 +70,6 @@ const DaoMembersSection = ({ members }: DaoMemberSectionProps) => {
             const engagement = memberDetails.engageScoresAndCommunity.filter(
               (item) => item.community.id === id,
             )[0].engageScore
-
-            console.log(
-              'PEPPA PIG',
-              id,
-              memberDetails.communitiesWithBadge.filter((item) => item.community.id === id),
-            )
 
             const badges = memberDetails.communitiesWithBadge.filter(
               (item) => item.community.id === id,

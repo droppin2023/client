@@ -25,6 +25,7 @@ const DaoPage = ({ id }: { id: number }) => {
     <VStack spacing="40px" marginBottom="100px">
       <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.totalEngage.unit} id={id}>
         {/* TODO: refactor member list, quests, and badges as context */}
+        {/* TODO: integrate discord */}
         <DaoOverview
           name={mockDao.name}
           imgUrl={mockDao.logo}
@@ -36,7 +37,7 @@ const DaoPage = ({ id }: { id: number }) => {
           description={mockDao.description}
           badges={mockDao.badges}
           owner={mockDao.owner}
-          website={mockDao.links?.filter((item) => item.name === 'website')[0].link}
+          website={mockDao.link}
         />
 
         <Box width="80%" minHeight="512px">
@@ -89,7 +90,7 @@ const DaoPage = ({ id }: { id: number }) => {
                 />
               </TabPanel>
               <TabPanel>
-                <DaoMembersSection />
+                <DaoMembersSection members={mockDao.members} />
               </TabPanel>
               {isAdmin && (
                 <TabPanel>
