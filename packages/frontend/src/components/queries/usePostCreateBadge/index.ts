@@ -1,12 +1,12 @@
-import { useState } from 'react'
 import axios from 'axios'
-import type { CreateBadgeParams } from './usePostCreateBadge.types'
-import { CREATE_BADGE } from './usePostCreateBadge.constants'
+import { useState } from 'react'
 import useContractConnection from '../useContractConnection'
+import { CREATE_BADGE } from './usePostCreateBadge.constants'
+import type { CreateBadgeParams } from './usePostCreateBadge.types'
 
 const usePostCreateBadge = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<unknown>()
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<unknown>(null)
 
   const { badgeContract } = useContractConnection()
   // const badgeData = {
@@ -22,6 +22,7 @@ const usePostCreateBadge = () => {
 
   const createBadge = async (params: CreateBadgeParams) => {
     setIsLoading(true)
+    setError(null)
     try {
       console.log('hihihi', badgeContract)
       const tsx = await badgeContract?.addBadge(

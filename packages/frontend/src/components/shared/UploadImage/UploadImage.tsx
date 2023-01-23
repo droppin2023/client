@@ -18,6 +18,7 @@ import { UploadImageProps } from './UploadImage.types'
  * @param {string | undefined} width - width of the button, defaults to 200px
  * @param {string | undefined} height - height of the button, defaults to 200px
  * @param {string | undefined} margin - margins of the button
+ * @param {string | undefined} loaded - preload an image here
  */
 const UploadImage = ({
   onFileLoad,
