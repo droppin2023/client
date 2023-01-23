@@ -806,6 +806,13 @@ export const MOCK_BADGE_LIST = [
   },
 ]
 
+export const MOCK_CLAIMED_BADGE = {
+  contractAddress: '0xawgaweewagewagwe',
+  tokenId: 2,
+  tokenStandard: 'ERC-20',
+  chain: 'polygon',
+}
+
 export const MOCK_BADGE: FetchBadgeDetailResponse = {
   id: 1,
   name: 'NewBie',

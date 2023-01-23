@@ -7,13 +7,15 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 import { QuestType } from '@components/queries/common'
-import { MOCK_BADGE } from '@mockData'
+import { MOCK_BADGE, MOCK_CLAIMED_BADGE } from '@mockData'
 import BadgeOverview from '@components/badgePage/BadgeOverview'
 import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
+import BadgeClaimedSection from '@components/badgePage/BadgeClaimedSection'
 
 const BadgePage = ({ id }: { id: number }) => {
   // TODO: integrate real data
   const mockBadge = MOCK_BADGE
+  const mockClamedBadge = MOCK_CLAIMED_BADGE
 
   return (
     <VStack spacing="40px" marginBottom="100px">
@@ -36,6 +38,15 @@ const BadgePage = ({ id }: { id: number }) => {
         requiredQuests={mockBadge.requiredQuests}
         requiredEngageScore={mockBadge.requiredEngageScore}
         requiredPrice={mockBadge.requiredPrice}
+      />
+      <BadgeClaimedSection
+        address={mockBadge.address}
+        claimedBadge={{
+          address: mockClamedBadge.contractAddress,
+          tokenId: mockClamedBadge.tokenId,
+          tokenStandard: mockClamedBadge.tokenStandard,
+          chain: mockClamedBadge.chain,
+        }}
       />
 
       {/* <Box width="80%" minHeight="512px">

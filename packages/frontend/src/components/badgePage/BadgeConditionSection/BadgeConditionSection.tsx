@@ -88,7 +88,6 @@ const BadgeConditionSection = ({
             justifyContent={'space-between'}
           >
             <Text textAlign={'right'} as="b">{`${requiredPrice.number}`}</Text>
-
             <Text textAlign={'right'} as="b">{`${requiredPrice.unit}`}</Text>
           </Flex>
         </VStack>

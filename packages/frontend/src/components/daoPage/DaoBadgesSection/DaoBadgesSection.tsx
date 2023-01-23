@@ -6,7 +6,6 @@ import { background2, discordPurple, pink, primary, primaryHighlight } from '@co
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
-import DaoCard from '@components/shared/DaoCard'
 import QuestBadge from '@components/shared/QuestBadge'
 import QuestCard from '../../shared/QuestCard'
 
@@ -17,6 +16,7 @@ import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 // TODO: integrate real data
 import { QuestType } from '@components/queries/common'
 import { MOCK_DAO_LIST } from '@mockData'
+import DaoCard from '@components/shared/DaoCard'
 
 const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadgesSectionProps) => {
   const { repUnit, isAdmin, id } = useDaoPageContext()
