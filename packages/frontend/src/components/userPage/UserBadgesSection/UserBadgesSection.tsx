@@ -15,10 +15,8 @@ const UserBadgesSection = () => {
 
   return (
     <VStack width="100%" align="left" spacing={10}>
-      <Box>
-        <Text textAlign="left" width="100%" mb={10}>
-          <SectionHeader title={'Claimed Badges'} subtitle="" />
-        </Text>
+      <Box textAlign="left">
+        <SectionHeader title={'Claimed Badges'} subtitle="" />
         <SimpleGrid
           columns={4}
           width={'100%'}
@@ -28,14 +26,12 @@ const UserBadgesSection = () => {
           borderRadius="48px"
         >
           {badges.map((item) => (
-            <QuestBadge key={item.id} name={item.name} img={item.logo} />
+            <QuestBadge key={item.id} name={item.name} img={item.logo} isLocked={false} />
           ))}
         </SimpleGrid>
       </Box>
-      <Box>
-        <Text textAlign="left" width="100%">
-          <SectionHeader title={'Joined Communities'} subtitle="" />
-        </Text>
+      <Box textAlign="left">
+        <SectionHeader title={'Joined Communities'} subtitle="" />
         <VStack spacing={5} align="left">
           {communitiesWithBadge.map((item, index) => (
             <Box textAlign={'left'} key={index} position="relative" width="100%">
