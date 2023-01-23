@@ -65,7 +65,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       badges: [
         {
           id: 0,
-          logo: 'todo',
+          logo: 'https://picsum.photos/300',
           name: 'NewBie',
           description: 'todo',
           isClaimed: false,
@@ -74,7 +74,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         },
         {
           id: 1,
-          logo: 'todo',
+          logo: 'https://picsum.photos/300',
           name: 'Novice',
           description: 'todo',
           isClaimed: false,

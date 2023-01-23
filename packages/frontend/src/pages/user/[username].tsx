@@ -2,10 +2,14 @@ import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
+import { primary } from '@constants/colors'
+
 import { UserPageProvider } from '@context/UserPageContext'
 
 import UserOverview from '@components/userPage/UserOverview'
-import { primary } from '@constants/colors'
+
+// TODO: integrate real data
+import UserBadgesSection from '@components/userPage/UserBadgesSection'
 import { ONE_USER_DETAIL } from '@mockData'
 
 const UserPage = ({ username }: { username: string }) => {
@@ -51,7 +55,9 @@ const UserPage = ({ username }: { username: string }) => {
             </TabList>
 
             <TabPanels>
-              <TabPanel>Badges</TabPanel>
+              <TabPanel>
+                <UserBadgesSection />
+              </TabPanel>
               <TabPanel>Engagements</TabPanel>
               <TabPanel>Quests</TabPanel>
             </TabPanels>
