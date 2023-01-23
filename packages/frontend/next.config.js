@@ -6,7 +6,7 @@
  **/
 const nextConfig = {
   images: {
-    domains: ['via.placeholder.com'],
+    domains: ['via.placeholder.com', 'picsum.photos'],
   },
 }
 
