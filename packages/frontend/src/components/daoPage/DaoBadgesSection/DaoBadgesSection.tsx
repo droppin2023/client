@@ -29,7 +29,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
       <VStack alignItems={'flex-start'} spacing={8}>
         <SimpleGrid columns={5} gap={8}>
           {badges.map((item, index) => (
-            <QuestBadge key={index} name={item.name} isLocked={false} />
+            <QuestBadge key={index} name={item.name} isLocked={false} img={item.logo} />
           ))}
           {isAdmin && (
             <Flex
