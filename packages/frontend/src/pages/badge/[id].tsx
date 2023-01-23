@@ -6,12 +6,13 @@ import { DaoPageProvider } from '@context/DaoPageContext'
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
-// TODO: integrate real data
 import { QuestType } from '@components/queries/common'
 import { MOCK_BADGE } from '@mockData'
 import BadgeOverview from '@components/badgePage/BadgeOverview'
+import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
 
 const BadgePage = ({ id }: { id: number }) => {
+  // TODO: integrate real data
   const mockBadge = MOCK_BADGE
 
   return (
@@ -27,6 +28,11 @@ const BadgePage = ({ id }: { id: number }) => {
         isDefault={mockBadge.isDefault}
         address={mockBadge.address}
         holderList={mockBadge.holderList}
+        requiredQuests={mockBadge.requiredQuests}
+        requiredEngageScore={mockBadge.requiredEngageScore}
+        requiredPrice={mockBadge.requiredPrice}
+      />
+      <BadgeConditionSection
         requiredQuests={mockBadge.requiredQuests}
         requiredEngageScore={mockBadge.requiredEngageScore}
         requiredPrice={mockBadge.requiredPrice}
