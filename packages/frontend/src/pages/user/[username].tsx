@@ -1,10 +1,11 @@
-import { VStack } from '@chakra-ui/react'
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 import { UserPageProvider } from '@context/UserPageContext'
 
 import UserOverview from '@components/userPage/UserOverview'
+import { primary } from '@constants/colors'
 import { ONE_USER_DETAIL } from '@mockData'
 
 const UserPage = ({ username }: { username: string }) => {
@@ -14,6 +15,48 @@ const UserPage = ({ username }: { username: string }) => {
     <UserPageProvider userData={{ ...userData, username }}>
       <VStack>
         <UserOverview />
+        <Box width="80%" minHeight="512px">
+          <Tabs isLazy align="center" variant="unstyled">
+            <TabList>
+              <Tab
+                fontWeight={'bold'}
+                _selected={{
+                  color: primary,
+                  fontWeight: 'bold',
+                  borderBottom: `3px solid ${primary}`,
+                }}
+              >
+                Badges
+              </Tab>
+              <Tab
+                fontWeight={'bold'}
+                _selected={{
+                  color: primary,
+                  fontWeight: 'bold',
+                  borderBottom: `3px solid ${primary}`,
+                }}
+              >
+                Engagements
+              </Tab>
+              <Tab
+                fontWeight={'bold'}
+                _selected={{
+                  color: primary,
+                  fontWeight: 'bold',
+                  borderBottom: `3px solid ${primary}`,
+                }}
+              >
+                Quests
+              </Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>Badges</TabPanel>
+              <TabPanel>Engagements</TabPanel>
+              <TabPanel>Quests</TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Box>
       </VStack>
     </UserPageProvider>
   )
