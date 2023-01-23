@@ -1,5 +1,7 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
+import { ethers } from 'ethers'
+
 export interface CreateBadgeParams {
   contract: OnChainBadgeParams
   description: string
@@ -9,7 +11,7 @@ export interface CreateBadgeParams {
 export interface OnChainBadgeParams {
   requiredQuests: number[]
   engagePointsThreshold: number
-  badgePrice: number
+  badgePrice: ethers.BigNumber
   name: string
   NFT: string
   groupId: number

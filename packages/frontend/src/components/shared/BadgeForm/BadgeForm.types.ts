@@ -7,4 +7,5 @@ export interface BadgeFormProps {
   repUnit: string
   questsDiscord: Quests
   questsSubmitForm: Quests
+  groupId: number
 }

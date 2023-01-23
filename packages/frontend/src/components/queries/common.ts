@@ -44,7 +44,7 @@ export interface Badge {
 
 // QUEST
 export interface Quests {
-  questType: number
+  questType: QuestType
   questList: Quest[]
 }
 
@@ -52,6 +52,10 @@ export interface Quest {
   id: number
   name: string
   engageScore: EngageScore
+  schemaHash: string
+  condition: Condition
+  description: string
+  status: Status
 }
 
 export enum QuestType {
