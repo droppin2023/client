@@ -1,20 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios'
-import coreContractAbi from '@shared/abis/CoreFacet.json'
 import type { CreateGroupParams } from './usePostCreateBadge.types'
 import { CREATE_GROUP } from './usePostCreateBadge.constants'
-import { useContract, useSigner } from 'wagmi'
+import useContractConnection from '../useContractConnection'
 
 const usePostCreateGroup = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
-  const { data: signer } = useSigner()
-
-  const coreContract = useContract({
-    address: '0x1c8aBb04C8Ab9a105ee2c44b13398E98fC12E6d4',
-    abi: coreContractAbi,
-    signerOrProvider: signer,
-  })
+  const { coreContract } = useContractConnection()
 
   const createGroup = async (params: CreateGroupParams) => {
     setIsLoading(true)

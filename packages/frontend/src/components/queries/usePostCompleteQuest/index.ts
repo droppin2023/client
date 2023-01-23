@@ -1,18 +1,12 @@
 import { useState } from 'react'
-import coreContractAbi from '@shared/abis/CoreFacet.json'
 import type { PostCompleteQuestParams } from './usePostCompleteQuest.types'
-import { useContract, useSigner } from 'wagmi'
+import useContractConnection from '../useContractConnection'
 
 const usePostCompleteQuest = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
-  const { data: signer } = useSigner()
+  const { coreContract } = useContractConnection()
 
-  const coreContract = useContract({
-    address: '0x1c8aBb04C8Ab9a105ee2c44b13398E98fC12E6d4',
-    abi: coreContractAbi,
-    signerOrProvider: signer,
-  })
   const completeQuest = async (params: PostCompleteQuestParams) => {
     setIsLoading(true)
 

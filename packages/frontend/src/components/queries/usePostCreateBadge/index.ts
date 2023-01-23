@@ -1,23 +1,14 @@
 import { useState } from 'react'
 import axios from 'axios'
-import badgeContractAbi from '@shared/abis/BadgeFacet.json'
 import type { CreateBadgeParams } from './usePostCreateBadge.types'
 import { CREATE_BADGE } from './usePostCreateBadge.constants'
-import { useContract, useSigner } from 'wagmi'
-import { parseEther } from 'ethers/lib/utils.js'
-import { ethers } from 'ethers'
+import useContractConnection from '../useContractConnection'
 
 const usePostCreateBadge = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
-  const { data: signer } = useSigner()
 
-  const badgeContract = useContract({
-    address: '0xc713834c7aF85099643013620416b673bdC6B526',
-    abi: badgeContractAbi,
-    signerOrProvider: signer,
-  })
-
+  const { badgeContract } = useContractConnection()
   // const badgeData = {
   //   requiredQuests: [1, 4, 2],
   //   engagePointsThreshold: 1000,
@@ -31,11 +22,10 @@ const usePostCreateBadge = () => {
 
   const createBadge = async (params: CreateBadgeParams) => {
     setIsLoading(true)
-    console.log(params, badgeContract, signer)
     try {
       console.log('hihihi')
-      const tsx = await badgeContract?.addBadge(
-        { ...params.contract, owner: signer },
+      const tsx = badgeContract?.addBadge(
+        params.contract,
         params.contract.symbol,
         params.contract.URI,
       )
@@ -46,7 +36,7 @@ const usePostCreateBadge = () => {
       const transactionHash = await tsx.wait()
       console.log({ transactionHash })
       const { data, status } = await axios.post(CREATE_BADGE, {
-        transactionHash,
+        transactionHash: transactionHash.transactionHash,
         description: params.description,
         name: params.name,
       })
