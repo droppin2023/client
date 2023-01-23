@@ -6,6 +6,7 @@ import axios from 'axios'
 import type { FetchBadgeDetailParams, FetchBadgeDetailResponse } from './useFetchBadgeDetail.types'
 import { GET_COMMUNITY } from './userFetchBadgeDetail.constants'
 import { stringify } from 'querystring'
+import { QuestType, Status } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchBadgeDetailResponse | undefined): FetchBadgeDetailResponse => {
@@ -41,12 +42,16 @@ const normalizeData = (data: FetchBadgeDetailResponse | undefined): FetchBadgeDe
     address: data?.address || '',
     requiredQuests: data?.requiredQuests || [
       {
-        questType: 0,
+        questType: QuestType.discord,
         questList: [
           {
             id: 0,
             name: '',
-            engageScore: 0,
+            engageScore: {
+              number: 0,
+              unit: '',
+            },
+            status: Status.noStatus,
           },
         ],
       },
