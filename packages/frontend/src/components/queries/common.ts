@@ -44,7 +44,7 @@ export interface Badge {
 
 // QUEST
 export interface Quests {
-  questType: number
+  questType: QuestType
   questList: Quest[]
 }
 

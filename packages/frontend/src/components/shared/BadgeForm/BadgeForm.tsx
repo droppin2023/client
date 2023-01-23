@@ -54,7 +54,7 @@ const BadgeForm = ({
   const [price, setPrice] = useState(0)
   const [symbol, setSymbol] = useState('')
   const [priceUnit, setPriceUnit] = useState('ETH')
-  const { createBadge, isLoading, error } = usePostCreateBadge()
+  const { createBadge, isLoading, setIsLoading, error } = usePostCreateBadge()
   const [checkedQuestError, setCheckedQuestError] = useState('')
   //TODO: handleQuestCheck is not properly working when after get CheckedQuestError. Have to Fix it
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
@@ -239,6 +239,9 @@ const BadgeForm = ({
             Create Badge
           </Button>
         </ModalFooter>
+        {/* {isLoading && (
+          <DroppinModal isOpen={isLoading} onClose={() => setIsLoading(false)} modatMessage={} modalStatus/>
+        )} */}
       </ModalContent>
     </Modal>
   )

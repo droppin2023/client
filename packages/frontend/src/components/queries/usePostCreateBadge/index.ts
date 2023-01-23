@@ -58,7 +58,7 @@ const usePostCreateBadge = () => {
     }
   }
 
-  return { createBadge, isLoading, error }
+  return { createBadge, isLoading, setIsLoading, error }
 }
 
 export default usePostCreateBadge
