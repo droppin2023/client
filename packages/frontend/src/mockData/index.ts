@@ -210,6 +210,24 @@ export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
   status: Status.noStatus,
 }
 
+export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
+  id: 0,
+  schemaHash: '0x34723d5f238357',
+  title: 'Join a Hackathon',
+  engageScore: {
+    number: 400,
+    unit: 'LPD',
+  },
+  condition: {
+    type: QuestType.discord,
+    conditionDetail: { guildId: 0, roleId: 0 },
+  },
+  description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
+  message: 'You did great',
+  answer: 'Please do better',
+  status: Status.rejected,
+}
+
 export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
   logo: 'https://picsum.photos/300',
   name: 'Lepak DAO',

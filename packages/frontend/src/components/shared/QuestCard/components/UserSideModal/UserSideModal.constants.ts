@@ -5,4 +5,5 @@ export const HEADER_MAPPING = {
   [Status.accepted]: 'Accepted Quest',
   [Status.rejected]: 'Rejected Quest',
   [Status.claimed]: 'Claimed Quest',
+  [Status.noStatus]: 'Quest',
 }
