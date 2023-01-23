@@ -9,6 +9,7 @@ import { Category, QuestType, Status } from '@components/queries/common'
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
+import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   id: 0,
@@ -806,8 +807,9 @@ export const MOCK_BADGE_LIST = [
   },
 ]
 
-export const MOCK_CLAIMED_BADGE = {
-  contractAddress: '0xawgaweewagewagwe',
+export const MOCK_CLAIMED_BADGE: FetchClaimedBadgeResponse = {
+  isClaimed: true,
+  address: '0xawgaweewagewagwe',
   tokenId: 2,
   tokenStandard: 'ERC-20',
   chain: 'polygon',

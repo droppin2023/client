@@ -28,7 +28,7 @@ const BadgeClaimdSection = ({ address, claimedBadge }: BadgeClaimedSectionProps)
           </Text>
           <Text color={secondary} textAlign={'right'} as="b">{`${address}`}</Text>
         </Flex>
-        {claimedBadge && (
+        {claimedBadge.isClaimed && (
           <>
             <Flex justifyContent={'space-between'} alignItems="center" width="100%">
               <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>

@@ -42,73 +42,13 @@ const BadgePage = ({ id }: { id: number }) => {
       <BadgeClaimedSection
         address={mockBadge.address}
         claimedBadge={{
-          address: mockClamedBadge.contractAddress,
+          isClaimed: mockClamedBadge.isClaimed,
+          address: mockClamedBadge.address,
           tokenId: mockClamedBadge.tokenId,
           tokenStandard: mockClamedBadge.tokenStandard,
           chain: mockClamedBadge.chain,
         }}
       />
-
-      {/* <Box width="80%" minHeight="512px">
-          <Tabs isLazy align="center" variant="unstyled">
-            <TabList>
-              <Tab
-                fontWeight={'bold'}
-                _selected={{
-                  color: primary,
-                  fontWeight: 'bold',
-                  borderBottom: `3px solid ${primary}`,
-                }}
-              >
-                Badges
-              </Tab>
-              <Tab
-                fontWeight={'bold'}
-                _selected={{
-                  color: primary,
-                  fontWeight: 'bold',
-                  borderBottom: `3px solid ${primary}`,
-                }}
-              >
-                Members
-              </Tab>
-              {isAdmin && (
-                <Tab
-                  fontWeight={'bold'}
-                  _selected={{
-                    color: primary,
-                    fontWeight: 'bold',
-                    borderBottom: `3px solid ${primary}`,
-                  }}
-                >
-                  Pending Quests
-                </Tab>
-              )}
-            </TabList>
-
-            <TabPanels>
-              <TabPanel>
-                <DaoBadgesSection
-                  badges={mockDao.badges}
-                  questsDiscord={
-                    mockDao.quests.filter((item) => item.questType === QuestType.discord)[0]
-                  }
-                  questsSubmitForm={
-                    mockDao.quests.filter((item) => item.questType === QuestType.form)[0]
-                  }
-                />
-              </TabPanel>
-              <TabPanel>
-                <DaoMembersSection members={mockDao.members} />
-              </TabPanel>
-              {isAdmin && (
-                <TabPanel>
-                  <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
-                </TabPanel>
-              )}
-            </TabPanels>
-          </Tabs>
-        </Box> */}
     </VStack>
   )
 }
