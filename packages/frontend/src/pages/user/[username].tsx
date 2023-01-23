@@ -11,6 +11,7 @@ import UserOverview from '@components/userPage/UserOverview'
 // TODO: integrate real data
 import UserBadgesSection from '@components/userPage/UserBadgesSection'
 import UserEngagementSection from '@components/userPage/UserEngagementSection'
+import UserQuestSection from '@components/userPage/UserQuestSection'
 import { ONE_USER_DETAIL } from '@mockData'
 
 const UserPage = ({ username }: { username: string }) => {
@@ -62,7 +63,9 @@ const UserPage = ({ username }: { username: string }) => {
               <TabPanel>
                 <UserEngagementSection />
               </TabPanel>
-              <TabPanel>Quests</TabPanel>
+              <TabPanel>
+                <UserQuestSection />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </Box>

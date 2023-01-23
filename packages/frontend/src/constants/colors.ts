@@ -20,3 +20,6 @@ export const dangerHighlight = '#FFADAD'
 export const discordPurple = '#7289DA'
 
 export const pink = '#FB507C'
+
+export const violet = '#7558DB'
+export const lightBlue = '#1FB8DA'

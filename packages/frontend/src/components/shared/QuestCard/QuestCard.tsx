@@ -2,17 +2,23 @@ import { useState } from 'react'
 
 import { Flex, Text } from '@chakra-ui/react'
 
-import { background2, orange, primary } from '@constants/colors'
-import { useDaoPageContext } from '@context/DaoPageContext'
+import { background2 } from '@constants/colors'
 
 import Done from '@components/icons/Done'
 import QuestDetailModal from '@components/shared/QuestCard/components/QuestDetailModal'
 
+import { Status } from '@components/queries/common'
+import { COLOR_MAPPING } from './QuestCard.constants'
 import type { QuestCardProps } from './QuestCard.types'
 
-const QuestCard = ({ name, reward, questType, id, isCompleted = false }: QuestCardProps) => {
-  const { repUnit } = useDaoPageContext()
-
+const QuestCard = ({
+  name,
+  reward,
+  repUnit,
+  questType,
+  id,
+  status = Status.noStatus,
+}: QuestCardProps) => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
 
   return (
@@ -21,7 +27,7 @@ const QuestCard = ({ name, reward, questType, id, isCompleted = false }: QuestCa
         position="relative"
         width="100%"
         textAlign={'center'}
-        border={`2px solid ${isCompleted ? primary : orange}`}
+        border={`2px solid ${COLOR_MAPPING[status]}`}
         borderRadius="20px"
         padding="16px"
         bg={background2}
@@ -31,11 +37,11 @@ const QuestCard = ({ name, reward, questType, id, isCompleted = false }: QuestCa
         cursor="pointer"
         onClick={() => setIsDetailModalOpen(true)}
       >
-        {isCompleted && (
+        {status === Status.claimed && (
           <Done position="absolute" right="-12px" top="-12px" width="28px" height="28px" />
         )}
         <Text as="b">{name}</Text>
-        <Text as="b" color={isCompleted ? primary : orange}>
+        <Text as="b" color={COLOR_MAPPING[status]}>
           {`${reward} ${repUnit}`}
         </Text>
       </Flex>

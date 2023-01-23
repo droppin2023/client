@@ -136,7 +136,57 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         },
         {
           id: 4,
-          name: 'Join our live gatherinf',
+          name: 'Join our live gathering',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      status: Status.accepted,
+      quests: [
+        {
+          id: 3,
+          name: 'Join 5 Hackathons',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 3,
+          name: 'Join 10 Hackathons',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Refer a member to our DAO',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      status: Status.rejected,
+      quests: [
+        {
+          id: 3,
+          name: 'Register on our web',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Join our online event',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      status: Status.claimed,
+      quests: [
+        {
+          id: 3,
+          name: 'Activate your account',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Verify your discord',
           engageScore: { number: 72673, unit: 'LPD' },
         },
       ],
