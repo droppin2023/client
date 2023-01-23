@@ -11,14 +11,15 @@ import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   id: 0,
-  name: '',
-  description: '',
-  image: '',
+  name: 'Rick Zhang',
+  description:
+    "Hey there! I'm Rick. I'm a pretty chill dude who likes to stay busy with a few different things. I'm a big reader, always down for a good book, but I also love getting out and playing some basketball. When I'm not doing either of those things, you can probably find me coding away on some new web project. I like to stay active and keep my mind sharp, that's why I like to do a bit of everything.",
+  image: 'https://picsum.photos/300',
   discord: '',
   badges: [
     {
       id: 0,
-      logo: 'todo',
+      logo: 'https://picsum.photos/300',
       name: 'NewBie',
       description: 'todo',
       isClaimed: false,
@@ -27,7 +28,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
     },
     {
       id: 0,
-      logo: 'todo',
+      logo: 'https://picsum.photos/300',
       name: 'Novice',
       description: 'todo',
       isClaimed: false,
@@ -36,7 +37,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
     },
     {
       id: 1,
-      logo: 'todo',
+      logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
       isClaimed: false,
@@ -45,7 +46,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
     },
     {
       id: 2,
-      logo: 'todo',
+      logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
       isClaimed: false,
@@ -59,7 +60,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         id: 0,
         name: 'LepakDAO',
         address: '0x73437205253',
-        image: 'https://via.placeholder.com/300',
+        image: 'https://picsum.photos/300',
       },
       badges: [
         {
@@ -93,7 +94,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         id: 0,
         name: 'Lepak DAO',
         address: '0x73437205253',
-        image: 'https://via.placeholder.com/300',
+        image: 'https://picsum.photos/300',
       },
     },
     {
@@ -105,7 +106,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         id: 1,
         name: 'Gedomazou DAO',
         address: '0x73437205253',
-        image: 'https://via.placeholder.com/300',
+        image: 'https://picsum.photos/300',
       },
     },
   ],
@@ -160,7 +161,7 @@ export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
 }
 
 export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
-  logo: 'https://via.placeholder.com/300',
+  logo: 'https://picsum.photos/300',
   name: 'Lepak DAO',
   category: Category.Other,
   discord: {
@@ -171,7 +172,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
   owner: {
     id: 1,
     address: '0xaegewgwewgeew',
-    image: 'https://via.placeholder.com/300',
+    image: 'https://picsum.photos/300',
     name: 'Via',
   },
   id: 0,
@@ -183,19 +184,19 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
     {
       id: 2,
       address: '0xaegewgwewgeew',
-      image: 'https://via.placeholder.com/300',
+      image: 'https://picsum.photos/300',
       name: 'John',
     },
     {
       id: 3,
       address: '0xaegewgwewgeew',
-      image: 'https://via.placeholder.com/300',
+      image: 'https://picsum.photos/300',
       name: 'Clark',
     },
     {
       id: 4,
       address: '0xaegewgwewgeew',
-      image: 'https://via.placeholder.com/300',
+      image: 'https://picsum.photos/300',
       name: 'May',
     },
   ],
@@ -206,7 +207,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
   badges: [
     {
       id: 1,
-      logo: 'https://aegwgwagew.dageew',
+      logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
       isClaimed: false,
@@ -215,7 +216,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
     },
     {
       id: 2,
-      logo: 'https://aegwgwagew.dageew',
+      logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
       isClaimed: false,
@@ -224,7 +225,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
     },
     {
       id: 3,
-      logo: 'https://aegwgwagew.dageew',
+      logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
       isClaimed: false,
@@ -723,7 +724,7 @@ export const MOCK_BADGE_LIST = [
 
 export const GET_CLAIMED_MOCK_BADGE = {
   name: 'NewBie',
-  badgeImg: 'https://via.placeholder.com/300',
+  badgeImg: 'https://picsum.photos/300',
   badgeSymbol: 'NB',
   daoId: 2,
   description: 'NewBie badge is for default badge in Lepak DAO',
@@ -802,21 +803,21 @@ export const GET_CLAIMED_MOCK_BADGE = {
 export const MOCK_USER = {
   name: 'pia',
   description: '21 | Builder in Crypto \n Love reading writing coding stuff. Engineer but Thinker.',
-  img: 'https://via.placeholder.com/300',
+  img: 'https://picsum.photos/300',
   badges: [
     {
       id: 1,
-      badgeImg: 'https://via.placeholder.com/300',
+      badgeImg: 'https://picsum.photos/300',
       name: 'Newbie',
     },
     {
       id: 2,
-      badgeImg: 'https://via.placeholder.com/300',
+      badgeImg: 'https://picsum.photos/300',
       name: 'Newbie',
     },
     {
       id: 3,
-      badgeImg: 'https://via.placeholder.com/300',
+      badgeImg: 'https://picsum.photos/300',
       name: 'Newbie',
     },
   ],
@@ -826,13 +827,13 @@ export const MOCK_USER = {
       badges: [
         {
           id: 1,
-          badgeImg: 'https://via.placeholder.com/300',
+          badgeImg: 'https://picsum.photos/300',
           name: 'Newbie',
           isClaimed: true,
         },
         {
           id: 2,
-          badgeImg: 'https://via.placeholder.com/300',
+          badgeImg: 'https://picsum.photos/300',
           name: 'Newbie2',
           isClaimed: true,
         },
@@ -843,13 +844,13 @@ export const MOCK_USER = {
       badges: [
         {
           id: 1,
-          badgeImg: 'https://via.placeholder.com/300',
+          badgeImg: 'https://picsum.photos/300',
           name: 'Newbie4',
           isClaimed: true,
         },
         {
           id: 2,
-          badgeImg: 'https://via.placeholder.com/300',
+          badgeImg: 'https://picsum.photos/300',
           name: 'Newbie3',
           isClaimed: false,
         },
@@ -860,7 +861,7 @@ export const MOCK_USER = {
     {
       dao: {
         daoId: 1,
-        img: 'https://via.placeholder.com/300',
+        img: 'https://picsum.photos/300',
         name: 'Lepak DAO',
         unit: 'LDP',
       },
@@ -872,7 +873,7 @@ export const MOCK_USER = {
     {
       dao: {
         daoId: 2,
-        img: 'https://via.placeholder.com/300',
+        img: 'https://picsum.photos/300',
         name: 'Lepak DAO',
         unit: 'LDP',
       },
