@@ -65,7 +65,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       badges: [
         {
           id: 0,
-          logo: 'todo',
+          logo: 'https://picsum.photos/300',
           name: 'NewBie',
           description: 'todo',
           isClaimed: false,
@@ -74,7 +74,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         },
         {
           id: 1,
-          logo: 'todo',
+          logo: 'https://picsum.photos/300',
           name: 'Novice',
           description: 'todo',
           isClaimed: false,
@@ -136,7 +136,57 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         },
         {
           id: 4,
-          name: 'Join our live gatherinf',
+          name: 'Join our live gathering',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      status: Status.accepted,
+      quests: [
+        {
+          id: 3,
+          name: 'Join 5 Hackathons',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 3,
+          name: 'Join 10 Hackathons',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Refer a member to our DAO',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      status: Status.rejected,
+      quests: [
+        {
+          id: 3,
+          name: 'Register on our web',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Join our online event',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+      ],
+    },
+    {
+      status: Status.claimed,
+      quests: [
+        {
+          id: 3,
+          name: 'Activate your account',
+          engageScore: { number: 72673, unit: 'LPD' },
+        },
+        {
+          id: 4,
+          name: 'Verify your discord',
           engageScore: { number: 72673, unit: 'LPD' },
         },
       ],
@@ -158,6 +208,24 @@ export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
   },
   description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
   status: Status.noStatus,
+}
+
+export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
+  id: 0,
+  schemaHash: '0x34723d5f238357',
+  title: 'Join a Hackathon',
+  engageScore: {
+    number: 400,
+    unit: 'LPD',
+  },
+  condition: {
+    type: QuestType.discord,
+    conditionDetail: { guildId: 0, roleId: 0 },
+  },
+  description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
+  message: 'You did great',
+  answer: 'Please do better',
+  status: Status.rejected,
 }
 
 export const ONE_COMMUNITY: FetchCommunityDetailResponse = {

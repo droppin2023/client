@@ -82,6 +82,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
                 id={item.id}
                 name={item.name}
                 reward={item.engageScore.number}
+                repUnit={item.engageScore.unit}
                 questType={QuestType.discord}
               />
             ))}
@@ -96,6 +97,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
                 id={item.id}
                 name={item.name}
                 reward={item.engageScore.number}
+                repUnit={item.engageScore.unit}
                 questType={QuestType.form}
               />
             ))}
