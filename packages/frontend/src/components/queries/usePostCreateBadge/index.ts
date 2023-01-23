@@ -4,6 +4,8 @@ import badgeContractAbi from '@shared/abis/BadgeFacet.json'
 import type { CreateBadgeParams } from './usePostCreateBadge.types'
 import { CREATE_BADGE } from './usePostCreateBadge.constants'
 import { useContract, useSigner } from 'wagmi'
+import { parseEther } from 'ethers/lib/utils.js'
+import { ethers } from 'ethers'
 
 const usePostCreateBadge = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -11,20 +13,36 @@ const usePostCreateBadge = () => {
   const { data: signer } = useSigner()
 
   const badgeContract = useContract({
-    address: '0x1c8aBb04C8Ab9a105ee2c44b13398E98fC12E6d4',
+    address: '0xc713834c7aF85099643013620416b673bdC6B526',
     abi: badgeContractAbi,
     signerOrProvider: signer,
   })
 
-  const postForm = async (params: CreateBadgeParams) => {
-    setIsLoading(true)
+  // const badgeData = {
+  //   requiredQuests: [1, 4, 2],
+  //   engagePointsThreshold: 1000,
+  //   badgePrice: parseEther('0.01'),
+  //   name: 'Hacker Badge',
+  //   NFT: ethers.constants.AddressZero,
+  //   groupId: 1,
+  //   symbol: 'HACK',
+  //   URI: 'www.google.com',
+  // }
 
+  const createBadge = async (params: CreateBadgeParams) => {
+    setIsLoading(true)
+    console.log(params, badgeContract, signer)
     try {
+      console.log('hihihi')
       const tsx = await badgeContract?.addBadge(
-        params.contract,
+        { ...params.contract, owner: signer },
         params.contract.symbol,
         params.contract.URI,
       )
+
+      // const tsx = await badgeContract?.addBadge(badgeData, badgeData.symbol, badgeData.URI)
+      console.log({ tsx })
+      console.log('agegwegwgagewwe')
       const transactionHash = await tsx.wait()
       console.log({ transactionHash })
       const { data, status } = await axios.post(CREATE_BADGE, {
@@ -32,6 +50,7 @@ const usePostCreateBadge = () => {
         description: params.description,
         name: params.name,
       })
+      console.log(data)
 
       if (status === 200) {
         setIsLoading(false)
@@ -45,7 +64,7 @@ const usePostCreateBadge = () => {
     }
   }
 
-  return { postForm, isLoading, error }
+  return { createBadge, isLoading, error }
 }
 
 export default usePostCreateBadge

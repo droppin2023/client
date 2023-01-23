@@ -33,6 +33,9 @@ import UploadImage from '@components/shared/UploadImage'
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
 import * as sty from './BadgeForm.styles'
 import type { BadgeFormProps } from './BadgeForm.types'
+import { parseEther } from 'ethers/lib/utils.js'
+import { ethers } from 'ethers'
+import usePostCreateBadge from '@components/queries/usePostCreateBadge'
 
 // TODO: checks for inputs
 const BadgeForm = ({
@@ -41,6 +44,7 @@ const BadgeForm = ({
   repUnit,
   questsDiscord,
   questsSubmitForm,
+  groupId,
 }: BadgeFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState('')
   const [checkedQuestList, setCheckedQuestList] = useState<typeof quests>([])
@@ -48,15 +52,16 @@ const BadgeForm = ({
   const [description, setDescription] = useState('')
   const [engagement, setEngagement] = useState(0)
   const [price, setPrice] = useState(0)
+  const [symbol, setSymbol] = useState('')
   const [priceUnit, setPriceUnit] = useState('ETH')
-
+  const { createBadge, isLoading, error } = usePostCreateBadge()
   const [checkedQuestError, setCheckedQuestError] = useState('')
 
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
     const tempCheckedList = [...checkedQuestList]
     if (e.target.checked) {
-      if (tempCheckedList.length >= 5) {
-        setCheckedQuestError('Maximum of 5 quests only.')
+      if (tempCheckedList.length >= 3) {
+        setCheckedQuestError('Maximum of 3 quests only.')
         e.target.checked = false
         return
       }
@@ -69,19 +74,26 @@ const BadgeForm = ({
     setCheckedQuestList(tempCheckedList)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // TODO: submissionlogic
-    if (checkedQuestList.length >= 5) return
-
-    console.log({
-      title,
-      img: localImgUrl,
-      checkedQuestList,
-      description,
-      engagement,
-      price,
-      priceUnit,
-    })
+    if (checkedQuestList.length >= 3) return
+    const params = {
+      contract: {
+        requiredQuests: checkedQuestList.map((quest: { id: number }) => quest.id),
+        engagePointsThreshold: engagement,
+        badgePrice: parseEther(price.toString()),
+        name: title,
+        NFT: ethers.constants.AddressZero,
+        groupId: groupId,
+        symbol: symbol,
+        URI: localImgUrl,
+      },
+      description: description,
+      name: title,
+    }
+    console.log(params)
+    const res = await createBadge(params)
+    console.log(res)
   }
 
   return (
@@ -107,6 +119,14 @@ const BadgeForm = ({
               variant="filled"
               placeholder="e.g. Hackathon guy"
               onChange={(e) => setTitle(e.target.value)}
+            />
+          </FormControl>
+          <FormControl mt={4}>
+            <FormLabel>Symbol</FormLabel>
+            <Input
+              variant="filled"
+              placeholder="e.g. HG"
+              onChange={(e) => setSymbol(e.target.value)}
             />
           </FormControl>
           <FormControl mt={4}>

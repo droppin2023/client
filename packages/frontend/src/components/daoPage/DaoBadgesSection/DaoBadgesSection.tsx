@@ -19,7 +19,7 @@ import { QuestType } from '@components/queries/common'
 import { MOCK_DAO_LIST } from '@mockData'
 
 const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadgesSectionProps) => {
-  const { repUnit, isAdmin } = useDaoPageContext()
+  const { repUnit, isAdmin, id } = useDaoPageContext()
 
   const [isCreateQuestOpen, setIsCreateQuestOpen] = useState(false)
   const [isCreateBadgeOpen, setIsCreateBadgeOpen] = useState(false)
@@ -127,6 +127,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
         repUnit={repUnit}
         questsDiscord={questsDiscord}
         questsSubmitForm={questsSubmitForm}
+        groupId={id}
       />
     </>
   )
