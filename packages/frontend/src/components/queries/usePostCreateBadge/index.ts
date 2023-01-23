@@ -23,16 +23,20 @@ const usePostCreateBadge = () => {
   const createBadge = async (params: CreateBadgeParams) => {
     setIsLoading(true)
     try {
-      console.log('hihihi')
-      const tsx = badgeContract?.addBadge(
+      console.log('hihihi', badgeContract)
+      const tsx = await badgeContract?.addBadge(
         params.contract,
         params.contract.symbol,
         params.contract.URI,
       )
+      // .catch((e: unknown) => {
+      //   setIsLoading(false)
+      //   setError(e)
+      // })
 
       // const tsx = await badgeContract?.addBadge(badgeData, badgeData.symbol, badgeData.URI)
       console.log({ tsx })
-      console.log('agegwegwgagewwe')
+
       const transactionHash = await tsx.wait()
       console.log({ transactionHash })
       const { data, status } = await axios.post(CREATE_BADGE, {
@@ -44,10 +48,10 @@ const usePostCreateBadge = () => {
 
       if (status === 200) {
         setIsLoading(false)
-        return data.data
+        return data
       }
 
-      throw new Error('Form Post Error!')
+      // throw new Error('Form Post Error!')
     } catch (e) {
       setIsLoading(false)
       setError(e)

@@ -59,17 +59,17 @@ const BadgeForm = ({
   //TODO: handleQuestCheck is not properly working when after get CheckedQuestError. Have to Fix it
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
     const tempCheckedList = [...checkedQuestList]
-    console.log(tempCheckedList)
     if (e.target.checked) {
       if (tempCheckedList.length >= 3) {
         setCheckedQuestError('Maximum of 3 quests only.')
-        console.log(e.target.checked)
         e.target.checked = false
         return
       }
       tempCheckedList.push(JSON.parse(e.target.value))
+      setEngagement(engagement + JSON.parse(e.target.value).engageScore.number)
     } else {
       tempCheckedList.splice(tempCheckedList.indexOf(JSON.parse(e.target.value)), 1)
+      setEngagement(engagement - JSON.parse(e.target.value).engageScore.number)
     }
 
     setCheckedQuestError('')
@@ -77,8 +77,8 @@ const BadgeForm = ({
   }
 
   const handleSubmit = async () => {
-    // TODO: submissionlogic
-    if (checkedQuestList.length >= 4) return
+    // TODO: check submission condition and error modal
+    if (checkedQuestList.length >= 4 || title == '' || symbol == '') return
     const params = {
       contract: {
         requiredQuests: checkedQuestList.map((quest: { id: number }) => quest.id),
@@ -93,9 +93,9 @@ const BadgeForm = ({
       description: description,
       name: title,
     }
-    console.log(params)
     const res = await createBadge(params)
-    console.log(res)
+    // TODO : Add loading modal and error modal using this data
+    console.log(res, error, isLoading)
   }
 
   return (
@@ -171,21 +171,28 @@ const BadgeForm = ({
           <FormControl mt={4}>
             <FormLabel>Claim conditions</FormLabel>
             <FormHelperText css={[sty.helperText]}>
-              Set the required engagement conditions to claim a badge
+              Required engagement conditions to claim a badge
             </FormHelperText>
-            <InputGroup>
+            <Flex justifyContent={'space-between'} alignItems={'center'} width="100%">
+              <Text>{engagement}</Text>
+              <Text color={primary} as="b">
+                {repUnit}
+              </Text>
+            </Flex>
+
+            {/* <InputGroup>
               <Input
                 onChange={(e) => setEngagement(parseInt(e.target.value))}
                 variant="filled"
                 type="number"
-                placeholder="1000"
+                // placeholder={checkedQuestList.map((quest)=>return )}
               />
               <InputRightElement>
                 <Text color={primary} as="b">
                   {repUnit}
                 </Text>
               </InputRightElement>
-            </InputGroup>
+            </InputGroup> */}
             <FormHelperText css={[sty.helperText]}>Set a price for a badge </FormHelperText>
             <InputGroup>
               <Input
