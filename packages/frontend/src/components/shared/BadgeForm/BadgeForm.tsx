@@ -104,9 +104,9 @@ const BadgeForm = ({
         <ModalCloseButton />
         <ModalBody pb={6}>
           <Flex justifyContent={'space-between'} alignItems="center">
-            <FormLabel>Badge ID</FormLabel>
+            <FormLabel>Community ID</FormLabel>
             <Text as="b" color={primary} margin="8px 0 12px 0">
-              MOCK_ID
+              {groupId}
             </Text>
           </Flex>
           <FormControl>
@@ -150,7 +150,14 @@ const BadgeForm = ({
             <VStack maxHeight="256px" overflowY="scroll" alignItems="flex-start">
               {[...questsDiscord.questList, ...questsSubmitForm.questList].map((item, index) => (
                 <Checkbox value={JSON.stringify(item)} key={index} onChange={handleQuestCheck}>
-                  {item.name}
+                  <Flex justifyContent={'space-between'} alignItems={'center'} width="100%">
+                    <FormHelperText color={foreground} margin="8px 0 12px 0">
+                      <Text as="b">{item.name}</Text>
+                      <Text>
+                        {item.engageScore.number} {item.engageScore.unit}
+                      </Text>
+                    </FormHelperText>
+                  </Flex>
                 </Checkbox>
               ))}
             </VStack>
@@ -202,21 +209,17 @@ const BadgeForm = ({
             <VStack alignItems={'flex-start'}>
               <Flex justifyContent={'space-between'} alignItems={'center'} width="100%">
                 <FormHelperText css={[sty.helperText]}>Listing Price</FormHelperText>
-                <Text>22 MATIC</Text>
+                <Text>{price} ETH</Text>
               </Flex>
               <Flex justifyContent={'space-between'} alignItems={'center'} width="100%">
                 <FormHelperText css={[sty.helperText]}>Service Fee</FormHelperText>
                 <Text>2.5 %</Text>
               </Flex>
               <Flex justifyContent={'space-between'} alignItems={'center'} width="100%">
-                <FormHelperText css={[sty.helperText]}>Community Earnings</FormHelperText>
-                <Text>3 %</Text>
-              </Flex>
-              <Flex justifyContent={'space-between'} alignItems={'center'} width="100%">
                 <FormHelperText color={foreground} margin="8px 0 12px 0" as="b">
                   Potential Earnings
                 </FormHelperText>
-                <Text>20.79 MATIC</Text>
+                <Text>{price * 0.75} ETH</Text>
               </Flex>
             </VStack>
           </FormControl>
