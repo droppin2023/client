@@ -8,6 +8,7 @@ import Done from '@components/icons/Done'
 import QuestDetailModal from '@components/shared/QuestCard/components/QuestDetailModal'
 
 import { Status } from '@components/queries/common'
+import UserSideModal from './components/UserSideModal'
 import { COLOR_MAPPING } from './QuestCard.constants'
 import type { QuestCardProps } from './QuestCard.types'
 
@@ -20,6 +21,12 @@ const QuestCard = ({
   status = Status.noStatus,
 }: QuestCardProps) => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
+  const [isUserSideModalOpen, setIsUserSideModalOpen] = useState(false)
+
+  const handleCardClick = () => {
+    if (status === Status.noStatus) setIsDetailModalOpen(true)
+    else setIsUserSideModalOpen(true)
+  }
 
   return (
     <>
@@ -35,7 +42,7 @@ const QuestCard = ({
         alignItems="center"
         justifyContent={'center'}
         cursor="pointer"
-        onClick={() => setIsDetailModalOpen(true)}
+        onClick={handleCardClick}
       >
         {status === Status.claimed && (
           <Done position="absolute" right="-12px" top="-12px" width="28px" height="28px" />
@@ -45,13 +52,22 @@ const QuestCard = ({
           {`${reward} ${repUnit}`}
         </Text>
       </Flex>
-      <QuestDetailModal
-        isOpen={isDetailModalOpen}
-        onClose={() => setIsDetailModalOpen(false)}
-        questType={questType}
-        questTitle={name}
-        questID={id}
-      />
+      {/* will open the quest detail modal if no status. else track the user's current status */}
+      {status === Status.noStatus ? (
+        <QuestDetailModal
+          isOpen={isDetailModalOpen}
+          onClose={() => setIsDetailModalOpen(false)}
+          questType={questType}
+          questTitle={name}
+          questID={id}
+        />
+      ) : (
+        <UserSideModal
+          isOpen={isUserSideModalOpen}
+          onClose={() => setIsUserSideModalOpen(false)}
+          questStatus={status}
+        />
+      )}
     </>
   )
 }
