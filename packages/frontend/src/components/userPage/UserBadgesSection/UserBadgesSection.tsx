@@ -44,7 +44,7 @@ const UserBadgesSection = () => {
               </Text>
               <HStack spacing={5}>
                 {item.badges.map((item) => (
-                  <QuestBadge key={item.id} name={item.name} img={item.logo} />
+                  <QuestBadge key={item.id} name={item.name} img={item.logo} isLocked={false} />
                 ))}
               </HStack>
 
