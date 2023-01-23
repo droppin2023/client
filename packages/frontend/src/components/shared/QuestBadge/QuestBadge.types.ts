@@ -2,7 +2,7 @@ import { StaticImageData } from 'next/image'
 
 export interface QuestBadgeProps {
   daoName?: string
-  img?: StaticImageData
+  img?: StaticImageData | string
   name: string
   recentActivity?: string
   minter?: string
