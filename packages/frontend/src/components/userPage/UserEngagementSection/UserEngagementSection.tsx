@@ -14,7 +14,7 @@ const UserEngagementSection = () => {
   return (
     <VStack width="100%" align="left" spacing={10}>
       <Text textAlign="left" width="100%">
-        <SectionHeader title={'Community Engagament'} subtitle="" />
+        <SectionHeader title={'Community Engagement'} subtitle="" />
       </Text>
       <SimpleGrid spacing={5} columns={2}>
         {engageScoresAndCommunity.map((item, index) => (

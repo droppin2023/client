@@ -16,7 +16,7 @@ const UserBadgesSection = () => {
   return (
     <VStack width="100%" align="left" spacing={10}>
       <Box>
-        <Text textAlign="left" width="100%">
+        <Text textAlign="left" width="100%" mb={10}>
           <SectionHeader title={'Claimed Badges'} subtitle="" />
         </Text>
         <SimpleGrid
