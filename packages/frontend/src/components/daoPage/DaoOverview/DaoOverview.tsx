@@ -108,7 +108,7 @@ const DaoOverview = ({
                 <HStack spacing={3}>
                   <HStack spacing="-12px">
                     {memberList.slice(0, 3).map((item, index) => (
-                      <AvatarPreview key={index} ringColor={orange} img={item.img} />
+                      <AvatarPreview key={index} ringColor={orange} img={item.image} />
                     ))}
                   </HStack>
 
