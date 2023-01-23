@@ -4,15 +4,10 @@ import Image from 'next/image'
 
 import { Badge, Box, Button, Flex, HStack, IconButton, Text, VStack } from '@chakra-ui/react'
 
-import DiscordIcon from '@components/icons/DiscordIcon'
-import WebsiteIcon from '@components/icons/WebsiteIcon'
 import AvatarPreview from '@components/shared/AvatarPreview'
 
-import { background, foreground, orange, orangeHighlight, secondary } from '@constants/colors'
+import { orange, orangeHighlight } from '@constants/colors'
 
-import Settings from '@components/icons/Settings'
-
-import { Category } from '@components/queries/common'
 import bannerOrnament from './assets/banner-ornament.svg'
 
 import * as sty from './BadgeOverview.styles'
@@ -47,7 +42,7 @@ const BadgeOverview = ({
           alignItems="center"
         >
           <HStack alignItems="flex-start" gap="32px" width="77vw">
-            <Image src={logo} alt={name} width={200} height={200} css={[sty.daoImage]} />
+            <Image src={logo} alt={name} width={200} height={200} css={[sty.badgeImage]} />
             <VStack alignItems={'flex-start'} width="100%">
               <Flex alignItems={'center'} justifyContent="space-between" width="100%" flex={1}>
                 <HStack spacing={5}>
@@ -57,76 +52,39 @@ const BadgeOverview = ({
                   <Text fontSize="4xl" lineHeight={1.2}>
                     {symbol}
                   </Text>
-                  {/* Symbol */}
-                  {/* <Badge
-                    fontSize="xl"
-                    bg={background}
-                    padding="4px 16px"
-                    borderRadius="6px"
-                  >{`${repScore} ${repUnit}`}</Badge> */}
                 </HStack>
-                {/* {isAdmin ? (
-                  <Button
-                    leftIcon={<Settings />}
-                    bg={background}
-                    _hover={{ bg: secondary }}
-                    onClick={() => setIsEditCommunityFormOpen(true)}
-                  >
-                    Edit
-                  </Button>
-                ) : (
-                  <Button leftIcon={<Text>+</Text>} bg={orange} _hover={{ bg: orangeHighlight }}>
-                    Join
-                  </Button>
-                )} */}
               </Flex>
-              {/* <HStack spacing={5}>
-                <Text>
-                  by <Text as="b">{owner.name}</Text>
-                </Text>
-                <HStack spacing={3}>
-                  <IconButton
-                    aria-label="website"
-                    variant="outline"
-                    borderRadius="9999px"
-                    borderColor={foreground}
-                  >
-                    <WebsiteIcon />
-                  </IconButton>
-                  <IconButton
-                    aria-label="discord"
-                    variant="outline"
-                    borderRadius="9999px"
-                    borderColor={foreground}
-                  >
-                    <DiscordIcon />
-                  </IconButton>
-                </HStack>
-              </HStack>
-              <Text>{description}</Text>
-              <HStack>
-                <HStack spacing={3}>
-                  <HStack spacing="-12px">
-                    {memberList.slice(0, 3).map((item, index) => (
-                      <AvatarPreview key={index} ringColor={orange} img={item.image} />
-                    ))}
-                  </HStack>
-
+              <Flex alignItems={'center'} justifyContent="space-between" width="100%" flex={1}>
+                <HStack spacing={6}>
                   <Text>
-                    Members <strong>{memberCount}</strong>
+                    by <Text as="b">{community.name}</Text>
                   </Text>
-                </HStack>
+                  <HStack spacing={3}>
+                    <HStack spacing="-12px">
+                      {holderList.slice(0, 3).map((item, index) => (
+                        <AvatarPreview key={index} ringColor={orange} img={item.image} />
+                      ))}
+                    </HStack>
 
-                <Text>&#x2022;</Text>
-                <Text>
-                  Chain <strong>{chain}</strong>
-                </Text>
-                <Text>&#x2022;</Text>
-                <Text>
-                  Category <strong>{category as string}</strong>
-                </Text>
-              </HStack> */}
-              <Flex></Flex>
+                    <Text>
+                      <strong>{holderList.length}</strong> holders
+                    </Text>
+                  </HStack>
+                </HStack>
+              </Flex>
+              <Flex alignItems={'center'} justifyContent="space-between" width="100%" flex={1}>
+                <Text>{description}</Text>
+              </Flex>
+              <Flex alignItems={'center'} justifyContent="left" width="100%" flex={1}>
+                <HStack spacing={6}>
+                  <Text as="b">
+                    {requiredPrice.number} {requiredPrice.unit}
+                  </Text>
+                  <Button leftIcon={<Text>+</Text>} bg={orange} _hover={{ bg: orangeHighlight }}>
+                    Claim Now
+                  </Button>
+                </HStack>
+              </Flex>
             </VStack>
           </HStack>
         </Box>

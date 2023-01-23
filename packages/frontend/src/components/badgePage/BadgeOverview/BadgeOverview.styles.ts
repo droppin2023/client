@@ -10,7 +10,7 @@ export const bannerOrnament = css`
   z-index: -1;
 `
 
-export const daoImage = css`
+export const badgeImage = css`
   border: 4px solid ${foreground};
   border-radius: 16px;
 `
