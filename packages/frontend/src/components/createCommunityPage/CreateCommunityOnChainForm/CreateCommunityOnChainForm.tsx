@@ -13,10 +13,7 @@ import {
   Input,
   Text,
   VStack,
-  Wrap,
-  WrapItem,
 } from '@chakra-ui/react'
-import DroppinCheckbox from '@components/shared/DroppinCheckbox'
 import QuestBadge from '@components/shared/QuestBadge'
 import SectionHeader from '@components/shared/SectionHeader'
 import { NETWORKS } from '@constants/categories'
@@ -24,6 +21,7 @@ import { primary, primaryHighlight, secondary } from '@constants/colors'
 import { useRef, useState } from 'react'
 import { FormStepCommonProps } from '../types'
 
+import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
 import { useCreateCommunityContext } from '@context/CreateCommunityContext'
 import * as globalSty from '@styles'
 
@@ -83,14 +81,11 @@ const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => 
             Select the blockchain where you’d like new badges from this community to be added by
             default
           </FormHelperText>
-          <Wrap>
-            {/* TODO: this should be a radio version */}
-            {NETWORKS.map((item, index) => (
-              <WrapItem key={index}>
-                <DroppinCheckbox isChecked={true}>{item}</DroppinCheckbox>
-              </WrapItem>
-            ))}
-          </Wrap>
+          <DroppinRadioGroup
+            options={NETWORKS}
+            onChange={(nextValue: string) => {}}
+            defaultValue={'Polygon'}
+          />
         </FormControl>
 
         <Flex justifyContent="space-between" mt={8}>
