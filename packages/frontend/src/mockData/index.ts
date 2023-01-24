@@ -1,3 +1,4 @@
+import { FetchBadgeDetailResponse } from '@components/queries/useFetchBadgeDetail/useFetchBadgeDetail.types'
 import mockAvatar1 from './assets/mock-avatar-1.png'
 import mockAvatar2 from './assets/mock-avatar-2.png'
 import mockAvatar3 from './assets/mock-avatar-3.png'
@@ -8,6 +9,7 @@ import { Category, QuestType, Status } from '@components/queries/common'
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
+import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   id: 0,
@@ -118,11 +120,13 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 2,
           name: 'Verify on Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
       ],
     },
@@ -133,11 +137,13 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Join Hackathon',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 4,
           name: 'Join our live gathering',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
       ],
     },
@@ -148,16 +154,19 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Join 5 Hackathons',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 3,
           name: 'Join 10 Hackathons',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 4,
           name: 'Refer a member to our DAO',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
       ],
     },
@@ -168,11 +177,13 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Register on our web',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 4,
           name: 'Join our online event',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
       ],
     },
@@ -183,11 +194,13 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Activate your account',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 4,
           name: 'Verify your discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
       ],
     },
@@ -309,11 +322,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 2,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
       ],
     },
@@ -324,11 +339,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 3,
           name: 'Join Hackathon',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
         {
           id: 4,
           name: 'Win a prize',
           engageScore: { number: 72673, unit: 'LPD' },
+          status: Status.noStatus,
         },
       ],
     },
@@ -790,80 +807,93 @@ export const MOCK_BADGE_LIST = [
   },
 ]
 
-export const GET_CLAIMED_MOCK_BADGE = {
+export const MOCK_CLAIMED_BADGE: FetchClaimedBadgeResponse = {
+  isClaimed: true,
+  address: '0xawgaweewagewagwe',
+  tokenId: 2,
+  tokenStandard: 'ERC-20',
+  chain: 'polygon',
+}
+
+export const MOCK_BADGE: FetchBadgeDetailResponse = {
+  id: 1,
   name: 'NewBie',
-  badgeImg: 'https://picsum.photos/300',
-  badgeSymbol: 'NB',
-  daoId: 2,
+  logo: 'https://picsum.photos/300',
+  symbol: 'NB',
+  address: '0xagwgwgwagewgwewegwea',
+  community: {
+    id: 1,
+    //address is for community! not admin
+    address: '0xaewwegwgweagawewge',
+    image: 'https://picsum.photos/300',
+    name: 'Lepak DAO',
+  },
   description: 'NewBie badge is for default badge in Lepak DAO',
+
+  requiredPrice: {
+    number: 4,
+    unit: 'ETH',
+  },
+  requiredEngageScore: {
+    number: 200,
+    unit: 'LPD',
+  },
   isDefault: true,
   // should we have to get onchain data through contact? or backend
-  badgeDetail: {
-    contractAddress: '0xawgaweewagewagwe',
-    tokenId: 2,
-    tokenStandard: 'ERC-20',
-    chain: 'polygon',
-    communityEarning: 12,
-  },
-  badgeHolder: {
-    totalNummber: 5,
-    holderList: [
-      {
-        userId: 1,
-        userName: 'pia',
-      },
-      {
-        userId: 2,
-        userName: 'pia2',
-      },
-      {
-        userId: 3,
-        userName: 'pia3',
-      },
-      {
-        userId: 6,
-        userName: 'pia4',
-      },
-      {
-        userId: 10,
-        userName: 'pia5',
-      },
-    ],
-  },
-  claimConditions: [
+  // badgeDetail?: {
+  //   contractAddress: '0xawgaweewagewagwe',
+  //   tokenId: 2,
+  //   tokenStandard: 'ERC-20',
+  //   chain: 'polygon',
+
+  // },
+  holderList: [
     {
-      type: 'quest',
-      detail: [
-        {
-          id: 1,
-          questNmae: 'Join 1 Hackathon',
-          engageScore: 100,
-        },
-        {
-          id: 2,
-          questNmae: 'Win a prize in Hackathon',
-          engageScore: 100,
-        },
-        {
-          id: 3,
-          questNmae: 'Join a Github Organization',
-          engageScore: 200,
-        },
-      ],
+      id: 1,
+      address: '0xagaewgwegwe',
+      image: 'https://picsum.photos/300',
+      name: 'pia',
     },
     {
-      type: 'engageScore',
-      detail: {
-        threshold: 400,
+      id: 2,
+      address: '0xagaewgwegwe',
+      image: 'https://picsum.photos/300',
+      name: 'pia',
+    },
+    {
+      id: 2,
+      address: '0xagaewgwegwe',
+      image: 'https://picsum.photos/300',
+      name: 'pia',
+    },
+  ],
+  requiredQuests: [
+    {
+      id: 0,
+      name: 'join discord',
+      engageScore: {
+        number: 100,
         unit: 'LPD',
       },
+      status: Status.noStatus,
     },
     {
-      type: 'price',
-      detail: {
-        number: 4,
-        unit: 'MATIC',
+      id: 1,
+      name: 'join discord',
+      engageScore: {
+        number: 100,
+        unit: 'LPD',
       },
+      status: Status.noStatus,
+    },
+    {
+      id: 2,
+      name: 'join discord',
+      engageScore: {
+        number: 100,
+        unit: 'LPD',
+      },
+      status: Status.noStatus,
     },
   ],
 }
