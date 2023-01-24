@@ -1,8 +1,8 @@
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react'
 
-import { background2, primary, secondary } from '@constants/colors'
-import type { BadgeClaimedSectionProps } from './BadgeClamedSection.types'
 import Lock from '@components/icons/Lock'
+import { background2, primary, secondary } from '@constants/colors'
+import type { BadgeClaimedSectionProps } from './BadgeClaimedSection.types'
 
 const BadgeClaimdSection = ({ address, claimedBadge }: BadgeClaimedSectionProps) => {
   return (

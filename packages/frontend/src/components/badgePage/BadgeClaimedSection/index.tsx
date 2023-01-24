@@ -1,2 +1,2 @@
-export * from './BadgeClamedSection'
-export { default } from './BadgeClamedSection'
+export * from './BadgeClaimedSection'
+export { default } from './BadgeClaimedSection'
