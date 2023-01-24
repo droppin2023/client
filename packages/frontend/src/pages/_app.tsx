@@ -1,4 +1,4 @@
-import { ChakraProvider, DarkMode } from '@chakra-ui/react'
+import { ChakraProvider, DarkMode, extendTheme } from '@chakra-ui/react'
 import { BaseLayout } from '@components/layout/BaseLayout'
 import { HotToastConfig } from '@components/layout/HotToastConfig'
 import { cache } from '@emotion/css'
@@ -8,6 +8,7 @@ import '@rainbow-me/rainbowkit/styles.css'
 import { env } from '@shared/environment'
 import { chains, wagmiClient } from '@shared/wagmiClient'
 import GlobalStyles from '@styles/GlobalStyles'
+import { StepsTheme as Steps } from 'chakra-ui-steps'
 import { DefaultSeo } from 'next-seo'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -24,6 +25,12 @@ Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const chakraTheme = extendTheme({
+    components: {
+      Steps,
+    },
+  })
+
   return (
     <>
       {/* TODO SEO */}
@@ -56,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <CacheProvider value={cache}>
-        <ChakraProvider>
+        <ChakraProvider theme={chakraTheme}>
           <DarkMode>
             <GlobalStyles />
 
