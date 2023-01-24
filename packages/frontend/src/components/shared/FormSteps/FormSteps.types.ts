@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 interface StepItem {
   label: string
-  content: ReactNode
+  content: (onNext: () => void, onPrev: () => void) => ReactNode
 }
 
 export interface FormStepsProps {
