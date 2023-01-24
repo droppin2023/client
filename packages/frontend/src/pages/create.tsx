@@ -8,6 +8,7 @@ import CreateCommunityCoverSection from '@components/createCommunityPage/CreateC
 import CreateCommunityInfoForm from '@components/createCommunityPage/CreateCommunityInfoForm'
 import CreateCommunityOnChainForm from '@components/createCommunityPage/CreateCommunityOnChainForm'
 
+import CreateCommunitySuccess from '@components/createCommunityPage/CreateCommunitySuccess'
 import 'twin.macro'
 
 const CreateCommunityPage = () => {
@@ -37,7 +38,7 @@ const CreateCommunityPage = () => {
   return (
     <CreateCommunityProvider>
       <Flex width="100vw" justifyContent={'center'} alignItems="center">
-        <FormSteps steps={steps} finishPage={<>hello</>} />
+        <FormSteps steps={steps} finishPage={<CreateCommunitySuccess />} />
       </Flex>
     </CreateCommunityProvider>
   )

@@ -85,13 +85,6 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
 
       <FormControl mt={4}>
         <FormLabel>Category</FormLabel>
-        {/* <Wrap>
-          {DAO_CATEGORIES.map((item, index) => (
-            <WrapItem key={index}>
-              <DroppinCheckbox isChecked={item === selectedCategory}>{item}</DroppinCheckbox>
-            </WrapItem>
-          ))}
-        </Wrap> */}
         <DroppinRadioGroup
           options={DAO_CATEGORIES}
           onChange={handleSelectCategory}
