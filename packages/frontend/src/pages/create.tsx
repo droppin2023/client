@@ -1,13 +1,17 @@
 import { Flex } from '@chakra-ui/react'
 
+import { CreateCommunityProvider } from '@context/CreateCommunityContext'
+
 import FormSteps from '@components/shared/FormSteps'
 
 import CreateCommunityCoverSection from '@components/createCommunityPage/CreateCommunityCoverSection'
+import CreateCommunityInfoForm from '@components/createCommunityPage/CreateCommunityInfoForm'
+import CreateCommunityOnChainForm from '@components/createCommunityPage/CreateCommunityOnChainForm'
 
 import 'twin.macro'
 
 const CreateCommunityPage = () => {
-  const content = <Flex py={4}>Hello</Flex>
+  // the state management is handled within the context
 
   const steps = [
     {
@@ -16,14 +20,26 @@ const CreateCommunityPage = () => {
         <CreateCommunityCoverSection onNext={onNext} />
       ),
     },
-    { label: 'Community Info', content: (onNext: () => void, onPrev: () => void) => content },
-    { label: 'On-Chain Setup', content: (onNext: () => void, onPrev: () => void) => content },
+    {
+      label: 'Community Info',
+      content: (onNext: () => void, onPrev: () => void) => (
+        <CreateCommunityInfoForm onNext={onNext} onPrev={onPrev} />
+      ),
+    },
+    {
+      label: 'On-Chain Setup',
+      content: (onNext: () => void, onPrev: () => void) => (
+        <CreateCommunityOnChainForm onNext={onNext} onPrev={onPrev} />
+      ),
+    },
   ]
 
   return (
-    <Flex width="100vw" justifyContent={'center'} alignItems="center">
-      <FormSteps steps={steps} />
-    </Flex>
+    <CreateCommunityProvider>
+      <Flex width="100vw" justifyContent={'center'} alignItems="center">
+        <FormSteps steps={steps} finishPage={<>hello</>} />
+      </Flex>
+    </CreateCommunityProvider>
   )
 }
 

@@ -7,4 +7,5 @@ interface StepItem {
 
 export interface FormStepsProps {
   steps: StepItem[]
+  finishPage: ReactNode
 }
