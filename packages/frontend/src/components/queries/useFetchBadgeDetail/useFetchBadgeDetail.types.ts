@@ -3,6 +3,7 @@
 import { Community, EngageScore, Price, Quest, Quests, User } from '@components/queries/common'
 
 export interface FetchBadgeDetailParams {
+  communityId: number
   badgeId: number
 }
 
@@ -16,7 +17,7 @@ export interface FetchBadgeDetailResponse {
   isDefault: boolean
   address: string
   holderList: User[]
-  requiredQuests: Quest[]
+  requiredQuests: Quests[]
   requiredEngageScore: EngageScore
   requiredPrice: Price
 }

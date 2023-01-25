@@ -208,35 +208,42 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
 }
 
 export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
-  id: 0,
-  // schemaHash: '0x34723d5f238357',
-  title: 'Join a Hackathon',
-  engageScore: {
-    number: 400,
-    unit: 'LPD',
+  quest: {
+    id: 0,
+    // schemaHash: '0x34723d5f238357',
+    name: 'Join a Hackathon',
+    engageScore: {
+      number: 400,
+      unit: 'LPD',
+    },
+    description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
   },
+
   condition: {
     type: QuestType.discord,
     conditionDetail: { guildId: 0, roleId: 0 },
   },
-  description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
   // status: Status.accepted,
 }
 
 export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
-  id: 0,
-  // schemaHash: '0x34723d5f238357',
-  title: 'Join a Hackathon',
-  engageScore: {
-    number: 400,
-    unit: 'LPD',
+  quest: {
+    id: 0,
+    // schemaHash: '0x34723d5f238357',
+    name: 'Join a Hackathon',
+    engageScore: {
+      number: 400,
+      unit: 'LPD',
+    },
+    description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
   },
+
   condition: {
     type: QuestType.discord,
     conditionDetail: { guildId: 0, roleId: 0 },
   },
-  description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
-  message: 'You did great',
+
+  // message: 'You did great',
   // answer: 'Please do better',
   // status: Status.rejected,
 }
@@ -1019,31 +1026,50 @@ export const MOCK_BADGE: FetchBadgeDetailResponse = {
   ],
   requiredQuests: [
     {
-      id: 0,
-      name: 'join discord',
-      engageScore: {
-        number: 100,
-        unit: 'LPD',
-      },
-      description: 'agwegwegewgwegewwegwegewgew',
+      questType: QuestType.discord,
+      questList: [
+        {
+          id: 0,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+        {
+          id: 1,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+      ],
     },
     {
-      id: 1,
-      name: 'join discord',
-      engageScore: {
-        number: 100,
-        unit: 'LPD',
-      },
-      description: 'agwegwegewgwegewwegwegewgew',
-    },
-    {
-      id: 2,
-      name: 'join discord',
-      engageScore: {
-        number: 100,
-        unit: 'LPD',
-      },
-      description: 'agwegwegewgwegewwegwegewgew',
+      questType: QuestType.discord,
+      questList: [
+        {
+          id: 0,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+        {
+          id: 1,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+      ],
     },
   ],
 }

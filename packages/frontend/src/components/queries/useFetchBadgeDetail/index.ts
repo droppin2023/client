@@ -32,7 +32,7 @@ const normalizeData = (data: FetchBadgeDetailResponse | undefined): FetchBadgeDe
     },
     holderList: data?.holderList || [
       {
-        id: 0,
+        username: '',
         address: '',
         image: '',
         name: '',
@@ -47,11 +47,11 @@ const normalizeData = (data: FetchBadgeDetailResponse | undefined): FetchBadgeDe
           {
             id: 0,
             name: '',
+            description: '',
             engageScore: {
               number: 0,
               unit: '',
             },
-            status: Status.noStatus,
           },
         ],
       },
