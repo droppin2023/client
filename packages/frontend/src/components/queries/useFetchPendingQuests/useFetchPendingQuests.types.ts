@@ -4,7 +4,7 @@ import { User, Quest } from '@components/queries/common'
 
 export interface FetchPendingQuestsParams {
   groupId: number
-  adminId: number
+  username: string
 }
 
 export interface FetchPendingQuestsResponse {

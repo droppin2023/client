@@ -54,7 +54,7 @@ export interface Quest {
   engageScore: EngageScore
   // schemaHash: string
   // condition: Condition
-  // description: string
+  description: string
   // status: Status
 }
 

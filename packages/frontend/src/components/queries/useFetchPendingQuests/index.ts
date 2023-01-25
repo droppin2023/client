@@ -21,17 +21,9 @@ const normalizeData = (
         quest: {
           id: data?.pendingQuests[0].quest.id || 0,
           name: data?.pendingQuests[0].quest.name || '',
-          condition: data?.pendingQuests[0].quest.condition || {
-            type: QuestType.form,
-            conditionDetail: data?.pendingQuests[0].quest.condition.conditionDetail || {
-              guildId: 0,
-              roleId: 0,
-            },
-          },
+
           engageScore: data?.pendingQuests[0].quest.engageScore || { number: 0, unit: '' },
-          schemaHash: data?.pendingQuests[0].quest.schemaHash || '',
           description: data?.pendingQuests[0].quest.description || '',
-          status: Status.pending,
         },
         requestUser: {
           id: data?.pendingQuests[0].requestUser.id || 0,
@@ -46,7 +38,7 @@ const normalizeData = (
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ groupId, adminId }: FetchPendingQuestsParams) => {
+const useFetchQuestDetail = ({ groupId, username }: FetchPendingQuestsParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchPendingQuestsResponse>(
     normalizeData(undefined) as FetchPendingQuestsResponse,
@@ -57,13 +49,16 @@ const useFetchQuestDetail = ({ groupId, adminId }: FetchPendingQuestsParams) => 
     setIsLoading(true)
 
     axios
-      .get<FetchPendingQuestsResponse>(`${GET_COMMUNITY}/?groupId=${groupId}&adminId=${adminId}`, {
-        headers: {
-          'Content-Type': '*/*',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      .get<FetchPendingQuestsResponse>(
+        `${GET_COMMUNITY}/?groupId=${groupId}&username=${username}`,
+        {
+          headers: {
+            'Content-Type': '*/*',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          },
         },
-      })
+      )
       .then((data) => {
         setData(data.data)
       })

@@ -1,7 +1,5 @@
-import { QuestStatus } from '@types/quest'
 import type { StaticImageData } from 'next/image'
 
-// TODO: change all any type with proper definitions
 export interface DaoPendingRequestsProps {
   requests: any
 }
@@ -10,6 +8,11 @@ export interface PendingRequestsTableRow {
   name: string
   img: StaticImageData
   questName: string
-  questReward: string
-  questStatus: QuestStatus
+  // TODO: engageScore why type error?
+  engageScore: any
+  item: any
+}
+export interface EngageScore {
+  number: number
+  unit: string
 }

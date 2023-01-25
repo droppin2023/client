@@ -497,40 +497,49 @@ export const MOCK_USER_LIST = [
 
 export const MOCK_PENDING_REQUESTS = [
   {
-    user: {
-      name: 'John',
-      img: mockAvatar1,
-    },
     quest: {
-      name: 'Join the discord server',
-      type: 'Discord',
-      reward: 500,
+      id: 1,
+      name: 'Join Discord',
+      engageScore: { number: 200, unit: 'LPD' },
+      description: 'Join Discord Discord Discord',
     },
-    status: 'Pending',
+    requestUser: {
+      username: 'rkdud007',
+      address: '0xaeggawegwegwegwgw',
+      image: mockAvatar1,
+      name: 'Pia',
+    },
+    requestAnswer: 'hey please let me in',
   },
   {
-    user: {
-      name: 'John',
-      img: mockAvatar1,
-    },
     quest: {
-      name: 'Join the discord server',
-      type: 'Discord',
-      reward: 500,
+      id: 2,
+      name: 'Join Discord',
+      engageScore: { number: 200, unit: 'LPD' },
+      description: 'Join Discord Discord Discord',
     },
-    status: 'Pending',
+    requestUser: {
+      username: 'rkdud007',
+      address: '0xaeggawegwegwegwgw',
+      image: mockAvatar1,
+      name: 'Pia',
+    },
+    requestAnswer: 'hey please let me in',
   },
   {
-    user: {
-      name: 'John',
-      img: mockAvatar1,
-    },
     quest: {
-      name: 'Join the discord server',
-      type: 'Discord',
-      reward: 500,
+      id: 2,
+      name: 'Join Discord',
+      engageScore: { number: 200, unit: 'LPD' },
+      description: 'Join Discord Discord Discord',
     },
-    status: 'Pending',
+    requestUser: {
+      username: 'rkdud007',
+      address: '0xaeggawegwegwegwgw',
+      image: mockAvatar1,
+      name: 'Pia',
+    },
+    requestAnswer: 'hey please let me in',
   },
 ]
 
