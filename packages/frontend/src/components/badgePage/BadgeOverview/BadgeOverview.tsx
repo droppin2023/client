@@ -49,7 +49,7 @@ const BadgeOverview = ({
             justifyContent="center"
           >
             <Image src={logo} alt={name} width={200} height={200} css={[sty.badgeImage]} />
-            <VStack alignItems={'flex-start'}>
+            <VStack alignSelf="start" marginLeft={10}>
               <Flex alignItems={'center'} justifyContent="space-between" width="100%" flex={1}>
                 <HStack spacing={5}>
                   <Text fontSize="4xl" lineHeight={1.2} as="b">

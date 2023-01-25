@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
+import { Box, Button, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
 
 import DaoBadgesSection from '@components/daoPage/DaoBadgesSection'
 import DaoMembersSection from '@components/daoPage/DaoMembersSection'
@@ -14,6 +14,7 @@ import 'twin.macro'
 // TODO: integrate real data
 import { QuestType } from '@components/queries/common'
 import { MOCK_PENDING_REQUESTS, ONE_COMMUNITY } from '@mockData'
+import Link from 'next/link'
 
 const DaoPage = ({ id }: { id: number }) => {
   const mockDao = ONE_COMMUNITY
@@ -64,16 +65,9 @@ const DaoPage = ({ id }: { id: number }) => {
                 Members
               </Tab>
               {isAdmin && (
-                <Tab
-                  fontWeight={'bold'}
-                  _selected={{
-                    color: primary,
-                    fontWeight: 'bold',
-                    borderBottom: `3px solid ${primary}`,
-                  }}
-                >
-                  Pending Quests
-                </Tab>
+                <Button fontWeight={'bold'}>
+                  <Link href={`/community/${id}/pending`}>Pending Quests</Link>
+                </Button>
               )}
             </TabList>
 
@@ -92,11 +86,11 @@ const DaoPage = ({ id }: { id: number }) => {
               <TabPanel>
                 <DaoMembersSection members={mockDao.members} />
               </TabPanel>
-              {isAdmin && (
+              {/* {isAdmin && (
                 <TabPanel>
                   <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
                 </TabPanel>
-              )}
+              )} */}
             </TabPanels>
           </Tabs>
         </Box>
