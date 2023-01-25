@@ -12,7 +12,7 @@ import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/
 import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
-  id: 0,
+  username: 'rick',
   name: 'Rick Zhang',
   description:
     "Hey there! I'm Rick. I'm a pretty chill dude who likes to stay busy with a few different things. I'm a big reader, always down for a good book, but I also love getting out and playing some basketball. When I'm not doing either of those things, you can probably find me coding away on some new web project. I like to stay active and keep my mind sharp, that's why I like to do a bit of everything.",
@@ -114,17 +114,19 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   ],
   userQuests: [
     {
-      status: Status.noStatus,
+      status: Status.accepted,
       quests: [
         {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 2,
           name: 'Verify on Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -135,11 +137,13 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Join Hackathon',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Join our live gathering',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -150,16 +154,19 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Join 5 Hackathons',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 3,
           name: 'Join 10 Hackathons',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Refer a member to our DAO',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -170,26 +177,30 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Register on our web',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Join our online event',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
     {
-      status: Status.claimed,
+      status: Status.accepted,
       quests: [
         {
           id: 3,
           name: 'Activate your account',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Verify your discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -209,7 +220,7 @@ export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
     conditionDetail: { guildId: 0, roleId: 0 },
   },
   description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
-  status: Status.noStatus,
+  status: Status.accepted,
 }
 
 export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
@@ -240,7 +251,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
   },
   description: 'Lepak DAO Lepak DAOLepak DAO',
   owner: {
-    id: 1,
+    username: 'rkdud007',
     address: '0xaegewgwewgeew',
     image: 'https://picsum.photos/300',
     name: 'Via',
@@ -265,11 +276,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 2,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
       badges: [
@@ -316,11 +329,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 2,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
       badges: [
@@ -367,11 +382,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 2,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
       badges: [
@@ -446,11 +463,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 2,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -461,11 +480,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 3,
           name: 'Join Hackathon',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Win a prize',
           engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -978,19 +999,19 @@ export const MOCK_BADGE: FetchBadgeDetailResponse = {
   // },
   holderList: [
     {
-      id: 1,
+      username: 'rkrrrr',
       address: '0xagaewgwegwe',
       image: 'https://picsum.photos/300',
       name: 'pia',
     },
     {
-      id: 2,
+      username: 'rkrrrer',
       address: '0xagaewgwegwe',
       image: 'https://picsum.photos/300',
       name: 'pia',
     },
     {
-      id: 2,
+      username: 'r33krrrr',
       address: '0xagaewgwegwe',
       image: 'https://picsum.photos/300',
       name: 'pia',
@@ -1004,6 +1025,7 @@ export const MOCK_BADGE: FetchBadgeDetailResponse = {
         number: 100,
         unit: 'LPD',
       },
+      description: 'agwegwegewgwegewwegwegewgew',
     },
     {
       id: 1,
@@ -1012,6 +1034,7 @@ export const MOCK_BADGE: FetchBadgeDetailResponse = {
         number: 100,
         unit: 'LPD',
       },
+      description: 'agwegwegewgwegewwegwegewgew',
     },
     {
       id: 2,
@@ -1020,6 +1043,7 @@ export const MOCK_BADGE: FetchBadgeDetailResponse = {
         number: 100,
         unit: 'LPD',
       },
+      description: 'agwegwegewgwegewwegwegewgew',
     },
   ],
 }
