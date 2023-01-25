@@ -6,7 +6,13 @@ import { Button } from '@chakra-ui/react'
 
 import { danger, dangerHighlight, orange, orangeHighlight } from '@constants/colors'
 
+import ProfileDropdown from './components/ProfileDropdown'
+
 const DroppinConnectButton = () => {
+  const handleClickProfile = (openAccountModal: () => void) => {
+    // openAccountModal()
+  }
+
   return (
     <ConnectButton.Custom>
       {({
@@ -98,10 +104,12 @@ const DroppinConnectButton = () => {
                     {chain.name}
                   </Button>
 
-                  <Button onClick={openAccountModal} type="button">
-                    {account.displayName}
-                    {account.displayBalance ? ` (${account.displayBalance})` : ''}
-                  </Button>
+                  <ProfileDropdown
+                    openAccountModal={openAccountModal}
+                    walletAddress={account.displayName}
+                  >
+                    <Image src={account.ensAvatar as string} alt="Wallet avatar" />
+                  </ProfileDropdown>
                 </div>
               )
             })()}

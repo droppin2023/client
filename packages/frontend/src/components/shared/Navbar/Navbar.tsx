@@ -32,7 +32,6 @@ const Navbar = () => {
 
       <Flex justifyContent={'flex-end'} gap="32px" alignItems="center" width="35%">
         <Button variant="ghost">Explore</Button>
-        <Button variant="ghost">Create</Button>
         <DroppinConnectButton />
       </Flex>
     </Flex>
