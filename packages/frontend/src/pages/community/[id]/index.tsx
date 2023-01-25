@@ -11,14 +11,13 @@ import { DaoPageProvider } from '@context/DaoPageContext'
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
-// TODO: integrate real data
 import { QuestType } from '@components/queries/common'
-import { MOCK_PENDING_REQUESTS, ONE_COMMUNITY } from '@mockData'
+import { ONE_COMMUNITY } from '@mockData'
 import Link from 'next/link'
 
 const DaoPage = ({ id }: { id: number }) => {
+  // TODO: integrate real data
   const mockDao = ONE_COMMUNITY
-
   // TODO: this is a temporary flag, real flag would be calculated with context api and back end data
   const isAdmin = true
 
@@ -39,6 +38,8 @@ const DaoPage = ({ id }: { id: number }) => {
           badges={mockDao.badges}
           owner={mockDao.owner}
           website={mockDao.link}
+          discordLink={mockDao.discord?.link}
+          discordGuildId={mockDao.discord?.guildId}
         />
 
         <Box width="80%" minHeight="512px">

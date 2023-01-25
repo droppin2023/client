@@ -11,7 +11,8 @@ export interface DaoOverviewProps {
   repScore: number
   chain: string
   website?: string
-  discord?: string
+  discordLink?: string
+  discordGuildId?: number
   description: string
   badges: Badge[]
   owner: User
