@@ -55,7 +55,7 @@ export interface Quest {
   // schemaHash: string
   // condition: Condition
   // description: string
-  status: Status
+  // status: Status
 }
 
 export enum QuestType {

@@ -7,6 +7,7 @@ export interface CreateQuestParams {
   schemaHash: string
   condition: Condition
   detail: string
+  name: string
 }
 export interface onChainQuest {
   name: string

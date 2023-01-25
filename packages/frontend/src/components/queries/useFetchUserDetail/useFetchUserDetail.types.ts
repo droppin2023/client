@@ -3,7 +3,7 @@
 import { Badge, Community, EngageScore, Status, Quest } from '@components/queries/common'
 
 export interface FetchUserDetailParams {
-  userId: number
+  username: string
 }
 
 export interface FetchUserDetailResponse {

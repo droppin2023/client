@@ -65,12 +65,15 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
     ],
     userQuests: data?.userQuests || [
       {
-        status: Status.noStatus,
+        status: Status.accepted,
         quests: [
           {
             id: 0,
             name: '',
-            engageScore: 0,
+            engageScore: {
+              number: 0,
+              unit: 'LPD',
+            },
           },
         ],
       },
@@ -79,7 +82,7 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchUserDetail = ({ userId }: FetchUserDetailParams) => {
+const useFetchUserDetail = ({ username }: FetchUserDetailParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchUserDetailResponse>(
     normalizeData(undefined) as FetchUserDetailResponse,
@@ -90,7 +93,7 @@ const useFetchUserDetail = ({ userId }: FetchUserDetailParams) => {
     setIsLoading(true)
 
     axios
-      .get<FetchUserDetailResponse>(`${GET_COMMUNITY}/?id=${userId}`, {
+      .get<FetchUserDetailResponse>(`${GET_COMMUNITY}/?username=${username}`, {
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',
