@@ -37,6 +37,15 @@ export interface Badge {
   logo: string
   name: string
   description: string
+  // isClaimed: boolean
+  groupId: number
+  groupName: string
+}
+export interface UserBadge {
+  id: number
+  logo: string
+  name: string
+  description: string
   isClaimed: boolean
   groupId: number
   groupName: string

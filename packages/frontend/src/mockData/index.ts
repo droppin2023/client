@@ -24,7 +24,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'NewBie',
       description: 'todo',
-      isClaimed: false,
+
       groupId: 0,
       groupName: 'todo',
     },
@@ -33,7 +33,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Novice',
       description: 'todo',
-      isClaimed: false,
+
       groupId: 0,
       groupName: 'todo',
     },
@@ -42,7 +42,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
-      isClaimed: false,
+
       groupId: 0,
       groupName: 'todo',
     },
@@ -51,7 +51,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
-      isClaimed: false,
+
       groupId: 0,
       groupName: 'todo',
     },
@@ -70,7 +70,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'NewBie',
           description: 'todo',
-          isClaimed: false,
+          isClaimed: true,
           groupId: 0,
           groupName: 'todo',
         },
@@ -79,7 +79,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Novice',
           description: 'todo',
-          isClaimed: false,
+          isClaimed: true,
           groupId: 0,
           groupName: 'todo',
         },
@@ -291,7 +291,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -300,7 +300,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -309,7 +309,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -344,7 +344,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -353,7 +353,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -362,7 +362,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -397,7 +397,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -406,7 +406,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -415,7 +415,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-          isClaimed: false,
+
           groupId: 0,
           groupName: 'todo',
         },
@@ -432,7 +432,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-      isClaimed: false,
+
       groupId: 0,
       groupName: 'todo',
     },
@@ -441,7 +441,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-      isClaimed: false,
+
       groupId: 0,
       groupName: 'todo',
     },
@@ -450,7 +450,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-      isClaimed: false,
+
       groupId: 0,
       groupName: 'todo',
     },
@@ -1100,7 +1100,7 @@ export const MOCK_USER = {
           id: 2,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie3',
-          isClaimed: false,
+          isClaimed: true,
         },
       ],
     },
