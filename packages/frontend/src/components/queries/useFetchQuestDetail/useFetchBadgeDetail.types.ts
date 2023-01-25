@@ -5,17 +5,16 @@ import { Condition, EngageScore, Status } from '@components/queries/common'
 export interface FetchQuestDetailParams {
   groupId: number
   questId: number
-  userId: number
 }
 
 export interface FetchQuestDetailResponse {
   id: number
-  schemaHash: string
+  // schemaHash: string
   title: string
   engageScore: EngageScore
   condition: Condition
   description: string
-  status: Status
+  // status: Status
   message?: string
-  answer?: string
+  // answer?: string
 }

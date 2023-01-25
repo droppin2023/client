@@ -19,7 +19,6 @@ const normalizeData = (
         quest: {
           id: data?.pendingQuests[0].quest.id || 0,
           name: data?.pendingQuests[0].quest.name || '',
-
           engageScore: data?.pendingQuests[0].quest.engageScore || { number: 0, unit: '' },
           description: data?.pendingQuests[0].quest.description || '',
         },
@@ -36,7 +35,7 @@ const normalizeData = (
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ groupId, username }: FetchPendingQuestsParams) => {
+const useFetchPendingQuests = ({ groupId, username }: FetchPendingQuestsParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchPendingQuestsResponse>(
     normalizeData(undefined) as FetchPendingQuestsResponse,
@@ -67,4 +66,4 @@ const useFetchQuestDetail = ({ groupId, username }: FetchPendingQuestsParams) =>
   return { data: normalizeData(data), isLoading, error }
 }
 
-export default useFetchQuestDetail
+export default useFetchPendingQuests

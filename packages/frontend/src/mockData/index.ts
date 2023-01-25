@@ -209,7 +209,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
 
 export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
   id: 0,
-  schemaHash: '0x34723d5f238357',
+  // schemaHash: '0x34723d5f238357',
   title: 'Join a Hackathon',
   engageScore: {
     number: 400,
@@ -220,12 +220,12 @@ export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
     conditionDetail: { guildId: 0, roleId: 0 },
   },
   description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
-  status: Status.accepted,
+  // status: Status.accepted,
 }
 
 export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
   id: 0,
-  schemaHash: '0x34723d5f238357',
+  // schemaHash: '0x34723d5f238357',
   title: 'Join a Hackathon',
   engageScore: {
     number: 400,
@@ -237,8 +237,8 @@ export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
   },
   description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
   message: 'You did great',
-  answer: 'Please do better',
-  status: Status.rejected,
+  // answer: 'Please do better',
+  // status: Status.rejected,
 }
 
 export const ONE_COMMUNITY: FetchCommunityDetailResponse = {

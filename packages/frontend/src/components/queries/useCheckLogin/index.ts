@@ -15,7 +15,7 @@ const normalizeData = (data: CheckLoginResponse | undefined): CheckLoginResponse
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ address }: CheckLoginParams) => {
+const useCheckLogin = ({ address }: CheckLoginParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<CheckLoginResponse>(
     normalizeData(undefined) as CheckLoginResponse,
@@ -43,4 +43,4 @@ const useFetchQuestDetail = ({ address }: CheckLoginParams) => {
   return { data: normalizeData(data), isLoading, error }
 }
 
-export default useFetchQuestDetail
+export default useCheckLogin

@@ -14,20 +14,20 @@ const normalizeData = (data: FetchQuestDetailResponse | undefined): FetchQuestDe
     id: data?.id || 0,
     description: data?.description || '',
     title: data?.title || '',
-    schemaHash: data?.schemaHash || '',
+    // schemaHash: data?.schemaHash || '',
     condition: data?.condition || {
       type: QuestType.form,
       conditionDetail: data?.condition?.conditionDetail || { guildId: 0, roleId: 0 },
     },
     engageScore: data?.engageScore || { number: 0, unit: '' },
-    status: data?.status || Status.noStatus,
+    // status: data?.status || Status.accepted,
     message: data?.message || undefined,
-    answer: data?.answer || undefined,
+    // answer: data?.answer || undefined,
   }
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ groupId, questId, userId }: FetchQuestDetailParams) => {
+const useFetchQuestDetail = ({ groupId, questId }: FetchQuestDetailParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchQuestDetailResponse>(
     normalizeData(undefined) as FetchQuestDetailResponse,
@@ -38,16 +38,13 @@ const useFetchQuestDetail = ({ groupId, questId, userId }: FetchQuestDetailParam
     setIsLoading(true)
 
     axios
-      .get<FetchQuestDetailResponse>(
-        `${GET_COMMUNITY}/?groupId=${groupId}&questId=${questId}&userId=${userId}`,
-        {
-          headers: {
-            'Content-Type': '*/*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          },
+      .get<FetchQuestDetailResponse>(`${GET_COMMUNITY}/?groupId=${groupId}&questId=${questId}`, {
+        headers: {
+          'Content-Type': '*/*',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         },
-      )
+      })
       .then((data) => {
         setData(data.data)
       })
