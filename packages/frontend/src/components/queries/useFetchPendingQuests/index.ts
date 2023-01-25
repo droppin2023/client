@@ -8,8 +8,6 @@ import type {
   FetchPendingQuestsResponse,
 } from './useFetchPendingQuests.types'
 import { GET_COMMUNITY } from './userFetchPendingQuests.constants'
-import { stringify } from 'querystring'
-import { QuestType, Status } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (
@@ -26,7 +24,7 @@ const normalizeData = (
           description: data?.pendingQuests[0].quest.description || '',
         },
         requestUser: {
-          id: data?.pendingQuests[0].requestUser.id || 0,
+          username: data?.pendingQuests[0].requestUser.username || '',
           address: data?.pendingQuests[0].requestUser.address || '',
           image: data?.pendingQuests[0].requestUser.image || '',
           name: data?.pendingQuests[0].requestUser.name || '',
