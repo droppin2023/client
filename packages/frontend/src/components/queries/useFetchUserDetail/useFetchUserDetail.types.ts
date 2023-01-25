@@ -7,7 +7,7 @@ export interface FetchUserDetailParams {
 }
 
 export interface FetchUserDetailResponse {
-  id: number
+  username: string
   name: string
   description: string
   image: string

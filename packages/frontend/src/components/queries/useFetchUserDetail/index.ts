@@ -11,7 +11,7 @@ import { Status } from '../common'
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDetailResponse => {
   return {
-    id: data?.id || 0,
+    username: data?.username || '',
     description: data?.description || '',
     name: data?.name || '',
     image: data?.image || '',
@@ -48,7 +48,6 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
         ],
       },
     ],
-
     engageScoresAndCommunity: data?.engageScoresAndCommunity || [
       {
         engageScore: {
