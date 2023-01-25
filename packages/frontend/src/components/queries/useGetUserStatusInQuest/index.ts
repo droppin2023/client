@@ -22,6 +22,15 @@ const normalizeData = (
       image: '',
       name: '',
     },
+    quest: data?.quest || {
+      id: 0,
+      name: '',
+      engageScore: {
+        number: 0,
+        unit: '',
+      },
+      description: '',
+    },
     userSubmission: data?.userSubmission || '',
     communityMessage: data?.communityMessage || '',
   }

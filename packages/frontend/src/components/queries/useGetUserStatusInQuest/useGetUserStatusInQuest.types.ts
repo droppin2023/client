@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { Community, Status } from '../common'
+import { Community, Quest, Status } from '../common'
 
 export interface GetUserStatusQuestParams {
   communityId: number
@@ -10,6 +10,7 @@ export interface GetUserStatusQuestParams {
 
 export interface GetUserStatusQuestResponse {
   status: Status
+  quest: Quest
   community: Community
   userSubmission: string
   communityMessage: string

@@ -11,18 +11,19 @@ import { QuestType, Status } from '../common'
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchQuestDetailResponse | undefined): FetchQuestDetailResponse => {
   return {
-    id: data?.id || 0,
-    description: data?.description || '',
-    title: data?.title || '',
-    // schemaHash: data?.schemaHash || '',
+    quest: data?.quest || {
+      id: 0,
+      name: '',
+      engageScore: {
+        number: 0,
+        unit: '',
+      },
+      description: '',
+    },
     condition: data?.condition || {
       type: QuestType.form,
       conditionDetail: data?.condition?.conditionDetail || { guildId: 0, roleId: 0 },
     },
-    engageScore: data?.engageScore || { number: 0, unit: '' },
-    // status: data?.status || Status.accepted,
-    message: data?.message || undefined,
-    // answer: data?.answer || undefined,
   }
 }
 
