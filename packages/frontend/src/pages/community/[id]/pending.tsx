@@ -56,7 +56,7 @@ const DaoPage = ({ id }: { id: number }) => {
             </Tab>{' '}
           </Tabs>
 
-          <DaoMembersSection members={mockDao.members} />
+          <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
         </Box>
       </DaoPageProvider>
     </VStack>
