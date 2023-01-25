@@ -37,6 +37,31 @@ const normalizeData = (
         address: '',
         image: '',
         name: '',
+        engageScore: {
+          number: 0,
+          unit: 'LPD',
+        },
+        quests: [
+          {
+            id: 0,
+            name: '',
+            engageScore: {
+              number: 0,
+              unit: 'LPD',
+            },
+          },
+        ],
+        badges: [
+          {
+            id: 0,
+            logo: '',
+            name: '',
+            description: '',
+            groupId: 0,
+            isClaimed: false,
+            groupName: 'Lepak DAO',
+          },
+        ],
       },
     ],
     totalMember: data?.totalMember || 0,
