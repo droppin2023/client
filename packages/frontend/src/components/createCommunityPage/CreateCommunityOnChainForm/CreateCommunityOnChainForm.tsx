@@ -17,7 +17,7 @@ import {
 import QuestBadge from '@components/shared/QuestBadge'
 import SectionHeader from '@components/shared/SectionHeader'
 import { NETWORKS } from '@constants/categories'
-import { primary, primaryHighlight, secondary } from '@constants/colors'
+import { background2, primary, primaryHighlight, secondary } from '@constants/colors'
 import { useRef, useState } from 'react'
 import { FormStepCommonProps } from '../types'
 
@@ -116,7 +116,7 @@ const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => 
         onClose={() => setIsConfirmationOpen(false)}
       >
         <AlertDialogOverlay>
-          <AlertDialogContent>
+          <AlertDialogContent bg={background2}>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Comfirm submission
             </AlertDialogHeader>
