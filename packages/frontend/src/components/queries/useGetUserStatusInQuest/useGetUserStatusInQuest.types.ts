@@ -12,6 +12,6 @@ export interface GetUserStatusQuestResponse {
   status: Status
   quest: Quest
   community: Community
-  userSubmission: string
-  communityMessage: string
+  userSubmission?: string
+  communityMessage?: string
 }
