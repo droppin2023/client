@@ -10,6 +10,7 @@ import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommun
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
 import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
+import { GetUserStatusQuestResponse } from '@components/queries/useGetUserStatusInQuest/useGetUserStatusInQuest.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   username: 'rick',
@@ -24,7 +25,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'NewBie',
       description: 'todo',
-
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -33,7 +34,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Novice',
       description: 'todo',
-
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -42,7 +43,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
-
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -51,7 +52,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
-
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -70,18 +71,18 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'NewBie',
           description: 'todo',
-          isClaimed: true,
           groupId: 0,
           groupName: 'todo',
+          address: '0xagewwgawegwgwgwegwea',
         },
         {
           id: 1,
           logo: 'https://picsum.photos/300',
           name: 'Novice',
           description: 'todo',
-          isClaimed: true,
           groupId: 0,
           groupName: 'todo',
+          address: '0xagewwgawegwgwgwegwea',
         },
       ],
     },
@@ -187,43 +188,24 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
         },
       ],
     },
-    {
-      status: Status.accepted,
-      quests: [
-        {
-          id: 3,
-          name: 'Activate your account',
-          engageScore: { number: 72673, unit: 'LPD' },
-          description: 'agwegwegewgwegewwegwegewgew',
-        },
-        {
-          id: 4,
-          name: 'Verify your discord',
-          engageScore: { number: 72673, unit: 'LPD' },
-          description: 'agwegwegewgwegewwegwegewgew',
-        },
-      ],
-    },
+    // {
+    //   status: Status.accepted,
+    //   quests: [
+    //     {
+    //       id: 3,
+    //       name: 'Activate your account',
+    //       engageScore: { number: 72673, unit: 'LPD' },
+    //       description: 'agwegwegewgwegewwegwegewgew',
+    //     },
+    //     {
+    //       id: 4,
+    //       name: 'Verify your discord',
+    //       engageScore: { number: 72673, unit: 'LPD' },
+    //       description: 'agwegwegewgwegewwegwegewgew',
+    //     },
+    //   ],
+    // },
   ],
-}
-
-export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
-  quest: {
-    id: 0,
-    // schemaHash: '0x34723d5f238357',
-    name: 'Join a Hackathon',
-    engageScore: {
-      number: 400,
-      unit: 'LPD',
-    },
-    description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
-  },
-
-  condition: {
-    type: QuestType.discord,
-    conditionDetail: { guildId: 0, roleId: 0 },
-  },
-  // status: Status.accepted,
 }
 
 export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
@@ -298,7 +280,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -307,7 +289,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -316,7 +298,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -351,7 +333,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -360,7 +342,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -369,7 +351,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -404,7 +386,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -413,7 +395,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -422,7 +404,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'Newbie',
           description: 'Newbie is Newbie',
-
+          address: '0xagewwgawegwgwgwegwea',
           groupId: 0,
           groupName: 'todo',
         },
@@ -439,7 +421,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -448,7 +430,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -457,7 +439,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -965,7 +947,6 @@ export const MOCK_BADGE_LIST = [
 ]
 
 export const MOCK_CLAIMED_BADGE: FetchClaimedBadgeResponse = {
-  isClaimed: true,
   address: '0xawgaweewagewagwe',
   tokenId: 2,
   tokenStandard: 'ERC-20',
@@ -1103,13 +1084,11 @@ export const MOCK_USER = {
           id: 1,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie',
-          isClaimed: true,
         },
         {
           id: 2,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie2',
-          isClaimed: true,
         },
       ],
     },
@@ -1120,13 +1099,11 @@ export const MOCK_USER = {
           id: 1,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie4',
-          isClaimed: true,
         },
         {
           id: 2,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie3',
-          isClaimed: true,
         },
       ],
     },
@@ -1157,4 +1134,44 @@ export const MOCK_USER = {
       },
     },
   ],
+}
+
+export const MOCK_QUEST_STATUS: GetUserStatusQuestResponse = {
+  status: Status.pending,
+  community: {
+    id: 1,
+    address: '2523523252362362',
+    image: 'https://picsum.photos/300',
+    name: 'Lepak DAO',
+  },
+  quest: {
+    id: 0,
+    name: 'Join Discord',
+    engageScore: {
+      number: 1000,
+      unit: 'LPD',
+    },
+    description: '',
+  },
+  userSubmission: 'Hi i submit this',
+  communityMessage: 'Hi you are rejected',
+}
+
+export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
+  quest: {
+    id: 0,
+    // schemaHash: '0x34723d5f238357',
+    name: 'Join a Hackathon',
+    engageScore: {
+      number: 400,
+      unit: 'LPD',
+    },
+    description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
+  },
+
+  condition: {
+    type: QuestType.discord,
+    conditionDetail: { guildId: 0, roleId: 0 },
+  },
+  // status: Status.accepted,
 }

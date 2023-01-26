@@ -1,10 +1,6 @@
-import type { QuestType, Status } from '@components/queries/common'
+import type { Quest, QuestType } from '@components/queries/common'
 
 export interface QuestCardProps {
-  name: string
-  reward: number
-  id: number
+  quest: Quest
   questType: QuestType
-  repUnit: string
-  status?: Status
 }

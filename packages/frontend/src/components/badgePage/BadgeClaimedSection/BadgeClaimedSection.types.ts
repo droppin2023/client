@@ -1,7 +1,7 @@
 export interface BadgeClaimedSectionProps {
   address: string
   claimedBadge: {
-    isClaimed: boolean
+    // isClaimed: boolean
     address: string
     tokenId: number
     tokenStandard: string

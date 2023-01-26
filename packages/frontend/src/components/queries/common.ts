@@ -40,15 +40,7 @@ export interface Badge {
   // isClaimed: boolean
   groupId: number
   groupName: string
-}
-export interface UserBadge {
-  id: number
-  logo: string
-  name: string
-  description: string
-  isClaimed: boolean
-  groupId: number
-  groupName: string
+  address: string
 }
 
 // QUEST
@@ -102,6 +94,7 @@ export enum Category {
 }
 
 export enum Status {
+  noStatus = 'No Status',
   pending = 'Pending',
   accepted = 'Accepted',
   rejected = 'Rejected',

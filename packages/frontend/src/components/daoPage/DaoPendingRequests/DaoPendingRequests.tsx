@@ -18,7 +18,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
   const [isShowReviewModal, setIsShowReviewModal] = useState(false)
   const [reviewContent, setReviewContent] = useState({})
 
-  const onClick = (item: any) => {
+  const handleClick = (item: any) => {
     setReviewContent(item)
     setIsShowReviewModal(true)
   }
@@ -31,7 +31,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
         backgroundColor={background2}
         width="100%"
         cursor="pointer"
-        onClick={async () => await onClick(item)}
+        onClick={async () => await handleClick(item)}
       >
         <Tr display="flex" justifyContent={'space-between'}>
           <Td>
