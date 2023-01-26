@@ -31,6 +31,7 @@ import { useRef, useState } from 'react'
 import { FormStepCommonProps } from '../types'
 
 import { QuestType } from '@components/queries/common'
+import BadgeForm from '@components/shared/BadgeForm'
 import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
 import QuestCard from '@components/shared/QuestCard'
 import QuestForm from '@components/shared/QuestForm'
@@ -39,10 +40,16 @@ import * as globalSty from '@styles'
 
 const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => {
   const { repUnit, setRepUnit, questsDiscord, questsForm } = useCreateCommunityContext()
+
   const [isQuestFormOpen, setIsQuestFormOpen] = useState(false)
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
+  const [isCreateBadgeOpen, setIsCreateBadgeOpen] = useState(false)
 
   const confirmationCancelRef = useRef<HTMLButtonElement>()
+
+  // TODO: handle get badge and put in this default value when default value is created
+  // const defaultBadge = ONE_COMMUNITY.badges[0]
+  const defaultBadge = null
 
   const handlePrev = () => {
     if (onPrev) onPrev()
@@ -72,7 +79,29 @@ const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => 
           <FormHelperText css={[globalSty.helperText]}>
             To join the community, member have to claim this badge
           </FormHelperText>
-          <QuestBadge name="NewBie" isLocked={false} />
+
+          {defaultBadge ? (
+            <QuestBadge name="NewBie" isLocked={false} />
+          ) : (
+            <Flex
+              bg={background2}
+              color={primary}
+              width="200px"
+              height="200px"
+              borderRadius="20px"
+              border={`2px dashed ${primary}`}
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              onClick={() => setIsCreateBadgeOpen(true)}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              <Text fontSize="6xl">+</Text>
+              <Text>Create badge</Text>
+            </Flex>
+          )}
         </FormControl>
 
         <FormControl mt={4}>
@@ -208,7 +237,21 @@ const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => 
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
-      <QuestForm isOpen={isQuestFormOpen} onClose={() => setIsQuestFormOpen(false)} />
+      <QuestForm groupId={1} isOpen={isQuestFormOpen} onClose={() => setIsQuestFormOpen(false)} />
+      <BadgeForm
+        repUnit="Engagement"
+        questsDiscord={{
+          questType: QuestType.discord,
+          questList: questsDiscord,
+        }}
+        questsSubmitForm={{
+          questType: QuestType.form,
+          questList: questsForm,
+        }}
+        groupId={1}
+        isOpen={isCreateBadgeOpen}
+        onClose={() => setIsCreateBadgeOpen(false)}
+      />
     </>
   )
 }

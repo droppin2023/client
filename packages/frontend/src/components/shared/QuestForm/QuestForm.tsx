@@ -54,6 +54,10 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
     setQuestTitle(e.target.value)
   }
 
+  const handleChangeQuestCondition = (e: ChangeEvent<HTMLSelectElement>) => {
+    setQuestCondition(parseInt(e.target.value) as QuestType)
+  }
+
   const handleChangeReward = (e: ChangeEvent<HTMLInputElement>) => {
     // TODO: add checks here
 
@@ -136,10 +140,7 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
 
           <FormControl mt={4}>
             <FormLabel>Quest Condition</FormLabel>
-            <Select
-              onChange={(e) => setQuestCondition(e.target.value as unknown as QuestType)}
-              variant="filled"
-            >
+            <Select onChange={handleChangeQuestCondition} variant="filled">
               {QUEST_CONDITION_OPTIONS.map((item, index) => (
                 <option value={item.value} key={index}>
                   {item.message}
