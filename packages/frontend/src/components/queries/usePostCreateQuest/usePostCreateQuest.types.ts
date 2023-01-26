@@ -4,7 +4,7 @@ import { Condition } from '../common'
 
 export interface CreateQuestParams {
   contract: onChainQuest
-  schemaHash: string
+  // schemaHash: string
   condition: Condition
   detail: string
   name: string

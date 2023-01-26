@@ -108,7 +108,11 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
           </HStack>
         </HStack>
       </VStack>
-      <QuestForm isOpen={isCreateQuestOpen} onClose={() => setIsCreateQuestOpen(false)} />
+      <QuestForm
+        groupId={id}
+        isOpen={isCreateQuestOpen}
+        onClose={() => setIsCreateQuestOpen(false)}
+      />
       <BadgeForm
         isOpen={isCreateBadgeOpen}
         onClose={() => setIsCreateBadgeOpen(false)}

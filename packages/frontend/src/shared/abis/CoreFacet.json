@@ -5,33 +5,94 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_id",
+        "name": "id",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "address",
-        "name": "_creator",
+        "name": "creator",
         "type": "address"
       }
     ],
-    "name": "groupCreated",
+    "name": "GroupCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "groupId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "engagePoints",
+            "type": "uint256"
+          }
+        ],
+        "indexed": false,
+        "internalType": "struct LibCoreFacet.QuestData",
+        "name": "questData",
+        "type": "tuple"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "QuestCreated",
     "type": "event"
   },
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_groupId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "name",
-        "type": "bytes32"
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "groupId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "engagePoints",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LibCoreFacet.QuestData",
+        "name": "_questData",
+        "type": "tuple"
       }
     ],
     "name": "addQuest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_questId",
+        "type": "uint256"
+      }
+    ],
+    "name": "completeQuest",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -72,7 +133,7 @@
             "type": "address"
           }
         ],
-        "internalType": "struct GroupData",
+        "internalType": "struct LibCoreFacet.GroupData",
         "name": "",
         "type": "tuple"
       }
@@ -101,11 +162,35 @@
             "internalType": "uint256",
             "name": "groupId",
             "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "engagePoints",
+            "type": "uint256"
           }
         ],
-        "internalType": "struct QuestData",
+        "internalType": "struct LibCoreFacet.QuestData",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_groupId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getUserEngagePoint",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

@@ -11,15 +11,17 @@ const usePostCreateQuest = () => {
 
   const createQuest = async (params: CreateQuestParams) => {
     setIsLoading(true)
-
+    setError(null)
     try {
+      console.log(coreContract, params, params.contract)
       const tsx = await coreContract?.addQuest(params.contract)
+      console.log(tsx)
       const transactionHash = await tsx.wait()
-      console.log({ transactionHash })
+      console.log({ transactionHash }, transactionHash.transactionHash)
       const { data, status } = await axios.post(CREATE_QUEST, {
-        transactionHash,
-        schemaHash: params.schemaHash,
-        condition: params.condition,
+        transactionHash: transactionHash.transactionHash,
+        // schemaHash: params.schemaHash,
+        condition: JSON.stringify(params.condition),
         detail: params.detail,
         name: params.contract.name,
       })

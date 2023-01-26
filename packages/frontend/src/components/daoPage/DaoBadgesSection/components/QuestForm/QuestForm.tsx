@@ -32,20 +32,23 @@ import DiscordIcon from '@components/icons/DiscordIcon'
 import { QuestType } from '@components/queries/common'
 import { QUEST_CONDITION_OPTIONS } from './QuestForm.constants'
 import type { QuestFormProps } from './QuestForm.types'
+import usePostCreateQuest from '@components/queries/usePostCreateQuest'
+import { formatBytes32String } from 'ethers/lib/utils.js'
 
-const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
-  const [schemaHash, setSchemaHash] = useState('')
+const NewQuestForm = ({ groupId, isOpen, onClose }: QuestFormProps) => {
+  // const [schemaHash, setSchemaHash] = useState('')
   const [questTitle, setQuestTitle] = useState('')
+  const [questDetail, setQuestDetail] = useState('')
   const [reward, setReward] = useState(0)
   const [questCondition, setQuestCondition] = useState<QuestType>(QuestType.form)
-
+  const { createQuest, isLoading, error } = usePostCreateQuest()
   const { repUnit } = useDaoPageContext()
 
-  const handleChangeSchemaHash = (e: ChangeEvent<HTMLInputElement>) => {
-    // TODO: add checks here
+  // const handleChangeSchemaHash = (e: ChangeEvent<HTMLInputElement>) => {
+  //   // TODO: add checks here
 
-    setSchemaHash(e.target.value)
-  }
+  //   setSchemaHash(e.target.value)
+  // }
 
   const handleChangeQuestTitle = (e: ChangeEvent<HTMLInputElement>) => {
     // TODO: add checks here
@@ -59,13 +62,34 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
     setReward(parseInt(e.target.value))
   }
 
-  const handleSubmit = () => {
+  const handleChangeDetail = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    // TODO: add checks here
+
+    setQuestDetail(e.target.value)
+  }
+
+  const handleSubmit = async () => {
+    const params = {
+      contract: {
+        name: formatBytes32String(questTitle),
+        groupId: groupId,
+        engagePoints: reward,
+      },
+      // TODO : Discord
+      condition: {
+        type: questCondition,
+      },
+      detail: questDetail,
+      name: questTitle,
+    }
+    const res = await createQuest(params)
     // TODO: add a POST operation to server
     console.log({
-      schemaHash,
+      // schemaHash,
       questTitle,
       reward,
       questCondition,
+      res,
     })
   }
 
@@ -76,7 +100,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
         <ModalHeader>Create New Quest</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
-          <FormControl>
+          {/* <FormControl>
             <FormLabel>Schema Hash</FormLabel>
             <Input
               onChange={handleChangeSchemaHash}
@@ -84,7 +108,7 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
               variant="filled"
               placeholder="Input your Schema Hash here"
             />
-          </FormControl>
+          </FormControl> */}
 
           <FormControl mt={4}>
             <FormLabel>Title</FormLabel>
@@ -138,6 +162,8 @@ const NewQuestForm = ({ isOpen, onClose }: QuestFormProps) => {
               <Textarea
                 variant="filled"
                 placeholder="Write some more detail about the quest here"
+                value={questDetail}
+                onChange={handleChangeDetail}
               />
             </FormControl>
           )}
