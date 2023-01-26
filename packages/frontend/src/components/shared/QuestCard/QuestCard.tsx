@@ -18,13 +18,16 @@ const QuestCard = ({ quest, questType }: QuestCardProps) => {
   const [isUserSideModalOpen, setIsUserSideModalOpen] = useState(false)
   // TODO : add real quest data from {quest.id, username}
   const userQuest = MOCK_QUEST_STATUS
+  const isLogin = false
+  // const userQuest = false
   // const questDetail = ONE_QUEST_DETAIL
-  const status = userQuest ? userQuest.status : Status.noStatus
+  const status = isLogin ? userQuest.status : Status.noStatus
   // TODO : isLogin
-  const isLogin = true
+
   const handleCardClick = () => {
     if (!isLogin) setIsDetailModalOpen(true)
     else setIsUserSideModalOpen(true)
+    console.log('wgweag')
   }
 
   return (
