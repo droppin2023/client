@@ -83,14 +83,12 @@ const NewQuestForm = ({ groupId, isOpen, onClose }: QuestFormProps) => {
       name: questTitle,
     }
     const res = await createQuest(params)
+    if (res.msg == 'success') {
+      //TODO:add confirm toaster
+      onClose()
+    }
     // TODO: add a POST operation to server
-    console.log({
-      // schemaHash,
-      questTitle,
-      reward,
-      questCondition,
-      res,
-    })
+    // TODO : Add loading modal
   }
 
   return (
