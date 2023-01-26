@@ -8,12 +8,12 @@ import Done from '@components/icons/Done'
 import QuestDetailModal from '@components/shared/QuestCard/components/QuestDetailModal'
 
 import { Status } from '@components/queries/common'
+import { MOCK_QUEST_STATUS } from '@mockData'
 import UserSideModal from './components/UserSideModal'
 import { COLOR_MAPPING } from './QuestCard.constants'
 import type { QuestCardProps } from './QuestCard.types'
-import { MOCK_QUEST_STATUS, ONE_QUEST_DETAIL } from '@mockData'
 
-const QuestCard = ({ quest, questType }: QuestCardProps) => {
+const QuestCard = ({ quest, questType, showNoDetail }: QuestCardProps) => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
   const [isUserSideModalOpen, setIsUserSideModalOpen] = useState(false)
   // TODO : add real quest data from {quest.id, username}
@@ -25,9 +25,11 @@ const QuestCard = ({ quest, questType }: QuestCardProps) => {
   // TODO : isLogin
 
   const handleCardClick = () => {
-    if (!isLogin) setIsDetailModalOpen(true)
-    else setIsUserSideModalOpen(true)
-    console.log('wgweag')
+    if (!showNoDetail) {
+      if (!isLogin) setIsDetailModalOpen(true)
+      else setIsUserSideModalOpen(true)
+      console.log('wgweag')
+    }
   }
 
   return (
@@ -43,7 +45,7 @@ const QuestCard = ({ quest, questType }: QuestCardProps) => {
         direction="column"
         alignItems="center"
         justifyContent={'center'}
-        cursor="pointer"
+        cursor={showNoDetail ? 'auto' : 'pointer'}
         onClick={handleCardClick}
       >
         {status === Status.accepted && (

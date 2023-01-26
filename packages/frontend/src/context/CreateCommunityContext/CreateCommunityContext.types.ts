@@ -1,4 +1,4 @@
-import { Category } from '@components/queries/common'
+import { Category, Quest } from '@components/queries/common'
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 // const [localImgUrl, setLocalImgUrl] = useState('')
@@ -14,12 +14,16 @@ export interface CreateCommunityContextValue {
   website: string
   selectedCategory: Category
   repUnit: string
+  questsDiscord: Quest[]
+  questsForm: Quest[]
   setLocalImgUrl: Dispatch<SetStateAction<string>>
   setName: Dispatch<SetStateAction<string>>
   setDescription: Dispatch<SetStateAction<string>>
   setWebsite: Dispatch<SetStateAction<string>>
   setSelectedCategory: Dispatch<SetStateAction<Category>>
   setRepUnit: Dispatch<SetStateAction<string>>
+  setQuestsDiscord: Dispatch<SetStateAction<Quest[]>>
+  setQuestsForm: Dispatch<SetStateAction<Quest[]>>
 }
 
 export interface CreateCommunityProviderProps {

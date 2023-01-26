@@ -25,24 +25,22 @@ import {
 } from '@chakra-ui/react'
 
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
-import { useDaoPageContext } from '@context/DaoPageContext'
 import * as globalSty from '@styles'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
 import { QuestType } from '@components/queries/common'
-import { QUEST_CONDITION_OPTIONS } from './QuestForm.constants'
-import type { QuestFormProps } from './QuestForm.types'
 import usePostCreateQuest from '@components/queries/usePostCreateQuest'
 import { formatBytes32String } from 'ethers/lib/utils.js'
+import { QUEST_CONDITION_OPTIONS } from './QuestForm.constants'
+import type { QuestFormProps } from './QuestForm.types'
 
-const NewQuestForm = ({ groupId, isOpen, onClose }: QuestFormProps) => {
+const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: QuestFormProps) => {
   // const [schemaHash, setSchemaHash] = useState('')
   const [questTitle, setQuestTitle] = useState('')
   const [questDetail, setQuestDetail] = useState('')
   const [reward, setReward] = useState(0)
   const [questCondition, setQuestCondition] = useState<QuestType>(QuestType.form)
   const { createQuest, isLoading, error } = usePostCreateQuest()
-  const { repUnit } = useDaoPageContext()
 
   // const handleChangeSchemaHash = (e: ChangeEvent<HTMLInputElement>) => {
   //   // TODO: add checks here
@@ -128,7 +126,7 @@ const NewQuestForm = ({ groupId, isOpen, onClose }: QuestFormProps) => {
                 type="number"
                 placeholder="1000"
               />
-              <InputRightElement>
+              <InputRightElement width={repUnit === 'Engagement' ? '120px' : 'auto'} padding="8px">
                 <Text color={primary} as="b">
                   {repUnit}
                 </Text>
