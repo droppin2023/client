@@ -6,13 +6,13 @@ const useContractConnection = () => {
   const { data: signer } = useSigner()
 
   const badgeContract = useContract({
-    address: '0x26dA0c03fC70906836530b5a8fe56617665F3a59',
+    address: '0x39eF787427B3743Ee9932aE3b6647807dd044fD8',
     abi: badgeContractAbi,
     signerOrProvider: signer,
   })
 
   const coreContract = useContract({
-    address: '0x26dA0c03fC70906836530b5a8fe56617665F3a59',
+    address: '0x39eF787427B3743Ee9932aE3b6647807dd044fD8',
     abi: coreContractAbi,
     signerOrProvider: signer,
   })

@@ -11,7 +11,7 @@ import { Status } from '../common'
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDetailResponse => {
   return {
-    id: data?.id || 0,
+    username: data?.username || '',
     description: data?.description || '',
     name: data?.name || '',
     image: data?.image || '',
@@ -22,7 +22,6 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
         logo: '',
         name: '',
         description: '',
-        isClaimed: false,
         groupId: 0,
         groupName: '',
       },
@@ -48,7 +47,6 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
         ],
       },
     ],
-
     engageScoresAndCommunity: data?.engageScoresAndCommunity || [
       {
         engageScore: {
@@ -65,12 +63,16 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
     ],
     userQuests: data?.userQuests || [
       {
-        status: Status.noStatus,
+        status: Status.accepted,
         quests: [
           {
             id: 0,
             name: '',
-            engageScore: 0,
+            engageScore: {
+              number: 0,
+              unit: 'LPD',
+            },
+            description: '',
           },
         ],
       },
@@ -79,7 +81,7 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchUserDetail = ({ userId }: FetchUserDetailParams) => {
+const useFetchUserDetail = ({ username }: FetchUserDetailParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchUserDetailResponse>(
     normalizeData(undefined) as FetchUserDetailResponse,
@@ -90,7 +92,7 @@ const useFetchUserDetail = ({ userId }: FetchUserDetailParams) => {
     setIsLoading(true)
 
     axios
-      .get<FetchUserDetailResponse>(`${GET_COMMUNITY}/?id=${userId}`, {
+      .get<FetchUserDetailResponse>(`${GET_COMMUNITY}/?username=${username}`, {
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',

@@ -8,7 +8,6 @@ export interface FetchClaimedBadgeParams {
 }
 
 export interface FetchClaimedBadgeResponse {
-  isClaimed: boolean
   address: string
   tokenId: number
   tokenStandard: string

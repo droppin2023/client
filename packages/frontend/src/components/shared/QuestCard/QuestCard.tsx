@@ -11,21 +11,23 @@ import { Status } from '@components/queries/common'
 import UserSideModal from './components/UserSideModal'
 import { COLOR_MAPPING } from './QuestCard.constants'
 import type { QuestCardProps } from './QuestCard.types'
+import { MOCK_QUEST_STATUS, ONE_QUEST_DETAIL } from '@mockData'
 
-const QuestCard = ({
-  name,
-  reward,
-  repUnit,
-  questType,
-  id,
-  status = Status.noStatus,
-}: QuestCardProps) => {
+const QuestCard = ({ quest, questType }: QuestCardProps) => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
   const [isUserSideModalOpen, setIsUserSideModalOpen] = useState(false)
+  // TODO : add real quest data from {quest.id, username}
+  const userQuest = MOCK_QUEST_STATUS
+  const isLogin = false
+  // const userQuest = false
+  // const questDetail = ONE_QUEST_DETAIL
+  const status = isLogin ? userQuest.status : Status.noStatus
+  // TODO : isLogin
 
   const handleCardClick = () => {
-    if (status === Status.noStatus) setIsDetailModalOpen(true)
+    if (!isLogin) setIsDetailModalOpen(true)
     else setIsUserSideModalOpen(true)
+    console.log('wgweag')
   }
 
   return (
@@ -44,12 +46,12 @@ const QuestCard = ({
         cursor="pointer"
         onClick={handleCardClick}
       >
-        {status === Status.claimed && (
+        {status === Status.accepted && (
           <Done position="absolute" right="-12px" top="-12px" width="28px" height="28px" />
         )}
-        <Text as="b">{name}</Text>
+        <Text as="b">{quest.name}</Text>
         <Text as="b" color={COLOR_MAPPING[status]}>
-          {`${reward} ${repUnit}`}
+          {`${quest.engageScore.number} ${quest.engageScore.unit}`}
         </Text>
       </Flex>
       {/* will open the quest detail modal if no status. else track the user's current status */}
@@ -58,14 +60,18 @@ const QuestCard = ({
           isOpen={isDetailModalOpen}
           onClose={() => setIsDetailModalOpen(false)}
           questType={questType}
-          questTitle={name}
-          questID={id}
+          quest={quest}
         />
       ) : (
         <UserSideModal
           isOpen={isUserSideModalOpen}
           onClose={() => setIsUserSideModalOpen(false)}
+          questType={questType}
+          quest={quest}
           questStatus={status}
+          userSubmission={userQuest.userSubmission}
+          communityMessage={userQuest.communityMessage}
+          community={userQuest.community}
         />
       )}
     </>

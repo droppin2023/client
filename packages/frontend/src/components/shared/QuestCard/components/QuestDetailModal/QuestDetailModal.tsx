@@ -25,13 +25,7 @@ import * as globalSty from '@styles'
 
 import type { QuestDetailModalProps } from './QuestDetailModal.types'
 
-const QuestDetailModal = ({
-  isOpen,
-  onClose,
-  questType,
-  questTitle,
-  questID,
-}: QuestDetailModalProps) => {
+const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModalProps) => {
   // TODO: fetch the quest details here
   const data = ONE_QUEST_DETAIL
 
@@ -39,21 +33,21 @@ const QuestDetailModal = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent bg={background2}>
-        <ModalHeader>{questTitle}</ModalHeader>
+        <ModalHeader>{quest.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <VStack spacing={2} align="left" mt={4}>
-            <Flex justifyContent="space-between">
+            {/* <Flex justifyContent="space-between">
               <Text color={secondary}>Schema Hash</Text>
               <Text as="b">{data.schemaHash}</Text>
-            </Flex>
+            </Flex> */}
 
             <Flex justifyContent="space-between">
               <Text color={secondary}>Reward Engagement</Text>
               <Text as="b">
-                {data.engageScore.number}{' '}
+                {quest.engageScore.number}{' '}
                 <Text as="span" color={primary}>
-                  {data.engageScore.unit}
+                  {quest.engageScore.unit}
                 </Text>
               </Text>
             </Flex>
@@ -61,7 +55,7 @@ const QuestDetailModal = ({
 
           <VStack align="left" mt={4}>
             <Text color={secondary}>Description</Text>
-            <Text>{data.description}</Text>
+            <Text>{quest.description}</Text>
           </VStack>
 
           {questType === QuestType.form && (

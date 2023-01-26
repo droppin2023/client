@@ -77,14 +77,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
           </Badge>
           <SimpleGrid columns={4} gap={6} width="100%">
             {questsDiscord.questList.map((item, index) => (
-              <QuestCard
-                key={index}
-                id={item.id}
-                name={item.name}
-                reward={item.engageScore.number}
-                repUnit={item.engageScore.unit}
-                questType={QuestType.discord}
-              />
+              <QuestCard key={index} quest={item} questType={QuestType.discord} />
             ))}
           </SimpleGrid>
           <Badge fontSize="xl" bg={pink} padding="4px 16px" borderRadius="6px">
@@ -92,14 +85,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
           </Badge>
           <SimpleGrid columns={4} gap={6} width="100%">
             {questsSubmitForm.questList.map((item, index) => (
-              <QuestCard
-                key={index}
-                id={item.id}
-                name={item.name}
-                reward={item.engageScore.number}
-                repUnit={item.engageScore.unit}
-                questType={QuestType.form}
-              />
+              <QuestCard key={index} quest={item} questType={QuestType.form} />
             ))}
           </SimpleGrid>
         </VStack>
@@ -122,7 +108,11 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
           </HStack>
         </HStack>
       </VStack>
-      <QuestForm isOpen={isCreateQuestOpen} onClose={() => setIsCreateQuestOpen(false)} />
+      <QuestForm
+        groupId={id}
+        isOpen={isCreateQuestOpen}
+        onClose={() => setIsCreateQuestOpen(false)}
+      />
       <BadgeForm
         isOpen={isCreateBadgeOpen}
         onClose={() => setIsCreateBadgeOpen(false)}

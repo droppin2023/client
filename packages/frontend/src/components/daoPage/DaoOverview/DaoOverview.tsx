@@ -8,7 +8,14 @@ import DiscordIcon from '@components/icons/DiscordIcon'
 import WebsiteIcon from '@components/icons/WebsiteIcon'
 import AvatarPreview from '@components/shared/AvatarPreview'
 
-import { background, foreground, orange, orangeHighlight, secondary } from '@constants/colors'
+import {
+  background,
+  discordPurple,
+  foreground,
+  orange,
+  orangeHighlight,
+  secondary,
+} from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Settings from '@components/icons/Settings'
@@ -18,6 +25,7 @@ import bannerOrnament from './assets/banner-ornament.svg'
 import EditCommunityForm from './components/EditCommunityForm'
 import * as sty from './DaoOverview.styles'
 import type { DaoOverviewProps } from './DaoOverview.types'
+import Link from 'next/link'
 
 const DaoOverview = ({
   name = 'Drop DAO',
@@ -31,6 +39,8 @@ const DaoOverview = ({
   badges,
   owner,
   website,
+  discordLink = './assets/placeholder.jpeg',
+  discordGuildId,
 }: DaoOverviewProps) => {
   const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(false)
 
@@ -82,7 +92,10 @@ const DaoOverview = ({
               </Flex>
               <HStack spacing={5}>
                 <Text>
-                  by <Text as="b">{owner.name}</Text>
+                  by
+                  <Link href={`/user/${owner.username}`}>
+                    <Text as="b">{owner.name}</Text>
+                  </Link>
                 </Text>
                 <HStack spacing={3}>
                   <IconButton
@@ -91,16 +104,28 @@ const DaoOverview = ({
                     borderRadius="9999px"
                     borderColor={foreground}
                   >
-                    <WebsiteIcon />
+                    <Link href={`https://${website}`} target="_blank">
+                      <WebsiteIcon />
+                    </Link>
                   </IconButton>
-                  <IconButton
-                    aria-label="discord"
-                    variant="outline"
-                    borderRadius="9999px"
-                    borderColor={foreground}
-                  >
-                    <DiscordIcon />
-                  </IconButton>
+                  {discordGuildId ? (
+                    <IconButton
+                      aria-label="discord"
+                      variant="outline"
+                      borderRadius="9999px"
+                      borderColor={foreground}
+                    >
+                      <Link href={`https://${discordLink}`} target="_blank">
+                        <DiscordIcon />
+                      </Link>
+                    </IconButton>
+                  ) : (
+                    isAdmin && (
+                      <Flex justifyContent={'space-between'}>
+                        <Button bg={discordPurple}>Connect Discord</Button>
+                      </Flex>
+                    )
+                  )}
                 </HStack>
               </HStack>
               <Text>{description}</Text>

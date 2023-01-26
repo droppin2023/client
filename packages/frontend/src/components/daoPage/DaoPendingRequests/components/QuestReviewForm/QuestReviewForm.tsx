@@ -31,7 +31,7 @@ import {
 } from '@constants/colors'
 import mockAvatar1 from '@mockData/assets/mock-avatar-1.png'
 
-const QuestReviewForm = ({ isOpen, onClose }: QuestReviewFormProps) => {
+const QuestReviewForm = ({ isOpen, onClose, reviewContent }: QuestReviewFormProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -53,26 +53,21 @@ const QuestReviewForm = ({ isOpen, onClose }: QuestReviewFormProps) => {
                 width={32}
                 height={32}
               />
-              <Text>Carlos Ramos</Text>
+              <Text>{reviewContent.requestUser?.name}</Text>
             </HStack>
             <Button>View Profile</Button>
           </Flex>
 
           <VStack spacing={2} align="left" mt={4}>
-            <VStack align="left">
-              <Text color={secondary}>Schema Hash</Text>
-              <Text as="b">0x3236206269afe3</Text>
-            </VStack>
-
             <Flex justifyContent={'space-between'}>
               <VStack spacing={1} align="left">
                 <Text color={secondary}>Quest Name</Text>
-                <Text as="b">Join Hackathon</Text>
+                <Text as="b">{reviewContent.quest?.name}</Text>
               </VStack>
               <VStack spacing={1} align="left">
                 <Text color={secondary}>Quest Reward</Text>
                 <Text as="b" color={orange}>
-                  100 LEP
+                  {reviewContent.quest?.engageScore.number} {reviewContent.quest?.engageScore.unit}
                 </Text>
               </VStack>
             </Flex>
@@ -82,11 +77,7 @@ const QuestReviewForm = ({ isOpen, onClose }: QuestReviewFormProps) => {
             <FormLabel color={secondary} as="span">
               Request Details
             </FormLabel>
-            <Textarea
-              variant="filled"
-              disabled
-              value="Hi, this is Carlos. I joined Polygon pit hackathon."
-            />
+            <Textarea variant="filled" disabled value={reviewContent.requestAnswer} />
           </FormControl>
 
           <FormControl mt={4}>

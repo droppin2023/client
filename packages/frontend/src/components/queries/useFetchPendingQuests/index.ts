@@ -8,8 +8,6 @@ import type {
   FetchPendingQuestsResponse,
 } from './useFetchPendingQuests.types'
 import { GET_COMMUNITY } from './userFetchPendingQuests.constants'
-import { stringify } from 'querystring'
-import { QuestType, Status } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (
@@ -21,20 +19,11 @@ const normalizeData = (
         quest: {
           id: data?.pendingQuests[0].quest.id || 0,
           name: data?.pendingQuests[0].quest.name || '',
-          condition: data?.pendingQuests[0].quest.condition || {
-            type: QuestType.form,
-            conditionDetail: data?.pendingQuests[0].quest.condition.conditionDetail || {
-              guildId: 0,
-              roleId: 0,
-            },
-          },
           engageScore: data?.pendingQuests[0].quest.engageScore || { number: 0, unit: '' },
-          schemaHash: data?.pendingQuests[0].quest.schemaHash || '',
           description: data?.pendingQuests[0].quest.description || '',
-          status: Status.pending,
         },
         requestUser: {
-          id: data?.pendingQuests[0].requestUser.id || 0,
+          username: data?.pendingQuests[0].requestUser.username || '',
           address: data?.pendingQuests[0].requestUser.address || '',
           image: data?.pendingQuests[0].requestUser.image || '',
           name: data?.pendingQuests[0].requestUser.name || '',
@@ -46,7 +35,7 @@ const normalizeData = (
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ groupId, adminId }: FetchPendingQuestsParams) => {
+const useFetchPendingQuests = ({ groupId, username }: FetchPendingQuestsParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchPendingQuestsResponse>(
     normalizeData(undefined) as FetchPendingQuestsResponse,
@@ -57,13 +46,16 @@ const useFetchQuestDetail = ({ groupId, adminId }: FetchPendingQuestsParams) => 
     setIsLoading(true)
 
     axios
-      .get<FetchPendingQuestsResponse>(`${GET_COMMUNITY}/?groupId=${groupId}&adminId=${adminId}`, {
-        headers: {
-          'Content-Type': '*/*',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      .get<FetchPendingQuestsResponse>(
+        `${GET_COMMUNITY}/?groupId=${groupId}&username=${username}`,
+        {
+          headers: {
+            'Content-Type': '*/*',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          },
         },
-      })
+      )
       .then((data) => {
         setData(data.data)
       })
@@ -74,4 +66,4 @@ const useFetchQuestDetail = ({ groupId, adminId }: FetchPendingQuestsParams) => 
   return { data: normalizeData(data), isLoading, error }
 }
 
-export default useFetchQuestDetail
+export default useFetchPendingQuests

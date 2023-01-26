@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import type { PostCompleteQuestParams } from './usePostCompleteQuest.types'
+import type { PostSubmitQuest } from './userPostSubmitQuest.types'
 import axios from 'axios'
 import { CREATE_GROUP } from '../usePostCreateGroup/usePostCreateBadge.constants'
 
-const usePostCompleteQuest = () => {
+const usePostSubmitQuest = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
 
-  const completeQuest = async (params: PostCompleteQuestParams) => {
+  const submitQuest = async (params: PostSubmitQuest) => {
     setIsLoading(true)
 
     try {
@@ -27,7 +27,7 @@ const usePostCompleteQuest = () => {
     }
   }
 
-  return { completeQuest, isLoading, error }
+  return { submitQuest, isLoading, error }
 }
 
-export default usePostCompleteQuest
+export default usePostSubmitQuest

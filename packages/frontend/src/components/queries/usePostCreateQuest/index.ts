@@ -11,22 +11,23 @@ const usePostCreateQuest = () => {
 
   const createQuest = async (params: CreateQuestParams) => {
     setIsLoading(true)
-
+    setError(null)
     try {
       const tsx = await coreContract?.addQuest(params.contract)
+
       const transactionHash = await tsx.wait()
-      console.log({ transactionHash })
+
       const { data, status } = await axios.post(CREATE_QUEST, {
-        transactionHash,
-        schemaHash: params.schemaHash,
-        condition: params.condition,
+        transactionHash: transactionHash.transactionHash,
+        // schemaHash: params.schemaHash,
+        condition: JSON.stringify(params.condition),
         detail: params.detail,
         name: params.contract.name,
       })
 
       if (status === 200) {
         setIsLoading(false)
-        return data.data
+        return data
       }
 
       throw new Error('Form Post Error!')

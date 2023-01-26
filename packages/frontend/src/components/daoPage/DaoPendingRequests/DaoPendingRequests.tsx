@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 
 import Image from 'next/image'
 
@@ -16,21 +16,22 @@ import type { DaoPendingRequestsProps, PendingRequestsTableRow } from './DaoPend
 const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
   const { repUnit } = useDaoPageContext()
   const [isShowReviewModal, setIsShowReviewModal] = useState(false)
+  const [reviewContent, setReviewContent] = useState({})
 
-  const renderTableRow = ({
-    name,
-    img,
-    questName,
-    questReward,
-    questStatus,
-  }: PendingRequestsTableRow) => {
+  const handleClick = (item: any) => {
+    setReviewContent(item)
+    setIsShowReviewModal(true)
+  }
+
+  console.log(requests)
+  const renderTableRow = ({ name, img, questName, engageScore, item }: PendingRequestsTableRow) => {
     return (
       <Box
         borderRadius="16px"
         backgroundColor={background2}
         width="100%"
         cursor="pointer"
-        onClick={() => setIsShowReviewModal(true)}
+        onClick={async () => await handleClick(item)}
       >
         <Tr display="flex" justifyContent={'space-between'}>
           <Td>
@@ -40,8 +41,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
             </HStack>
           </Td>
           <Td color={orange}>{questName}</Td>
-          <Td color={primary}>{questStatus}</Td>
-          <Td color={orange}>{questReward}</Td>
+          <Td color={primary}>{engageScore}</Td>
         </Tr>
       </Box>
     )
@@ -63,16 +63,26 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
               <VStack spacing={3}>
                 {requests.map(
                   (item: {
-                    user: { name: any; img: any }
-                    quest: { name: any; reward: any }
-                    status: any
+                    quest: {
+                      id: number
+                      name: string
+                      engageScore: { number: number; unit: string }
+                      description: string
+                    }
+                    requestUser: {
+                      username: string
+                      address: string
+                      image: any
+                      name: string
+                    }
+                    requestAnswer: string
                   }) =>
                     renderTableRow({
-                      name: item.user.name,
-                      img: item.user.img,
+                      name: item.requestUser.name,
+                      img: item.requestUser.image,
                       questName: item.quest.name,
-                      questReward: `${item.quest.reward} ${repUnit}`,
-                      questStatus: item.status,
+                      engageScore: `${item.quest.engageScore.number} ${item.quest.engageScore.unit}`,
+                      item: item,
                     }),
                 )}
               </VStack>
@@ -80,7 +90,12 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
           </Table>
         </TableContainer>
       )}
-      <QuestReviewForm isOpen={isShowReviewModal} onClose={() => setIsShowReviewModal(false)} />
+      {/* TODO : Handle these reviewContent type */}
+      <QuestReviewForm
+        isOpen={isShowReviewModal}
+        onClose={() => setIsShowReviewModal(false)}
+        reviewContent={reviewContent}
+      />
     </>
   )
 }

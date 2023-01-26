@@ -23,7 +23,7 @@ const normalizeData = (data: FetchClaimedBadgeResponse | undefined): FetchClaime
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ badgeId, username }: FetchClaimedBadgeParams) => {
+const useFetchBadgeDetail = ({ badgeId, username }: FetchClaimedBadgeParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchClaimedBadgeResponse>(
     normalizeData(undefined) as FetchClaimedBadgeResponse,
@@ -51,4 +51,4 @@ const useFetchQuestDetail = ({ badgeId, username }: FetchClaimedBadgeParams) => 
   return { data: normalizeData(data), isLoading, error }
 }
 
-export default useFetchQuestDetail
+export default useFetchBadgeDetail

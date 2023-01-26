@@ -10,9 +10,10 @@ import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommun
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
 import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
+import { GetUserStatusQuestResponse } from '@components/queries/useGetUserStatusInQuest/useGetUserStatusInQuest.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
-  id: 0,
+  username: 'rick',
   name: 'Rick Zhang',
   description:
     "Hey there! I'm Rick. I'm a pretty chill dude who likes to stay busy with a few different things. I'm a big reader, always down for a good book, but I also love getting out and playing some basketball. When I'm not doing either of those things, you can probably find me coding away on some new web project. I like to stay active and keep my mind sharp, that's why I like to do a bit of everything.",
@@ -24,7 +25,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'NewBie',
       description: 'todo',
-      isClaimed: false,
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -33,7 +34,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Novice',
       description: 'todo',
-      isClaimed: false,
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -42,7 +43,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
-      isClaimed: false,
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -51,7 +52,7 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'todo',
       description: 'todo',
-      isClaimed: false,
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -70,18 +71,18 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           logo: 'https://picsum.photos/300',
           name: 'NewBie',
           description: 'todo',
-          isClaimed: false,
           groupId: 0,
           groupName: 'todo',
+          address: '0xagewwgawegwgwgwegwea',
         },
         {
           id: 1,
           logo: 'https://picsum.photos/300',
           name: 'Novice',
           description: 'todo',
-          isClaimed: false,
           groupId: 0,
           groupName: 'todo',
+          address: '0xagewwgawegwgwgwegwea',
         },
       ],
     },
@@ -114,19 +115,19 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   ],
   userQuests: [
     {
-      status: Status.noStatus,
+      status: Status.accepted,
       quests: [
         {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 2,
           name: 'Verify on Discord',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -137,13 +138,13 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Join Hackathon',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Join our live gathering',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -154,19 +155,19 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Join 5 Hackathons',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 3,
           name: 'Join 10 Hackathons',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Refer a member to our DAO',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -177,68 +178,56 @@ export const ONE_USER_DETAIL: FetchUserDetailResponse = {
           id: 3,
           name: 'Register on our web',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Join our online event',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
-    {
-      status: Status.claimed,
-      quests: [
-        {
-          id: 3,
-          name: 'Activate your account',
-          engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
-        },
-        {
-          id: 4,
-          name: 'Verify your discord',
-          engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
-        },
-      ],
-    },
+    // {
+    //   status: Status.accepted,
+    //   quests: [
+    //     {
+    //       id: 3,
+    //       name: 'Activate your account',
+    //       engageScore: { number: 72673, unit: 'LPD' },
+    //       description: 'agwegwegewgwegewwegwegewgew',
+    //     },
+    //     {
+    //       id: 4,
+    //       name: 'Verify your discord',
+    //       engageScore: { number: 72673, unit: 'LPD' },
+    //       description: 'agwegwegewgwegewwegwegewgew',
+    //     },
+    //   ],
+    // },
   ],
 }
 
-export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
-  id: 0,
-  schemaHash: '0x34723d5f238357',
-  title: 'Join a Hackathon',
-  engageScore: {
-    number: 400,
-    unit: 'LPD',
-  },
-  condition: {
-    type: QuestType.discord,
-    conditionDetail: { guildId: 0, roleId: 0 },
-  },
-  description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
-  status: Status.noStatus,
-}
-
 export const ONE_QUEST_DETAIL_TWO: FetchQuestDetailResponse = {
-  id: 0,
-  schemaHash: '0x34723d5f238357',
-  title: 'Join a Hackathon',
-  engageScore: {
-    number: 400,
-    unit: 'LPD',
+  quest: {
+    id: 0,
+    // schemaHash: '0x34723d5f238357',
+    name: 'Join a Hackathon',
+    engageScore: {
+      number: 400,
+      unit: 'LPD',
+    },
+    description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
   },
+
   condition: {
     type: QuestType.discord,
     conditionDetail: { guildId: 0, roleId: 0 },
   },
-  description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
-  message: 'You did great',
-  answer: 'Please do better',
-  status: Status.rejected,
+
+  // message: 'You did great',
+  // answer: 'Please do better',
+  // status: Status.rejected,
 }
 
 export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
@@ -251,7 +240,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
   },
   description: 'Lepak DAO Lepak DAOLepak DAO',
   owner: {
-    id: 1,
+    username: 'rkdud007',
     address: '0xaegewgwewgeew',
     image: 'https://picsum.photos/300',
     name: 'Via',
@@ -267,18 +256,159 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       address: '0xaegewgwewgeew',
       image: 'https://picsum.photos/300',
       name: 'John',
+      engageScore: {
+        number: 42352525,
+        unit: 'LPD',
+      },
+      quests: [
+        {
+          id: 1,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+        {
+          id: 2,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+      ],
+      badges: [
+        {
+          id: 1,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+        {
+          id: 2,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+        {
+          id: 3,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+      ],
     },
     {
       id: 3,
       address: '0xaegewgwewgeew',
       image: 'https://picsum.photos/300',
       name: 'Clark',
+      engageScore: {
+        number: 42352525,
+        unit: 'LPD',
+      },
+      quests: [
+        {
+          id: 1,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+        {
+          id: 2,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+      ],
+      badges: [
+        {
+          id: 1,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+        {
+          id: 2,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+        {
+          id: 3,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+      ],
     },
     {
       id: 4,
       address: '0xaegewgwewgeew',
       image: 'https://picsum.photos/300',
       name: 'May',
+      engageScore: {
+        number: 42352525,
+        unit: 'LPD',
+      },
+      quests: [
+        {
+          id: 1,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+        {
+          id: 2,
+          name: 'Join Discord',
+          engageScore: { number: 72673, unit: 'LPD' },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+      ],
+      badges: [
+        {
+          id: 1,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+        {
+          id: 2,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+        {
+          id: 3,
+          logo: 'https://picsum.photos/300',
+          name: 'Newbie',
+          description: 'Newbie is Newbie',
+          address: '0xagewwgawegwgwgwegwea',
+          groupId: 0,
+          groupName: 'todo',
+        },
+      ],
     },
   ],
   // offchain
@@ -291,7 +421,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-      isClaimed: false,
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -300,7 +430,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-      isClaimed: false,
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -309,7 +439,7 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
       logo: 'https://picsum.photos/300',
       name: 'Newbie',
       description: 'Newbie is Newbie',
-      isClaimed: false,
+      address: '0xagewwgawegwgwgwegwea',
       groupId: 0,
       groupName: 'todo',
     },
@@ -322,13 +452,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 1,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 2,
           name: 'Join Discord',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -339,13 +469,13 @@ export const ONE_COMMUNITY: FetchCommunityDetailResponse = {
           id: 3,
           name: 'Join Hackathon',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
         {
           id: 4,
           name: 'Win a prize',
           engageScore: { number: 72673, unit: 'LPD' },
-          status: Status.noStatus,
+          description: 'agwegwegewgwegewwegwegewgew',
         },
       ],
     },
@@ -377,40 +507,49 @@ export const MOCK_USER_LIST = [
 
 export const MOCK_PENDING_REQUESTS = [
   {
-    user: {
-      name: 'John',
-      img: mockAvatar1,
-    },
     quest: {
-      name: 'Join the discord server',
-      type: 'Discord',
-      reward: 500,
+      id: 1,
+      name: 'Join Discord',
+      engageScore: { number: 200, unit: 'LPD' },
+      description: 'Join Discord Discord Discord',
     },
-    status: 'Pending',
+    requestUser: {
+      username: 'rkdud007',
+      address: '0xaeggawegwegwegwgw',
+      image: mockAvatar1,
+      name: 'Pia',
+    },
+    requestAnswer: 'hey please let me in',
   },
   {
-    user: {
-      name: 'John',
-      img: mockAvatar1,
-    },
     quest: {
-      name: 'Join the discord server',
-      type: 'Discord',
-      reward: 500,
+      id: 2,
+      name: 'Join Discord',
+      engageScore: { number: 200, unit: 'LPD' },
+      description: 'Join Discord Discord Discord',
     },
-    status: 'Pending',
+    requestUser: {
+      username: 'rkdud007',
+      address: '0xaeggawegwegwegwgw',
+      image: mockAvatar1,
+      name: 'Pia',
+    },
+    requestAnswer: 'hey please let me in',
   },
   {
-    user: {
-      name: 'John',
-      img: mockAvatar1,
-    },
     quest: {
-      name: 'Join the discord server',
-      type: 'Discord',
-      reward: 500,
+      id: 2,
+      name: 'Join Discord',
+      engageScore: { number: 200, unit: 'LPD' },
+      description: 'Join Discord Discord Discord',
     },
-    status: 'Pending',
+    requestUser: {
+      username: 'rkdud007',
+      address: '0xaeggawegwegwegwgw',
+      image: mockAvatar1,
+      name: 'Pia',
+    },
+    requestAnswer: 'hey please let me in',
   },
 ]
 
@@ -808,7 +947,6 @@ export const MOCK_BADGE_LIST = [
 ]
 
 export const MOCK_CLAIMED_BADGE: FetchClaimedBadgeResponse = {
-  isClaimed: true,
   address: '0xawgaweewagewagwe',
   tokenId: 2,
   tokenStandard: 'ERC-20',
@@ -849,19 +987,19 @@ export const MOCK_BADGE: FetchBadgeDetailResponse = {
   // },
   holderList: [
     {
-      id: 1,
+      username: 'rkrrrr',
       address: '0xagaewgwegwe',
       image: 'https://picsum.photos/300',
       name: 'pia',
     },
     {
-      id: 2,
+      username: 'rkrrrer',
       address: '0xagaewgwegwe',
       image: 'https://picsum.photos/300',
       name: 'pia',
     },
     {
-      id: 2,
+      username: 'r33krrrr',
       address: '0xagaewgwegwe',
       image: 'https://picsum.photos/300',
       name: 'pia',
@@ -869,31 +1007,50 @@ export const MOCK_BADGE: FetchBadgeDetailResponse = {
   ],
   requiredQuests: [
     {
-      id: 0,
-      name: 'join discord',
-      engageScore: {
-        number: 100,
-        unit: 'LPD',
-      },
-      status: Status.noStatus,
+      questType: QuestType.discord,
+      questList: [
+        {
+          id: 0,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+        {
+          id: 1,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+      ],
     },
     {
-      id: 1,
-      name: 'join discord',
-      engageScore: {
-        number: 100,
-        unit: 'LPD',
-      },
-      status: Status.noStatus,
-    },
-    {
-      id: 2,
-      name: 'join discord',
-      engageScore: {
-        number: 100,
-        unit: 'LPD',
-      },
-      status: Status.noStatus,
+      questType: QuestType.discord,
+      questList: [
+        {
+          id: 0,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+        {
+          id: 1,
+          name: 'join discord',
+          engageScore: {
+            number: 100,
+            unit: 'LPD',
+          },
+          description: 'agwegwegewgwegewwegwegewgew',
+        },
+      ],
     },
   ],
 }
@@ -927,13 +1084,11 @@ export const MOCK_USER = {
           id: 1,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie',
-          isClaimed: true,
         },
         {
           id: 2,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie2',
-          isClaimed: true,
         },
       ],
     },
@@ -944,13 +1099,11 @@ export const MOCK_USER = {
           id: 1,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie4',
-          isClaimed: true,
         },
         {
           id: 2,
           badgeImg: 'https://picsum.photos/300',
           name: 'Newbie3',
-          isClaimed: false,
         },
       ],
     },
@@ -981,4 +1134,44 @@ export const MOCK_USER = {
       },
     },
   ],
+}
+
+export const MOCK_QUEST_STATUS: GetUserStatusQuestResponse = {
+  status: Status.pending,
+  community: {
+    id: 1,
+    address: '2523523252362362',
+    image: 'https://picsum.photos/300',
+    name: 'Lepak DAO',
+  },
+  quest: {
+    id: 0,
+    name: 'Join Discord',
+    engageScore: {
+      number: 1000,
+      unit: 'LPD',
+    },
+    description: '',
+  },
+  userSubmission: 'Hi i submit this',
+  communityMessage: 'Hi you are rejected',
+}
+
+export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
+  quest: {
+    id: 0,
+    // schemaHash: '0x34723d5f238357',
+    name: 'Join a Hackathon',
+    engageScore: {
+      number: 400,
+      unit: 'LPD',
+    },
+    description: 'lorem ipsum dolor sit amet this is a placeholder descrption',
+  },
+
+  condition: {
+    type: QuestType.discord,
+    conditionDetail: { guildId: 0, roleId: 0 },
+  },
+  // status: Status.accepted,
 }

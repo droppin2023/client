@@ -15,6 +15,7 @@ import UserQuestSection from '@components/userPage/UserQuestSection'
 import { ONE_USER_DETAIL } from '@mockData'
 
 const UserPage = ({ username }: { username: string }) => {
+  // TODO : change realdata
   const userData = ONE_USER_DETAIL
 
   return (

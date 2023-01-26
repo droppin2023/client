@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { Community, EngageScore, Price, Quest, Quests, User } from '@components/queries/common'
+import { Community, EngageScore, Price, Quests, User } from '@components/queries/common'
 
 export interface FetchBadgeDetailParams {
   badgeId: number
@@ -16,7 +16,7 @@ export interface FetchBadgeDetailResponse {
   isDefault: boolean
   address: string
   holderList: User[]
-  requiredQuests: Quest[]
+  requiredQuests: Quests[]
   requiredEngageScore: EngageScore
   requiredPrice: Price
 }

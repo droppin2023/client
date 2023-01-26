@@ -1,4 +1,4 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
+import { Box, Button, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
 
 import DaoBadgesSection from '@components/daoPage/DaoBadgesSection'
 import DaoMembersSection from '@components/daoPage/DaoMembersSection'
@@ -11,13 +11,13 @@ import { DaoPageProvider } from '@context/DaoPageContext'
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
-// TODO: integrate real data
 import { QuestType } from '@components/queries/common'
-import { MOCK_PENDING_REQUESTS, ONE_COMMUNITY } from '@mockData'
+import { ONE_COMMUNITY } from '@mockData'
+import Link from 'next/link'
 
 const DaoPage = ({ id }: { id: number }) => {
+  // TODO: integrate real data
   const mockDao = ONE_COMMUNITY
-
   // TODO: this is a temporary flag, real flag would be calculated with context api and back end data
   const isAdmin = true
 
@@ -38,6 +38,8 @@ const DaoPage = ({ id }: { id: number }) => {
           badges={mockDao.badges}
           owner={mockDao.owner}
           website={mockDao.link}
+          discordLink={mockDao.discord?.link}
+          discordGuildId={mockDao.discord?.guildId}
         />
 
         <Box width="80%" minHeight="512px">
@@ -64,16 +66,9 @@ const DaoPage = ({ id }: { id: number }) => {
                 Members
               </Tab>
               {isAdmin && (
-                <Tab
-                  fontWeight={'bold'}
-                  _selected={{
-                    color: primary,
-                    fontWeight: 'bold',
-                    borderBottom: `3px solid ${primary}`,
-                  }}
-                >
-                  Pending Quests
-                </Tab>
+                <Button fontWeight={'bold'}>
+                  <Link href={`/community/${id}/pending`}>Pending Quests</Link>
+                </Button>
               )}
             </TabList>
 
@@ -92,11 +87,11 @@ const DaoPage = ({ id }: { id: number }) => {
               <TabPanel>
                 <DaoMembersSection members={mockDao.members} />
               </TabPanel>
-              {isAdmin && (
+              {/* {isAdmin && (
                 <TabPanel>
                   <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
                 </TabPanel>
-              )}
+              )} */}
             </TabPanels>
           </Tabs>
         </Box>

@@ -25,7 +25,7 @@ const normalizeData = (
     },
     description: data?.description || '',
     owner: data?.owner || {
-      id: 0,
+      username: '',
       address: '',
       image: '',
       name: '',
@@ -37,6 +37,31 @@ const normalizeData = (
         address: '',
         image: '',
         name: '',
+        engageScore: {
+          number: 0,
+          unit: 'LPD',
+        },
+        quests: [
+          {
+            id: 0,
+            name: '',
+            engageScore: {
+              number: 0,
+              unit: 'LPD',
+            },
+            description: 'awgewgwewgawe',
+          },
+        ],
+        badges: [
+          {
+            id: 0,
+            logo: '',
+            name: '',
+            description: '',
+            groupId: 0,
+            groupName: 'Lepak DAO',
+          },
+        ],
       },
     ],
     totalMember: data?.totalMember || 0,
@@ -49,7 +74,6 @@ const normalizeData = (
         name: '',
         description: '',
         groupId: 0,
-        isClaimed: false,
         groupName: 'Lepak DAO',
       },
     ],
@@ -64,6 +88,7 @@ const normalizeData = (
               number: 0,
               unit: 'LPD',
             },
+            description: 'wagwegewew',
           },
         ],
       },

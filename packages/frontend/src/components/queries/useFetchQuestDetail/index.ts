@@ -5,29 +5,29 @@ import axios from 'axios'
 
 import type { FetchQuestDetailParams, FetchQuestDetailResponse } from './useFetchBadgeDetail.types'
 import { GET_COMMUNITY } from './userFetchBadgeDetail.constants'
-import { stringify } from 'querystring'
-import { QuestType, Status } from '../common'
+import { QuestType } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchQuestDetailResponse | undefined): FetchQuestDetailResponse => {
   return {
-    id: data?.id || 0,
-    description: data?.description || '',
-    title: data?.title || '',
-    schemaHash: data?.schemaHash || '',
+    quest: data?.quest || {
+      id: 0,
+      name: '',
+      engageScore: {
+        number: 0,
+        unit: '',
+      },
+      description: '',
+    },
     condition: data?.condition || {
       type: QuestType.form,
       conditionDetail: data?.condition?.conditionDetail || { guildId: 0, roleId: 0 },
     },
-    engageScore: data?.engageScore || { number: 0, unit: '' },
-    status: data?.status || Status.noStatus,
-    message: data?.message || undefined,
-    answer: data?.answer || undefined,
   }
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ groupId, questId, userId }: FetchQuestDetailParams) => {
+const useFetchQuestDetail = ({ questId }: FetchQuestDetailParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchQuestDetailResponse>(
     normalizeData(undefined) as FetchQuestDetailResponse,
@@ -38,16 +38,13 @@ const useFetchQuestDetail = ({ groupId, questId, userId }: FetchQuestDetailParam
     setIsLoading(true)
 
     axios
-      .get<FetchQuestDetailResponse>(
-        `${GET_COMMUNITY}/?groupId=${groupId}&questId=${questId}&userId=${userId}`,
-        {
-          headers: {
-            'Content-Type': '*/*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          },
+      .get<FetchQuestDetailResponse>(`${GET_COMMUNITY}/?questId=${questId}`, {
+        headers: {
+          'Content-Type': '*/*',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         },
-      )
+      })
       .then((data) => {
         setData(data.data)
       })

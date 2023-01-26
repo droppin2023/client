@@ -1,5 +1,5 @@
 export interface User {
-  id: number
+  username: string
   address: string
   image: string
   name: string
@@ -37,9 +37,10 @@ export interface Badge {
   logo: string
   name: string
   description: string
-  isClaimed: boolean
+  // isClaimed: boolean
   groupId: number
   groupName: string
+  address: string
 }
 
 // QUEST
@@ -52,10 +53,11 @@ export interface Quest {
   id: number
   name: string
   engageScore: EngageScore
+  description: string
   // schemaHash: string
   // condition: Condition
-  // description: string
-  status: Status
+
+  // status: Status
 }
 
 export enum QuestType {
@@ -96,5 +98,4 @@ export enum Status {
   pending = 'Pending',
   accepted = 'Accepted',
   rejected = 'Rejected',
-  claimed = 'Claimed',
 }

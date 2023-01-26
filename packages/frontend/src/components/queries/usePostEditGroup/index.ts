@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios'
-import type { CreateGroupParams } from './usePostEditGroup.types'
+import type { EditGroupParams } from './usePostEditGroup.types'
 import { CREATE_GROUP } from './usePostEditGroup.constants'
 
 const usePostEditGroup = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
 
-  const editGroup = async (params: CreateGroupParams) => {
+  const editGroup = async (params: EditGroupParams) => {
     setIsLoading(true)
 
     try {

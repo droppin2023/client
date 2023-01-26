@@ -42,7 +42,7 @@ const BadgePage = ({ id }: { id: number }) => {
       <BadgeClaimedSection
         address={mockBadge.address}
         claimedBadge={{
-          isClaimed: mockClamedBadge.isClaimed,
+          // isClaimed: mockClamedBadge.isClaimed,
           address: mockClamedBadge.address,
           tokenId: mockClamedBadge.tokenId,
           tokenStandard: mockClamedBadge.tokenStandard,
