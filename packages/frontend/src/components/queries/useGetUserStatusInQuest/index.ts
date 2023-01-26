@@ -37,7 +37,7 @@ const normalizeData = (
 }
 
 // THIS IS OUR QUERY HOOOK
-const useGetUserStatusInQuest = ({ communityId, questId, username }: GetUserStatusQuestParams) => {
+const useGetUserStatusInQuest = ({ questId, username }: GetUserStatusQuestParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<GetUserStatusQuestResponse>(
     normalizeData(undefined) as GetUserStatusQuestResponse,
@@ -49,7 +49,7 @@ const useGetUserStatusInQuest = ({ communityId, questId, username }: GetUserStat
 
     axios
       .get<GetUserStatusQuestResponse>(
-        `${GET_COMMUNITY}/?communityId=${communityId}&questId=${questId}&username=${username}`,
+        `${GET_COMMUNITY}/?questId=${questId}&username=${username}`,
         {
           headers: {
             'Content-Type': '*/*',

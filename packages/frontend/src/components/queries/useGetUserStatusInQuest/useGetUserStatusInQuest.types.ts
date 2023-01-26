@@ -3,7 +3,6 @@
 import { Community, Quest, Status } from '../common'
 
 export interface GetUserStatusQuestParams {
-  communityId: number
   questId: number
   username: string
 }

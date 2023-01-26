@@ -5,8 +5,7 @@ import axios from 'axios'
 
 import type { FetchQuestDetailParams, FetchQuestDetailResponse } from './useFetchBadgeDetail.types'
 import { GET_COMMUNITY } from './userFetchBadgeDetail.constants'
-import { stringify } from 'querystring'
-import { QuestType, Status } from '../common'
+import { QuestType } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchQuestDetailResponse | undefined): FetchQuestDetailResponse => {
@@ -28,7 +27,7 @@ const normalizeData = (data: FetchQuestDetailResponse | undefined): FetchQuestDe
 }
 
 // THIS IS OUR QUERY HOOOK
-const useFetchQuestDetail = ({ groupId, questId }: FetchQuestDetailParams) => {
+const useFetchQuestDetail = ({ questId }: FetchQuestDetailParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchQuestDetailResponse>(
     normalizeData(undefined) as FetchQuestDetailResponse,
@@ -39,7 +38,7 @@ const useFetchQuestDetail = ({ groupId, questId }: FetchQuestDetailParams) => {
     setIsLoading(true)
 
     axios
-      .get<FetchQuestDetailResponse>(`${GET_COMMUNITY}/?groupId=${groupId}&questId=${questId}`, {
+      .get<FetchQuestDetailResponse>(`${GET_COMMUNITY}/?questId=${questId}`, {
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',
