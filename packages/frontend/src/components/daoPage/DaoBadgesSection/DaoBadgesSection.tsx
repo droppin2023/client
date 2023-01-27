@@ -7,16 +7,16 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
 import QuestBadge from '@components/shared/QuestBadge'
-import QuestCard from '../../shared/QuestCard'
+import QuestCard from '@components/shared/QuestCard'
 
-import BadgeForm from '../../shared/BadgeForm'
-import QuestForm from './components/QuestForm'
+import BadgeForm from '@components/shared/BadgeForm'
+import QuestForm from '@components/shared/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
 // TODO: integrate real data
 import { QuestType } from '@components/queries/common'
-import { MOCK_DAO_LIST } from '@mockData'
 import DaoCard from '@components/shared/DaoCard'
+import { MOCK_DAO_LIST } from '@mockData'
 
 const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadgesSectionProps) => {
   const { repUnit, isAdmin, id } = useDaoPageContext()
@@ -112,6 +112,7 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
         groupId={id}
         isOpen={isCreateQuestOpen}
         onClose={() => setIsCreateQuestOpen(false)}
+        repUnit={repUnit}
       />
       <BadgeForm
         isOpen={isCreateBadgeOpen}

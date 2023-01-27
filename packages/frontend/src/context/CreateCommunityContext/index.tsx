@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 
-import { Category } from '@components/queries/common'
+import { Category, Quest } from '@components/queries/common'
 
 import type {
   CreateCommunityContextValue,
@@ -16,6 +16,8 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
   const [website, setWebsite] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<Category>(Category.Other)
   const [repUnit, setRepUnit] = useState<string>('')
+  const [questsDiscord, setQuestsDiscord] = useState<Quest[]>([])
+  const [questsForm, setQuestsForm] = useState<Quest[]>([])
 
   return (
     <CreateCommunityContext.Provider
@@ -26,12 +28,16 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
         website,
         selectedCategory,
         repUnit,
+        questsDiscord,
+        questsForm,
         setLocalImgUrl,
         setName,
         setDescription,
         setWebsite,
         setSelectedCategory,
         setRepUnit,
+        setQuestsDiscord,
+        setQuestsForm,
       }}
     >
       {children}
