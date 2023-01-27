@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Stat, Text } from '@chakra-ui/react'
 
 import { background2 } from '@constants/colors'
 
@@ -12,10 +12,12 @@ import UserSideModal from './components/UserSideModal'
 import { COLOR_MAPPING } from './QuestCard.constants'
 import type { QuestCardProps } from './QuestCard.types'
 import { MOCK_QUEST_STATUS, ONE_QUEST_DETAIL } from '@mockData'
+import NotLoginedModal from '../NotLoginedModal'
 
 const QuestCard = ({ quest, questType }: QuestCardProps) => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
   const [isUserSideModalOpen, setIsUserSideModalOpen] = useState(false)
+  const [isNotLoginedModalOpen, setIsNotLoginedModalOpen] = useState(false)
   // TODO : add real quest data from {quest.id, username}
   const userQuest = MOCK_QUEST_STATUS
   const isLogin = false
@@ -25,9 +27,11 @@ const QuestCard = ({ quest, questType }: QuestCardProps) => {
   // TODO : isLogin
 
   const handleCardClick = () => {
-    if (!isLogin) setIsDetailModalOpen(true)
-    else setIsUserSideModalOpen(true)
-    console.log('wgweag')
+    if (!isLogin) setIsNotLoginedModalOpen(true)
+    else {
+      if (status == Status.noStatus) setIsDetailModalOpen(true)
+      else setIsUserSideModalOpen(true)
+    }
   }
 
   return (
@@ -74,6 +78,10 @@ const QuestCard = ({ quest, questType }: QuestCardProps) => {
           community={userQuest.community}
         />
       )}
+      <NotLoginedModal
+        isOpen={isNotLoginedModalOpen}
+        onClose={() => setIsNotLoginedModalOpen(false)}
+      />
     </>
   )
 }
