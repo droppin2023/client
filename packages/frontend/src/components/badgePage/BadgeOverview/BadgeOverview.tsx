@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-import { Badge, Box, Button, Flex, HStack, IconButton, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Text, VStack } from '@chakra-ui/react'
 
 import AvatarPreview from '@components/shared/AvatarPreview'
 
@@ -12,6 +12,7 @@ import bannerOrnament from './assets/banner-ornament.svg'
 
 import * as sty from './BadgeOverview.styles'
 import type { BadgeOverviewProps } from './BadgeOverview.types'
+import ClaimModal from './components/ClaimModal'
 
 const BadgeOverview = ({
   id,
@@ -27,6 +28,8 @@ const BadgeOverview = ({
   requiredEngageScore,
   requiredPrice,
 }: BadgeOverviewProps) => {
+  const [isClaimModalOpen, setIsClaimModalOpen] = useState(false)
+
   return (
     <>
       <Box width="100%" height="auto" position="relative">
@@ -86,7 +89,12 @@ const BadgeOverview = ({
                   <Text as="b">
                     {requiredPrice.number} {requiredPrice.unit}
                   </Text>
-                  <Button leftIcon={<Text>+</Text>} bg={orange} _hover={{ bg: orangeHighlight }}>
+                  <Button
+                    onClick={() => setIsClaimModalOpen(true)}
+                    leftIcon={<Text>+</Text>}
+                    bg={orange}
+                    _hover={{ bg: orangeHighlight }}
+                  >
                     Claim Now
                   </Button>
                 </HStack>
@@ -109,6 +117,13 @@ const BadgeOverview = ({
         category={category}
         owner={owner}
       /> */}
+      <ClaimModal
+        isOpen={isClaimModalOpen}
+        onClose={() => setIsClaimModalOpen(false)}
+        badgeName={name}
+        badgeLogo={logo}
+        badgePrice={requiredPrice}
+      />
     </>
   )
 }
