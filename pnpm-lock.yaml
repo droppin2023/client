@@ -81,6 +81,7 @@ importers:
       '@babel/core': ^7.20.2
       '@babel/preset-react': ^7.18.6
       '@babel/preset-typescript': ^7.18.6
+      '@chakra-ui/icons': ^2.0.17
       '@chakra-ui/react': 2.4.2
       '@droppin/contracts': workspace:*
       '@emotion/babel-plugin': ^11.10.5
@@ -126,6 +127,7 @@ importers:
       use-async-effect: ^2.2.7
       wagmi: ^0.8.5
     dependencies:
+      '@chakra-ui/icons': 2.0.17_xivvz2l3eyrkvszadds3phcwaq
       '@chakra-ui/react': 2.4.2_uibis2bm44wz3hkzfktj2mle4y
       '@droppin/contracts': link:../contracts
       '@emotion/css': 11.10.5_@babel+core@7.20.12
@@ -821,6 +823,28 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@chakra-ui/icon/3.0.16_xivvz2l3eyrkvszadds3phcwaq:
+    resolution: {integrity: sha512-RpA1X5Ptz8Mt39HSyEIW1wxAz2AXyf9H0JJ5HVx/dBdMZaGMDJ0HyyPBVci0m4RCoJuyG1HHG/DXJaVfUTVAeg==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18 || ^18.0.0'
+    dependencies:
+      '@chakra-ui/shared-utils': 2.0.5
+      '@chakra-ui/system': 2.3.4_dovxhg2tvkkxkdnqyoum6wzcxm
+      react: 18.2.0
+    dev: false
+
+  /@chakra-ui/icons/2.0.17_xivvz2l3eyrkvszadds3phcwaq:
+    resolution: {integrity: sha512-HMJP0WrJgAmFR9+Xh/CBH0nVnGMsJ4ZC8MK6tMgxPKd9/muvn0I4hsicHqdPlLpmB0TlxlhkBAKaVMtOdz6F0w==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18 || ^18.0.0'
+    dependencies:
+      '@chakra-ui/icon': 3.0.16_xivvz2l3eyrkvszadds3phcwaq
+      '@chakra-ui/system': 2.3.4_dovxhg2tvkkxkdnqyoum6wzcxm
+      react: 18.2.0
+    dev: false
+
   /@chakra-ui/image/2.0.12_xivvz2l3eyrkvszadds3phcwaq:
     resolution: {integrity: sha512-uclFhs0+wq2qujGu8Wk4eEWITA3iZZQTitGiFSEkO9Ws5VUH+Gqtn3mUilH0orubrI5srJsXAmjVTuVwge1KJQ==}
     peerDependencies:
@@ -1347,6 +1371,10 @@ packages:
 
   /@chakra-ui/shared-utils/2.0.3:
     resolution: {integrity: sha512-pCU+SUGdXzjAuUiUT8mriekL3tJVfNdwSTIaNeip7k/SWDzivrKGMwAFBxd3XVTDevtVusndkO4GJuQ3yILzDg==}
+    dev: false
+
+  /@chakra-ui/shared-utils/2.0.5:
+    resolution: {integrity: sha512-4/Wur0FqDov7Y0nCXl7HbHzCg4aq86h+SXdoUeuCMD3dSj7dpsVnStLYhng1vxvlbUnLpdF4oz5Myt3i/a7N3Q==}
     dev: false
 
   /@chakra-ui/skeleton/2.0.18_xivvz2l3eyrkvszadds3phcwaq:

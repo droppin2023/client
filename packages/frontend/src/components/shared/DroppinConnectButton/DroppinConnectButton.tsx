@@ -8,10 +8,10 @@ import { danger, dangerHighlight, orange, orangeHighlight } from '@constants/col
 
 import ProfileDropdown from './components/ProfileDropdown'
 
+import * as sty from './DroppinConnectButton.styles'
+
 const DroppinConnectButton = () => {
-  const handleClickProfile = (openAccountModal: () => void) => {
-    // openAccountModal()
-  }
+  // TODO: get real user data
 
   return (
     <ConnectButton.Custom>
@@ -104,11 +104,20 @@ const DroppinConnectButton = () => {
                     {chain.name}
                   </Button>
 
-                  <ProfileDropdown
-                    openAccountModal={openAccountModal}
-                    walletAddress={account.displayName}
-                  >
-                    <Image src={account.ensAvatar as string} alt="Wallet avatar" />
+                  <Button onClick={openAccountModal} type="button">
+                    {account.displayName}
+                    {account.displayBalance ? ` (${account.displayBalance})` : ''}
+                  </Button>
+
+                  <ProfileDropdown>
+                    {/* TOD0: get user image here */}
+                    <Image
+                      src="https://picsum.photos/id/40/200"
+                      alt="Wallet avatar"
+                      width={36}
+                      height={36}
+                      css={[sty.profileImg]}
+                    />
                   </ProfileDropdown>
                 </div>
               )

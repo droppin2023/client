@@ -1,9 +1,10 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { ChevronRightIcon } from '@chakra-ui/icons'
+import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import { background2, secondaryWeak } from '@constants/colors'
 import { useRouter } from 'next/router'
 import { ProfileDropdownProps } from './ProfileDropdown.types'
 
-const ProfileDropdown = ({ children, openAccountModal, walletAddress }: ProfileDropdownProps) => {
+const ProfileDropdown = ({ children }: ProfileDropdownProps) => {
   const router = useRouter()
 
   // TODO: later on integrate real data for the routes
@@ -21,15 +22,13 @@ const ProfileDropdown = ({ children, openAccountModal, walletAddress }: ProfileD
       name: 'Create',
       onClick: () => router.push('/create'),
     },
-    {
-      name: `View Wallet ${walletAddress}`,
-      onClick: openAccountModal,
-    },
   ]
 
   return (
     <Menu>
-      <MenuButton as={Button}>{children}</MenuButton>
+      <MenuButton as={Box} cursor="pointer">
+        {children}
+      </MenuButton>
       <MenuList bg={background2} border="none">
         {menuData.map((item, index) => (
           <MenuItem
@@ -40,7 +39,10 @@ const ProfileDropdown = ({ children, openAccountModal, walletAddress }: ProfileD
             _hover={{ bg: secondaryWeak }}
             onClick={item.onClick}
           >
-            {item.name}
+            <Flex justifyContent="space-between" alignItems="center" width="100%">
+              <Text>{item.name}</Text>
+              <ChevronRightIcon />
+            </Flex>
           </MenuItem>
         ))}
       </MenuList>
