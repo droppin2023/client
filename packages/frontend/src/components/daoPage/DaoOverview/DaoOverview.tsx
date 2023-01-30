@@ -45,7 +45,9 @@ const DaoOverview = ({
   const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(false)
 
   const { isAdmin, repUnit } = useDaoPageContext()
-
+  const onHandleJoin = () => {
+    console.log('get membership NFT')
+  }
   return (
     <>
       <Box width="100%" height="auto" position="relative">
@@ -85,7 +87,12 @@ const DaoOverview = ({
                     Edit
                   </Button>
                 ) : (
-                  <Button leftIcon={<Text>+</Text>} bg={orange} _hover={{ bg: orangeHighlight }}>
+                  <Button
+                    leftIcon={<Text>+</Text>}
+                    bg={orange}
+                    _hover={{ bg: orangeHighlight }}
+                    onClick={onHandleJoin}
+                  >
                     Join
                   </Button>
                 )}

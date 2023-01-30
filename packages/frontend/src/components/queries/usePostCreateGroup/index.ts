@@ -11,10 +11,11 @@ const usePostCreateGroup = () => {
 
   const createGroup = async (params: CreateGroupParams) => {
     setIsLoading(true)
-
+    setError(null)
     try {
       const tsx = await coreContract?.createGroup(params.name)
       const transactionHash = await tsx.wait()
+      console.log(transactionHash)
       console.log({ transactionHash })
       const { data, status } = await axios.post(CREATE_GROUP, {
         transactionHash,

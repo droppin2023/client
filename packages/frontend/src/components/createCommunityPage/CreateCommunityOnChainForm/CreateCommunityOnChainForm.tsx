@@ -39,7 +39,7 @@ import { useCreateCommunityContext } from '@context/CreateCommunityContext'
 import * as globalSty from '@styles'
 
 const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => {
-  const { repUnit, setRepUnit, questsDiscord, questsForm } = useCreateCommunityContext()
+  const { questsDiscord, questsForm } = useCreateCommunityContext()
 
   const [isQuestFormOpen, setIsQuestFormOpen] = useState(false)
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
@@ -56,6 +56,7 @@ const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => 
   }
 
   const handleFinish = () => {
+    console.log(questsDiscord, questsForm)
     if (onNext) onNext()
   }
 
@@ -161,19 +162,6 @@ const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => 
               </>
             )}
           </VStack>
-        </FormControl>
-
-        <FormControl mt={4} isRequired>
-          <FormLabel>Name your community’s Engagement score</FormLabel>
-          <FormHelperText css={[globalSty.helperText]}>
-            Members can get Community Engagement score after they complete their quest
-          </FormHelperText>
-          <Input
-            value={repUnit}
-            onChange={(e) => setRepUnit(e.target.value)}
-            variant="filled"
-            placeholder="e.g. DROP"
-          />
         </FormControl>
 
         <FormControl mt={4}>

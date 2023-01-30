@@ -26,6 +26,7 @@ import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
 import { DAO_CATEGORIES } from '@constants/categories'
 import * as sty from './CreateCommunityInfoForm.styles'
 import { CreateCommunityInfoFormProps } from './CreateCommunityInfoForm.types'
+import usePostCreateGroup from '@components/queries/usePostCreateGroup'
 
 const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProps) => {
   const {
@@ -35,14 +36,44 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
     website,
     selectedCategory,
     setLocalImgUrl,
+    repUnit,
+    setRepUnit,
     setName,
     setDescription,
     setWebsite,
     setSelectedCategory,
   } = useCreateCommunityContext()
 
+  const { createGroup, isLoading, error } = usePostCreateGroup()
+
+  //TODO : Discord
+  const discord = {
+    link: 'https://via.discord.com/300',
+    guildId: 223523,
+  }
+
   const handleSelectCategory = (nextValue: string) => {
     setSelectedCategory(nextValue as Category)
+  }
+
+  const onHandleGroupCreation = async () => {
+    console.log(name, website, localImgUrl, description, selectedCategory)
+    const params = {
+      name,
+      link: website,
+      logo: localImgUrl,
+      description,
+      category: selectedCategory,
+      discord: JSON.stringify(discord),
+    }
+    console.log(params, isLoading)
+    const res = await createGroup(params)
+    console.log(isLoading, res)
+
+    //TODO : Check first
+    if (onNext) {
+      onNext()
+    }
   }
 
   return (
@@ -67,6 +98,19 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
           placeholder="e.g. DroppinDAO"
           onChange={(e) => setName(e.target.value)}
           value={name}
+        />
+      </FormControl>
+
+      <FormControl mt={4} isRequired>
+        <FormLabel>Name your community’s Engagement score</FormLabel>
+        <FormHelperText css={[globalSty.helperText]}>
+          Members can get Community Engagement score after they complete their quest
+        </FormHelperText>
+        <Input
+          value={repUnit}
+          onChange={(e) => setRepUnit(e.target.value)}
+          variant="filled"
+          placeholder="e.g. DROP"
         />
       </FormControl>
 
@@ -152,7 +196,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
         </Button>
 
         <Button
-          onClick={onNext}
+          onClick={onHandleGroupCreation}
           alignSelf="flex-end"
           bg={primary}
           _hover={{ bg: primaryHighlight }}
