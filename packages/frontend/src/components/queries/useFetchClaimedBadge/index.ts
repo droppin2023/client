@@ -1,20 +1,18 @@
 // PUT THE MAIN HOOK LOGIC HERE
 
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 import type {
   FetchClaimedBadgeParams,
   FetchClaimedBadgeResponse,
 } from './useFetchClaimedBadge.types'
 import { GET_COMMUNITY } from './userFetchClaimedBadge.constants'
-import { stringify } from 'querystring'
-import { QuestType, Status } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
-const normalizeData = (data: FetchClaimedBadgeResponse | undefined): FetchClaimedBadgeResponse => {
+const normalizeData = (data: FetchClaimedBadgeResponse | undefined) => {
   return {
-    isClaimed: data?.isClaimed || false,
+    // isClaimed: data?.isClaimed || false,
     address: data?.address || '',
     tokenId: data?.tokenId || 0,
     tokenStandard: data?.tokenStandard || '',

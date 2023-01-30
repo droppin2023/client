@@ -7,14 +7,27 @@ import BadgeClaimedSection from '@components/badgePage/BadgeClaimedSection'
 import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
 import BadgeOverview from '@components/badgePage/BadgeOverview'
 import useFetchBadgeDetail from '@components/queries/useFetchBadgeDetail'
-import { MOCK_CLAIMED_BADGE } from '@mockData'
+import useFetchClaimedBadge from '@components/queries/useFetchClaimedBadge'
+import { useUserContext } from '@context/UserContext'
 
 const BadgePage = ({ id }: { id: number }) => {
   // TODO: integrate real data
   // const badgeData = MOCK_BADGE
-  const mockClamedBadge = MOCK_CLAIMED_BADGE
+  // const claimedBadgeData = MOCK_CLAIMED_BADGE
 
-  const { data: badgeData, isLoading, error } = useFetchBadgeDetail({ badgeId: id })
+  const { user } = useUserContext()
+
+  const {
+    data: badgeData,
+    isLoading: isFetchBadgeDetailsLoading,
+    error: isFetchBadgeDetailsError,
+  } = useFetchBadgeDetail({ badgeId: id })
+
+  const {
+    data: claimedBadgeData,
+    isLoading: isFetchClaimedBadgeLoading,
+    error: isFetchClaimedBadgeError,
+  } = useFetchClaimedBadge({ badgeId: id, username: user?.username as string })
 
   return (
     <VStack spacing="40px" marginBottom="100px">
@@ -32,23 +45,26 @@ const BadgePage = ({ id }: { id: number }) => {
         requiredQuests={badgeData.requiredQuests}
         requiredEngageScore={badgeData.requiredEngageScore}
         requiredPrice={badgeData.requiredPrice}
-        isLoading={isLoading}
+        isLoading={isFetchBadgeDetailsLoading}
       />
       <BadgeConditionSection
         requiredQuests={badgeData.requiredQuests}
         requiredEngageScore={badgeData.requiredEngageScore}
         requiredPrice={badgeData.requiredPrice}
-        isLoading={isLoading}
+        isLoading={isFetchBadgeDetailsLoading}
       />
+
+      {/* TODO: would need a bit of explanation on this part */}
       <BadgeClaimedSection
         address={badgeData.address}
         claimedBadge={{
-          // isClaimed: mockClamedBadge.isClaimed,
-          address: mockClamedBadge.address,
-          tokenId: mockClamedBadge.tokenId,
-          tokenStandard: mockClamedBadge.tokenStandard,
-          chain: mockClamedBadge.chain,
+          // isClaimed: claimedBadgeData.isClaimed,
+          address: claimedBadgeData.address,
+          tokenId: claimedBadgeData.tokenId,
+          tokenStandard: claimedBadgeData.tokenStandard,
+          chain: claimedBadgeData.chain,
         }}
+        isLoading={isFetchClaimedBadgeLoading}
       />
     </VStack>
   )

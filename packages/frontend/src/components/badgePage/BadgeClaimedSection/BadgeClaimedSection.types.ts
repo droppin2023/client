@@ -7,4 +7,5 @@ export interface BadgeClaimedSectionProps {
     tokenStandard: string
     chain: string
   }
+  isLoading: boolean
 }

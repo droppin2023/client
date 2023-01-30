@@ -8,7 +8,7 @@ import type { FetchBadgeDetailParams, FetchBadgeDetailResponse } from './useFetc
 import { GET_BADGE_DETAIL } from './userFetchBadgeDetail.constants'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
-const normalizeData = (data: FetchBadgeDetailResponse | undefined): FetchBadgeDetailResponse => {
+const normalizeData = (data: FetchBadgeDetailResponse | undefined) => {
   return {
     id: data?.id || 0,
     description: data?.description || '',
