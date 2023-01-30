@@ -15,7 +15,7 @@ const CreateCommunityCoverSection = ({ onNext }: CreateCommunityCoverSectionProp
       </HStack>
     )
   }
-
+  // TODO : We have to check isLogin before onNext
   return (
     <Flex width="100%" height="90vh" justifyContent={'center'} alignItems="center">
       <Flex justifyContent={'space-between'} alignItems="center">

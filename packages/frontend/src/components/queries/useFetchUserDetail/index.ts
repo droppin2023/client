@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import type { FetchUserDetailParams, FetchUserDetailResponse } from './useFetchUserDetail.types'
-import { GET_COMMUNITY } from './userFetchUserDetail.constants'
+import { GET_USER } from './userFetchUserDetail.constants'
 import { stringify } from 'querystring'
 import { Status } from '../common'
 
@@ -24,6 +24,7 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
         description: '',
         groupId: 0,
         groupName: '',
+        address: '',
       },
     ],
     communitiesWithBadge: data?.communitiesWithBadge || [
@@ -40,9 +41,9 @@ const normalizeData = (data: FetchUserDetailResponse | undefined): FetchUserDeta
             logo: '',
             name: '',
             description: '',
-            isClaimed: false,
             groupId: 0,
             groupName: '',
+            address: '',
           },
         ],
       },
@@ -92,7 +93,8 @@ const useFetchUserDetail = ({ username }: FetchUserDetailParams) => {
     setIsLoading(true)
 
     axios
-      .get<FetchUserDetailResponse>(`${GET_COMMUNITY}/?username=${username}`, {
+      .get<FetchUserDetailResponse>(`${GET_USER}`, {
+        params: { username: username },
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',
