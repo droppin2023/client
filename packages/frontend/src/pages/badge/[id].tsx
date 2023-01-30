@@ -55,17 +55,19 @@ const BadgePage = ({ id }: { id: number }) => {
       />
 
       {/* TODO: would need a bit of explanation on this part */}
-      <BadgeClaimedSection
-        address={badgeData.address}
-        claimedBadge={{
-          // isClaimed: claimedBadgeData.isClaimed,
-          address: claimedBadgeData.address,
-          tokenId: claimedBadgeData.tokenId,
-          tokenStandard: claimedBadgeData.tokenStandard,
-          chain: claimedBadgeData.chain,
-        }}
-        isLoading={isFetchClaimedBadgeLoading}
-      />
+      {claimedBadgeData.address.length > 0 && (
+        <BadgeClaimedSection
+          address={badgeData.address}
+          claimedBadge={{
+            // isClaimed: claimedBadgeData.isClaimed,
+            address: claimedBadgeData.address,
+            tokenId: claimedBadgeData.tokenId,
+            tokenStandard: claimedBadgeData.tokenStandard,
+            chain: claimedBadgeData.chain,
+          }}
+          isLoading={isFetchClaimedBadgeLoading}
+        />
+      )}
     </VStack>
   )
 }
