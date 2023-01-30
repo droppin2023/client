@@ -11,37 +11,37 @@ import { MOCK_CLAIMED_BADGE } from '@mockData'
 
 const BadgePage = ({ id }: { id: number }) => {
   // TODO: integrate real data
-  // const mockBadge = MOCK_BADGE
+  // const badgeData = MOCK_BADGE
   const mockClamedBadge = MOCK_CLAIMED_BADGE
 
-  const { data: mockBadge, isLoading, error } = useFetchBadgeDetail({ badgeId: id })
+  const { data: badgeData, isLoading, error } = useFetchBadgeDetail({ badgeId: id })
 
   return (
     <VStack spacing="40px" marginBottom="100px">
       {/* TODO: integrate discord */}
       <BadgeOverview
-        id={mockBadge.id}
-        name={mockBadge.name}
-        symbol={mockBadge.symbol}
-        logo={mockBadge.logo}
-        community={mockBadge.community}
-        description={mockBadge.description}
-        isDefault={mockBadge.isDefault}
-        address={mockBadge.address}
-        holderList={mockBadge.holderList}
-        requiredQuests={mockBadge.requiredQuests}
-        requiredEngageScore={mockBadge.requiredEngageScore}
-        requiredPrice={mockBadge.requiredPrice}
+        id={badgeData.id}
+        name={badgeData.name}
+        symbol={badgeData.symbol}
+        logo={badgeData.logo}
+        community={badgeData.community}
+        description={badgeData.description}
+        isDefault={badgeData.isDefault}
+        address={badgeData.address}
+        holderList={badgeData.holderList}
+        requiredQuests={badgeData.requiredQuests}
+        requiredEngageScore={badgeData.requiredEngageScore}
+        requiredPrice={badgeData.requiredPrice}
         isLoading={isLoading}
       />
       <BadgeConditionSection
-        requiredQuests={mockBadge.requiredQuests}
-        requiredEngageScore={mockBadge.requiredEngageScore}
-        requiredPrice={mockBadge.requiredPrice}
+        requiredQuests={badgeData.requiredQuests}
+        requiredEngageScore={badgeData.requiredEngageScore}
+        requiredPrice={badgeData.requiredPrice}
         isLoading={isLoading}
       />
       <BadgeClaimedSection
-        address={mockBadge.address}
+        address={badgeData.address}
         claimedBadge={{
           // isClaimed: mockClamedBadge.isClaimed,
           address: mockClamedBadge.address,
