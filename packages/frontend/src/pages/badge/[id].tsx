@@ -6,12 +6,15 @@ import 'twin.macro'
 import BadgeClaimedSection from '@components/badgePage/BadgeClaimedSection'
 import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
 import BadgeOverview from '@components/badgePage/BadgeOverview'
-import { MOCK_BADGE, MOCK_CLAIMED_BADGE } from '@mockData'
+import useFetchBadgeDetail from '@components/queries/useFetchBadgeDetail'
+import { MOCK_CLAIMED_BADGE } from '@mockData'
 
 const BadgePage = ({ id }: { id: number }) => {
   // TODO: integrate real data
-  const mockBadge = MOCK_BADGE
+  // const mockBadge = MOCK_BADGE
   const mockClamedBadge = MOCK_CLAIMED_BADGE
+
+  const { data: mockBadge, isLoading, error } = useFetchBadgeDetail({ badgeId: id })
 
   return (
     <VStack spacing="40px" marginBottom="100px">
@@ -29,11 +32,13 @@ const BadgePage = ({ id }: { id: number }) => {
         requiredQuests={mockBadge.requiredQuests}
         requiredEngageScore={mockBadge.requiredEngageScore}
         requiredPrice={mockBadge.requiredPrice}
+        isLoading={isLoading}
       />
       <BadgeConditionSection
         requiredQuests={mockBadge.requiredQuests}
         requiredEngageScore={mockBadge.requiredEngageScore}
         requiredPrice={mockBadge.requiredPrice}
+        isLoading={isLoading}
       />
       <BadgeClaimedSection
         address={mockBadge.address}
@@ -50,11 +55,11 @@ const BadgePage = ({ id }: { id: number }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const daoID = parseInt(context.params?.id as string)
+  const badgeID = parseInt(context.params?.id as string)
 
   return {
     props: {
-      id: daoID,
+      id: badgeID,
     },
   }
 }

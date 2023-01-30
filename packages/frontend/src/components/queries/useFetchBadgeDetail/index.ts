@@ -1,12 +1,11 @@
 // PUT THE MAIN HOOK LOGIC HERE
 
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
+import { QuestType } from '../common'
 import type { FetchBadgeDetailParams, FetchBadgeDetailResponse } from './useFetchBadgeDetail.types'
-import { GET_COMMUNITY } from './userFetchBadgeDetail.constants'
-import { stringify } from 'querystring'
-import { QuestType, Status } from '../common'
+import { GET_BADGE_DETAIL } from './userFetchBadgeDetail.constants'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchBadgeDetailResponse | undefined): FetchBadgeDetailResponse => {
@@ -71,7 +70,7 @@ const useFetchBadgeDetail = ({ badgeId }: FetchBadgeDetailParams) => {
     setIsLoading(true)
 
     axios
-      .get<FetchBadgeDetailResponse>(`${GET_COMMUNITY}/?id=${badgeId}`, {
+      .get<FetchBadgeDetailResponse>(`${GET_BADGE_DETAIL}/${badgeId}`, {
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',
