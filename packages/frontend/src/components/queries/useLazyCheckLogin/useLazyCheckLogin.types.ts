@@ -5,6 +5,7 @@ export interface CheckLoginParams {
 }
 
 export interface CheckLoginResponse {
-  isLogined: boolean
-  username: string
+  isSignedUp: boolean
+  username?: string
+  msg?: string
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import Image from 'next/image'
 
 import { ConnectButton } from '@rainbow-me/rainbowkit'
@@ -5,6 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { Button } from '@chakra-ui/react'
 
 import { danger, dangerHighlight, orange, orangeHighlight } from '@constants/colors'
+import { useUserContext } from '@context/UserContext'
 
 import ProfileDropdown from './components/ProfileDropdown'
 
@@ -12,6 +14,8 @@ import * as sty from './DroppinConnectButton.styles'
 
 const DroppinConnectButton = () => {
   // TODO: get real user data
+
+  const { logIn, user, isLoggedIn } = useUserContext()
 
   return (
     <ConnectButton.Custom>
@@ -32,6 +36,10 @@ const DroppinConnectButton = () => {
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === 'authenticated')
+
+        if (connected) {
+          if (!isLoggedIn) logIn(account?.address as string)
+        }
 
         return (
           <div

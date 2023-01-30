@@ -12,6 +12,8 @@ import {
   FormLabel,
   HStack,
   Input,
+  InputGroup,
+  InputLeftAddon,
   SimpleGrid,
   Text,
   Textarea,
@@ -75,12 +77,17 @@ const SignupForm = () => {
                     Your username cannot be changed and must be unique after signing up, please
                     choose wisely.
                   </FormHelperText>
-                  <Input
-                    variant="filled"
-                    placeholder="Write your username here"
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username}
-                  />
+                  <InputGroup>
+                    <InputLeftAddon>
+                      <Text>@</Text>
+                    </InputLeftAddon>
+                    <Input
+                      variant="filled"
+                      placeholder="Write your username here"
+                      onChange={(e) => setUsername(e.target.value)}
+                      value={username}
+                    />
+                  </InputGroup>
                 </FormControl>
 
                 <FormControl mt={4}>
