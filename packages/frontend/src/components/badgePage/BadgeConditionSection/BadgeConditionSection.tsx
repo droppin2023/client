@@ -34,7 +34,7 @@ const BadgeConditionSection = ({
         <Flex justifyContent={'space-between'} alignItems="center" width="100%">
           <Text fontSize="2xl" as="b" lineHeight="64px" color={orange}>
             <HStack spacing={2}>
-              <span>Engagement</span>
+              <span>Quests</span>
             </HStack>
           </Text>
         </Flex>
@@ -90,52 +90,56 @@ const BadgeConditionSection = ({
             </>
           )}
         </VStack>
-        <VStack alignItems={'flex-start'} spacing={0}>
-          <Flex justifyContent={'space-between'} alignItems="center" width="100%">
-            <Text fontSize="2xl" as="b" lineHeight="64px" color={orange}>
-              <HStack spacing={2}>
-                <span>Engagement</span>
-              </HStack>
-            </Text>
-          </Flex>
-        </VStack>
-        <Skeleton isLoaded={!isLoading} width="100%">
-          <Flex
-            bgColor={background2}
-            borderRadius="16px"
-            padding="16px"
-            width="100%"
-            justifyContent={'space-between'}
-          >
-            <HStack spacing={10} alignItems="flex-start">
-              <Text
-                textAlign={'right'}
-                as="b"
-              >{`Should be at least ${requiredEngageScore.number} ${requiredEngageScore.unit}`}</Text>
-            </HStack>
-          </Flex>
-        </Skeleton>
-        <VStack alignItems={'flex-start'} spacing={0}>
-          <Flex justifyContent={'space-between'} alignItems="center" width="100%">
-            <Text fontSize="2xl" as="b" lineHeight="64px" color={orange}>
-              <HStack spacing={2}>
-                <span>Price</span>
-              </HStack>
-            </Text>
-          </Flex>
-        </VStack>
-        <Skeleton isLoaded={!isLoading} width="100%">
-          <Flex
-            bgColor={background2}
-            borderRadius="16px"
-            padding="16px"
-            width="100%"
-            justifyContent={'space-between'}
-          >
-            <Text textAlign={'right'} as="b">{`${requiredPrice.number}`}</Text>
-            <Text textAlign={'right'} as="b">{`${requiredPrice.unit}`}</Text>
-          </Flex>
-        </Skeleton>
+        <SimpleGrid columns={2} width="100%" gap={3}>
+          <Skeleton isLoaded={!isLoading} width="100%">
+            <VStack alignItems={'flex-start'} spacing={2}>
+              <Flex justifyContent={'space-between'} alignItems="center" width="100%">
+                <Text fontSize="2xl" as="b" lineHeight="64px" color={orange}>
+                  <HStack spacing={2}>
+                    <span>Engagement</span>
+                  </HStack>
+                </Text>
+              </Flex>
+
+              <Flex
+                bgColor={background2}
+                borderRadius="16px"
+                padding="16px"
+                width="100%"
+                justifyContent={'space-between'}
+              >
+                <HStack spacing={10} alignItems="flex-start">
+                  <Text
+                    textAlign={'right'}
+                    as="b"
+                  >{`Should be at least ${requiredEngageScore.number} ${requiredEngageScore.unit}`}</Text>
+                </HStack>
+              </Flex>
+            </VStack>
+          </Skeleton>
+          <Skeleton isLoaded={!isLoading} width="100%">
+            <VStack alignItems={'flex-start'} spacing={2}>
+              <Flex justifyContent={'space-between'} alignItems="center" width="100%">
+                <Text fontSize="2xl" as="b" lineHeight="64px" color={orange}>
+                  <HStack spacing={2}>
+                    <span>Price</span>
+                  </HStack>
+                </Text>
+              </Flex>
+
+              <Flex
+                bgColor={background2}
+                borderRadius="16px"
+                padding="16px"
+                width="100%"
+                justifyContent={'space-between'}
+              >
+                <Text textAlign={'right'} as="b">{`${requiredPrice.number}`}</Text>
+                <Text textAlign={'right'} as="b">{`${requiredPrice.unit}`}</Text>
+              </Flex>
+            </VStack>
+          </Skeleton>
+        </SimpleGrid>
       </VStack>
     </>
   )
