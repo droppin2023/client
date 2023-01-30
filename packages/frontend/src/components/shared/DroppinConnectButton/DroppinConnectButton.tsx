@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import Image from 'next/image'
 
 import { ConnectButton } from '@rainbow-me/rainbowkit'
@@ -5,6 +6,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { Button } from '@chakra-ui/react'
 
 import { danger, dangerHighlight, orange, orangeHighlight } from '@constants/colors'
+import { useUserContext } from '@context/UserContext'
 
 import ProfileDropdown from './components/ProfileDropdown'
 
@@ -12,6 +14,8 @@ import * as sty from './DroppinConnectButton.styles'
 
 const DroppinConnectButton = () => {
   // TODO: get real user data
+
+  const { user, isLoggedIn } = useUserContext()
 
   return (
     <ConnectButton.Custom>
@@ -109,16 +113,18 @@ const DroppinConnectButton = () => {
                     {account.displayBalance ? ` (${account.displayBalance})` : ''}
                   </Button>
 
-                  <ProfileDropdown>
-                    {/* TOD0: get user image here */}
-                    <Image
-                      src="https://picsum.photos/id/40/200"
-                      alt="Wallet avatar"
-                      width={36}
-                      height={36}
-                      css={[sty.profileImg]}
-                    />
-                  </ProfileDropdown>
+                  {isLoggedIn && (
+                    <ProfileDropdown>
+                      {/* TOD0: get user image here */}
+                      <Image
+                        src={user?.image as string}
+                        alt="Wallet avatar"
+                        width={36}
+                        height={36}
+                        css={[sty.profileImg]}
+                      />
+                    </ProfileDropdown>
+                  )}
                 </div>
               )
             })()}
