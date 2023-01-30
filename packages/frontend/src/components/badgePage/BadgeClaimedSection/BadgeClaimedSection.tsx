@@ -7,7 +7,7 @@ import type { BadgeClaimedSectionProps } from './BadgeClaimedSection.types'
 const BadgeClaimdSection = ({ address, claimedBadge }: BadgeClaimedSectionProps) => {
   return (
     <>
-      <VStack alignItems={'flex-start'} spacing={4} width={580}>
+      <VStack alignItems={'flex-start'} spacing={4} width="70%">
         <Flex justifyContent={'space-between'} alignItems="center" width="100%">
           <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
             <HStack spacing={2}>

@@ -1,16 +1,12 @@
-import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
-
-import { primary } from '@constants/colors'
-import { DaoPageProvider } from '@context/DaoPageContext'
+import { VStack } from '@chakra-ui/react'
 
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
-import { QuestType } from '@components/queries/common'
-import { MOCK_BADGE, MOCK_CLAIMED_BADGE } from '@mockData'
-import BadgeOverview from '@components/badgePage/BadgeOverview'
-import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
 import BadgeClaimedSection from '@components/badgePage/BadgeClaimedSection'
+import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
+import BadgeOverview from '@components/badgePage/BadgeOverview'
+import { MOCK_BADGE, MOCK_CLAIMED_BADGE } from '@mockData'
 
 const BadgePage = ({ id }: { id: number }) => {
   // TODO: integrate real data
@@ -53,14 +49,14 @@ const BadgePage = ({ id }: { id: number }) => {
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const daoID = parseInt(context.params?.id as string)
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const daoID = parseInt(context.params?.id as string)
 
-//   return {
-//     props: {
-//       id: daoID,
-//     },
-//   }
-// }
+  return {
+    props: {
+      id: daoID,
+    },
+  }
+}
 
 export default BadgePage

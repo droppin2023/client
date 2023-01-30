@@ -1,13 +1,12 @@
 import { Badge, Flex, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 
-import { background2, primary, orange, discordPurple, pink } from '@constants/colors'
+import { background2, discordPurple, orange, pink, primary } from '@constants/colors'
 
 import type { BadgeConditionSectionProps } from './BadgeConditionSection.types'
 
-import { QuestType } from '@components/queries/common'
 import Lock from '@components/icons/Lock'
+import { QuestType } from '@components/queries/common'
 import QuestCard from '@components/shared/QuestCard'
-import Award from '@components/icons/Award'
 
 const BadgeConditionSection = ({
   requiredQuests,
@@ -19,7 +18,7 @@ const BadgeConditionSection = ({
   const questsSubmitForm = requiredQuests[1]
   return (
     <>
-      <VStack alignItems={'flex-start'} spacing={0}>
+      <VStack alignItems={'flex-start'} spacing={0} width="70%">
         {' '}
         <Flex justifyContent={'space-between'} alignItems="center" width="100%">
           <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
