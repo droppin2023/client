@@ -8,8 +8,6 @@ export interface LoginParams {
 export interface UserContextValue {
   user: User | null
   isLoggedIn: boolean
-  logIn: (address: string) => void
-  logOut: () => void
   isLoading: boolean
 }
 

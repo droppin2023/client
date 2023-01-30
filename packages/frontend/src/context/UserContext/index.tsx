@@ -1,7 +1,8 @@
 import { User } from '@components/queries/common'
 import useLazyCheckLogin from '@components/queries/useLazyCheckLogin'
+import useLazyFetchUserDetail from '@components/queries/useLazyFetchUserDetail'
 import { useRouter } from 'next/router'
-import { createContext, useContext, useRef, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { useAccount, useDisconnect } from 'wagmi'
 
 import type { UserContextValue, UserProviderProps } from './UserContext.types'
@@ -14,38 +15,50 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(null)
 
   const { disconnect } = useDisconnect()
-  const { isConnected } = useAccount()
+
   const router = useRouter()
-  const cancelRef = useRef()
 
-  const { checkLogin, isLoading, error } = useLazyCheckLogin()
+  const { checkLogin, isLoading: checkLoginLoading, error: checkLoginError } = useLazyCheckLogin()
+  const {
+    fetchUserDetail,
+    isLoading: fetchUserDetailLoading,
+    error: fetchUserDetailError,
+  } = useLazyFetchUserDetail()
 
-  // referring to wallet connection here
-  const logIn = async (address: string) => {
-    const loginData = await checkLogin({ address: address.toLowerCase() })
+  const { address } = useAccount({
+    onConnect: async ({ address, isReconnected }) => {
+      const loginData = await checkLogin({ address: (address as string).toLowerCase() })
 
-    // if user not registered we redirect to registration
-    if (error) {
-      if (router.asPath !== '/signup' && isConnected) {
-        router.push('/signup')
+      // if user not registered we redirect to registration
+      if (checkLoginError) {
+        if (router.asPath !== '/signup') {
+          router.push('/signup')
+        }
+      } else {
+        const userData = await fetchUserDetail({ username: loginData?.username })
+
+        // load the user data to the user state
+        setUser({
+          username: userData?.username as string,
+          address: address as string,
+          image: userData?.image as string,
+          name: userData?.name as string,
+        })
+        setIsLoggedIn(true)
       }
-    } else {
-      console.log('[UserProvider]', `${loginData?.username} is registered`)
-
-      // load the user data to the user state
-    }
-  }
-
-  const logOut = () => {
-    setIsLoggedIn(false)
-    setUser(null)
-    disconnect()
-  }
+    },
+    onDisconnect: () => {
+      setIsLoggedIn(false)
+      setUser(null)
+    },
+  })
 
   // do the fun stuff
   return (
     <>
-      <UserContext.Provider value={{ isLoggedIn, user, logIn, logOut, isLoading }}>
+      <UserContext.Provider
+        value={{ isLoggedIn, user, isLoading: fetchUserDetailLoading && checkLoginLoading }}
+      >
         {children}
       </UserContext.Provider>
     </>

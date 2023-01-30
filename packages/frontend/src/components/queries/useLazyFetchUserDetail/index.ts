@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 import { Status } from '../common'
 import type { FetchUserDetailParams, FetchUserDetailResponse } from './useLazyFetchUserDetail.types'
-import { GET_COMMUNITY } from './userLazyFetchUserDetail.constants'
+import { GET_USER_DETAIL } from './userLazyFetchUserDetail.constants'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchUserDetailResponse | undefined) => {
@@ -80,16 +80,16 @@ const normalizeData = (data: FetchUserDetailResponse | undefined) => {
 }
 
 // THIS IS OUR QUERY HOOOK
-const useLazyFetchUserDetail = ({ username }: FetchUserDetailParams) => {
+const useLazyFetchUserDetail = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<unknown>()
 
-  const fetchUserDetail = async () => {
+  const fetchUserDetail = async ({ username }: FetchUserDetailParams) => {
     setIsLoading(true)
 
     try {
-      const res = await axios.get<FetchUserDetailResponse>(
-        `${GET_COMMUNITY}/?username=${username}`,
+      const res = await axios.get<{ data: FetchUserDetailResponse }>(
+        `${GET_USER_DETAIL}/${username}`,
         {
           headers: {
             'Content-Type': '*/*',
@@ -102,7 +102,7 @@ const useLazyFetchUserDetail = ({ username }: FetchUserDetailParams) => {
       setIsLoading(false)
 
       if (res.status === 200) {
-        return normalizeData(res.data)
+        return normalizeData(res.data.data)
       }
 
       throw 'Fetch User Detail Failed'
