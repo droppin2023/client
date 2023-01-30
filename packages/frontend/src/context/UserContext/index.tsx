@@ -37,6 +37,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
       } else {
         const userData = await fetchUserDetail({ username: loginData?.username })
 
+        //TODO: add discord tokens
+
         // load the user data to the user state
         setUser({
           username: userData?.username as string,
