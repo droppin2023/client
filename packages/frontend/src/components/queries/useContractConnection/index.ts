@@ -7,20 +7,16 @@ const useContractConnection = () => {
   const { data: signer } = useSigner()
 
   const badgeContract = useContract({
-    // address: '0x7330d3370e3ef493addb2641381cfce60c050ee7',
     address: env.droppinDiamond,
     abi: badgeContractAbi,
     signerOrProvider: signer,
   })
 
   const coreContract = useContract({
-    // address: '0x7330d3370e3ef493addb2641381cfce60c050ee7',
     address: env.droppinDiamond,
     abi: coreContractAbi,
     signerOrProvider: signer,
   })
-
-  console.log(badgeContract, env.droppinDiamond, 'agwegagawegwaegweagawegawegewag')
 
   return { signer, coreContract, badgeContract }
 }

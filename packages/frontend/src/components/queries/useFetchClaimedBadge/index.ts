@@ -31,7 +31,7 @@ const useFetchClaimedBadge = ({ badgeId }: FetchClaimedBadgeParams) => {
 
   const fetchClaimedBadge = async (params: FetchClaimedBadgeParams) => {
     setIsLoading(true)
-    console.log(params, badgeContract)
+    // console.log(params, badgeContract)
     try {
       const tsx = await badgeContract?.claimBadge(params.badgeId)
       const transactionHash = await tsx.wait()

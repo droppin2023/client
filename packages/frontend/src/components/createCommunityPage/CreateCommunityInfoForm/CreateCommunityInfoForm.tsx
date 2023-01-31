@@ -67,7 +67,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
   }
 
   const onHandleGroupCreation = async () => {
-    console.log(name, website, localImgUrl, description, selectedCategory)
+    // console.log(name, website, localImgUrl, description, selectedCategory)
     const params = {
       name,
       link: website,
@@ -78,7 +78,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
     }
 
     const res = await createGroup(params)
-    console.log(res, 'res')
+    // console.log(res, 'res')
     //TODO : Check first
     // if (onNext) {
     //   onNext()
