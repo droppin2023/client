@@ -9,14 +9,13 @@ import { UserPageProvider } from '@context/UserPageContext'
 import UserOverview from '@components/userPage/UserOverview'
 
 // TODO: integrate real data
+import useFetchUserDetail from '@components/queries/useFetchUserDetail'
 import UserBadgesSection from '@components/userPage/UserBadgesSection'
 import UserEngagementSection from '@components/userPage/UserEngagementSection'
 import UserQuestSection from '@components/userPage/UserQuestSection'
-import { ONE_USER_DETAIL } from '@mockData'
 
 const UserPage = ({ username }: { username: string }) => {
-  // TODO : change realdata
-  const userData = ONE_USER_DETAIL
+  const { data: userData, isLoading, error } = useFetchUserDetail({ username })
 
   return (
     <UserPageProvider userData={{ ...userData, username }}>

@@ -19,7 +19,7 @@ const DaoPage = ({ id }: { id: number }) => {
   // TODO: integrate real data
   const mockDao = ONE_COMMUNITY
   // TODO: this is a temporary flag, real flag would be calculated with context api and back end data
-  const isAdmin = true
+  const isAdmin = false
 
   return (
     <VStack spacing="40px" marginBottom="100px">
