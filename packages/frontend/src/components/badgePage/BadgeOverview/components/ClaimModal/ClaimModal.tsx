@@ -17,17 +17,31 @@ import {
 import Done from '@components/icons/Done'
 import QuestBadge from '@components/shared/QuestBadge'
 import { background2, orange, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { useUserContext } from '@context/UserContext'
 import Image from 'next/image'
-import { ClaimModalProps } from './ClaimModal.types'
+import { useRef, useState } from 'react'
+import { ClaimModalPhase, ClaimModalProps } from './ClaimModal.types'
 
-const ClaimModal = ({
-  isOpen,
-  onClose,
-  badgeName,
-  badgeLogo,
-  badgePrice,
-  user,
-}: ClaimModalProps) => {
+const ClaimModal = ({ isOpen, onClose, badgeName, badgeLogo, badgePrice }: ClaimModalProps) => {
+  const { user } = useUserContext()
+
+  const [phase, setPhase] = useState<ClaimModalPhase>(ClaimModalPhase.PRE_IDENTIFY)
+  const urlRef = useRef<HTMLInputElement>(null)
+
+  // TODO:  DUMMY HANDLER, TEMPORARY SOLUTION BEFORE POLYGON ID
+  const handleScanned = () => {
+    setPhase(ClaimModalPhase.POST_IDENTIFY)
+  }
+
+  const handleClaim = () => {
+    setPhase(ClaimModalPhase.CLAIMED)
+  }
+
+  const handleCopy = () => {
+    if (urlRef?.current?.value || null)
+      navigator.clipboard.writeText(urlRef?.current?.value as string)
+  }
+
   const renderPolygonIdScan = () => (
     <>
       <ModalBody>
@@ -46,6 +60,7 @@ const ClaimModal = ({
             alt="Polygon ID Barcode"
             width={200}
             height={200}
+            onClick={handleScanned}
           />
         </Flex>
       </ModalFooter>
@@ -83,7 +98,7 @@ const ClaimModal = ({
               <FormLabel>Any messages you want to share?</FormLabel>
               <Input variant="filled" placeholder="Leave your message here and post it" />
             </FormControl>
-            <Button size="lg" bg={primary} _hover={{ bg: primaryHighlight }}>
+            <Button size="lg" bg={primary} _hover={{ bg: primaryHighlight }} onClick={handleClaim}>
               Claim Badge
             </Button>
           </VStack>
@@ -109,8 +124,13 @@ const ClaimModal = ({
               <Text textAlign="center" color={primary}>
                 share
               </Text>
-              <Input variant="filled" readOnly value="https://droppin.io/drop_dao/in..." />
-              <Button variant="ghost" color={orange}>
+              <Input
+                variant="filled"
+                readOnly
+                value="https://droppin.io/drop_dao/in..."
+                ref={urlRef}
+              />
+              <Button variant="ghost" color={orange} onClick={handleCopy}>
                 copy
               </Button>
             </Flex>
@@ -162,9 +182,17 @@ const ClaimModal = ({
       <ModalContent bg={background2}>
         <ModalHeader>Badge Claim</ModalHeader>
         <ModalCloseButton />
-        {/* {renderPolygonIdScan()} */}
-        {/* {renderClaimConfirmation()} */}
-        {renderClaimCompleted()}
+
+        {(() => {
+          switch (phase) {
+            case ClaimModalPhase.PRE_IDENTIFY:
+              return renderPolygonIdScan()
+            case ClaimModalPhase.POST_IDENTIFY:
+              return renderClaimConfirmation()
+            case ClaimModalPhase.CLAIMED:
+              return renderClaimCompleted()
+          }
+        })()}
       </ModalContent>
     </Modal>
   )

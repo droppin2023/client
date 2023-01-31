@@ -10,6 +10,7 @@ import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBad
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
+import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClaimedBadge/useFetchClaimedBadge.types'
 import { GetUserStatusQuestResponse } from '@components/queries/useGetUserStatusInQuest/useGetUserStatusInQuest.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {

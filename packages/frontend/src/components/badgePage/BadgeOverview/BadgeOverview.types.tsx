@@ -1,4 +1,4 @@
-import { Community, EngageScore, Price, Quest, Quests, User } from '@components/queries/common'
+import { Community, EngageScore, Price, Quests, User } from '@components/queries/common'
 
 export interface BadgeOverviewProps {
   id: number
@@ -13,4 +13,5 @@ export interface BadgeOverviewProps {
   requiredQuests: Quests[]
   requiredEngageScore: EngageScore
   requiredPrice: Price
+  isLoading: boolean
 }
