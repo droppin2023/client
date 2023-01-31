@@ -13,8 +13,6 @@ import ProfileDropdown from './components/ProfileDropdown'
 import * as sty from './DroppinConnectButton.styles'
 
 const DroppinConnectButton = () => {
-  // TODO: get real user data
-
   const { user, isLoggedIn } = useUserContext()
 
   return (

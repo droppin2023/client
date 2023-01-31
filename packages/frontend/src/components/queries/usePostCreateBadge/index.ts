@@ -24,7 +24,6 @@ const usePostCreateBadge = () => {
     setIsLoading(true)
     setError(null)
     try {
-      console.log('hihihi', badgeContract)
       const tsx = await badgeContract?.addBadge(
         params.contract,
         params.contract.symbol,

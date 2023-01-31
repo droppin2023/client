@@ -53,6 +53,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
     onDisconnect: () => {
       setIsLoggedIn(false)
       setUser(null)
+      if (router.asPath !== '/') {
+        router.push('/')
+      }
     },
   })
 

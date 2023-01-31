@@ -3,6 +3,7 @@ import axios from 'axios'
 import type { CreateGroupParams } from './usePostCreateBadge.types'
 import { CREATE_GROUP } from './usePostCreateBadge.constants'
 import useContractConnection from '../useContractConnection'
+import { formatBytes32String } from 'ethers/lib/utils.js'
 
 const usePostCreateGroup = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -12,8 +13,9 @@ const usePostCreateGroup = () => {
   const createGroup = async (params: CreateGroupParams) => {
     setIsLoading(true)
     setError(null)
+    console.log(params, coreContract)
     try {
-      const tsx = await coreContract?.createGroup(params.name)
+      const tsx = coreContract?.createGroup(formatBytes32String(params.name))
       const transactionHash = await tsx.wait()
       console.log(transactionHash)
       console.log({ transactionHash })

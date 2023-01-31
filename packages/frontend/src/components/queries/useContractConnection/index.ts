@@ -18,8 +18,6 @@ const useContractConnection = () => {
     signerOrProvider: signer,
   })
 
-  console.log(badgeContract, env.droppinDiamond, env, 'agwegew')
-
   return { signer, coreContract, badgeContract }
 }
 

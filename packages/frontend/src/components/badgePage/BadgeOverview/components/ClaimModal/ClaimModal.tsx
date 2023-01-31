@@ -55,7 +55,6 @@ const ClaimModal = ({
       badgeId,
     }
     const res = await claimBadge(params)
-    console.log(res, 'aseagwew')
     setPhase(ClaimModalPhase.CLAIMED)
     // TODO  : GET CLAIMED INFO
     // const res2 = await
