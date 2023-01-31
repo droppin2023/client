@@ -3,15 +3,17 @@ import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-u
 import { background2, secondaryWeak } from '@constants/colors'
 import { useRouter } from 'next/router'
 import { ProfileDropdownProps } from './ProfileDropdown.types'
+import { useUserContext } from '@context/UserContext'
 
 const ProfileDropdown = ({ children }: ProfileDropdownProps) => {
   const router = useRouter()
-
+  const { user } = useUserContext()
+  console.log(user)
   // TODO: later on integrate real data for the routes
   const menuData = [
     {
       name: 'Profile',
-      onClick: () => router.push('/user/metalboyrick'),
+      onClick: () => router.push(`/user/${user?.username}`),
     },
     {
       name: 'My Communities',

@@ -53,7 +53,7 @@ const SignupForm = () => {
     }
     const res = postSignup(params)
     setIsConfirmationOpen(false)
-    // setIsFinished(true)
+    setIsFinished(true)
   }
 
   return (
