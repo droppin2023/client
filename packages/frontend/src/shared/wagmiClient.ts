@@ -21,11 +21,8 @@ export const getRpcUrl = (chainId: number): string => {
   return env.rpcUrls[chainId as keyof typeof env.rpcUrls]
 }
 
-export const {
-  chains: [, ...chains],
-  provider,
-} = configureChains(
-  Array.from(new Set([chain.mainnet, defaultChain, ...supportedChains])).filter(Boolean) as Chain[],
+export const { chains, provider } = configureChains(
+  [chain.localhost, chain.mainnet, ...supportedChains],
   [
     jsonRpcProvider({
       rpc: (chain) => {
