@@ -5,6 +5,6 @@ export interface SignupParams {
   name: string
   username: string
   description: string
-  discord: string
+  discord?: string
   image: string
 }

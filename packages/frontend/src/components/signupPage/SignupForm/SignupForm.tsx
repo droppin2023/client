@@ -22,12 +22,13 @@ import {
 import { useRef, useState } from 'react'
 
 import UploadImage from '@components/shared/UploadImage'
-
+import { useAccount } from 'wagmi'
 import DiscordIcon from '@components/icons/DiscordIcon'
 import SectionHeader from '@components/shared/SectionHeader'
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 import * as globalSty from '@styles'
 import SignupSuccess from './components/SignupSuccess'
+import usePostSignup from '@components/queries/usePostSignup'
 
 const SignupForm = () => {
   const [localImgUrl, setLocalImgUrl] = useState('')
@@ -36,12 +37,23 @@ const SignupForm = () => {
   const [bio, setBio] = useState('')
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
+  const { postSignup, isLoading, error } = usePostSignup()
+  const { address } = useAccount()
 
   const confirmationCancelRef = useRef(null)
 
   const handleFinish = () => {
+    const params = {
+      address: address?.toString() as string,
+      name,
+      username,
+      description: bio,
+      // discord: '',
+      image: localImgUrl,
+    }
+    const res = postSignup(params)
     setIsConfirmationOpen(false)
-    setIsFinished(true)
+    // setIsFinished(true)
   }
 
   return (

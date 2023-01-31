@@ -3,6 +3,7 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 import { primary } from '@constants/colors'
+import { useAccount } from 'wagmi'
 
 import { UserPageProvider } from '@context/UserPageContext'
 
