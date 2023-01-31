@@ -7,7 +7,7 @@ import type {
   FetchClaimedBadgeParams,
   FetchClaimedBadgeResponse,
 } from './useFetchClaimedBadge.types'
-import { GET_COMMUNITY } from './userFetchClaimedBadge.constants'
+import useContractConnection from '../useContractConnection'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchClaimedBadgeResponse | undefined) => {
@@ -21,32 +21,29 @@ const normalizeData = (data: FetchClaimedBadgeResponse | undefined) => {
 }
 
 // NOTE: need some tutorial on This part, I read it fetches from the SC
-const useFetchBadgeDetail = ({ badgeId, username }: FetchClaimedBadgeParams) => {
+const useFetchClaimedBadge = ({ badgeId }: FetchClaimedBadgeParams) => {
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<unknown>()
+  const { badgeContract } = useContractConnection()
   const [data, setData] = useState<FetchClaimedBadgeResponse>(
     normalizeData(undefined) as FetchClaimedBadgeResponse,
   )
-  const [error, setError] = useState<unknown>()
 
-  useEffect(() => {
+  const fetchClaimedBadge = async (params: FetchClaimedBadgeParams) => {
     setIsLoading(true)
+    console.log(params, badgeContract)
+    try {
+      const tsx = await badgeContract?.claimBadge(params.badgeId)
+      const transactionHash = await tsx.wait()
+      console.log({ transactionHash })
+      return transactionHash
+    } catch (e) {
+      setIsLoading(false)
+      setError(e)
+    }
+  }
 
-    axios
-      .get<FetchClaimedBadgeResponse>(`${GET_COMMUNITY}/?badgeId=${badgeId}&username=${username}`, {
-        headers: {
-          'Content-Type': '*/*',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        },
-      })
-      .then((data) => {
-        setData(data.data)
-      })
-      .catch((err) => setError(err))
-      .finally(() => setIsLoading(false))
-  }, [])
-
-  return { data: normalizeData(data), isLoading, error }
+  return { fetchClaimedBadge, isLoading, error }
 }
 
-export default useFetchBadgeDetail
+export default useFetchClaimedBadge

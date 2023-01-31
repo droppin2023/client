@@ -23,12 +23,6 @@ const BadgePage = ({ id }: { id: number }) => {
     error: isFetchBadgeDetailsError,
   } = useFetchBadgeDetail({ badgeId: id })
 
-  const {
-    data: claimedBadgeData,
-    isLoading: isFetchClaimedBadgeLoading,
-    error: isFetchClaimedBadgeError,
-  } = useFetchClaimedBadge({ badgeId: id, username: user?.username as string })
-
   return (
     <VStack spacing="40px" marginBottom="100px">
       {/* TODO: integrate discord */}
@@ -40,7 +34,7 @@ const BadgePage = ({ id }: { id: number }) => {
         community={badgeData.community}
         description={badgeData.description}
         isDefault={badgeData.isDefault}
-        address={badgeData.address}
+        badgeAddress={badgeData.address}
         holderList={badgeData.holderList}
         requiredQuests={badgeData.requiredQuests}
         requiredEngageScore={badgeData.requiredEngageScore}
@@ -51,10 +45,11 @@ const BadgePage = ({ id }: { id: number }) => {
         requiredQuests={badgeData.requiredQuests}
         requiredEngageScore={badgeData.requiredEngageScore}
         requiredPrice={badgeData.requiredPrice}
+        badgeAddress={badgeData.address}
         isLoading={isFetchBadgeDetailsLoading}
       />
 
-      {/* TODO: would need a bit of explanation on this part */}
+      {/* TODO: would need a bit of explanation on this part
       {claimedBadgeData.address.length > 0 && (
         <BadgeClaimedSection
           address={badgeData.address}
@@ -67,7 +62,7 @@ const BadgePage = ({ id }: { id: number }) => {
           }}
           isLoading={isFetchClaimedBadgeLoading}
         />
-      )}
+      )} */}
     </VStack>
   )
 }

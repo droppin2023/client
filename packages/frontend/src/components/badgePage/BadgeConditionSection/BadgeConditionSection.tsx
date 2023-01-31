@@ -12,6 +12,7 @@ const BadgeConditionSection = ({
   requiredQuests,
   requiredEngageScore,
   requiredPrice,
+  badgeAddress,
   isLoading,
 }: BadgeConditionSectionProps) => {
   console.log(requiredQuests)
@@ -140,6 +141,34 @@ const BadgeConditionSection = ({
             </VStack>
           </Skeleton>
         </SimpleGrid>
+        <VStack alignItems={'flex-start'} spacing={4} width="70%">
+          {isLoading ? (
+            <Skeleton height="80px" width="100%" />
+          ) : (
+            <>
+              <Flex justifyContent={'space-between'} alignItems="center" width="100%">
+                <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
+                  <HStack spacing={2}>
+                    <Lock color={primary} />
+                    <span>Badge Contract</span>
+                  </HStack>
+                </Text>
+              </Flex>{' '}
+              <Flex
+                bgColor={background2}
+                borderRadius="16px"
+                padding="16px"
+                width="100%"
+                justifyContent={'space-between'}
+              >
+                <Text textAlign={'right'} as="b">
+                  Contract Address
+                </Text>
+                <Text color={secondary} textAlign={'right'} as="b">{`${badgeAddress}`}</Text>
+              </Flex>
+            </>
+          )}
+        </VStack>
       </VStack>
     </>
   )

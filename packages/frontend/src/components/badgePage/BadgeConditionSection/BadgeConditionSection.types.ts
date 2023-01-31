@@ -4,5 +4,6 @@ export interface BadgeConditionSectionProps {
   requiredQuests: Quests[]
   requiredEngageScore: EngageScore
   requiredPrice: Price
+  badgeAddress: string
   isLoading: boolean
 }

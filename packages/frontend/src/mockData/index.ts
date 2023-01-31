@@ -6,7 +6,6 @@ import mockAvatar3 from './assets/mock-avatar-3.png'
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
 import { Category, QuestType, Status } from '@components/queries/common'
-import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'

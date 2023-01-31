@@ -21,20 +21,44 @@ import { useUserContext } from '@context/UserContext'
 import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { ClaimModalPhase, ClaimModalProps } from './ClaimModal.types'
+import usePostClaimBadge from '@components/queries/usePostClaimBadge'
+import useFetchClaimedBadge from '@components/queries/useFetchClaimedBadge'
 
-const ClaimModal = ({ isOpen, onClose, badgeName, badgeLogo, badgePrice }: ClaimModalProps) => {
+const ClaimModal = ({
+  isOpen,
+  onClose,
+  badgeId,
+  badgeName,
+  badgeLogo,
+  badgeAddress,
+  badgePrice,
+}: ClaimModalProps) => {
   const { user } = useUserContext()
 
   const [phase, setPhase] = useState<ClaimModalPhase>(ClaimModalPhase.PRE_IDENTIFY)
   const urlRef = useRef<HTMLInputElement>(null)
+  const { claimBadge, isLoading, error } = usePostClaimBadge()
+  const [onchainBadge, setOnchainBadge] = useState()
 
   // TODO:  DUMMY HANDLER, TEMPORARY SOLUTION BEFORE POLYGON ID
-  const handleScanned = () => {
-    setPhase(ClaimModalPhase.POST_IDENTIFY)
-  }
+  // const handleScanned = () => {
+  //   setPhase(ClaimModalPhase.POST_IDENTIFY)
+  // }
+  const { fetchClaimedBadge } = useFetchClaimedBadge({
+    badgeId,
+    badgeAddress: badgeAddress,
+    userAddress: user?.address as string,
+  })
 
-  const handleClaim = () => {
+  const handleClaim = async () => {
+    const params = {
+      badgeId,
+    }
+    const res = await claimBadge(params)
+    console.log(res, 'aseagwew')
     setPhase(ClaimModalPhase.CLAIMED)
+    // TODO  : GET CLAIMED INFO
+    // const res2 = await
   }
 
   const handleCopy = () => {
@@ -47,65 +71,100 @@ const ClaimModal = ({ isOpen, onClose, badgeName, badgeLogo, badgePrice }: Claim
       <ModalBody>
         <VStack spacing={5}>
           <QuestBadge img={badgeLogo} name={badgeName} isLocked={false} />
-          <Text as="b" fontSize="xl" textAlign="center">
-            Scan your Polygon ID Wallet to unlock badge!
+
+          <Text fontSize="lg" textAlign="center">
+            You can claim your badge now.
           </Text>
         </VStack>
       </ModalBody>
       <ModalFooter>
         <Flex width="100%" justifyContent="center">
-          {/* TODO: replace with polygon ID barcode */}
-          <Image
-            src="https://picsum.photos/200"
-            alt="Polygon ID Barcode"
-            width={200}
-            height={200}
-            onClick={handleScanned}
-          />
+          <VStack>
+            <Text as="b" fontSize="l" textAlign="center">
+              Scan it, Get Badge Claim to your Polygon ID Identity
+            </Text>
+            {/* TODO: replace with polygon ID barcode */}
+            <Image
+              src="https://picsum.photos/200"
+              alt="Polygon ID Barcode"
+              width={200}
+              height={200}
+              // onClick={handleScanned}
+            />
+            {/* <VStack spacing={1}>
+              <Text fontSize="lg" textAlign="center" color={primary}>
+                Price
+              </Text>
+              <Text as="b" fontSize="lg" textAlign="center">
+                {`${badgePrice.number} ${badgePrice.unit}`}
+              </Text>
+            </VStack> */}
+            <Flex width="100%" justifyContent="flex-start">
+              <VStack align="left" width="100%" spacing={5}>
+                {/* <FormControl>
+                  <FormLabel>Any messages you want to share?</FormLabel>
+                  <Input variant="filled" placeholder="Leave your message here and post it" />
+                </FormControl> */}
+                <Button
+                  size="lg"
+                  bg={primary}
+                  _hover={{ bg: primaryHighlight }}
+                  onClick={handleClaim}
+                >
+                  <Text as="b" fontSize="lg" textAlign="center" margin={3}>
+                    {`${badgePrice.number} ${badgePrice.unit}`}
+                  </Text>
+                  <Text fontSize="lg" textAlign="center">
+                    Claim Badge
+                  </Text>
+                </Button>
+              </VStack>
+            </Flex>
+          </VStack>
         </Flex>
       </ModalFooter>
     </>
   )
 
-  const renderClaimConfirmation = () => (
-    <>
-      <ModalBody>
-        <VStack spacing={5}>
-          <QuestBadge img={badgeLogo} name={badgeName} isLocked={false} />
-          <VStack spacing={1}>
-            <Done width="48px" height="48px" />
-            <Text as="b" fontSize="lg" textAlign="center">
-              All good !
-            </Text>
-            <Text fontSize="lg" textAlign="center">
-              You can claim your badge now.
-            </Text>
-          </VStack>
-          <VStack spacing={1}>
-            <Text fontSize="lg" textAlign="center" color={primary}>
-              Price
-            </Text>
-            <Text as="b" fontSize="lg" textAlign="center">
-              {`${badgePrice.number} ${badgePrice.unit}`}
-            </Text>
-          </VStack>
-        </VStack>
-      </ModalBody>
-      <ModalFooter>
-        <Flex width="100%" justifyContent="flex-start">
-          <VStack align="left" width="100%" spacing={5}>
-            <FormControl>
-              <FormLabel>Any messages you want to share?</FormLabel>
-              <Input variant="filled" placeholder="Leave your message here and post it" />
-            </FormControl>
-            <Button size="lg" bg={primary} _hover={{ bg: primaryHighlight }} onClick={handleClaim}>
-              Claim Badge
-            </Button>
-          </VStack>
-        </Flex>
-      </ModalFooter>
-    </>
-  )
+  // const renderClaimConfirmation = () => (
+  //   <>
+  //     <ModalBody>
+  //       <VStack spacing={5}>
+  //         <QuestBadge img={badgeLogo} name={badgeName} isLocked={false} />
+  //         <VStack spacing={1}>
+  //           <Done width="48px" height="48px" />
+  //           <Text as="b" fontSize="lg" textAlign="center">
+  //             All good !
+  //           </Text>
+  //           <Text fontSize="lg" textAlign="center">
+  //             You can claim your badge now.
+  //           </Text>
+  //         </VStack>
+  //         <VStack spacing={1}>
+  //           <Text fontSize="lg" textAlign="center" color={primary}>
+  //             Price
+  //           </Text>
+  //           <Text as="b" fontSize="lg" textAlign="center">
+  //             {`${badgePrice.number} ${badgePrice.unit}`}
+  //           </Text>
+  //         </VStack>
+  //       </VStack>
+  //     </ModalBody>
+  //     <ModalFooter>
+  //       <Flex width="100%" justifyContent="flex-start">
+  //         <VStack align="left" width="100%" spacing={5}>
+  //           <FormControl>
+  //             <FormLabel>Any messages you want to share?</FormLabel>
+  //             <Input variant="filled" placeholder="Leave your message here and post it" />
+  //           </FormControl>
+  //           <Button size="lg" bg={primary} _hover={{ bg: primaryHighlight }} onClick={handleClaim}>
+  //             Claim Badge
+  //           </Button>
+  //         </VStack>
+  //       </Flex>
+  //     </ModalFooter>
+  //   </>
+  // )
 
   const renderClaimCompleted = () => (
     <>
@@ -187,8 +246,8 @@ const ClaimModal = ({ isOpen, onClose, badgeName, badgeLogo, badgePrice }: Claim
           switch (phase) {
             case ClaimModalPhase.PRE_IDENTIFY:
               return renderPolygonIdScan()
-            case ClaimModalPhase.POST_IDENTIFY:
-              return renderClaimConfirmation()
+            // case ClaimModalPhase.POST_IDENTIFY:
+            //   return renderClaimConfirmation()
             case ClaimModalPhase.CLAIMED:
               return renderClaimCompleted()
           }
