@@ -1,34 +1,43 @@
-import { Flex, HStack, Text, VStack } from '@chakra-ui/react'
+import { Flex, HStack, Skeleton, Text, VStack } from '@chakra-ui/react'
 
 import Lock from '@components/icons/Lock'
 import { background2, primary, secondary } from '@constants/colors'
 import type { BadgeClaimedSectionProps } from './BadgeClaimedSection.types'
 
-const BadgeClaimdSection = ({ address, claimedBadge }: BadgeClaimedSectionProps) => {
+const BadgeClaimdSection = ({ address, claimedBadge, isLoading }: BadgeClaimedSectionProps) => {
   return (
     <>
-      <VStack alignItems={'flex-start'} spacing={4} width={580}>
-        <Flex justifyContent={'space-between'} alignItems="center" width="100%">
-          <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
-            <HStack spacing={2}>
-              <Lock color={primary} />
-              <span>Badge Contract</span>
-            </HStack>
-          </Text>
-        </Flex>{' '}
-        <Flex
-          bgColor={background2}
-          borderRadius="16px"
-          padding="16px"
-          width="100%"
-          justifyContent={'space-between'}
-        >
-          <Text textAlign={'right'} as="b">
-            Contract Address
-          </Text>
-          <Text color={secondary} textAlign={'right'} as="b">{`${address}`}</Text>
-        </Flex>
-        {claimedBadge.isClaimed && (
+      <VStack alignItems={'flex-start'} spacing={4} width="70%">
+        {isLoading ? (
+          <Skeleton height="80px" width="100%" />
+        ) : (
+          <>
+            <Flex justifyContent={'space-between'} alignItems="center" width="100%">
+              <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
+                <HStack spacing={2}>
+                  <Lock color={primary} />
+                  <span>Badge Contract</span>
+                </HStack>
+              </Text>
+            </Flex>{' '}
+            <Flex
+              bgColor={background2}
+              borderRadius="16px"
+              padding="16px"
+              width="100%"
+              justifyContent={'space-between'}
+            >
+              <Text textAlign={'right'} as="b">
+                Contract Address
+              </Text>
+              <Text color={secondary} textAlign={'right'} as="b">{`${address}`}</Text>
+            </Flex>
+          </>
+        )}
+
+        {isLoading ? (
+          <Skeleton height="80px" width="100%" />
+        ) : (
           <>
             <Flex justifyContent={'space-between'} alignItems="center" width="100%">
               <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
@@ -38,7 +47,6 @@ const BadgeClaimdSection = ({ address, claimedBadge }: BadgeClaimedSectionProps)
                 </HStack>
               </Text>
             </Flex>
-
             <Flex
               bgColor={background2}
               borderRadius="16px"
