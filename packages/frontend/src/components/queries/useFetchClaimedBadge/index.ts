@@ -20,7 +20,7 @@ const normalizeData = (data: FetchClaimedBadgeResponse | undefined) => {
   }
 }
 
-// THIS IS OUR QUERY HOOOK
+// NOTE: need some tutorial on This part, I read it fetches from the SC
 const useFetchBadgeDetail = ({ badgeId, username }: FetchClaimedBadgeParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState<FetchClaimedBadgeResponse>(
