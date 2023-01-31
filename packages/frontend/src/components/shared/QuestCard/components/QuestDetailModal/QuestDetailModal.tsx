@@ -13,21 +13,49 @@ import {
   ModalOverlay,
   Text,
   Textarea,
+  useToast,
   VStack,
 } from '@chakra-ui/react'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
 import { QuestType } from '@components/queries/common'
+import usePostSubmitQuest from '@components/queries/usePostSubmitQuest'
 
 import { background2, discordPurple, primary, primaryHighlight, secondary } from '@constants/colors'
+import { useUserContext } from '@context/UserContext'
 import { ONE_QUEST_DETAIL } from '@mockData'
 import * as globalSty from '@styles'
+import { useState } from 'react'
 
 import type { QuestDetailModalProps } from './QuestDetailModal.types'
 
 const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModalProps) => {
+  const { user } = useUserContext()
+  const toast = useToast()
+
+  const [questFormEntry, setQuestFormEntry] = useState('')
+
   // TODO: fetch the quest details here
   const data = ONE_QUEST_DETAIL
+  const { submitQuest, isLoading, error } = usePostSubmitQuest()
+
+  const handleSubmit = async () => {
+    const response = await submitQuest({
+      questId: data.quest.id,
+      username: user?.username as string,
+      userSubmission: questFormEntry,
+    })
+
+    toast({
+      title: 'Quest Submitted',
+      description: 'Wait for the admin to get back to you',
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    })
+
+    onClose()
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -64,6 +92,8 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
               <Textarea
                 variant="filled"
                 placeholder="Write about your completion for this request here"
+                onChange={(e) => setQuestFormEntry(e.target.value)}
+                value={questFormEntry}
               />
             </FormControl>
           )}
@@ -84,8 +114,14 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
         <ModalFooter>
           <Flex width="100%" justifyContent={'space-between'} gap="12px">
-            <Button size="lg" bg={primary} _hover={{ bg: primaryHighlight }} flex="1">
-              Continue
+            <Button
+              size="lg"
+              bg={primary}
+              _hover={{ bg: primaryHighlight }}
+              flex="1"
+              onClick={handleSubmit}
+            >
+              Submit
             </Button>
           </Flex>
         </ModalFooter>

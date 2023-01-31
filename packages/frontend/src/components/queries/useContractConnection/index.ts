@@ -1,18 +1,20 @@
-import { useContract, useSigner } from 'wagmi'
 import badgeContractAbi from '@shared/abis/BadgeFacet.json'
 import coreContractAbi from '@shared/abis/CoreFacet.json'
+import { useContract, useSigner } from 'wagmi'
+
+import { env } from '@shared/environment'
 
 const useContractConnection = () => {
   const { data: signer } = useSigner()
 
   const badgeContract = useContract({
-    address: '0x39eF787427B3743Ee9932aE3b6647807dd044fD8',
+    address: env.droppinDiamond,
     abi: badgeContractAbi,
     signerOrProvider: signer,
   })
 
   const coreContract = useContract({
-    address: '0x39eF787427B3743Ee9932aE3b6647807dd044fD8',
+    address: env.droppinDiamond,
     abi: coreContractAbi,
     signerOrProvider: signer,
   })

@@ -6,10 +6,10 @@ import mockAvatar3 from './assets/mock-avatar-3.png'
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
 import { Category, QuestType, Status } from '@components/queries/common'
+import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
 import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
 import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
-import { FetchClaimedBadgeResponse } from '@components/queries/useFetchClamedBadge/useFetchClaimedBadge.types'
 import { GetUserStatusQuestResponse } from '@components/queries/useGetUserStatusInQuest/useGetUserStatusInQuest.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
@@ -1159,7 +1159,7 @@ export const MOCK_QUEST_STATUS: GetUserStatusQuestResponse = {
 
 export const ONE_QUEST_DETAIL: FetchQuestDetailResponse = {
   quest: {
-    id: 0,
+    id: 2,
     // schemaHash: '0x34723d5f238357',
     name: 'Join a Hackathon',
     engageScore: {

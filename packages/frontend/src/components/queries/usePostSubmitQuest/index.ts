@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import type { PostSubmitQuest } from './userPostSubmitQuest.types'
 import axios from 'axios'
-import { CREATE_GROUP } from '../usePostCreateGroup/usePostCreateBadge.constants'
+import { useState } from 'react'
+import { SUBMIT_QUEST_URL } from './userPostSubmitQuest.constants'
+import type { PostSubmitQuest } from './userPostSubmitQuest.types'
 
 const usePostSubmitQuest = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -11,9 +11,7 @@ const usePostSubmitQuest = () => {
     setIsLoading(true)
 
     try {
-      const { data, status } = await axios.post(CREATE_GROUP, {
-        params,
-      })
+      const { data, status } = await axios.post(SUBMIT_QUEST_URL, params)
 
       if (status === 200) {
         setIsLoading(false)
