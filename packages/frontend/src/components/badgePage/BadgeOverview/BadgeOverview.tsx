@@ -10,6 +10,7 @@ import { orange, orangeHighlight } from '@constants/colors'
 
 import bannerOrnament from './assets/banner-ornament.svg'
 
+import { useUserContext } from '@context/UserContext'
 import * as sty from './BadgeOverview.styles'
 import type { BadgeOverviewProps } from './BadgeOverview.types'
 import ClaimModal from './components/ClaimModal'
@@ -29,6 +30,7 @@ const BadgeOverview = ({
   requiredPrice,
   isLoading,
 }: BadgeOverviewProps) => {
+  const { isLoggedIn } = useUserContext()
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false)
 
   return (
@@ -102,14 +104,16 @@ const BadgeOverview = ({
                   <Text as="b">
                     {requiredPrice.number} {requiredPrice.unit}
                   </Text>
-                  <Button
-                    onClick={() => setIsClaimModalOpen(true)}
-                    leftIcon={<Text>+</Text>}
-                    bg={orange}
-                    _hover={{ bg: orangeHighlight }}
-                  >
-                    Claim Now
-                  </Button>
+                  {isLoggedIn && (
+                    <Button
+                      onClick={() => setIsClaimModalOpen(true)}
+                      leftIcon={<Text>+</Text>}
+                      bg={orange}
+                      _hover={{ bg: orangeHighlight }}
+                    >
+                      Claim Now
+                    </Button>
+                  )}
                 </HStack>
               </Flex>
             </Skeleton>
