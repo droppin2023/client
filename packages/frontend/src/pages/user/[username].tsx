@@ -15,8 +15,6 @@ import UserEngagementSection from '@components/userPage/UserEngagementSection'
 import UserQuestSection from '@components/userPage/UserQuestSection'
 
 const UserPage = ({ username }: { username: string }) => {
-  // TODO : change realdata
-  // const userData = ONE_USER_DETAIL
   const { data: userData, isLoading, error } = useFetchUserDetail({ username })
 
   return (
