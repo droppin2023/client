@@ -1,7 +1,7 @@
+import axios from 'axios'
 import { useState } from 'react'
 import type { PostCompleteQuestParams } from './usePostCompleteQuest.types'
-import axios from 'axios'
-import { CREATE_GROUP } from '../usePostCreateGroup/usePostCreateBadge.constants'
+import { COMPLETE_QUEST_URL } from './usePostCompleteQuests.constants'
 
 const usePostCompleteQuest = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -11,8 +11,8 @@ const usePostCompleteQuest = () => {
     setIsLoading(true)
 
     try {
-      const { data, status } = await axios.post(CREATE_GROUP, {
-        params,
+      const { data, status } = await axios.post(COMPLETE_QUEST_URL, {
+        ...params,
       })
 
       if (status === 200) {
