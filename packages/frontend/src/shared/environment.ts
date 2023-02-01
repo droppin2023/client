@@ -12,7 +12,7 @@ export const env = {
   isProduction: process.env.NEXT_PUBLIC_PRODUCTION_MODE === 'true',
 
   defaultChain: parseInt(process.env.NEXT_PUBLIC_DEFAULT_CHAIN!),
-  droppinDiamond: process.env.DEPLOYED_DROPPIN_DIAMOND_ADDR,
+  droppinDiamond: process.env.NEXT_PUBLIC_DEPLOYED_DROPPIN_DIAMOND_ADDR,
   supportedChains: JSON.parse(process.env.NEXT_PUBLIC_SUPPORTED_CHAINS!),
 
   rpcUrls: {

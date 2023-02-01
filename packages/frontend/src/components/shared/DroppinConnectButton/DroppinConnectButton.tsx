@@ -13,8 +13,6 @@ import ProfileDropdown from './components/ProfileDropdown'
 import * as sty from './DroppinConnectButton.styles'
 
 const DroppinConnectButton = () => {
-  // TODO: get real user data
-
   const { user, isLoggedIn } = useUserContext()
 
   return (
@@ -28,6 +26,15 @@ const DroppinConnectButton = () => {
         authenticationStatus,
         mounted,
       }) => {
+        console.log(
+          account,
+          chain,
+          openAccountModal,
+          openChainModal,
+          openConnectModal,
+          authenticationStatus,
+          mounted,
+        )
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
         const ready = mounted && authenticationStatus !== 'loading'

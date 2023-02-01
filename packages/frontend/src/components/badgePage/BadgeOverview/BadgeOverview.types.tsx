@@ -8,7 +8,7 @@ export interface BadgeOverviewProps {
   community: Community
   description: string
   isDefault: boolean
-  address: string
+  badgeAddress: string
   holderList: User[]
   requiredQuests: Quests[]
   requiredEngageScore: EngageScore

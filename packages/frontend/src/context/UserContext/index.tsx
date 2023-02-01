@@ -19,6 +19,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const router = useRouter()
 
   const { checkLogin, isLoading: checkLoginLoading, error: checkLoginError } = useLazyCheckLogin()
+
   const {
     fetchUserDetail,
     isLoading: fetchUserDetailLoading,
@@ -36,7 +37,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         }
       } else {
         const userData = await fetchUserDetail({ username: loginData?.username })
-
+        console.log(userData)
         //TODO: add discord tokens
 
         // load the user data to the user state
@@ -52,6 +53,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
     onDisconnect: () => {
       setIsLoggedIn(false)
       setUser(null)
+      if (router.asPath !== '/') {
+        router.push('/')
+      }
     },
   })
 

@@ -23,7 +23,7 @@ const BadgeOverview = ({
   community,
   description,
   isDefault,
-  address: string,
+  badgeAddress,
   holderList,
   requiredQuests,
   requiredEngageScore,
@@ -32,7 +32,14 @@ const BadgeOverview = ({
 }: BadgeOverviewProps) => {
   const { isLoggedIn } = useUserContext()
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false)
+  const onHandleClaim = () => {
+    // TODO : Need API to check if user fullfilled every conditions for Badge
+    const isClaimAble = true
 
+    if (isClaimAble) {
+      setIsClaimModalOpen(true)
+    }
+  }
   return (
     <>
       <Flex
@@ -106,7 +113,7 @@ const BadgeOverview = ({
                   </Text>
                   {isLoggedIn && (
                     <Button
-                      onClick={() => setIsClaimModalOpen(true)}
+                      onClick={onHandleClaim}
                       leftIcon={<Text>+</Text>}
                       bg={orange}
                       _hover={{ bg: orangeHighlight }}
@@ -123,8 +130,10 @@ const BadgeOverview = ({
       <ClaimModal
         isOpen={isClaimModalOpen}
         onClose={() => setIsClaimModalOpen(false)}
+        badgeId={id}
         badgeName={name}
         badgeLogo={logo}
+        badgeAddress={badgeAddress}
         badgePrice={requiredPrice}
       />
     </>
