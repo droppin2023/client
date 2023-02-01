@@ -1,13 +1,13 @@
 // PUT THE MAIN HOOK LOGIC HERE
 
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { CHECK_ADMIN_URL } from './useCheckAdmin.constants'
 
 import type { CheckAdminParams, CheckAdminResponse } from './userCheckAdmin.types'
-import { GET_COMMUNITY } from './useCheckAdmin.constants'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
-const normalizeData = (data: CheckAdminResponse | undefined): CheckAdminResponse => {
+const normalizeData = (data: CheckAdminResponse | undefined) => {
   return {
     isAdmin: data?.isAdmin || false,
   }
@@ -25,22 +25,19 @@ const useCheckAdmin = ({ communityId, username }: CheckAdminParams) => {
     setIsLoading(true)
 
     axios
-      .get<CheckAdminResponse>(
-        `${GET_COMMUNITY}/?communityId=${communityId}&username=${username}`,
-        {
-          headers: {
-            'Content-Type': '*/*',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          },
+      .get<CheckAdminResponse>(`${CHECK_ADMIN_URL}/${communityId}/${username}`, {
+        headers: {
+          'Content-Type': '*/*',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         },
-      )
+      })
       .then((data) => {
         setData(data.data)
       })
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false))
-  }, [])
+  }, [communityId, username])
 
   return { data: normalizeData(data), isLoading, error }
 }

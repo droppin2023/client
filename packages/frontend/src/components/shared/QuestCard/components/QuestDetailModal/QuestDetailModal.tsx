@@ -23,9 +23,8 @@ import usePostSubmitQuest from '@components/queries/usePostSubmitQuest'
 
 import { background2, discordPurple, primary, primaryHighlight, secondary } from '@constants/colors'
 import { useUserContext } from '@context/UserContext'
-import { ONE_QUEST_DETAIL } from '@mockData'
 import * as globalSty from '@styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { QuestDetailModalProps } from './QuestDetailModal.types'
 
@@ -36,12 +35,22 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
   const [questFormEntry, setQuestFormEntry] = useState('')
 
   // TODO: fetch the quest details here
-  const data = ONE_QUEST_DETAIL
-  const { submitQuest, isLoading, error } = usePostSubmitQuest()
+  // const data = ONE_QUEST_DETAIL
+  // const {
+  //   data,
+  //   isLoading: fetchQuestDetailLoading,
+  //   error: fetchQuestDetailError,
+  // } = useFetchQuestDetail({ questId: quest.id })
+
+  const {
+    submitQuest,
+    isLoading: submitQuestLoading,
+    error: submitQuestError,
+  } = usePostSubmitQuest()
 
   const handleSubmit = async () => {
     const response = await submitQuest({
-      questId: data.quest.id,
+      questId: quest.id,
       username: user?.username as string,
       userSubmission: questFormEntry,
     })
@@ -56,6 +65,10 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
     onClose()
   }
+
+  useEffect(() => {
+    console.log('QUEST', quest)
+  }, [quest])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -83,7 +96,7 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
           <VStack align="left" mt={4}>
             <Text color={secondary}>Description</Text>
-            <Text>{quest.description}</Text>
+            <Text>{quest.detail}</Text>
           </VStack>
 
           {questType === QuestType.form && (

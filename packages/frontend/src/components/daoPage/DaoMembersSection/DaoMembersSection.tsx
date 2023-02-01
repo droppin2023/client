@@ -23,18 +23,25 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 import * as sty from './DaoMembersSection.styles'
 
 // TODO: integrate real data via props and context API
-import { ONE_USER_DETAIL, ONE_COMMUNITY } from '@mockData'
 
 // TODO: notifications
-const DaoMembersSection = ({ members }: DaoMemberSectionProps) => {
+const DaoMembersSection = ({ members, owner }: DaoMemberSectionProps) => {
   const { id } = useDaoPageContext()
 
   // TODO: need to fetching for each member info
-  const memberListDetailed = ONE_COMMUNITY.members
+  // const memberss = ONE_COMMUNITY.members
 
-  const renderTableRow = ({ number, name, img, repScore, quests, badges }: MemberTableRow) => {
+  const renderTableRow = ({
+    number,
+    name,
+    img,
+    repScore,
+    quests,
+    badges,
+    isOwner,
+  }: MemberTableRow) => {
     return (
-      <Tr>
+      <Tr key={number}>
         <Td isNumeric color={primary}>
           {number}
         </Td>
@@ -45,8 +52,8 @@ const DaoMembersSection = ({ members }: DaoMemberSectionProps) => {
           </HStack>
         </Td>
         <Td color={orange}>{repScore}</Td>
-        <Td isNumeric color={primary}>
-          {quests}
+        <Td isNumeric={isOwner} color={primary}>
+          {isOwner ? 'OWNER' : quests}
         </Td>
         <Td>{badges}</Td>
       </Tr>
@@ -66,7 +73,16 @@ const DaoMembersSection = ({ members }: DaoMemberSectionProps) => {
           </Tr>
         </Thead>
         <Tbody>
-          {memberListDetailed.map((memberDetails, index) => {
+          {renderTableRow({
+            isOwner: true,
+            number: 1,
+            name: owner.name,
+            img: owner.image,
+            repScore: 'OWNER',
+            quests: 0,
+            badges: 'OWNER',
+          })}
+          {members.map((memberDetails, index) => {
             const engagement = memberDetails.engageScore
 
             const badges = memberDetails.badges
@@ -78,7 +94,8 @@ const DaoMembersSection = ({ members }: DaoMemberSectionProps) => {
             // }
 
             return renderTableRow({
-              number: index + 1,
+              isOwner: false,
+              number: index + 2,
               name: memberDetails.name,
               img: memberDetails.image,
               repScore: `${engagement.number} ${engagement.unit}`,

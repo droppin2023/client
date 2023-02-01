@@ -53,9 +53,9 @@ export interface Quest {
   id: number
   name: string
   engageScore: EngageScore
-  description: string
+  detail: string
   // schemaHash: string
-  // condition: Condition
+  condition: Condition
 
   // status: Status
 }
@@ -94,8 +94,8 @@ export enum Category {
 }
 
 export enum Status {
-  noStatus = 'No Status',
-  pending = 'Pending',
-  accepted = 'Accepted',
-  rejected = 'Rejected',
+  noStatus = 'NO_STATUS',
+  pending = 'PENDING',
+  accepted = 'ACCEPTED',
+  rejected = 'REJECTED',
 }

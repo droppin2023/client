@@ -1,21 +1,19 @@
 // PUT THE MAIN HOOK LOGIC HERE
 
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
+import { Status } from '../common'
+import { GET_USER_STATUS_IN_QUEST_URL } from './useGetUserStatusInQuest.constants'
 import type {
   GetUserStatusQuestParams,
   GetUserStatusQuestResponse,
 } from './useGetUserStatusInQuest.types'
-import { GET_COMMUNITY } from './useGetUserStatusInQuestconstants'
-import { Status } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
-const normalizeData = (
-  data: GetUserStatusQuestResponse | undefined,
-): GetUserStatusQuestResponse => {
+const normalizeData = (data: GetUserStatusQuestResponse | undefined) => {
   return {
-    status: data?.status || Status.rejected,
+    status: data?.status || Status.noStatus,
     community: data?.community || {
       id: 0,
       address: '',
@@ -38,7 +36,7 @@ const normalizeData = (
 
 // THIS IS OUR QUERY HOOOK
 const useGetUserStatusInQuest = ({ questId, username }: GetUserStatusQuestParams) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [data, setData] = useState<GetUserStatusQuestResponse>(
     normalizeData(undefined) as GetUserStatusQuestResponse,
   )
@@ -49,7 +47,7 @@ const useGetUserStatusInQuest = ({ questId, username }: GetUserStatusQuestParams
 
     axios
       .get<GetUserStatusQuestResponse>(
-        `${GET_COMMUNITY}/?questId=${questId}&username=${username}`,
+        `${GET_USER_STATUS_IN_QUEST_URL}/${questId}/user/${username}`,
         {
           headers: {
             'Content-Type': '*/*',
@@ -59,11 +57,12 @@ const useGetUserStatusInQuest = ({ questId, username }: GetUserStatusQuestParams
         },
       )
       .then((data) => {
+        console.log('BLABLA', data.data)
         setData(data.data)
       })
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false))
-  }, [])
+  }, [questId, username])
 
   return { data: normalizeData(data), isLoading, error }
 }

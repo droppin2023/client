@@ -1,9 +1,8 @@
-import { Box, Button, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, VStack } from '@chakra-ui/react'
 
 import DaoBadgesSection from '@components/daoPage/DaoBadgesSection'
 import DaoMembersSection from '@components/daoPage/DaoMembersSection'
 import DaoOverview from '@components/daoPage/DaoOverview'
-import DaoPendingRequests from '@components/daoPage/DaoPendingRequests'
 
 import { primary } from '@constants/colors'
 import { DaoPageProvider } from '@context/DaoPageContext'
@@ -12,34 +11,45 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 import { QuestType } from '@components/queries/common'
-import { ONE_COMMUNITY } from '@mockData'
-import Link from 'next/link'
+import useCheckAdmin from '@components/queries/useCheckAdmin'
+import useFetchCommunityDetail from '@components/queries/useFetchCommunityDetail'
+import { useUserContext } from '@context/UserContext'
 
 const DaoPage = ({ id }: { id: number }) => {
-  // TODO: integrate real data
-  const mockDao = ONE_COMMUNITY
-  // TODO: this is a temporary flag, real flag would be calculated with context api and back end data
-  const isAdmin = false
+  const { user } = useUserContext()
+
+  const {
+    data: communityData,
+    isLoading: fetchCommunityDetailLoading,
+    error: fetchCommunityDetailError,
+  } = useFetchCommunityDetail({ communityId: id })
+
+  const {
+    data: { isAdmin },
+    isLoading: checkAdminLoading,
+    error: checkAdminError,
+  } = useCheckAdmin({ communityId: id, username: user?.username as string })
 
   return (
     <VStack spacing="40px" marginBottom="100px">
-      <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.totalEngage.unit} id={id}>
-        {/* TODO: refactor member list, quests, and badges as context */}
+      <DaoPageProvider isAdmin={isAdmin} repUnit={communityData.totalEngage.unit} id={id}>
         {/* TODO: integrate discord */}
         <DaoOverview
-          name={mockDao.name}
-          imgUrl={mockDao.logo}
-          memberCount={mockDao.totalMember}
-          memberList={mockDao.members}
-          chain={mockDao.blockchain}
-          category={mockDao.category}
-          repScore={mockDao.totalEngage.number}
-          description={mockDao.description}
-          badges={mockDao.badges}
-          owner={mockDao.owner}
-          website={mockDao.link}
-          discordLink={mockDao.discord?.link}
-          discordGuildId={mockDao.discord?.guildId}
+          name={communityData.name}
+          imgUrl={communityData.logo}
+          memberCount={communityData.totalMember}
+          memberList={communityData.members}
+          // chain={communityData.blockchain}
+          chain="Polygon"
+          category={communityData.category}
+          repScore={communityData.totalEngage.number}
+          description={communityData.description}
+          badges={communityData.badges}
+          owner={communityData.owner}
+          website={communityData.link}
+          discordLink={communityData.discord?.link}
+          discordGuildId={communityData.discord?.guildId}
+          isLoading={fetchCommunityDetailLoading || checkAdminLoading}
         />
 
         <Box width="80%" minHeight="512px">
@@ -65,27 +75,23 @@ const DaoPage = ({ id }: { id: number }) => {
               >
                 Members
               </Tab>
-              {isAdmin && (
-                <Button fontWeight={'bold'}>
-                  <Link href={`/community/${id}/pending`}>Pending Quests</Link>
-                </Button>
-              )}
             </TabList>
 
             <TabPanels>
               <TabPanel>
                 <DaoBadgesSection
-                  badges={mockDao.badges}
-                  questsDiscord={
-                    mockDao.quests.filter((item) => item.questType === QuestType.discord)[0]
-                  }
-                  questsSubmitForm={
-                    mockDao.quests.filter((item) => item.questType === QuestType.form)[0]
-                  }
+                  badges={communityData.badges}
+                  questsDiscord={communityData.quests.filter(
+                    (item) => item.condition.type === QuestType.discord,
+                  )}
+                  questsSubmitForm={communityData.quests.filter(
+                    (item) => item.condition.type === QuestType.form,
+                  )}
+                  isLoading={fetchCommunityDetailLoading}
                 />
               </TabPanel>
               <TabPanel>
-                <DaoMembersSection members={mockDao.members} />
+                <DaoMembersSection members={communityData.members} owner={communityData.owner} />
               </TabPanel>
               {/* {isAdmin && (
                 <TabPanel>

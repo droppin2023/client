@@ -1,4 +1,4 @@
-import type { User } from '@components/queries/common'
+import { User } from '@components/queries/common'
 import { memberInCommunity } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import type { StaticImageData } from 'next/image'
 import type { ReactNode } from 'react'
@@ -10,8 +10,10 @@ export interface MemberTableRow {
   repScore: string
   quests: number
   badges: ReactNode
+  isOwner: boolean
 }
 
 export interface DaoMemberSectionProps {
   members: memberInCommunity[]
+  owner: User
 }

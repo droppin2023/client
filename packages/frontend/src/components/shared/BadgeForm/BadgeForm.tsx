@@ -173,7 +173,7 @@ const BadgeForm = ({
               </FormHelperText>
 
               <VStack maxHeight="256px" overflowY="scroll" alignItems="flex-start">
-                {[...questsDiscord.questList, ...questsSubmitForm.questList].map((item, index) => (
+                {[...questsDiscord, ...questsSubmitForm].map((item, index) => (
                   <Checkbox value={JSON.stringify(item)} key={index} onChange={handleQuestCheck}>
                     <Flex justifyContent={'space-between'} alignItems={'center'} width="100%">
                       <FormHelperText color={foreground} margin="8px 0 12px 0">
