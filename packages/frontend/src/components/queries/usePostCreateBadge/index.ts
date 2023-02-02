@@ -35,7 +35,8 @@ const usePostCreateBadge = () => {
       // })
 
       // const tsx = await badgeContract?.addBadge(badgeData, badgeData.symbol, badgeData.URI)
-      console.log({ tsx })
+      console.log('TSX', tsx)
+      console.log('BADGE_CONTRACT', badgeContract)
 
       const transactionHash = await tsx.wait()
       console.log({ transactionHash })

@@ -31,10 +31,12 @@ import UploadImage from '@components/shared/UploadImage'
 import { DAO_CATEGORIES, NETWORKS } from '@constants/categories'
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 
+import { Category } from '@components/queries/common'
 import QuestBadge from '@components/shared/QuestBadge'
 import * as sty from './EditCommunityForm.styles'
 import { EditCommunityFormProps } from './EditCommunityForm.types'
 
+// TODO: low-prio, fix name not popping up
 const EditCommunityForm = ({
   isOpen,
   onClose,
@@ -48,11 +50,10 @@ const EditCommunityForm = ({
   owner,
 }: EditCommunityFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState(img)
-  const [name, setName] = useState(currentName)
-  const [description, setDescription] = useState(currentDescription)
-  const [defaultBadge, setDefaultBadge] = useState(badges[0].name)
-  const [website, setWebsite] = useState(currentWebsite)
-  const [selectedCategory, setSelectedCategory] = useState<any>(category)
+  const [name, setName] = useState<string>(currentName)
+  const [description, setDescription] = useState<string>(currentDescription)
+  const [website, setWebsite] = useState<string>(currentWebsite)
+  const [selectedCategory, setSelectedCategory] = useState<Category>(category)
   const [selectedBlockchain, setSelectedBlockchain] = useState<any>('')
   const [selectedAdmins, setSelectedAdmins] = useState<any>([])
 
@@ -88,12 +89,7 @@ const EditCommunityForm = ({
 
           <FormControl mt={4}>
             <FormLabel>Name</FormLabel>
-            <Input
-              variant="filled"
-              placeholder="e.g. DroppinDAO"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
+            <Input value={name} variant="filled" onChange={(e) => setName(e.target.value)} />
           </FormControl>
 
           <FormControl mt={4}>
@@ -101,9 +97,8 @@ const EditCommunityForm = ({
             <FormHelperText css={[sty.helperText]}>Briefly describe your community</FormHelperText>
             <Textarea
               variant="filled"
-              placeholder="e.g. DAO for Droppin Protocol Users"
-              onChange={(e) => setDescription(e.target.value)}
               value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </FormControl>
 
@@ -137,7 +132,13 @@ const EditCommunityForm = ({
                   <WebsiteIcon />
                   <Text>Website</Text>
                 </HStack>
-                <Input value={website} placeholder="yoursite.io" ml={8} variant="filled" />
+                <Input
+                  value={website}
+                  placeholder="yoursite.io"
+                  ml={8}
+                  variant="filled"
+                  onChange={(e) => setWebsite(e.target.value)}
+                />
               </Flex>
             </VStack>
           </FormControl>

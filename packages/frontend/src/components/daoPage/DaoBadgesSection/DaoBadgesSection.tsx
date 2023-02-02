@@ -1,8 +1,15 @@
 import { useState } from 'react'
 
-import { Badge, Button, Flex, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import { Badge, Button, Flex, HStack, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react'
 
-import { background2, discordPurple, pink, primary, primaryHighlight } from '@constants/colors'
+import {
+  background2,
+  discordPurple,
+  pink,
+  primary,
+  primaryHighlight,
+  secondary,
+} from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
@@ -18,11 +25,56 @@ import { QuestType } from '@components/queries/common'
 import DaoCard from '@components/shared/DaoCard'
 import { MOCK_DAO_LIST } from '@mockData'
 
-const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadgesSectionProps) => {
+const DaoBadgesSection = ({
+  badges,
+  questsDiscord,
+  questsSubmitForm,
+  isLoading,
+}: DaoBadgesSectionProps) => {
   const { repUnit, isAdmin, id } = useDaoPageContext()
 
   const [isCreateQuestOpen, setIsCreateQuestOpen] = useState(false)
   const [isCreateBadgeOpen, setIsCreateBadgeOpen] = useState(false)
+
+  const renderDiscordQuests = () => {
+    if (isLoading) return <Spinner size="lg" />
+
+    return (
+      <>
+        {questsDiscord.length > 0 ? (
+          <SimpleGrid columns={4} gap={6} width="100%">
+            {questsDiscord.map((item, index) => (
+              <QuestCard key={index} quest={item} questType={QuestType.discord} />
+            ))}
+          </SimpleGrid>
+        ) : (
+          <Text color={secondary} as="b">
+            There are no Discord Quests yet for this Badge !
+          </Text>
+        )}
+      </>
+    )
+  }
+
+  const renderSubmitFormQuests = () => {
+    if (isLoading) return <Spinner size="lg" />
+
+    return (
+      <>
+        {questsSubmitForm.length > 0 ? (
+          <SimpleGrid columns={4} gap={6} width="100%">
+            {questsSubmitForm.map((item, index) => (
+              <QuestCard key={index} quest={item} questType={QuestType.form} />
+            ))}
+          </SimpleGrid>
+        ) : (
+          <Text color={secondary} as="b">
+            There are no Discord Quests yet for this Badge !
+          </Text>
+        )}
+      </>
+    )
+  }
 
   return (
     <>
@@ -75,19 +127,11 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
           <Badge fontSize="xl" bg={discordPurple} padding="4px 16px" borderRadius="6px">
             Discord
           </Badge>
-          <SimpleGrid columns={4} gap={6} width="100%">
-            {questsDiscord.questList.map((item, index) => (
-              <QuestCard key={index} quest={item} questType={QuestType.discord} />
-            ))}
-          </SimpleGrid>
+          {renderDiscordQuests()}
           <Badge fontSize="xl" bg={pink} padding="4px 16px" borderRadius="6px">
             Submit Link
           </Badge>
-          <SimpleGrid columns={4} gap={6} width="100%">
-            {questsSubmitForm.questList.map((item, index) => (
-              <QuestCard key={index} quest={item} questType={QuestType.form} />
-            ))}
-          </SimpleGrid>
+          {renderSubmitFormQuests()}
         </VStack>
         <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
           <span>You might also like</span>
@@ -103,6 +147,8 @@ const DaoBadgesSection = ({ badges, questsDiscord, questsSubmitForm }: DaoBadges
                 repScore={item.repScore}
                 repUnit={item.repUnit}
                 description={item.description.substring(0, 40) + '...'}
+                // NOTE: this is a random url
+                imgUrl={`https://picsum.photos/id/${index * 10}/200`}
               />
             ))}
           </HStack>

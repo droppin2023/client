@@ -17,7 +17,7 @@ import {
 
 import { background2, orange, secondary, secondaryWeak } from '@constants/colors'
 
-import { Status } from '@components/queries/common'
+import { QuestType, Status } from '@components/queries/common'
 
 import Done from '@components/icons/Done'
 import { HEADER_MAPPING } from './UserSideModal.constants'
@@ -83,7 +83,16 @@ const UserSideModal = ({
           <VStack align="left" width="100%" spacing={5}>
             <VStack align="left">
               <Text color={secondary}>Quest Type</Text>
-              <Text as="b">{questType}</Text>
+              <Text as="b">
+                {(() => {
+                  switch (questType) {
+                    case QuestType.discord:
+                      return 'Discord'
+                    case QuestType.form:
+                      return 'Submit Form'
+                  }
+                })()}
+              </Text>
             </VStack>
             <Flex width="100%" justifyContent={'space-between'}>
               <VStack align="left">

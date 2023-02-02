@@ -1,9 +1,6 @@
 import {
   Button,
   Flex,
-  FormControl,
-  FormLabel,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -15,14 +12,16 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import Done from '@components/icons/Done'
+import useFetchClaimedBadge from '@components/queries/useFetchClaimedBadge'
+import usePostClaimBadge from '@components/queries/usePostClaimBadge'
 import QuestBadge from '@components/shared/QuestBadge'
-import { background2, orange, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { background2, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
 import { useUserContext } from '@context/UserContext'
 import Image from 'next/image'
+import NextLink from 'next/link'
 import { useRef, useState } from 'react'
+import { getTwitterTweetContent } from './ClaimModal.helpers'
 import { ClaimModalPhase, ClaimModalProps } from './ClaimModal.types'
-import usePostClaimBadge from '@components/queries/usePostClaimBadge'
-import useFetchClaimedBadge from '@components/queries/useFetchClaimedBadge'
 
 const ClaimModal = ({
   isOpen,
@@ -178,7 +177,7 @@ const ClaimModal = ({
           </VStack>
 
           <VStack spacing={3}>
-            <Flex justifyContent={'center'} alignItems="center" gap={3}>
+            {/* <Flex justifyContent={'center'} alignItems="center" gap={3}>
               <Text textAlign="center" color={primary}>
                 share
               </Text>
@@ -191,8 +190,16 @@ const ClaimModal = ({
               <Button variant="ghost" color={orange} onClick={handleCopy}>
                 copy
               </Button>
-            </Flex>
-            <Button colorScheme="twitter">Share on Twitter</Button>
+            </Flex> */}
+            <NextLink
+              href={`https://twitter.com/intent/tweet?text=${getTwitterTweetContent(
+                badgeName,
+              )}&hashtags=droppin,droppinprotocol`}
+            >
+              <Button as="a" colorScheme="twitter">
+                Share on Twitter
+              </Button>
+            </NextLink>
           </VStack>
         </VStack>
       </ModalBody>

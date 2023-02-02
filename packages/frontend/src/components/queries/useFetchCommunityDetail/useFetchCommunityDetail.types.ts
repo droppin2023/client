@@ -1,6 +1,7 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { Badge, EngageScore, Quest, Quests, User } from '@components/queries/common'
+import { Badge, EngageScore, Quest, User } from '@components/queries/common'
+import { BigNumber } from 'ethers'
 
 export interface FetchCommunityDetailParams {
   communityId: number
@@ -20,7 +21,7 @@ export interface FetchCommunityDetailResponse {
   blockchain: string
   link?: string
   badges: Badge[]
-  quests: Quests[]
+  quests: (Quest & { engagePoints: BigNumber })[]
 }
 
 export interface memberInCommunity {
@@ -29,6 +30,7 @@ export interface memberInCommunity {
   image: string
   name: string
   engageScore: EngageScore
+  username: string
   quests: Quest[]
   badges: Badge[]
 }

@@ -1,19 +1,32 @@
 // PUT THE MAIN HOOK LOGIC HERE
 
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
+import { ethers } from 'ethers'
+import { GET_COMMUNITY } from './useFetchCommunityDetail.constants'
 import {
   Category,
   FetchCommunityDetailParams,
   FetchCommunityDetailResponse,
 } from './useFetchCommunityDetail.types'
-import { GET_COMMUNITY } from './userFetchCommunityDetail.constants'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
-const normalizeData = (
-  data: FetchCommunityDetailResponse | undefined,
-): FetchCommunityDetailResponse => {
+const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
+  const normalizedQuests = []
+
+  for (let i = 0; i < (data?.quests || []).length; i++) {
+    const normalizedQuest = { ...data?.quests[i] }
+
+    normalizedQuest['engageScore'] = { number: 0, unit: '' }
+    normalizedQuest['engageScore']['number'] = ethers.BigNumber.from(
+      normalizedQuest.engagePoints,
+    ).toNumber()
+    normalizedQuest['engageScore']['unit'] = data?.name.slice(0, 3).toUpperCase() as string
+
+    normalizedQuests.push({ ...normalizedQuest })
+  }
+
   return {
     id: data?.id || 0,
     logo: data?.logo || '',
@@ -31,68 +44,12 @@ const normalizeData = (
       name: '',
     },
     totalEngage: data?.totalEngage || { number: 0, unit: '' },
-    members: data?.members || [
-      {
-        id: 0,
-        address: '',
-        image: '',
-        name: '',
-        engageScore: {
-          number: 0,
-          unit: 'LPD',
-        },
-        quests: [
-          {
-            id: 0,
-            name: '',
-            engageScore: {
-              number: 0,
-              unit: 'LPD',
-            },
-            description: 'awgewgwewgawe',
-          },
-        ],
-        badges: [
-          {
-            id: 0,
-            logo: '',
-            name: '',
-            description: '',
-            groupId: 0,
-            groupName: 'Lepak DAO',
-          },
-        ],
-      },
-    ],
+    members: data?.members || [],
     totalMember: data?.totalMember || 0,
     blockchain: data?.blockchain || '',
     link: data?.link || '',
-    badges: data?.badges || [
-      {
-        id: 0,
-        logo: '',
-        name: '',
-        description: '',
-        groupId: 0,
-        groupName: 'Lepak DAO',
-      },
-    ],
-    quests: data?.quests || [
-      {
-        questType: 0,
-        questList: [
-          {
-            id: 0,
-            name: '',
-            engageScore: {
-              number: 0,
-              unit: 'LPD',
-            },
-            description: 'wagwegewew',
-          },
-        ],
-      },
-    ],
+    badges: data?.badges || [],
+    quests: normalizedQuests,
   }
 }
 
@@ -108,7 +65,7 @@ const useFetchCommunityDetail = ({ communityId }: FetchCommunityDetailParams) =>
     setIsLoading(true)
 
     axios
-      .get<FetchCommunityDetailResponse>(`${GET_COMMUNITY}/?id=${communityId}`, {
+      .get<{ data: FetchCommunityDetailResponse }>(`${GET_COMMUNITY}/${communityId}`, {
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',
@@ -116,11 +73,12 @@ const useFetchCommunityDetail = ({ communityId }: FetchCommunityDetailParams) =>
         },
       })
       .then((data) => {
-        setData(data.data)
+        console.log(data.data.data)
+        setData(data.data.data)
       })
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false))
-  }, [])
+  }, [communityId])
 
   return { data: normalizeData(data), isLoading, error }
 }

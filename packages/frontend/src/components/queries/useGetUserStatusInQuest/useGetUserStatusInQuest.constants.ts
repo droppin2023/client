@@ -2,5 +2,4 @@
 
 import { SERVER_URL } from '@/constants/serverConfig'
 
-export const GET_COMMUNITY = SERVER_URL + '/api/Product/Jual'
-export const WTS_LINK = SERVER_URL + '/api/Product/Beli'
+export const GET_USER_STATUS_IN_QUEST_URL = SERVER_URL + '/quest'

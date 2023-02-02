@@ -1,7 +1,7 @@
 // PUT THE MAIN HOOK LOGIC HERE
 
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 import type {
   FetchPendingQuestsParams,
@@ -20,7 +20,7 @@ const normalizeData = (
           id: data?.pendingQuests[0].quest.id || 0,
           name: data?.pendingQuests[0].quest.name || '',
           engageScore: data?.pendingQuests[0].quest.engageScore || { number: 0, unit: '' },
-          description: data?.pendingQuests[0].quest.description || '',
+          description: data?.pendingQuests[0].quest.detail || '',
         },
         requestUser: {
           username: data?.pendingQuests[0].requestUser.username || '',

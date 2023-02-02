@@ -1,14 +1,14 @@
 // PUT THE MAIN HOOK LOGIC HERE
 
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
+import { QuestType } from '../common'
 import type { FetchQuestDetailParams, FetchQuestDetailResponse } from './useFetchBadgeDetail.types'
 import { GET_COMMUNITY } from './userFetchBadgeDetail.constants'
-import { QuestType } from '../common'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
-const normalizeData = (data: FetchQuestDetailResponse | undefined): FetchQuestDetailResponse => {
+const normalizeData = (data: FetchQuestDetailResponse | undefined) => {
   return {
     quest: data?.quest || {
       id: 0,
@@ -38,7 +38,7 @@ const useFetchQuestDetail = ({ questId }: FetchQuestDetailParams) => {
     setIsLoading(true)
 
     axios
-      .get<FetchQuestDetailResponse>(`${GET_COMMUNITY}/?questId=${questId}`, {
+      .get<FetchQuestDetailResponse>(`${GET_COMMUNITY}/${questId}`, {
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',
@@ -46,11 +46,12 @@ const useFetchQuestDetail = ({ questId }: FetchQuestDetailParams) => {
         },
       })
       .then((data) => {
+        console.log('QUEST_DETAIL', data)
         setData(data.data)
       })
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false))
-  }, [])
+  }, [questId])
 
   return { data: normalizeData(data), isLoading, error }
 }

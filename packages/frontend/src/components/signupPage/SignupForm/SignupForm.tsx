@@ -19,16 +19,21 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import localStorageUtils from '@helpers/localStorageUtils'
+import { env } from '@shared/environment'
+import NextLink from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
-import UploadImage from '@components/shared/UploadImage'
-import { useAccount } from 'wagmi'
 import DiscordIcon from '@components/icons/DiscordIcon'
-import SectionHeader from '@components/shared/SectionHeader'
-import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
-import * as globalSty from '@styles'
-import SignupSuccess from './components/SignupSuccess'
+import TwitterIcon from '@components/icons/TwitterIcon'
 import usePostSignup from '@components/queries/usePostSignup'
+import SectionHeader from '@components/shared/SectionHeader'
+import UploadImage from '@components/shared/UploadImage'
+import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
+import { LS_KEY_DISCORD_USER } from '@constants/discord'
+import * as globalSty from '@styles'
+import { useAccount } from 'wagmi'
+import SignupSuccess from './components/SignupSuccess'
 
 const SignupForm = () => {
   const [localImgUrl, setLocalImgUrl] = useState('')
@@ -37,12 +42,28 @@ const SignupForm = () => {
   const [bio, setBio] = useState('')
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
+  const [twitter, setTwitter] = useState('')
+
+  const [discordUsername, setDiscordUsername] = useState('')
+  const [discordDiscriminator, setDiscordDiscriminator] = useState('')
+
   const { postSignup, isLoading, error } = usePostSignup()
   const { address } = useAccount()
 
   const confirmationCancelRef = useRef(null)
 
+  const discordUserData =
+    JSON.stringify(localStorageUtils.read(LS_KEY_DISCORD_USER)) === '{}'
+      ? {
+          id: '',
+          username: '',
+          discriminator: '',
+        }
+      : localStorageUtils.read(LS_KEY_DISCORD_USER)
+
   const handleFinish = () => {
+    // TODO: post the twitter
+
     const params = {
       address: address?.toString() as string,
       name,
@@ -55,6 +76,11 @@ const SignupForm = () => {
     setIsConfirmationOpen(false)
     setIsFinished(true)
   }
+
+  useEffect(() => {
+    setDiscordUsername(discordUserData.username)
+    setDiscordDiscriminator(discordUserData.discriminator)
+  }, [discordUserData])
 
   return (
     <>
@@ -110,7 +136,33 @@ const SignupForm = () => {
                         <DiscordIcon />
                         <Text>Discord</Text>
                       </HStack>
-                      <Button bg={discordPurple}>Connect Discord</Button>
+
+                      <NextLink href={env.discordAuthUrl as string}>
+                        <Button as="a" bg={discordPurple}>
+                          {(discordUserData?.id || '').length > 0 ? (
+                            <Text as="span">{`${discordUserData.username}#${discordUserData.discriminator}`}</Text>
+                          ) : (
+                            'Connect Discord'
+                          )}
+                        </Button>
+                      </NextLink>
+                    </Flex>
+                    <Flex justifyContent={'space-between'} gap={3}>
+                      <HStack>
+                        <TwitterIcon />
+                        <Text>Twitter</Text>
+                      </HStack>
+                      <InputGroup>
+                        <InputLeftAddon>
+                          <Text>@</Text>
+                        </InputLeftAddon>
+                        <Input
+                          variant="filled"
+                          placeholder="Write your twitter link here"
+                          onChange={(e) => setTwitter(e.target.value)}
+                          value={twitter}
+                        />
+                      </InputGroup>
                     </Flex>
                   </VStack>
                 </FormControl>
