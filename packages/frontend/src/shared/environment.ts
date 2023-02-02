@@ -15,6 +15,8 @@ export const env = {
   droppinDiamond: process.env.NEXT_PUBLIC_DEPLOYED_DROPPIN_DIAMOND_ADDR,
   supportedChains: JSON.parse(process.env.NEXT_PUBLIC_SUPPORTED_CHAINS!),
 
+  discordAuthUrl: process.env.NEXT_PUBLIC_DISCORD_AUTH_URL,
+
   rpcUrls: {
     1337: process.env.NEXT_PUBLIC_RPC_1337!, // Hardhat
 

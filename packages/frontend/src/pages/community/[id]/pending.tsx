@@ -1,61 +1,56 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  VStack,
-} from '@chakra-ui/react'
+import { Box, Button, HStack, VStack } from '@chakra-ui/react'
 
-import DaoBadgesSection from '@components/daoPage/DaoBadgesSection'
-import DaoMembersSection from '@components/daoPage/DaoMembersSection'
-import DaoOverview from '@components/daoPage/DaoOverview'
 import DaoPendingRequests from '@components/daoPage/DaoPendingRequests'
 
-import { primary } from '@constants/colors'
 import { DaoPageProvider } from '@context/DaoPageContext'
 
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 // TODO: integrate real data
-import { QuestType } from '@components/queries/common'
-import { MOCK_PENDING_REQUESTS, ONE_COMMUNITY } from '@mockData'
+import { ChevronLeftIcon } from '@chakra-ui/icons'
+import useCheckAdmin from '@components/queries/useCheckAdmin'
+import useFetchCommunityDetail from '@components/queries/useFetchCommunityDetail'
+import SectionHeader from '@components/shared/SectionHeader'
+import { useUserContext } from '@context/UserContext'
+import { MOCK_PENDING_REQUESTS } from '@mockData'
 import { useRouter } from 'next/router'
 
 const DaoPage = ({ id }: { id: number }) => {
-  const mockDao = ONE_COMMUNITY
+  const { user } = useUserContext()
+
   const router = useRouter()
 
   // TODO: this is a temporary flag, real flag would be calculated with context api and back end data
-  const isAdmin = true
+
+  // const isAdmin = true
+
+  const {
+    data: communityData,
+    isLoading: fetchCommunityDetailLoading,
+    error: fetchCommunityDetailError,
+  } = useFetchCommunityDetail({ communityId: id })
+
+  const {
+    data: { isAdmin },
+    isLoading: checkAdminLoading,
+    error: checkAdminError,
+  } = useCheckAdmin({ communityId: id, username: user?.username as string })
 
   return (
     <VStack spacing="40px" marginBottom="100px">
       <HStack alignSelf="start" marginLeft={10} marginTop={10}>
-        <Button onClick={() => router.back()}>back</Button>
+        <Button onClick={() => router.back()}>
+          <ChevronLeftIcon />
+          Back
+        </Button>
       </HStack>
-      <DaoPageProvider isAdmin={isAdmin} repUnit={mockDao.totalEngage.unit} id={id}>
+      <DaoPageProvider isAdmin={isAdmin} repUnit={communityData.totalEngage.unit} id={id}>
         {/* TODO: refactor member list, quests, and badges as context */}
         {/* TODO: integrate discord */}
+        <SectionHeader title="Pending Quests" subtitle="" />
 
         <Box width="80%" minHeight="512px">
-          <Tabs>
-            <Tab
-              fontWeight={'bold'}
-              _selected={{
-                color: primary,
-                fontWeight: 'bold',
-                borderBottom: `3px solid ${primary}`,
-              }}
-            >
-              Pending Quests
-            </Tab>{' '}
-          </Tabs>
-
           <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
         </Box>
       </DaoPageProvider>

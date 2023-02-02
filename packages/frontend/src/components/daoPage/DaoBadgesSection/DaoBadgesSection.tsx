@@ -22,6 +22,8 @@ import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
 // TODO: integrate real data
 import { QuestType } from '@components/queries/common'
+import DaoCard from '@components/shared/DaoCard'
+import { MOCK_DAO_LIST } from '@mockData'
 
 const DaoBadgesSection = ({
   badges,
@@ -131,7 +133,7 @@ const DaoBadgesSection = ({
           </Badge>
           {renderSubmitFormQuests()}
         </VStack>
-        {/* <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
+        <Text fontSize="4xl" as="b" lineHeight="64px" color={primary}>
           <span>You might also like</span>
         </Text>
         <HStack marginTop="36px">
@@ -145,10 +147,12 @@ const DaoBadgesSection = ({
                 repScore={item.repScore}
                 repUnit={item.repUnit}
                 description={item.description.substring(0, 40) + '...'}
+                // NOTE: this is a random url
+                imgUrl={`https://picsum.photos/id/${index * 10}/200`}
               />
             ))}
           </HStack>
-        </HStack> */}
+        </HStack>
       </VStack>
       <QuestForm
         groupId={id}

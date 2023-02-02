@@ -30,6 +30,7 @@ export interface memberInCommunity {
   image: string
   name: string
   engageScore: EngageScore
+  username: string
   quests: Quest[]
   badges: Badge[]
 }
