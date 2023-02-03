@@ -8,4 +8,6 @@ export const imgSlot = (isLocked: boolean) => css`
 
 export const img = css`
   border-radius: 16px;
+  width: 200px;
+  height: 200px;
 `

@@ -61,7 +61,8 @@ const QuestCard = ({ quest, questType, showNoDetail }: QuestCardProps) => {
         )}
         <Text as="b">{quest.name}</Text>
         <Text as="b" color={colorMap(status as Status)}>
-          {`${quest.engageScore.number} ${quest.engageScore.unit}`}
+          {/* TODO: FIX CURRENCY BRO */}
+          {`${quest.engagePoints} YOO`}
         </Text>
       </Flex>
 

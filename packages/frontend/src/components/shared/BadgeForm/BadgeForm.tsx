@@ -179,7 +179,8 @@ const BadgeForm = ({
                       <FormHelperText color={foreground} margin="8px 0 12px 0">
                         <Text as="b">{item.name}</Text>
                         <Text>
-                          {item.engageScore.number} {item.engageScore.unit}
+                          {/* TODO: CURRENCY */}
+                          {item.engagePoints} YOO
                         </Text>
                       </FormHelperText>
                     </Flex>

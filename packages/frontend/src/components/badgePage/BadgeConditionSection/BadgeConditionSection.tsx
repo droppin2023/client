@@ -11,15 +11,18 @@ import QuestCard from '@components/shared/QuestCard'
 const BadgeConditionSection = ({
   requiredQuests,
   requiredEngageScore,
-  requiredPrice,
+  badgePrice,
   badgeAddress,
   isLoading,
+  communityName,
+  engagePointsThreshold,
 }: BadgeConditionSectionProps) => {
   console.log(requiredQuests)
   const questsDiscord =
-    requiredQuests.filter((item) => item.questType === QuestType.discord)?.[0]?.questList || []
+    requiredQuests.filter((item) => item.condition.type === QuestType.discord) || []
   const questsSubmitForm =
-    requiredQuests.filter((item) => item.questType === QuestType.form)?.[0]?.questList || []
+    requiredQuests.filter((item) => item.condition.type === QuestType.form) || []
+
   return (
     <>
       <VStack alignItems={'flex-start'} spacing={0} width="70%">
@@ -113,7 +116,9 @@ const BadgeConditionSection = ({
                   <Text
                     textAlign={'right'}
                     as="b"
-                  >{`Should be at least ${requiredEngageScore.number} ${requiredEngageScore.unit}`}</Text>
+                  >{`Should be at least ${engagePointsThreshold} ${communityName
+                    .toUpperCase()
+                    .slice(0, 3)}`}</Text>
                 </HStack>
               </Flex>
             </VStack>
@@ -135,8 +140,9 @@ const BadgeConditionSection = ({
                 width="100%"
                 justifyContent={'space-between'}
               >
-                <Text textAlign={'right'} as="b">{`${requiredPrice.number}`}</Text>
-                <Text textAlign={'right'} as="b">{`${requiredPrice.unit}`}</Text>
+                <Text textAlign={'right'} as="b">{`${badgePrice} ${communityName
+                  .toUpperCase()
+                  .slice(0, 3)}`}</Text>
               </Flex>
             </VStack>
           </Skeleton>

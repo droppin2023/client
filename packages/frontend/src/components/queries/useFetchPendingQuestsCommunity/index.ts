@@ -2,6 +2,7 @@
 
 import { SERVER_URL } from '@constants/serverConfig'
 import axios, { AxiosResponse } from 'axios'
+import { BigNumber } from 'ethers'
 import { useEffect, useState } from 'react'
 
 import type {
@@ -19,9 +20,14 @@ const normalizeData = (data: FetchPendingQuestsCommunityResponse | undefined) =>
     normalizedEntry['quest'] = data?.pendingQuests?.[i].quest || {
       id: 0,
       name: '',
-      engageScore: { number: 0, unit: '' },
+      engageScore: 0,
       description: '',
     }
+
+    if (data?.pendingQuests?.[i].quest.engageScore)
+      (normalizedEntry.quest as any).engageScore = BigNumber.from(
+        data?.pendingQuests?.[i].quest.engageScore,
+      ).toNumber()
 
     normalizedEntry['requestUser'] = data?.pendingQuests?.[i].requestUser || {
       username: '',
@@ -79,8 +85,14 @@ const useFetchPendingQuests = ({ groupId, members }: FetchPendingQuestsCommunity
       .then((values) => {
         const newData = []
         for (const data of values) {
-          newData.push(data.data)
+          newData.push(...data.data.pendingQuests)
         }
+
+        console.log('PENDING QUESTS', newData)
+
+        setData({
+          pendingQuests: newData,
+        })
       })
       .catch((err) => setError(error))
       .finally(() => setIsLoading(false))

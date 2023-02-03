@@ -4,8 +4,6 @@ import Image from 'next/image'
 
 import { Button, Flex, HStack, Skeleton, SkeletonText, Text, VStack } from '@chakra-ui/react'
 
-import AvatarPreview from '@components/shared/AvatarPreview'
-
 import { orange, orangeHighlight } from '@constants/colors'
 
 import bannerOrnament from './assets/banner-ornament.svg'
@@ -19,15 +17,15 @@ const BadgeOverview = ({
   id,
   name = 'NewBie Badge',
   symbol,
-  logo = './assets/placeholder.jpeg',
-  community,
+  logo,
+  communityName,
   description,
   isDefault,
   badgeAddress,
   holderList,
   requiredQuests,
   requiredEngageScore,
-  requiredPrice,
+  badgePrice,
   isLoading,
 }: BadgeOverviewProps) => {
   const { isLoggedIn } = useUserContext()
@@ -40,6 +38,7 @@ const BadgeOverview = ({
       setIsClaimModalOpen(true)
     }
   }
+
   return (
     <>
       <Flex
@@ -76,18 +75,18 @@ const BadgeOverview = ({
               <Flex alignItems={'center'} justifyContent="space-between" width="100%" flex={1}>
                 <HStack spacing={6}>
                   <Text>
-                    by <Text as="b">{community.name}</Text>
+                    by <Text as="b">{communityName}</Text>
                   </Text>
                   <HStack spacing={3}>
-                    <HStack spacing="-12px">
+                    {/* <HStack spacing="-12px">
                       {holderList.slice(0, 3).map((item, index) => (
                         <AvatarPreview key={index} ringColor={orange} img={item.image} />
                       ))}
-                    </HStack>
+                    </HStack> */}
 
-                    <Text>
+                    {/* <Text>
                       <strong>{holderList.length}</strong> holders
-                    </Text>
+                    </Text> */}
                   </HStack>
                 </HStack>
               </Flex>
@@ -109,7 +108,7 @@ const BadgeOverview = ({
               <Flex alignItems={'center'} justifyContent="left" width="100%" flex={1}>
                 <HStack spacing={6}>
                   <Text as="b">
-                    {requiredPrice.number} {requiredPrice.unit}
+                    {badgePrice} {communityName.toUpperCase().slice(0, 3)}
                   </Text>
                   {isLoggedIn && (
                     <Button
@@ -134,7 +133,7 @@ const BadgeOverview = ({
         badgeName={name}
         badgeLogo={logo}
         badgeAddress={badgeAddress}
-        badgePrice={requiredPrice}
+        badgePrice={badgePrice}
       />
     </>
   )

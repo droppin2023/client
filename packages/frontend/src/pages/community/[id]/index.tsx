@@ -14,6 +14,7 @@ import { QuestType } from '@components/queries/common'
 import useCheckAdmin from '@components/queries/useCheckAdmin'
 import useFetchCommunityDetail from '@components/queries/useFetchCommunityDetail'
 import { useUserContext } from '@context/UserContext'
+import { useEffect } from 'react'
 
 const DaoPage = ({ id }: { id: number }) => {
   const { user } = useUserContext()
@@ -30,6 +31,10 @@ const DaoPage = ({ id }: { id: number }) => {
     error: checkAdminError,
   } = useCheckAdmin({ communityId: id, username: user?.username as string })
 
+  useEffect(() => {
+    console.log('COMMUNITY_DATA', communityData)
+  }, [communityData])
+
   return (
     <VStack spacing="40px" marginBottom="100px">
       <DaoPageProvider isAdmin={isAdmin} repUnit={communityData.totalEngage.unit} id={id}>
@@ -42,13 +47,13 @@ const DaoPage = ({ id }: { id: number }) => {
           // chain={communityData.blockchain}
           chain="Polygon"
           category={communityData.category}
-          repScore={communityData.totalEngage.number}
+          repScore={communityData.totalEngage}
           description={communityData.description}
           badges={communityData.badges}
           owner={communityData.owner}
           website={communityData.link}
-          discordLink={communityData.discord?.link}
-          discordGuildId={communityData.discord?.guildId}
+          discordLink={communityData.discord as string}
+          discordGuildId={communityData.discord}
           isLoading={fetchCommunityDetailLoading || checkAdminLoading}
         />
 

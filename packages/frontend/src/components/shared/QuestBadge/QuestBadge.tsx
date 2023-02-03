@@ -19,9 +19,10 @@ const QuestBadge = ({
   isLocked,
   lockedMessage = '',
   minter,
+  onClick = () => {},
 }: QuestBadgeProps) => {
   return (
-    <Box position="relative">
+    <Box position="relative" onClick={onClick} cursor="pointer">
       {isLocked && (
         <>
           <Box position="absolute" left="0" right="0" top="24px" width="100%" padding="16px">

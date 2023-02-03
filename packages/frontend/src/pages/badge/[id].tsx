@@ -3,11 +3,10 @@ import { VStack } from '@chakra-ui/react'
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
-import BadgeClaimedSection from '@components/badgePage/BadgeClaimedSection'
 import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
 import BadgeOverview from '@components/badgePage/BadgeOverview'
 import useFetchBadgeDetail from '@components/queries/useFetchBadgeDetail'
-import useFetchClaimedBadge from '@components/queries/useFetchClaimedBadge'
+import useFetchCommunityDetail from '@components/queries/useFetchCommunityDetail'
 import { useUserContext } from '@context/UserContext'
 
 const BadgePage = ({ id }: { id: number }) => {
@@ -23,6 +22,14 @@ const BadgePage = ({ id }: { id: number }) => {
     error: isFetchBadgeDetailsError,
   } = useFetchBadgeDetail({ badgeId: id })
 
+  const {
+    data: communityData,
+    isLoading: fetchCommunityLoading,
+    error: fetchCommunityError,
+  } = useFetchCommunityDetail({ communityId: Number(badgeData.groupId) })
+
+  const loading = isFetchBadgeDetailsLoading || fetchCommunityLoading
+
   return (
     <VStack spacing="40px" marginBottom="100px">
       {/* TODO: integrate discord */}
@@ -30,23 +37,24 @@ const BadgePage = ({ id }: { id: number }) => {
         id={badgeData.id}
         name={badgeData.name}
         symbol={badgeData.symbol}
-        logo={badgeData.logo}
-        community={badgeData.community}
+        logo={badgeData.image}
+        communityName={communityData.name}
         description={badgeData.description}
         isDefault={badgeData.isDefault}
         badgeAddress={badgeData.address}
         holderList={badgeData.holderList}
         requiredQuests={badgeData.requiredQuests}
         requiredEngageScore={badgeData.requiredEngageScore}
-        requiredPrice={badgeData.requiredPrice}
-        isLoading={isFetchBadgeDetailsLoading}
+        badgePrice={badgeData.badgePrice}
+        isLoading={loading}
       />
       <BadgeConditionSection
         requiredQuests={badgeData.requiredQuests}
         requiredEngageScore={badgeData.requiredEngageScore}
-        requiredPrice={badgeData.requiredPrice}
+        badgePrice={badgeData.badgePrice}
         badgeAddress={badgeData.address}
-        isLoading={isFetchBadgeDetailsLoading}
+        isLoading={loading}
+        communityName={communityData.name}
       />
 
       {/* TODO: would need a bit of explanation on this part

@@ -18,11 +18,7 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
   for (let i = 0; i < (data?.quests || []).length; i++) {
     const normalizedQuest = { ...data?.quests[i] }
 
-    normalizedQuest['engageScore'] = { number: 0, unit: '' }
-    normalizedQuest['engageScore']['number'] = ethers.BigNumber.from(
-      normalizedQuest.engagePoints,
-    ).toNumber()
-    normalizedQuest['engageScore']['unit'] = data?.name.slice(0, 3).toUpperCase() as string
+    normalizedQuest['engagePoints'] = ethers.BigNumber.from(normalizedQuest.engagePoints).toNumber()
 
     normalizedQuests.push({ ...normalizedQuest })
   }

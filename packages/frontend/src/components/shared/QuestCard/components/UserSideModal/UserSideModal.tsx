@@ -102,7 +102,8 @@ const UserSideModal = ({
               <VStack align="left">
                 <Text color={secondary}>Quest Reward</Text>
                 <Text as="b" color={orange}>
-                  {`${quest.engageScore.number} ${quest.engageScore.unit}`}
+                  {/* TODO: FIX CURRENCYYYY */}
+                  {`${quest.engagePoints} YOO`}
                 </Text>
               </VStack>
             </Flex>

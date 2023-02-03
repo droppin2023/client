@@ -1,4 +1,3 @@
-import { Price } from '@components/queries/common'
 import { ModalProps } from '@types/modal'
 import { StaticImageData } from 'next/image'
 
@@ -6,7 +5,7 @@ export type ClaimModalProps = ModalProps & {
   badgeId: number
   badgeName: string
   badgeLogo: string | StaticImageData
-  badgePrice: Price
+  badgePrice: number
   badgeAddress: string
 }
 

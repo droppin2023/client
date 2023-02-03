@@ -61,8 +61,8 @@ export interface Quest {
 }
 
 export enum QuestType {
-  discord = 0,
-  form = 1,
+  discord = 'discord',
+  form = 'form',
 }
 
 // Quest Contdition

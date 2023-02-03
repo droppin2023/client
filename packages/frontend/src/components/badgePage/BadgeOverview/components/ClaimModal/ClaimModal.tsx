@@ -15,11 +15,12 @@ import Done from '@components/icons/Done'
 import useFetchClaimedBadge from '@components/queries/useFetchClaimedBadge'
 import usePostClaimBadge from '@components/queries/usePostClaimBadge'
 import QuestBadge from '@components/shared/QuestBadge'
-import { background2, primary, primaryHighlight, secondaryWeak } from '@constants/colors'
+import { background2, primary, primaryHighlight } from '@constants/colors'
 import { useUserContext } from '@context/UserContext'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRef, useState } from 'react'
+import barcodePlaceholder from './assets/barcode-placeholder.png'
 import { getTwitterTweetContent } from './ClaimModal.helpers'
 import { ClaimModalPhase, ClaimModalProps } from './ClaimModal.types'
 
@@ -73,23 +74,18 @@ const ClaimModal = ({
           <Text fontSize="lg" textAlign="center">
             You can claim your badge now.
           </Text>
-        </VStack>
-      </ModalBody>
-      <ModalFooter>
-        <Flex width="100%" justifyContent="center">
-          <VStack>
-            <Text as="b" fontSize="l" textAlign="center">
-              Scan it, Get Badge Claim to your Polygon ID Identity
-            </Text>
-            {/* TODO: replace with polygon ID barcode */}
-            <Image
-              src="https://picsum.photos/200"
-              alt="Polygon ID Barcode"
-              width={200}
-              height={200}
-              // onClick={handleScanned}
-            />
-            {/* <VStack spacing={1}>
+          <Text as="b" fontSize="l" textAlign="center">
+            Scan it, Get Badge Claim to your Polygon ID Identity
+          </Text>
+          {/* TODO: replace with polygon ID barcode */}
+          <Image
+            src={barcodePlaceholder}
+            alt="Polygon ID Barcode"
+            width={200}
+            height={200}
+            // onClick={handleScanned}
+          />
+          {/* <VStack spacing={1}>
               <Text fontSize="lg" textAlign="center" color={primary}>
                 Price
               </Text>
@@ -97,6 +93,11 @@ const ClaimModal = ({
                 {`${badgePrice.number} ${badgePrice.unit}`}
               </Text>
             </VStack> */}
+        </VStack>
+      </ModalBody>
+      <ModalFooter>
+        <Flex width="100%" justifyContent="center">
+          <VStack>
             <Flex width="100%" justifyContent="flex-start">
               <VStack align="left" width="100%" spacing={5}>
                 {/* <FormControl>
@@ -110,7 +111,8 @@ const ClaimModal = ({
                   onClick={handleClaim}
                 >
                   <Text as="b" fontSize="lg" textAlign="center" margin={3}>
-                    {`${badgePrice.number} ${badgePrice.unit}`}
+                    {/* TODO: HARDCODED DATA */}
+                    {`${badgePrice} YOO`}
                   </Text>
                   <Text fontSize="lg" textAlign="center">
                     Claim Badge
@@ -204,14 +206,13 @@ const ClaimModal = ({
         </VStack>
       </ModalBody>
       <ModalFooter>
-        <VStack
+        {/* <VStack
           width="100%"
           justifyContent="flex-start"
           bg={secondaryWeak}
           padding="16px"
           borderRadius="16px"
         >
-          {/* TODO: integrate real data */}
           <Flex width="100%" justifyContent={'space-between'} alignItems="center">
             <Text>Address</Text>
             <Text as="b" color={primary}>
@@ -236,7 +237,7 @@ const ClaimModal = ({
               Polygon
             </Text>
           </Flex>
-        </VStack>
+        </VStack> */}
       </ModalFooter>
     </>
   )

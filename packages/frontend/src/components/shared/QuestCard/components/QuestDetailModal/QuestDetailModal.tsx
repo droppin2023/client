@@ -86,9 +86,10 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
             <Flex justifyContent="space-between">
               <Text color={secondary}>Reward Engagement</Text>
               <Text as="b">
-                {quest.engageScore.number}{' '}
+                {quest.engagePoints}{' '}
                 <Text as="span" color={primary}>
-                  {quest.engageScore.unit}
+                  {/* TODO: FIX THIS CURRENCY */}
+                  YOO
                 </Text>
               </Text>
             </Flex>

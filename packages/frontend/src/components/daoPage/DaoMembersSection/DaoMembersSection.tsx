@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import {
+  Avatar,
   Badge,
   HStack,
   Table,
@@ -17,7 +18,7 @@ import {
 
 import type { DaoMemberSectionProps, MemberTableRow } from './DaoMembersSection.types'
 
-import { orange, primary } from '@constants/colors'
+import { primary } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import * as sty from './DaoMembersSection.styles'
@@ -47,12 +48,17 @@ const DaoMembersSection = ({ members, owner }: DaoMemberSectionProps) => {
         </Td>
         <Td>
           <HStack>
-            <Image src={img} alt={name} width={24} height={24} css={[sty.memberImage]} />
+            {img !== 'none' ? (
+              <Image src={img} alt={name} width={24} height={24} css={[sty.memberImage]} />
+            ) : (
+              <Avatar name={name} width="24px" height="24px" css={[sty.memberImage]} />
+            )}
+
             <Text color={primary}>{name}</Text>
           </HStack>
         </Td>
-        <Td color={orange}>{repScore}</Td>
-        <Td isNumeric={isOwner} color={primary}>
+        {/* <Td color={orange}>{repScore}</Td> */}
+        <Td isNumeric color={primary}>
           {isOwner ? 'OWNER' : quests}
         </Td>
         <Td>{badges}</Td>
@@ -67,7 +73,7 @@ const DaoMembersSection = ({ members, owner }: DaoMemberSectionProps) => {
           <Tr>
             <Th isNumeric>No.</Th>
             <Th>Member</Th>
-            <Th>Reputation</Th>
+            {/* <Th>Reputation</Th> */}
             <Th isNumeric>Quests</Th>
             <Th>Badges</Th>
           </Tr>
@@ -98,8 +104,9 @@ const DaoMembersSection = ({ members, owner }: DaoMemberSectionProps) => {
               number: index + 2,
               name: memberDetails.name,
               img: memberDetails.image,
-              repScore: `${engagement.number} ${engagement.unit}`,
-              quests: memberDetails.quests.length,
+              // repScore: `${engagement.number} ${engagement.unit}`,
+              repScore: ``,
+              quests: memberDetails.userQuests.length,
               badges: (
                 <Wrap>
                   {badges.map((item, index) => (

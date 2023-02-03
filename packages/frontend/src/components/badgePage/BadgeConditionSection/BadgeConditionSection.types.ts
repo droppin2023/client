@@ -1,9 +1,11 @@
-import type { EngageScore, Price, Quests } from '@components/queries/common'
+import type { EngageScore } from '@components/queries/common'
 
 export interface BadgeConditionSectionProps {
-  requiredQuests: Quests[]
+  requiredQuests: any
   requiredEngageScore: EngageScore
-  requiredPrice: Price
+  badgePrice: number
   badgeAddress: string
   isLoading: boolean
+  communityName: string
+  engagePointsThreshold: number
 }

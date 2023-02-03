@@ -8,4 +8,5 @@ export interface QuestBadgeProps {
   minter?: string
   isLocked: boolean
   lockedMessage?: string
+  onClick?: () => void
 }
