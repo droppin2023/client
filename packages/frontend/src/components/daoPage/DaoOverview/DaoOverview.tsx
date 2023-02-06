@@ -53,7 +53,6 @@ const DaoOverview = ({
   owner,
   website,
   discordLink = './assets/placeholder.jpeg',
-  discordGuildId,
   isLoading,
 }: DaoOverviewProps) => {
   const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(false)
@@ -149,7 +148,7 @@ const DaoOverview = ({
                         <WebsiteIcon />
                       </Link>
                     </IconButton>
-                    {discordGuildId ? (
+                    {discordLink ? (
                       <IconButton
                         aria-label="discord"
                         variant="outline"
