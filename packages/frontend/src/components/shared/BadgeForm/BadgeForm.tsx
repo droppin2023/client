@@ -105,9 +105,15 @@ const BadgeForm = ({
     // upload image
     const uploadUrl = await uploadImage(localImgUrl)
 
+    // pad checked quests array if not multiple of 3
+    const requiredQuests = checkedQuestList.map((quest) => quest.id)
+    while (requiredQuests.length < 3) {
+      requiredQuests.push(0)
+    }
+
     const params = {
       contract: {
-        requiredQuests: checkedQuestList.map((quest) => quest.id),
+        requiredQuests,
         engagePointsThreshold: engagement,
         badgePrice: parseEther(price.toString()),
         name: title,
