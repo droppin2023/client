@@ -1,8 +1,9 @@
 import { Badge, Category, User } from '@queries/common'
+import { StaticImageData } from 'next/image'
 
 export interface DaoOverviewProps {
   name: string
-  imgUrl?: string
+  imgUrl?: string | StaticImageData
   memberCount: number
   memberList: User[]
   category: Category

@@ -36,6 +36,7 @@ import { parseEther } from 'ethers/lib/utils.js'
 
 import { uploadImage } from '@helpers/imageUtils'
 import { Quest } from '@queries/common'
+import { useRouter } from 'next/router'
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
 import * as sty from './BadgeForm.styles'
 import type { BadgeFormProps } from './BadgeForm.types'
@@ -49,7 +50,6 @@ const BadgeForm = ({
   questsSubmitForm,
   groupId,
 }: BadgeFormProps) => {
-  const toast = useToast()
   const [localImgUrl, setLocalImgUrl] = useState('')
   const [checkedQuestList, setCheckedQuestList] = useState<Quest[]>([])
   const [title, setTitle] = useState('')
@@ -58,8 +58,11 @@ const BadgeForm = ({
   const [price, setPrice] = useState(0)
   const [symbol, setSymbol] = useState('')
   const [priceUnit, setPriceUnit] = useState('ETH')
-  const { createBadge, isLoading, setIsLoading, error } = usePostCreateBadge()
   const [checkedQuestError, setCheckedQuestError] = useState('')
+
+  const toast = useToast()
+  const router = useRouter()
+  const { createBadge, isLoading, setIsLoading, error } = usePostCreateBadge()
 
   //TODO: handleQuestCheck is not properly working when after get CheckedQuestError. Have to Fix it
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
@@ -130,6 +133,8 @@ const BadgeForm = ({
 
     // TODO : Add loading modal and error modal using this data
     console.log('CLAIM BADGE CONTRACT', res, error, isLoading)
+
+    router.reload()
   }
 
   // this useEffect helps with the toaster rendering
@@ -292,9 +297,17 @@ const BadgeForm = ({
           </ModalBody>
 
           <ModalFooter>
-            <Button onClick={handleSubmit} size="lg" bg={primary} _hover={{ bg: primaryHighlight }}>
-              Create Badge
-            </Button>
+            <FormControl>
+              <Button
+                type="submit"
+                onClick={handleSubmit}
+                size="lg"
+                bg={primary}
+                _hover={{ bg: primaryHighlight }}
+              >
+                Create Badge
+              </Button>
+            </FormControl>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -303,7 +316,7 @@ const BadgeForm = ({
         onClose={() => {
           return
         }}
-        modatMessage={'Lorem ipsum'}
+        modatMessage={'Creating Badge, Please Wait'}
         modalStatus={0}
       />
     </>
