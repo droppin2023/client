@@ -15,20 +15,12 @@ import {
   VStack,
 } from '@chakra-ui/react'
 
-import DiscordIcon from '@components/icons/DiscordIcon'
 import WebsiteIcon from '@components/icons/WebsiteIcon'
 import AvatarPreview from '@components/shared/AvatarPreview'
 
 import BadgeClaimModal from '@components/badgePage/BadgeOverview/components/ClaimModal'
 
-import {
-  background,
-  discordPurple,
-  foreground,
-  orange,
-  orangeHighlight,
-  secondary,
-} from '@constants/colors'
+import { background, foreground, orange, orangeHighlight, secondary } from '@constants/colors'
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Settings from '@components/icons/Settings'
@@ -40,6 +32,8 @@ import EditCommunityForm from './components/EditCommunityForm'
 import * as sty from './DaoOverview.styles'
 import type { DaoOverviewProps } from './DaoOverview.types'
 
+import placeholder from './assets/placeholder.jpeg'
+
 const DaoOverview = ({
   name = 'Drop DAO',
   memberCount = 0,
@@ -48,7 +42,7 @@ const DaoOverview = ({
   repScore = 0,
   description = '',
   chain = 'Polygon',
-  imgUrl = './assets/placeholder.jpeg',
+  imgUrl = placeholder,
   badges,
   owner,
   website,
@@ -56,10 +50,9 @@ const DaoOverview = ({
   isLoading,
 }: DaoOverviewProps) => {
   const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(false)
-
   const [isClaimDefaultBadgeOpen, setIsCreateDefaultBadgeOpen] = useState(false)
-
   const { isAdmin, repUnit, id } = useDaoPageContext()
+
   const onHandleJoin = () => {
     console.log('get membership NFT')
     setIsCreateDefaultBadgeOpen(true)
@@ -82,7 +75,13 @@ const DaoOverview = ({
         >
           <HStack alignItems="flex-start" gap="32px" width="77vw">
             <Skeleton width="auto" height="auto" isLoaded={!isLoading} borderRadius="16px">
-              <Image src={imgUrl} alt={name} width={200} height={200} css={[sty.daoImage]} />
+              <Image
+                src={imgUrl || placeholder}
+                alt={name}
+                width={200}
+                height={200}
+                css={[sty.daoImage]}
+              />
             </Skeleton>
             <VStack alignItems={'flex-start'} width="100%">
               <Skeleton width="100%" height="auto" isLoaded={!isLoading}>
@@ -148,7 +147,7 @@ const DaoOverview = ({
                         <WebsiteIcon />
                       </Link>
                     </IconButton>
-                    {discordLink ? (
+                    {/* {discordLink ? (
                       <IconButton
                         aria-label="discord"
                         variant="outline"
@@ -165,7 +164,7 @@ const DaoOverview = ({
                           <Button bg={discordPurple}>Connect Discord</Button>
                         </Flex>
                       )
-                    )}
+                    )} */}
                   </HStack>
                 </HStack>
               </Skeleton>

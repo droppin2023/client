@@ -5,7 +5,7 @@ import { CREATE_QUEST } from './usePostCreateQuest.constants'
 import type { CreateQuestParams } from './usePostCreateQuest.types'
 
 const usePostCreateQuest = () => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<unknown>()
   const { coreContract } = useContractConnection()
 
@@ -14,7 +14,6 @@ const usePostCreateQuest = () => {
     setError(null)
     try {
       const tsx = await coreContract?.addQuest(params.contract)
-
       const transactionHash = await tsx.wait()
 
       const { data, status } = await axios.post(CREATE_QUEST, {
