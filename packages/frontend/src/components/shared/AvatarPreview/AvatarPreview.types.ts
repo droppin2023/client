@@ -6,4 +6,5 @@ export interface AvatarPreviewProps {
   img: StaticImageData | string
   ringColor: string
   css?: [SerializedStyles]
+  name?: string
 }

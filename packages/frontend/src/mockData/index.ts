@@ -1,15 +1,15 @@
-import { FetchBadgeDetailResponse } from '@components/queries/useFetchBadgeDetail/useFetchBadgeDetail.types'
+import { FetchBadgeDetailResponse } from '@queries/useFetchBadgeDetail/useFetchBadgeDetail.types'
 import mockAvatar1 from './assets/mock-avatar-1.png'
 import mockAvatar2 from './assets/mock-avatar-2.png'
 import mockAvatar3 from './assets/mock-avatar-3.png'
 
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
-import { Category, QuestType, Status } from '@components/queries/common'
-import { FetchCommunityDetailResponse } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
-import { FetchQuestDetailResponse } from '@components/queries/useFetchQuestDetail/useFetchBadgeDetail.types'
-import { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
-import { GetUserStatusQuestResponse } from '@components/queries/useGetUserStatusInQuest/useGetUserStatusInQuest.types'
+import { Category, QuestType, Status } from '@queries/common'
+import { FetchCommunityDetailResponse } from '@queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
+import { FetchQuestDetailResponse } from '@queries/useFetchQuestDetail/useFetchBadgeDetail.types'
+import { FetchUserDetailResponse } from '@queries/useFetchUserDetail/useFetchUserDetail.types'
+import { GetUserStatusQuestResponse } from '@queries/useGetUserStatusInQuest/useGetUserStatusInQuest.types'
 
 export const ONE_USER_DETAIL: FetchUserDetailResponse = {
   username: 'rick',

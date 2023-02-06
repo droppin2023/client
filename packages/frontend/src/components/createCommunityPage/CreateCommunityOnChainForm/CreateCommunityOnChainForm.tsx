@@ -11,7 +11,6 @@ import {
   FormControl,
   FormHelperText,
   FormLabel,
-  Input,
   SimpleGrid,
   Text,
   VStack,
@@ -30,12 +29,12 @@ import {
 import { useRef, useState } from 'react'
 import { FormStepCommonProps } from '../types'
 
-import { QuestType } from '@components/queries/common'
 import BadgeForm from '@components/shared/BadgeForm'
 import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
 import QuestCard from '@components/shared/QuestCard'
 import QuestForm from '@components/shared/QuestForm'
 import { useCreateCommunityContext } from '@context/CreateCommunityContext'
+import { QuestType } from '@queries/common'
 import * as globalSty from '@styles'
 
 const CreateCommunityOnChainForm = ({ onNext, onPrev }: FormStepCommonProps) => {

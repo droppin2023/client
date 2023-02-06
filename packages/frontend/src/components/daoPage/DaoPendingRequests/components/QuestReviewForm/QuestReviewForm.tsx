@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import {
+  Avatar,
   Button,
   Flex,
   FormControl,
@@ -46,13 +47,18 @@ const QuestReviewForm = ({ isOpen, onClose, reviewContent }: QuestReviewFormProp
             justifyContent={'space-between'}
           >
             <HStack>
-              <Image
-                src={mockAvatar1}
-                alt="Profile picture"
-                css={[sty.userImg]}
-                width={32}
-                height={32}
-              />
+              {(reviewContent.requestUser?.image || 'none') !== 'none' ? (
+                <Image
+                  src={reviewContent.requestUser?.image}
+                  alt="Profile picture"
+                  css={[sty.userImg]}
+                  width={32}
+                  height={32}
+                />
+              ) : (
+                <Avatar name={reviewContent.requestUser?.name || ''} width="32px" height="32px" />
+              )}
+
               <Text>{reviewContent.requestUser?.name}</Text>
             </HStack>
             <Button>View Profile</Button>
@@ -67,7 +73,8 @@ const QuestReviewForm = ({ isOpen, onClose, reviewContent }: QuestReviewFormProp
               <VStack spacing={1} align="left">
                 <Text color={secondary}>Quest Reward</Text>
                 <Text as="b" color={orange}>
-                  {reviewContent.quest?.engageScore.number} {reviewContent.quest?.engageScore.unit}
+                  {/* TODO: HARDCODED DATA */}
+                  {reviewContent.quest?.engageScore} YOO
                 </Text>
               </VStack>
             </Flex>

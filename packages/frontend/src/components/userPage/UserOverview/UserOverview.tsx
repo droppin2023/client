@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Button, Flex, HStack, Text, VStack } from '@chakra-ui/react'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -37,7 +37,12 @@ const UserOverview = () => {
           width="75%"
           gap={10}
         >
-          <Image src={image} alt="User Image" width={180} height={180} css={[sty.userImage]} />
+          {image.length > 5 ? (
+            <Image src={image} alt="User Image" width={180} height={180} css={[sty.userImage]} />
+          ) : (
+            <Avatar name={name} width="180px" height="180px" />
+          )}
+
           <VStack align="left" width="100%" flex="3">
             <Flex justifyContent="space-between" alignItems="center">
               <HStack spacing={5}>

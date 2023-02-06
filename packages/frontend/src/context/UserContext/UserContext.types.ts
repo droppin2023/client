@@ -1,4 +1,4 @@
-import { User } from '@components/queries/common'
+import { User } from '@queries/common'
 import type { ReactNode } from 'react'
 
 export interface LoginParams {

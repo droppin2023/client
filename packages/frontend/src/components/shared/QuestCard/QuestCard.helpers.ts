@@ -1,5 +1,5 @@
-import { Status } from '@components/queries/common'
 import { danger, orange, primary, violet } from '@constants/colors'
+import { Status } from '@queries/common'
 
 export const colorMap = (status: Status) => {
   switch (status) {

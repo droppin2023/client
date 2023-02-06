@@ -10,13 +10,16 @@ import { DaoPageProvider } from '@context/DaoPageContext'
 import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
-import { QuestType } from '@components/queries/common'
-import useCheckAdmin from '@components/queries/useCheckAdmin'
-import useFetchCommunityDetail from '@components/queries/useFetchCommunityDetail'
 import { useUserContext } from '@context/UserContext'
+import { QuestType } from '@queries/common'
+import useCheckAdmin from '@queries/useCheckAdmin'
+import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
+import { useState } from 'react'
 
 const DaoPage = ({ id }: { id: number }) => {
   const { user } = useUserContext()
+  // this state is for re-rendering after a post request, just increment it.
+  const [submitCount, setSubmitCount] = useState(0)
 
   const {
     data: communityData,
@@ -32,12 +35,18 @@ const DaoPage = ({ id }: { id: number }) => {
 
   return (
     <VStack spacing="40px" marginBottom="100px">
-      <DaoPageProvider isAdmin={isAdmin} repUnit={communityData.totalEngage.unit} id={id}>
+      <Box display={'none'}>{submitCount}</Box>
+      <DaoPageProvider
+        isAdmin={isAdmin}
+        repUnit={communityData.repUnit}
+        id={id}
+        setSubmitCount={setSubmitCount}
+      >
         {/* TODO: integrate discord */}
         <DaoOverview
           name={communityData.name}
           imgUrl={communityData.logo}
-          memberCount={communityData.totalMember}
+          memberCount={communityData.members.length}
           memberList={communityData.members}
           // chain={communityData.blockchain}
           chain="Polygon"
@@ -47,8 +56,7 @@ const DaoPage = ({ id }: { id: number }) => {
           badges={communityData.badges}
           owner={communityData.owner}
           website={communityData.link}
-          discordLink={communityData.discord?.link}
-          discordGuildId={communityData.discord?.guildId}
+          discordLink={communityData.discord as string}
           isLoading={fetchCommunityDetailLoading || checkAdminLoading}
         />
 
@@ -93,11 +101,6 @@ const DaoPage = ({ id }: { id: number }) => {
               <TabPanel>
                 <DaoMembersSection members={communityData.members} owner={communityData.owner} />
               </TabPanel>
-              {/* {isAdmin && (
-                <TabPanel>
-                  <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
-                </TabPanel>
-              )} */}
             </TabPanels>
           </Tabs>
         </Box>

@@ -1,4 +1,4 @@
-import { Community, Quest, QuestType, Status } from '@components/queries/common'
+import { Community, Quest, QuestType, Status } from '@queries/common'
 import { ModalProps } from '@types/modal'
 
 export type UserSideModalProps = ModalProps & {

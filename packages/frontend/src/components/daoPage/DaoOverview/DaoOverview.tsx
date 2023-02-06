@@ -19,6 +19,8 @@ import DiscordIcon from '@components/icons/DiscordIcon'
 import WebsiteIcon from '@components/icons/WebsiteIcon'
 import AvatarPreview from '@components/shared/AvatarPreview'
 
+import BadgeClaimModal from '@components/badgePage/BadgeOverview/components/ClaimModal'
+
 import {
   background,
   discordPurple,
@@ -31,7 +33,7 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Settings from '@components/icons/Settings'
 
-import { Category } from '@components/queries/common'
+import { Category } from '@queries/common'
 import Link from 'next/link'
 import bannerOrnament from './assets/banner-ornament.svg'
 import EditCommunityForm from './components/EditCommunityForm'
@@ -56,9 +58,12 @@ const DaoOverview = ({
 }: DaoOverviewProps) => {
   const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(false)
 
+  const [isClaimDefaultBadgeOpen, setIsCreateDefaultBadgeOpen] = useState(false)
+
   const { isAdmin, repUnit, id } = useDaoPageContext()
   const onHandleJoin = () => {
     console.log('get membership NFT')
+    setIsCreateDefaultBadgeOpen(true)
   }
   return (
     <>
@@ -87,12 +92,9 @@ const DaoOverview = ({
                     <Text fontSize="4xl" lineHeight={1.2} as="b">
                       {name}
                     </Text>
-                    <Badge
-                      fontSize="xl"
-                      bg={background}
-                      padding="4px 16px"
-                      borderRadius="6px"
-                    >{`${repScore} ${repUnit}`}</Badge>
+                    <Badge fontSize="xl" bg={background} padding="4px 16px" borderRadius="6px">
+                      {`${repScore} ${repUnit}`}
+                    </Badge>
                   </HStack>
                   <HStack spacing={2}>
                     {isAdmin && (
@@ -154,8 +156,8 @@ const DaoOverview = ({
                         borderRadius="9999px"
                         borderColor={foreground}
                       >
-                        <Link href={`https://${discordLink}`} target="_blank">
-                          <DiscordIcon />
+                        <Link href={`${discordLink}`} target="_blank">
+                          <DiscordIcon as="a" />
                         </Link>
                       </IconButton>
                     ) : (
@@ -179,7 +181,12 @@ const DaoOverview = ({
                     {memberList.length > 0 && (
                       <HStack spacing="-12px">
                         {memberList.slice(0, 3).map((item, index) => (
-                          <AvatarPreview key={index} ringColor={orange} img={item.image} />
+                          <AvatarPreview
+                            key={index}
+                            ringColor={orange}
+                            img={item.image}
+                            name={item.name}
+                          />
                         ))}
                       </HStack>
                     )}
@@ -217,6 +224,18 @@ const DaoOverview = ({
         category={category}
         owner={owner}
       />
+      {/* HARDCODED PROPS */}
+      <BadgeClaimModal
+        isOpen={isClaimDefaultBadgeOpen}
+        onClose={() => setIsCreateDefaultBadgeOpen(false)}
+        badgeId={1}
+        badgeName={'y00ts Holder'}
+        badgeLogo={
+          'https://img-cdn.magiceden.dev/rs:fill:400:400:0:0/plain/https://bafkreicndlrqersl63a7fpk6zzw73lsklj5bwsidk74n4solbcyz2g3viq.ipfs.nftstorage.link/'
+        }
+        badgePrice={0}
+        badgeAddress={'0x3B02fF1e626Ed7a8fd6eC5299e2C54e1421B626B'}
+      ></BadgeClaimModal>
     </>
   )
 }

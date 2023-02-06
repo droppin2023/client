@@ -1,9 +1,10 @@
-import type { ReactNode } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface DaoPageContextValue {
   isAdmin: boolean
   repUnit: string
   id: number
+  setSubmitCount: Dispatch<SetStateAction<number>>
 }
 
 export interface DaoPageProviderProps {
@@ -11,4 +12,5 @@ export interface DaoPageProviderProps {
   isAdmin?: boolean
   repUnit: string
   id: number
+  setSubmitCount: Dispatch<SetStateAction<number>>
 }

@@ -1,15 +1,15 @@
-import type { FetchUserDetailResponse } from '@components/queries/useFetchUserDetail/useFetchUserDetail.types'
+import type { NormalizedUserResponse } from '@queries/useFetchUserDetail/useFetchUserDetail.types'
 import type { ReactNode } from 'react'
 
 export interface UserPageContextValue {
-  userData: FetchUserDetailResponse & {
+  userData: NormalizedUserResponse & {
     username: string
   }
 }
 
 export interface UserPageProviderProps {
   children: ReactNode
-  userData: FetchUserDetailResponse & {
+  userData: NormalizedUserResponse & {
     username: string
   }
 }

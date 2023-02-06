@@ -3,17 +3,16 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 import { primary } from '@constants/colors'
-import { useAccount } from 'wagmi'
 
 import { UserPageProvider } from '@context/UserPageContext'
 
 import UserOverview from '@components/userPage/UserOverview'
 
 // TODO: integrate real data
-import useFetchUserDetail from '@components/queries/useFetchUserDetail'
 import UserBadgesSection from '@components/userPage/UserBadgesSection'
 import UserEngagementSection from '@components/userPage/UserEngagementSection'
 import UserQuestSection from '@components/userPage/UserQuestSection'
+import useFetchUserDetail from '@queries/useFetchUserDetail'
 
 const UserPage = ({ username }: { username: string }) => {
   const { data: userData, isLoading, error } = useFetchUserDetail({ username })

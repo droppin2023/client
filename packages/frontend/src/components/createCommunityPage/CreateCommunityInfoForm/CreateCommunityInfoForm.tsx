@@ -5,6 +5,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogOverlay,
+  Avatar,
   Button,
   Flex,
   FormControl,
@@ -23,17 +24,18 @@ import Image from 'next/image'
 import SectionHeader from '@components/shared/SectionHeader'
 import UploadImage from '@components/shared/UploadImage'
 
-import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
+import { background2, discordPurple, primary, primaryHighlight, secondary } from '@constants/colors'
 import { useCreateCommunityContext } from '@context/CreateCommunityContext'
 import * as globalSty from '@styles'
 
-import { Category } from '@components/queries/common'
 import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
 import { DAO_CATEGORIES } from '@constants/categories'
+import { useUserContext } from '@context/UserContext'
+import { Category } from '@queries/common'
+import usePostCreateGroup from '@queries/usePostCreateGroup'
+import { useRef, useState } from 'react'
 import * as sty from './CreateCommunityInfoForm.styles'
 import { CreateCommunityInfoFormProps } from './CreateCommunityInfoForm.types'
-import usePostCreateGroup from '@components/queries/usePostCreateGroup'
-import { useRef, useState } from 'react'
 
 const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProps) => {
   const {
@@ -50,6 +52,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
     setWebsite,
     setSelectedCategory,
   } = useCreateCommunityContext()
+
+  const { user } = useUserContext()
 
   const { createGroup, isLoading, error } = usePostCreateGroup()
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
@@ -176,21 +180,26 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
           </VStack>
         </FormControl>
 
-        {/* TODO: integrate current user data here */}
         <FormControl mt={4}>
           <FormLabel>Admin</FormLabel>
           <FormHelperText css={[globalSty.helperText]}>
             Admin can modify community settings
           </FormHelperText>
           <HStack spacing={3}>
-            <Image
-              src={'https://picsum.photos/200'}
-              alt={'Admin image'}
-              css={[sty.userImage]}
-              width={32}
-              height={32}
-            />
-            <Text>Pia</Text>
+            {(user?.image?.length || '') > 5 ? (
+              <Image
+                src={user?.image as string}
+                alt={'Admin image'}
+                css={[sty.userImage]}
+                width={32}
+                height={32}
+              />
+            ) : (
+              <Avatar name={user?.username} css={[sty.userImage]} />
+            )}
+
+            <Text>{user?.name}</Text>
+            <Text color={secondary}>`@{user?.username}`</Text>
           </HStack>
         </FormControl>
 

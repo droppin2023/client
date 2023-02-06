@@ -6,7 +6,14 @@
  **/
 const nextConfig = {
   images: {
-    domains: ['via.placeholder.com', 'picsum.photos'],
+    domains: [
+      'via.placeholder.com',
+      'picsum.photos',
+      'pbs.twimg.com',
+      'powered.by.dustlabs.com',
+      'img-cdn.magiceden.dev',
+      'thumbs2.imgbox.com',
+    ],
   },
 }
 

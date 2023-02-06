@@ -1,6 +1,6 @@
-import { User } from '@components/queries/common'
-import useLazyCheckLogin from '@components/queries/useLazyCheckLogin'
-import useLazyFetchUserDetail from '@components/queries/useLazyFetchUserDetail'
+import { User } from '@queries/common'
+import useLazyCheckLogin from '@queries/useLazyCheckLogin'
+import useLazyFetchUserDetail from '@queries/useLazyFetchUserDetail'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useState } from 'react'
 import { useAccount, useDisconnect } from 'wagmi'
@@ -29,15 +29,16 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const { address } = useAccount({
     onConnect: async ({ address, isReconnected }) => {
       const loginData = await checkLogin({ address: (address as string).toLowerCase() })
+      console.log('LOGIN STATUS', loginData)
 
       // if user not registered we redirect to registration
-      if (checkLoginError) {
+      if ((loginData?.isSignedUp || false) === false) {
         if (router.asPath !== '/signup') {
           router.push('/signup')
         }
       } else {
-        const userData = await fetchUserDetail({ username: loginData?.username })
-        console.log(userData)
+        const userData = await fetchUserDetail({ username: loginData?.username as string })
+        console.log('USER DETAIL', userData)
         //TODO: add discord tokens
 
         // load the user data to the user state

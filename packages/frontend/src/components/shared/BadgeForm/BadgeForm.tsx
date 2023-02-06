@@ -30,10 +30,11 @@ import { background2, foreground, primary, primaryHighlight } from '@constants/c
 import DroppinModal from '@components/shared/DroppinModal'
 import UploadImage from '@components/shared/UploadImage'
 
-import usePostCreateBadge from '@components/queries/usePostCreateBadge'
+import usePostCreateBadge from '@queries/usePostCreateBadge'
 import { ethers } from 'ethers'
 import { parseEther } from 'ethers/lib/utils.js'
 
+import { Quest } from '@queries/common'
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
 import * as sty from './BadgeForm.styles'
 import type { BadgeFormProps } from './BadgeForm.types'
@@ -49,7 +50,7 @@ const BadgeForm = ({
 }: BadgeFormProps) => {
   const toast = useToast()
   const [localImgUrl, setLocalImgUrl] = useState('')
-  const [checkedQuestList, setCheckedQuestList] = useState<typeof quests>([])
+  const [checkedQuestList, setCheckedQuestList] = useState<Quest[]>([])
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [engagement, setEngagement] = useState(0)
@@ -61,45 +62,64 @@ const BadgeForm = ({
 
   //TODO: handleQuestCheck is not properly working when after get CheckedQuestError. Have to Fix it
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    const tempCheckedList = [...checkedQuestList]
+    let tempCheckedList = [...checkedQuestList]
+    const focusedQuest: Quest = JSON.parse(e.target.value)
+
     if (e.target.checked) {
       if (tempCheckedList.length >= 3) {
         setCheckedQuestError('Maximum of 3 quests only.')
         e.target.checked = false
         return
       }
-      tempCheckedList.push(JSON.parse(e.target.value))
-      setEngagement(engagement + JSON.parse(e.target.value).engageScore.number)
+      tempCheckedList.push(focusedQuest)
+      setEngagement(engagement + focusedQuest.engagePoints)
     } else {
-      tempCheckedList.splice(tempCheckedList.indexOf(JSON.parse(e.target.value)), 1)
-      setEngagement(engagement - JSON.parse(e.target.value).engageScore.number)
+      tempCheckedList = tempCheckedList.filter((item) => item.id !== focusedQuest.id)
+      setEngagement(engagement - focusedQuest.engagePoints)
     }
 
     setCheckedQuestError('')
     setCheckedQuestList(tempCheckedList)
   }
 
+  // reset everything when we close the modal
+  const handleClose = () => {
+    setLocalImgUrl('')
+    setCheckedQuestList([])
+    setTitle('')
+    setDescription('')
+    setEngagement(0)
+    setPrice(0)
+    setSymbol('')
+    setPriceUnit('ETH')
+    setCheckedQuestError('')
+
+    onClose()
+  }
+
   const handleSubmit = async () => {
     // TODO: check submission condition and error modal
     if (checkedQuestList.length >= 4 || title == '' || symbol == '') return
+
     const params = {
       contract: {
-        requiredQuests: checkedQuestList.map((quest: { id: number }) => quest.id),
+        requiredQuests: checkedQuestList.map((quest) => quest.id),
         engagePointsThreshold: engagement,
         badgePrice: parseEther(price.toString()),
         name: title,
         NFT: ethers.constants.AddressZero,
-        groupId: groupId,
+        groupId: Number(groupId),
         symbol: symbol,
         URI: localImgUrl,
       },
       description: description,
       name: title,
+      symbol,
     }
     const res = await createBadge(params)
 
     // TODO : Add loading modal and error modal using this data
-    console.log(res, error, isLoading)
+    console.log('CLAIM BADGE CONTRACT', res, error, isLoading)
   }
 
   // this useEffect helps with the toaster rendering
@@ -119,7 +139,7 @@ const BadgeForm = ({
 
   return (
     <>
-      <Modal isOpen={isOpen && !isLoading} onClose={onClose}>
+      <Modal isOpen={isOpen && !isLoading} onClose={handleClose}>
         <ModalOverlay />
         <ModalContent bg={background2}>
           <ModalHeader>Create New Badge</ModalHeader>
@@ -179,7 +199,7 @@ const BadgeForm = ({
                       <FormHelperText color={foreground} margin="8px 0 12px 0">
                         <Text as="b">{item.name}</Text>
                         <Text>
-                          {item.engageScore.number} {item.engageScore.unit}
+                          {item.engagePoints} {item.symbol}
                         </Text>
                       </FormHelperText>
                     </Flex>
@@ -270,7 +290,9 @@ const BadgeForm = ({
       </Modal>
       <DroppinModal
         isOpen={isOpen && isLoading}
-        onClose={() => {}}
+        onClose={() => {
+          return
+        }}
         modatMessage={'Lorem ipsum'}
         modalStatus={0}
       />

@@ -20,10 +20,10 @@ import BadgeForm from '@components/shared/BadgeForm'
 import QuestForm from '@components/shared/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
-// TODO: integrate real data
-import { QuestType } from '@components/queries/common'
 import DaoCard from '@components/shared/DaoCard'
 import { MOCK_DAO_LIST } from '@mockData'
+import { QuestType } from '@queries/common'
+import { useRouter } from 'next/router'
 
 const DaoBadgesSection = ({
   badges,
@@ -31,10 +31,14 @@ const DaoBadgesSection = ({
   questsSubmitForm,
   isLoading,
 }: DaoBadgesSectionProps) => {
+  const router = useRouter()
+
   const { repUnit, isAdmin, id } = useDaoPageContext()
 
   const [isCreateQuestOpen, setIsCreateQuestOpen] = useState(false)
   const [isCreateBadgeOpen, setIsCreateBadgeOpen] = useState(false)
+
+  //TODO: hardcoded modal
 
   const renderDiscordQuests = () => {
     if (isLoading) return <Spinner size="lg" />
@@ -81,7 +85,13 @@ const DaoBadgesSection = ({
       <VStack alignItems={'flex-start'} spacing={8}>
         <SimpleGrid columns={5} gap={8}>
           {badges.map((item, index) => (
-            <QuestBadge key={index} name={item.name} isLocked={false} img={item.logo} />
+            <QuestBadge
+              onClick={() => router.push(`/badge/${item.id}`)}
+              key={index}
+              name={item.name}
+              isLocked={false}
+              img={item.image}
+            />
           ))}
           {isAdmin && (
             <Flex

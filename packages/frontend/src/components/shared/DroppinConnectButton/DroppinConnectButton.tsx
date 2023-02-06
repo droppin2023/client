@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 
-import { Button } from '@chakra-ui/react'
+import { Avatar, Button } from '@chakra-ui/react'
 
 import { danger, dangerHighlight, orange, orangeHighlight } from '@constants/colors'
 import { useUserContext } from '@context/UserContext'
@@ -123,13 +123,17 @@ const DroppinConnectButton = () => {
                   {isLoggedIn && (
                     <ProfileDropdown>
                       {/* TOD0: get user image here */}
-                      <Image
-                        src={user?.image as string}
-                        alt="Wallet avatar"
-                        width={36}
-                        height={36}
-                        css={[sty.profileImg]}
-                      />
+                      {(user?.image || 'none') !== 'none' ? (
+                        <Image
+                          src={user?.image as string}
+                          alt="Wallet avatar"
+                          width={36}
+                          height={36}
+                          css={[sty.profileImg]}
+                        />
+                      ) : (
+                        <Avatar width="36px" height="36px" name={user?.name} />
+                      )}
                     </ProfileDropdown>
                   )}
                 </div>

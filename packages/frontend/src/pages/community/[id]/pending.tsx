@@ -1,4 +1,4 @@
-import { Box, Button, HStack, VStack } from '@chakra-ui/react'
+import { Button, Flex, HStack, Spinner, VStack } from '@chakra-ui/react'
 
 import DaoPendingRequests from '@components/daoPage/DaoPendingRequests'
 
@@ -9,12 +9,15 @@ import 'twin.macro'
 
 // TODO: integrate real data
 import { ChevronLeftIcon } from '@chakra-ui/icons'
-import useCheckAdmin from '@components/queries/useCheckAdmin'
-import useFetchCommunityDetail from '@components/queries/useFetchCommunityDetail'
 import SectionHeader from '@components/shared/SectionHeader'
+import { SERVER_URL } from '@constants/serverConfig'
 import { useUserContext } from '@context/UserContext'
-import { MOCK_PENDING_REQUESTS } from '@mockData'
+import useCheckAdmin from '@queries/useCheckAdmin'
+import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
+import axios from 'axios'
+import { BigNumber } from 'ethers'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 const DaoPage = ({ id }: { id: number }) => {
   const { user } = useUserContext()
@@ -37,6 +40,35 @@ const DaoPage = ({ id }: { id: number }) => {
     error: checkAdminError,
   } = useCheckAdmin({ communityId: id, username: user?.username as string })
 
+  // const {
+  //   data: pendingQuestData,
+  //   isLoading: fetchPendingQuestLoading,
+  //   error: fetchPendingQuestError,
+  // } = useFetchPendingQuestsCommunity({ groupId: communityData.id, members: communityData.members })
+
+  // TODO: make this a query hoook
+  const [pendingQuestData, setPendingQuestData] = useState<any>({ pendingQuests: [] })
+  const fetchPendingQuestLoading = false
+
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/pending-quests/${id}`)
+      .then((data) => {
+        const pendingInfo = data.data
+
+        for (let i = 0; i < pendingInfo.pendingQuests.length; i++) {
+          pendingInfo.pendingQuests[i].quest.engageScore = BigNumber.from(
+            pendingInfo.pendingQuests[i].quest.engageScore,
+          ).toNumber()
+        }
+
+        console.log(pendingInfo)
+
+        setPendingQuestData(pendingInfo)
+      })
+      .catch((err) => console.log('PENDING INFO', err))
+  }, [id])
+
   return (
     <VStack spacing="40px" marginBottom="100px">
       <HStack alignSelf="start" marginLeft={10} marginTop={10}>
@@ -48,11 +80,15 @@ const DaoPage = ({ id }: { id: number }) => {
       <DaoPageProvider isAdmin={isAdmin} repUnit={communityData.totalEngage.unit} id={id}>
         {/* TODO: refactor member list, quests, and badges as context */}
         {/* TODO: integrate discord */}
-        <SectionHeader title="Pending Quests" subtitle="" />
+        <SectionHeader title="Pending Quests" subtitle={<></>} />
 
-        <Box width="80%" minHeight="512px">
-          <DaoPendingRequests requests={MOCK_PENDING_REQUESTS} />
-        </Box>
+        <Flex width="80%" minHeight="512px" justifyContent={'center'}>
+          {fetchPendingQuestLoading ? (
+            <Spinner size="lg" alignSelf={'center'} />
+          ) : (
+            <DaoPendingRequests requests={pendingQuestData.pendingQuests} />
+          )}
+        </Flex>
       </DaoPageProvider>
     </VStack>
   )
