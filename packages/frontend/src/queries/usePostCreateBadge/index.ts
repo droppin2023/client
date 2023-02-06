@@ -1,3 +1,4 @@
+import { uploadImage } from '@helpers/imageUtils'
 import axios from 'axios'
 import { useState } from 'react'
 import useContractConnection from '../useContractConnection'
@@ -10,28 +11,14 @@ const usePostCreateBadge = () => {
 
   const { badgeContract } = useContractConnection()
 
-  // const badgeData = {
-  //   requiredQuests: [1, 4, 2],
-  //   engagePointsThreshold: 1000,
-  //   badgePrice: parseEther('0.01'),
-  //   name: 'Hacker Badge',
-  //   NFT: ethers.constants.AddressZero,
-  //   groupId: 1,
-  //   symbol: 'HACK',
-  //   URI: 'www.google.com',
-  // }
-
   const createBadge = async (params: CreateBadgeParams) => {
     setIsLoading(true)
     setError(null)
 
     try {
-      const tsx = await badgeContract?.addBadge(
-        params.contract,
-        params.contract.symbol,
-        params.contract.URI,
-      )
-
+      // upload image
+      const uploadUrl = await uploadImage(params.contract.URI)
+      const tsx = await badgeContract?.addBadge(params.contract, params.contract.symbol, uploadUrl)
       const transactionHash = await tsx.wait()
 
       console.log('CREATE BADGE CONTRACT', { transactionHash })
