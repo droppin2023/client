@@ -13,6 +13,7 @@ import {
   FormLabel,
   HStack,
   Input,
+  Spinner,
   Text,
   Textarea,
   VStack,
@@ -85,23 +86,12 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
       description,
       category: selectedCategory,
       discord: JSON.stringify(discord),
+      repUnit,
     }
 
-    try {
-      const res = await createGroup(params)
+    const res = await createGroup(params)
 
-      if (onNext) {
-        onNext()
-      }
-    } catch (e) {
-      return
-    }
-
-    // console.log(res, 'res')
-    //TODO : Check first
-    // if (onNext) {
-    //   onNext()
-    // }
+    router.push(`/community/${res.id}`)
   }
 
   return (
@@ -248,27 +238,44 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
       >
         <AlertDialogOverlay>
           <AlertDialogContent bg={background2}>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Comfirm submission
-            </AlertDialogHeader>
+            {isLoading ? (
+              <>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold"></AlertDialogHeader>
 
-            <AlertDialogBody>
-              Please make sure you input the correct information before submitting!
-            </AlertDialogBody>
+                <AlertDialogBody alignItems={'center'}>
+                  <VStack>
+                    <Spinner size="lg" />
+                    <Text>Please Wait...</Text>
+                  </VStack>
+                </AlertDialogBody>
 
-            <AlertDialogFooter>
-              <Button ref={confirmationCancelRef} onClick={() => setIsConfirmationOpen(false)}>
-                Cancel
-              </Button>
-              <Button
-                bg={primary}
-                _hover={{ bg: primaryHighlight }}
-                onClick={onHandleGroupCreation}
-                ml={3}
-              >
-                Submit
-              </Button>
-            </AlertDialogFooter>
+                <AlertDialogFooter></AlertDialogFooter>
+              </>
+            ) : (
+              <>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Comfirm submission
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  Please make sure you input the correct information before submitting!
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={confirmationCancelRef} onClick={() => setIsConfirmationOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button
+                    bg={primary}
+                    _hover={{ bg: primaryHighlight }}
+                    onClick={onHandleGroupCreation}
+                    ml={3}
+                  >
+                    Submit
+                  </Button>
+                </AlertDialogFooter>
+              </>
+            )}
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>

@@ -6,7 +6,7 @@ import { CREATE_GROUP } from './usePostCreateBadge.constants'
 import type { CreateGroupParams } from './usePostCreateBadge.types'
 
 const usePostCreateGroup = () => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<unknown>()
   const { coreContract } = useContractConnection()
 
