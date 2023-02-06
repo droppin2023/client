@@ -34,6 +34,7 @@ import usePostCreateBadge from '@queries/usePostCreateBadge'
 import { ethers } from 'ethers'
 import { parseEther } from 'ethers/lib/utils.js'
 
+import { uploadImage } from '@helpers/imageUtils'
 import { Quest } from '@queries/common'
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
 import * as sty from './BadgeForm.styles'
@@ -101,6 +102,9 @@ const BadgeForm = ({
     // TODO: check submission condition and error modal
     if (checkedQuestList.length >= 4 || title == '' || symbol == '') return
 
+    // upload image
+    const uploadUrl = await uploadImage(localImgUrl)
+
     const params = {
       contract: {
         requiredQuests: checkedQuestList.map((quest) => quest.id),
@@ -110,7 +114,7 @@ const BadgeForm = ({
         NFT: ethers.constants.AddressZero,
         groupId: Number(groupId),
         symbol: symbol,
-        URI: localImgUrl,
+        URI: uploadUrl,
       },
       description: description,
       name: title,

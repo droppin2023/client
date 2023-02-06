@@ -31,8 +31,10 @@ import * as globalSty from '@styles'
 import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
 import { DAO_CATEGORIES } from '@constants/categories'
 import { useUserContext } from '@context/UserContext'
+import { uploadImage } from '@helpers/imageUtils'
 import { Category } from '@queries/common'
 import usePostCreateGroup from '@queries/usePostCreateGroup'
+import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import * as sty from './CreateCommunityInfoForm.styles'
 import { CreateCommunityInfoFormProps } from './CreateCommunityInfoForm.types'
@@ -55,6 +57,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
 
   const { user } = useUserContext()
 
+  const router = useRouter()
+
   const { createGroup, isLoading, error } = usePostCreateGroup()
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
@@ -71,17 +75,28 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
   }
 
   const onHandleGroupCreation = async () => {
-    // console.log(name, website, localImgUrl, description, selectedCategory)
+    // upload image
+    const uploadUrl = await uploadImage(localImgUrl)
+
     const params = {
       name,
       link: website,
-      logo: localImgUrl,
+      logo: uploadUrl,
       description,
       category: selectedCategory,
       discord: JSON.stringify(discord),
     }
 
-    const res = await createGroup(params)
+    try {
+      const res = await createGroup(params)
+
+      if (onNext) {
+        onNext()
+      }
+    } catch (e) {
+      return
+    }
+
     // console.log(res, 'res')
     //TODO : Check first
     // if (onNext) {
@@ -183,7 +198,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
         <FormControl mt={4}>
           <FormLabel>Admin</FormLabel>
           <FormHelperText css={[globalSty.helperText]}>
-            Admin can modify community settings
+            Admin can modify community settings. This should be your account
           </FormHelperText>
           <HStack spacing={3}>
             {(user?.image?.length || '') > 5 ? (
@@ -199,7 +214,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
             )}
 
             <Text>{user?.name}</Text>
-            <Text color={secondary}>`@{user?.username}`</Text>
+            <Text color={secondary}>{`@${user?.username}`}</Text>
           </HStack>
         </FormControl>
 
