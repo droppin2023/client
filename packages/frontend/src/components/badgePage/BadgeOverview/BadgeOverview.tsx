@@ -20,11 +20,7 @@ const BadgeOverview = ({
   logo,
   communityName,
   description,
-  isDefault,
   badgeAddress,
-  holderList,
-  requiredQuests,
-  requiredEngageScore,
   badgePrice,
   isLoading,
 }: BadgeOverviewProps) => {
@@ -77,17 +73,6 @@ const BadgeOverview = ({
                   <Text>
                     by <Text as="b">{communityName}</Text>
                   </Text>
-                  <HStack spacing={3}>
-                    {/* <HStack spacing="-12px">
-                      {holderList.slice(0, 3).map((item, index) => (
-                        <AvatarPreview key={index} ringColor={orange} img={item.image} />
-                      ))}
-                    </HStack> */}
-
-                    {/* <Text>
-                      <strong>{holderList.length}</strong> holders
-                    </Text> */}
-                  </HStack>
                 </HStack>
               </Flex>
             </Skeleton>
@@ -108,7 +93,7 @@ const BadgeOverview = ({
               <Flex alignItems={'center'} justifyContent="left" width="100%" flex={1}>
                 <HStack spacing={6}>
                   <Text as="b">
-                    {badgePrice} {communityName.toUpperCase().slice(0, 3)}
+                    {badgePrice} {symbol}
                   </Text>
                   {isLoggedIn && (
                     <Button

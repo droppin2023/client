@@ -17,7 +17,7 @@ import {
 
 import { background2, orange, secondary, secondaryWeak } from '@constants/colors'
 
-import { QuestType, Status } from '@components/queries/common'
+import { QuestType, Status } from '@queries/common'
 
 import Done from '@components/icons/Done'
 import { HEADER_MAPPING } from './UserSideModal.constants'
@@ -102,8 +102,7 @@ const UserSideModal = ({
               <VStack align="left">
                 <Text color={secondary}>Quest Reward</Text>
                 <Text as="b" color={orange}>
-                  {/* TODO: FIX CURRENCYYYY */}
-                  {`${quest.engagePoints} YOO`}
+                  {`${quest.engagePoints} ${quest.symbol}`}
                 </Text>
               </VStack>
             </Flex>

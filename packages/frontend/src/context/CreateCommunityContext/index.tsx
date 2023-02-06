@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 
-import { Category, Quest } from '@components/queries/common'
+import { Category, Quest } from '@queries/common'
 
 import type {
   CreateCommunityContextValue,

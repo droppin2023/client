@@ -7,9 +7,9 @@ import { background2 } from '@constants/colors'
 import Done from '@components/icons/Done'
 import QuestDetailModal from '@components/shared/QuestCard/components/QuestDetailModal'
 
-import { Status } from '@components/queries/common'
-import useGetUserStatusInQuest from '@components/queries/useGetUserStatusInQuest'
 import { useUserContext } from '@context/UserContext'
+import { Status } from '@queries/common'
+import useGetUserStatusInQuest from '@queries/useGetUserStatusInQuest'
 import UserSideModal from './components/UserSideModal'
 import { colorMap } from './QuestCard.helpers'
 import type { QuestCardProps } from './QuestCard.types'
@@ -61,8 +61,7 @@ const QuestCard = ({ quest, questType, showNoDetail }: QuestCardProps) => {
         )}
         <Text as="b">{quest.name}</Text>
         <Text as="b" color={colorMap(status as Status)}>
-          {/* TODO: FIX CURRENCY BRO */}
-          {`${quest.engagePoints} YOO`}
+          {`${quest.engagePoints} ${quest.symbol}`}
         </Text>
       </Flex>
 

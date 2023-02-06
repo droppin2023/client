@@ -1,4 +1,4 @@
-import { Category, Quest } from '@components/queries/common'
+import { Category, Quest } from '@queries/common'
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 // const [localImgUrl, setLocalImgUrl] = useState('')

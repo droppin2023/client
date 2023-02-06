@@ -1,4 +1,4 @@
-import type { Community, EngageScore } from '@components/queries/common'
+import type { Community, EngageScore } from '@queries/common'
 
 export interface UserEngagementCardProps {
   engageScore: EngageScore

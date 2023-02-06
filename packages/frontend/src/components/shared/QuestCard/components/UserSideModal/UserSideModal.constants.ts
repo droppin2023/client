@@ -1,4 +1,4 @@
-import { Status } from '@components/queries/common'
+import { Status } from '@queries/common'
 
 export const HEADER_MAPPING = {
   [Status.pending]: 'Pending Quest',

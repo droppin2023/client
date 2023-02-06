@@ -5,17 +5,17 @@ import { background2, discordPurple, orange, pink, primary, secondary } from '@c
 import type { BadgeConditionSectionProps } from './BadgeConditionSection.types'
 
 import Lock from '@components/icons/Lock'
-import { QuestType } from '@components/queries/common'
 import QuestCard from '@components/shared/QuestCard'
+import { QuestType } from '@queries/common'
 
 const BadgeConditionSection = ({
   requiredQuests,
-  requiredEngageScore,
   badgePrice,
   badgeAddress,
   isLoading,
   communityName,
   engagePointsThreshold,
+  symbol,
 }: BadgeConditionSectionProps) => {
   console.log(requiredQuests)
   const questsDiscord =
@@ -116,9 +116,7 @@ const BadgeConditionSection = ({
                   <Text
                     textAlign={'right'}
                     as="b"
-                  >{`Should be at least ${engagePointsThreshold} ${communityName
-                    .toUpperCase()
-                    .slice(0, 3)}`}</Text>
+                  >{`Should be at least ${engagePointsThreshold} ${symbol}`}</Text>
                 </HStack>
               </Flex>
             </VStack>
@@ -140,9 +138,7 @@ const BadgeConditionSection = ({
                 width="100%"
                 justifyContent={'space-between'}
               >
-                <Text textAlign={'right'} as="b">{`${badgePrice} ${communityName
-                  .toUpperCase()
-                  .slice(0, 3)}`}</Text>
+                <Text textAlign={'right'} as="b">{`${badgePrice} ${symbol}`}</Text>
               </Flex>
             </VStack>
           </Skeleton>

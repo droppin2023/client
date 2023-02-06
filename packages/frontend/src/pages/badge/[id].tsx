@@ -5,15 +5,11 @@ import 'twin.macro'
 
 import BadgeConditionSection from '@components/badgePage/BadgeConditionSection'
 import BadgeOverview from '@components/badgePage/BadgeOverview'
-import useFetchBadgeDetail from '@components/queries/useFetchBadgeDetail'
-import useFetchCommunityDetail from '@components/queries/useFetchCommunityDetail'
 import { useUserContext } from '@context/UserContext'
+import useFetchBadgeDetail from '@queries/useFetchBadgeDetail'
+import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
 
 const BadgePage = ({ id }: { id: number }) => {
-  // TODO: integrate real data
-  // const badgeData = MOCK_BADGE
-  // const claimedBadgeData = MOCK_CLAIMED_BADGE
-
   const { user } = useUserContext()
 
   const {
@@ -40,17 +36,14 @@ const BadgePage = ({ id }: { id: number }) => {
         logo={badgeData.image}
         communityName={communityData.name}
         description={badgeData.description}
-        isDefault={badgeData.isDefault}
         badgeAddress={badgeData.address}
-        holderList={badgeData.holderList}
-        requiredQuests={badgeData.requiredQuests}
-        requiredEngageScore={badgeData.requiredEngageScore}
         badgePrice={badgeData.badgePrice}
         isLoading={loading}
       />
       <BadgeConditionSection
         requiredQuests={badgeData.requiredQuests}
-        requiredEngageScore={badgeData.requiredEngageScore}
+        engagePointsThreshold={badgeData.engagePointsThreshold}
+        symbol={badgeData.symbol}
         badgePrice={badgeData.badgePrice}
         badgeAddress={badgeData.address}
         isLoading={loading}

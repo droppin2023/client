@@ -20,10 +20,9 @@ import BadgeForm from '@components/shared/BadgeForm'
 import QuestForm from '@components/shared/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
-// TODO: integrate real data
-import { QuestType } from '@components/queries/common'
 import DaoCard from '@components/shared/DaoCard'
 import { MOCK_DAO_LIST } from '@mockData'
+import { QuestType } from '@queries/common'
 import { useRouter } from 'next/router'
 
 const DaoBadgesSection = ({

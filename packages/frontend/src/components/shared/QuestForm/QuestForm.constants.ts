@@ -1,4 +1,4 @@
-import { QuestType } from '@components/queries/common'
+import { QuestType } from '@queries/common'
 
 export const QUEST_CONDITION_OPTIONS = [
   {

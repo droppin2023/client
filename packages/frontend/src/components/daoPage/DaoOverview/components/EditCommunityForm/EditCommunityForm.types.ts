@@ -1,5 +1,5 @@
-import { Badge, Category, User } from '@components/queries/common'
-import { memberInCommunity } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
+import { Badge, Category, User } from '@queries/common'
+import { memberInCommunity } from '@queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 
 export interface EditCommunityFormProps {
   isOpen: boolean

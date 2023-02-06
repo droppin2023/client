@@ -1,4 +1,4 @@
-import type { Quest, QuestType } from '@components/queries/common'
+import type { Quest, QuestType } from '@queries/common'
 import { ModalProps } from '@types/modal'
 
 export type QuestDetailModalProps = ModalProps & {

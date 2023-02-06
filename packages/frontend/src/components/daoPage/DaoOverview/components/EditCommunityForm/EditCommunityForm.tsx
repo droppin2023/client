@@ -31,8 +31,8 @@ import UploadImage from '@components/shared/UploadImage'
 import { DAO_CATEGORIES, NETWORKS } from '@constants/categories'
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 
-import { Category } from '@components/queries/common'
 import QuestBadge from '@components/shared/QuestBadge'
+import { Category } from '@queries/common'
 import * as sty from './EditCommunityForm.styles'
 import { EditCommunityFormProps } from './EditCommunityForm.types'
 

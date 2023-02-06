@@ -23,14 +23,9 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 
 import * as sty from './DaoMembersSection.styles'
 
-// TODO: integrate real data via props and context API
-
 // TODO: notifications
 const DaoMembersSection = ({ members, owner }: DaoMemberSectionProps) => {
   const { id } = useDaoPageContext()
-
-  // TODO: need to fetching for each member info
-  // const memberss = ONE_COMMUNITY.members
 
   const renderTableRow = ({
     number,

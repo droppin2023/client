@@ -1,5 +1,5 @@
-import { User } from '@components/queries/common'
-import { memberInCommunity } from '@components/queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
+import { User } from '@queries/common'
+import { memberInCommunity } from '@queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import type { StaticImageData } from 'next/image'
 import type { ReactNode } from 'react'
 

@@ -19,7 +19,6 @@ import DiscordIcon from '@components/icons/DiscordIcon'
 import WebsiteIcon from '@components/icons/WebsiteIcon'
 import AvatarPreview from '@components/shared/AvatarPreview'
 
-// TODO: THIS IS HARDCODED
 import BadgeClaimModal from '@components/badgePage/BadgeOverview/components/ClaimModal'
 
 import {
@@ -34,7 +33,7 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Settings from '@components/icons/Settings'
 
-import { Category } from '@components/queries/common'
+import { Category } from '@queries/common'
 import Link from 'next/link'
 import bannerOrnament from './assets/banner-ornament.svg'
 import EditCommunityForm from './components/EditCommunityForm'
@@ -94,8 +93,7 @@ const DaoOverview = ({
                       {name}
                     </Text>
                     <Badge fontSize="xl" bg={background} padding="4px 16px" borderRadius="6px">
-                      {/* TODO: CURRENCY */}
-                      {`${repScore} YOO`}
+                      {`${repScore} ${repUnit}`}
                     </Badge>
                   </HStack>
                   <HStack spacing={2}>

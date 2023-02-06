@@ -12,14 +12,16 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import Done from '@components/icons/Done'
-import useFetchClaimedBadge from '@components/queries/useFetchClaimedBadge'
-import usePostClaimBadge from '@components/queries/usePostClaimBadge'
 import QuestBadge from '@components/shared/QuestBadge'
 import { background2, primary, primaryHighlight } from '@constants/colors'
+import { SERVER_URL } from '@constants/serverConfig'
 import { useUserContext } from '@context/UserContext'
+import useFetchClaimedBadge from '@queries/useFetchClaimedBadge'
+import usePostClaimBadge from '@queries/usePostClaimBadge'
+import axios from 'axios'
 import Image from 'next/image'
 import NextLink from 'next/link'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import barcodePlaceholder from './assets/barcode-placeholder.png'
 import { getTwitterTweetContent } from './ClaimModal.helpers'
 import { ClaimModalPhase, ClaimModalProps } from './ClaimModal.types'
@@ -40,6 +42,8 @@ const ClaimModal = ({
   const { claimBadge, isLoading, error } = usePostClaimBadge()
   const [onchainBadge, setOnchainBadge] = useState()
 
+  const [isClaimable, setIsClaimable] = useState(false)
+
   // TODO:  DUMMY HANDLER, TEMPORARY SOLUTION BEFORE POLYGON ID
   // const handleScanned = () => {
   //   setPhase(ClaimModalPhase.POST_IDENTIFY)
@@ -49,6 +53,22 @@ const ClaimModal = ({
     badgeAddress: badgeAddress,
     userAddress: user?.address as string,
   })
+
+  //TODO: CHANGE TO OUR CONVENTIONS
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/check-badge/${user?.username}/${badgeId}`)
+      .then((data) => {
+        const claimInfo = data.data
+
+        console.log('CLAIM INFO', claimInfo)
+
+        // TODO: POC
+        if (badgeId === 1) setIsClaimable(true)
+        else setIsClaimable(claimInfo.claimable)
+      })
+      .catch((err) => console.log('CHECK BADGE ERROR', err))
+  }, [user, badgeId])
 
   const handleClaim = async () => {
     const params = {
@@ -109,6 +129,7 @@ const ClaimModal = ({
                   bg={primary}
                   _hover={{ bg: primaryHighlight }}
                   onClick={handleClaim}
+                  disabled={!isClaimable}
                 >
                   <Text as="b" fontSize="lg" textAlign="center" margin={3}>
                     {/* TODO: HARDCODED DATA */}

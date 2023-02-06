@@ -28,8 +28,9 @@ import { background2, discordPurple, primary, primaryHighlight } from '@constant
 import * as globalSty from '@styles'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
-import { QuestType } from '@components/queries/common'
-import usePostCreateQuest from '@components/queries/usePostCreateQuest'
+import { useDaoPageContext } from '@context/DaoPageContext'
+import { QuestType } from '@queries/common'
+import usePostCreateQuest from '@queries/usePostCreateQuest'
 import { formatBytes32String } from 'ethers/lib/utils.js'
 import { QUEST_CONDITION_OPTIONS } from './QuestForm.constants'
 import type { QuestFormProps } from './QuestForm.types'
@@ -41,6 +42,8 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
   const [reward, setReward] = useState(0)
   const [questCondition, setQuestCondition] = useState<QuestType>(QuestType.form)
   const { createQuest, isLoading, error } = usePostCreateQuest()
+
+  const { setSubmitCount } = useDaoPageContext()
 
   // const handleChangeSchemaHash = (e: ChangeEvent<HTMLInputElement>) => {
   //   // TODO: add checks here
@@ -55,7 +58,7 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
   }
 
   const handleChangeQuestCondition = (e: ChangeEvent<HTMLSelectElement>) => {
-    setQuestCondition(parseInt(e.target.value) as QuestType)
+    setQuestCondition(e.target.value as QuestType)
   }
 
   const handleChangeReward = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,16 +88,26 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
       name: questTitle,
     }
     const res = await createQuest(params)
-    if (res.msg == 'success') {
-      //TODO:add confirm toaster
+    if (res.msg === 'success') {
+      //TODO : add confirm toaster
+      setSubmitCount(1)
       onClose()
     }
     // TODO: add a POST operation to server
     // TODO : Add loading modal
   }
 
+  // reset the modal if we close
+  const handleModalClose = () => {
+    setQuestTitle('')
+    setQuestDetail('')
+    setReward(0)
+    setQuestCondition(QuestType.form)
+    onClose()
+  }
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleModalClose}>
       <ModalOverlay />
       <ModalContent bg={background2}>
         <ModalHeader>Create New Quest</ModalHeader>
@@ -224,7 +237,13 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
         </ModalBody>
 
         <ModalFooter>
-          <Button onClick={handleSubmit} size="lg" bg={primary} _hover={{ bg: primaryHighlight }}>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            size="lg"
+            bg={primary}
+            _hover={{ bg: primaryHighlight }}
+          >
             Create Quest
           </Button>
         </ModalFooter>

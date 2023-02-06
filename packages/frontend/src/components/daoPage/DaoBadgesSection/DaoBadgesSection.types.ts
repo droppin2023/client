@@ -1,6 +1,5 @@
-import type { Badge, Quest } from '@components/queries/common'
+import type { Badge, Quest } from '@queries/common'
 
-// TODO: better type definition for badges and quests
 export interface DaoBadgesSectionProps {
   badges: Badge[]
   questsDiscord: Quest[]

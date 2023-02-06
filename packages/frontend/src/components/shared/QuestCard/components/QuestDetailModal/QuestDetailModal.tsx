@@ -1,9 +1,11 @@
+import { CheckIcon } from '@chakra-ui/icons'
 import {
   Button,
   Flex,
   FormControl,
   FormHelperText,
   FormLabel,
+  HStack,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -18,8 +20,9 @@ import {
 } from '@chakra-ui/react'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
-import { QuestType } from '@components/queries/common'
-import usePostSubmitQuest from '@components/queries/usePostSubmitQuest'
+import { QuestType } from '@queries/common'
+import usePostCompleteQuest from '@queries/usePostCompleteQuest'
+import usePostSubmitQuest from '@queries/usePostSubmitQuest'
 
 import { background2, discordPurple, primary, primaryHighlight, secondary } from '@constants/colors'
 import { useUserContext } from '@context/UserContext'
@@ -34,7 +37,11 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
   const [questFormEntry, setQuestFormEntry] = useState('')
 
-  // TODO: fetch the quest details here
+  // TODO: THIS IS A POC STAGE STATE
+  const [isDiscordQualified, setIsDiscordQualified] = useState(false)
+  const [discordLoading, setDiscordLoading] = useState(false)
+
+  //TODO: fetch the quest details here
   // const data = ONE_QUEST_DETAIL
   // const {
   //   data,
@@ -48,6 +55,8 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
     error: submitQuestError,
   } = usePostSubmitQuest()
 
+  const { completeQuest, isLoading, error } = usePostCompleteQuest()
+
   const handleSubmit = async () => {
     const response = await submitQuest({
       questId: quest.id,
@@ -57,13 +66,24 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
     toast({
       title: 'Quest Submitted',
-      description: 'Wait for the admin to get back to you',
+      description: '',
       status: 'success',
       duration: 5000,
       isClosable: true,
     })
 
     onClose()
+  }
+
+  const handleDiscordCheck = () => {
+    setDiscordLoading(true)
+    setTimeout(() => {
+      setIsDiscordQualified(true)
+      setDiscordLoading(false)
+      handleSubmit().then(() => {
+        const sth = completeQuest({ questId: quest.id, username: user?.username as string })
+      })
+    }, 1000)
   }
 
   useEffect(() => {
@@ -88,8 +108,7 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
               <Text as="b">
                 {quest.engagePoints}{' '}
                 <Text as="span" color={primary}>
-                  {/* TODO: FIX THIS CURRENCY */}
-                  YOO
+                  {quest.symbol}
                 </Text>
               </Text>
             </Flex>
@@ -118,9 +137,22 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
               <FormHelperText css={[globalSty.helperText]}>
                 To complete this quest, you have to connect discord account
               </FormHelperText>
-              <Button bgColor={discordPurple}>
+
+              {isDiscordQualified && (
+                <HStack spacing={5} mb={5}>
+                  <CheckIcon />
+                  <Text>Discord conditions passed</Text>
+                </HStack>
+              )}
+
+              <Button
+                bgColor={discordPurple}
+                onClick={handleDiscordCheck}
+                disabled={isDiscordQualified}
+                isLoading={discordLoading}
+              >
                 <DiscordIcon />
-                <Text ml={4}>Connect Discord</Text>
+                <Text ml={4}>Check Discord Conditions</Text>
               </Button>
             </FormControl>
           )}
@@ -128,15 +160,23 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
         <ModalFooter>
           <Flex width="100%" justifyContent={'space-between'} gap="12px">
-            <Button
-              size="lg"
-              bg={primary}
-              _hover={{ bg: primaryHighlight }}
-              flex="1"
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
+            {questType === QuestType.discord ? (
+              isDiscordQualified && (
+                <Text color={primary} as="b">
+                  Quest Verified, You can close this modal now
+                </Text>
+              )
+            ) : (
+              <Button
+                size="lg"
+                bg={primary}
+                _hover={{ bg: primaryHighlight }}
+                flex="1"
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            )}
           </Flex>
         </ModalFooter>
       </ModalContent>
