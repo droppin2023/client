@@ -13,6 +13,7 @@ const nextConfig = {
       'powered.by.dustlabs.com',
       'img-cdn.magiceden.dev',
       'thumbs2.imgbox.com',
+      'localhost',
     ],
   },
 }

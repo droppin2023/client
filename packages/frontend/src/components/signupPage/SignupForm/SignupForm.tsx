@@ -30,6 +30,7 @@ import SectionHeader from '@components/shared/SectionHeader'
 import UploadImage from '@components/shared/UploadImage'
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 import { LS_KEY_DISCORD_USER } from '@constants/discord'
+import { uploadImage } from '@helpers/imageUtils'
 import usePostSignup from '@queries/usePostSignup'
 import * as globalSty from '@styles'
 import { useAccount } from 'wagmi'
@@ -61,8 +62,11 @@ const SignupForm = () => {
         }
       : localStorageUtils.read(LS_KEY_DISCORD_USER)
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     // TODO: post the twitter
+
+    // upload image
+    const uploadUrl = await uploadImage(localImgUrl)
 
     const params = {
       address: address?.toString() as string,
@@ -70,7 +74,7 @@ const SignupForm = () => {
       username,
       description: bio,
       // discord: '',
-      image: localImgUrl,
+      image: uploadUrl,
     }
     const res = postSignup(params)
     setIsConfirmationOpen(false)

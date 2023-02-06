@@ -28,7 +28,6 @@ import { background2, discordPurple, primary, primaryHighlight } from '@constant
 import * as globalSty from '@styles'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
-import { useDaoPageContext } from '@context/DaoPageContext'
 import { QuestType } from '@queries/common'
 import usePostCreateQuest from '@queries/usePostCreateQuest'
 import { formatBytes32String } from 'ethers/lib/utils.js'
@@ -42,8 +41,6 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
   const [reward, setReward] = useState(0)
   const [questCondition, setQuestCondition] = useState<QuestType>(QuestType.form)
   const { createQuest, isLoading, error } = usePostCreateQuest()
-
-  const { setSubmitCount } = useDaoPageContext()
 
   // const handleChangeSchemaHash = (e: ChangeEvent<HTMLInputElement>) => {
   //   // TODO: add checks here
@@ -90,7 +87,6 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
     const res = await createQuest(params)
     if (res.msg === 'success') {
       //TODO : add confirm toaster
-      setSubmitCount(1)
       onClose()
     }
     // TODO: add a POST operation to server

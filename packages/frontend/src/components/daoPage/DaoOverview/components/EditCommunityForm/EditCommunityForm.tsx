@@ -32,6 +32,7 @@ import { DAO_CATEGORIES, NETWORKS } from '@constants/categories'
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 
 import QuestBadge from '@components/shared/QuestBadge'
+import { uploadImage } from '@helpers/imageUtils'
 import { Category } from '@queries/common'
 import * as sty from './EditCommunityForm.styles'
 import { EditCommunityFormProps } from './EditCommunityForm.types'
@@ -57,7 +58,11 @@ const EditCommunityForm = ({
   const [selectedBlockchain, setSelectedBlockchain] = useState<any>('')
   const [selectedAdmins, setSelectedAdmins] = useState<any>([])
 
-  const handleSubmit = () => {}
+  const handleSubmit = async () => {
+    // upload image
+    // use this url to submit
+    const uploadUrl = await uploadImage(localImgUrl)
+  }
 
   const handleConnectDiscord = () => {}
 

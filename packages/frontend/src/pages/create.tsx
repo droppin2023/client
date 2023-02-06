@@ -6,7 +6,6 @@ import FormSteps from '@components/shared/FormSteps'
 
 import CreateCommunityCoverSection from '@components/createCommunityPage/CreateCommunityCoverSection'
 import CreateCommunityInfoForm from '@components/createCommunityPage/CreateCommunityInfoForm'
-import CreateCommunityOnChainForm from '@components/createCommunityPage/CreateCommunityOnChainForm'
 
 import CreateCommunitySuccess from '@components/createCommunityPage/CreateCommunitySuccess'
 import 'twin.macro'
@@ -27,12 +26,12 @@ const CreateCommunityPage = () => {
         <CreateCommunityInfoForm onNext={onNext} onPrev={onPrev} />
       ),
     },
-    {
-      label: 'On-Chain Setup',
-      content: (onNext: () => void, onPrev: () => void) => (
-        <CreateCommunityOnChainForm onNext={onNext} onPrev={onPrev} />
-      ),
-    },
+    // {
+    //   label: 'On-Chain Setup',
+    //   content: (onNext: () => void, onPrev: () => void) => (
+    //     <CreateCommunityOnChainForm onNext={onNext} onPrev={onPrev} />
+    //   ),
+    // },
   ]
 
   return (
