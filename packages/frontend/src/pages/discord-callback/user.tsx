@@ -1,5 +1,6 @@
+/* eslint-disable no-debugger */
 import { Flex, Spinner, Text, VStack } from '@chakra-ui/react'
-import { LS_KEY_DISCORD_USER } from '@constants/discord'
+import { DISCORD_REDIRECT_USER, LS_KEY_DISCORD_USER } from '@constants/discord'
 import { DISCORD_ENDPOINT } from '@constants/serverConfig'
 import localStorageUtils from '@helpers/localStorageUtils'
 import { env } from '@shared/environment'
@@ -8,16 +9,11 @@ import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-const DiscordAuthRedirectUser = (props: {
-  id: string
-  username: string
-  discriminator: string
-}) => {
-  const { id, username, discriminator } = props
+const DiscordAuthRedirect = (props: { id: string; username: string; discriminator: string }) => {
   const router = useRouter()
 
   useEffect(() => {
-    localStorageUtils.write(LS_KEY_DISCORD_USER, { id, username, discriminator })
+    localStorageUtils.write(LS_KEY_DISCORD_USER, props)
     router.replace('/signup')
   }, [props])
 
@@ -25,7 +21,7 @@ const DiscordAuthRedirectUser = (props: {
     <Flex width="100%" height="100%" justifyContent={'center'} alignItems="center">
       <VStack spacing={5}>
         <Spinner size="lg" />
-        <Text>Redirecting...</Text>
+        <Text>Fetching Discord Data...</Text>
       </VStack>
     </Flex>
   )
@@ -40,7 +36,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       client_secret: process.env.DISCORD_CLIENT_SECRET,
       grant_type: 'authorization_code',
       code,
-      redirect_uri: process.env.DISCORD_REDIRECT_URL,
+      redirect_uri: DISCORD_REDIRECT_USER,
     }
 
     const tokenRes = await axios.post(`${DISCORD_ENDPOINT}/oauth2/token`, getTokenBody, {
@@ -57,6 +53,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
+
+    debugger
 
     return {
       props: {
@@ -78,4 +76,4 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 }
 
-export default DiscordAuthRedirectUser
+export default DiscordAuthRedirect

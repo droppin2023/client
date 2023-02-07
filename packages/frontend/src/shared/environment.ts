@@ -16,6 +16,7 @@ export const env = {
   supportedChains: JSON.parse(process.env.NEXT_PUBLIC_SUPPORTED_CHAINS!),
 
   discordAuthUrl: process.env.NEXT_PUBLIC_DISCORD_AUTH_URL,
+  discordClientId: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID,
 
   rpcUrls: {
     1337: process.env.NEXT_PUBLIC_RPC_1337!, // Hardhat
