@@ -33,6 +33,7 @@ import { generateAuthUrl } from '@helpers/discord'
 import { uploadImage } from '@helpers/imageUtils'
 import usePostSignup from '@queries/usePostSignup'
 import * as globalSty from '@styles'
+import { useRouter } from 'next/router'
 import { useAccount } from 'wagmi'
 import SignupSuccess from './components/SignupSuccess'
 import { SIGNUP_PERSIST_KEY } from './SignupForm.constants'
@@ -52,6 +53,7 @@ const SignupForm = () => {
 
   const { postSignup, isLoading, error } = usePostSignup()
   const { address } = useAccount()
+  const router = useRouter()
 
   const confirmationCancelRef = useRef(null)
 
@@ -89,6 +91,8 @@ const SignupForm = () => {
     const res = postSignup(params)
     setIsConfirmationOpen(false)
     setIsFinished(true)
+
+    router.replace(`/user/${username}`)
   }
 
   const handleConnectDiscord = () => {

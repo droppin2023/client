@@ -63,7 +63,11 @@ const UserOverview = () => {
             <HStack alignItems={'center'} spacing={4}>
               <DiscordIcon width="32px" height="32px" />
               <Text as="b" fontSize="xl">
-                <Text>{discord.length > 0 ? discord : 'Not connected'}</Text>
+                <Text>
+                  {discord.id.length > 0
+                    ? `${discord.name}#${discord.discriminator}`
+                    : 'Not connected'}
+                </Text>
               </Text>
             </HStack>
             <Text>{description}</Text>
