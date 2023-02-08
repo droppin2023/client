@@ -11,7 +11,7 @@ const useCreateSchema = () => {
     setIsLoading(true)
     //should also get from server
     const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzU4NjU2ODcsImp0aSI6ImJmY2U5YzljLTdjZjctNGFhYy1hOWJhLTA4ZTI4NDdiZTY5OCIsImlhdCI6MTY3NTc3OTI4NywibmJmIjoxNjc1Nzc5Mjg3LCJzdWIiOiIyYzdhMGFlMy03ODYxLTRhYWEtOWEzMC1lNjk0ODNhYmFhODYiLCJzY29wZSI6ImFwaSIsImFjY291bnQiOnsidmVyaWZpZWQiOmZhbHNlLCJvcmdhbml6YXRpb24iOiIxNDFiNTY4YS03MGYxLTQ3MjYtYTAyYy1hMDcwOWQyYjMyZjUiLCJyb2xlIjoiT1dORVIiLCJlbWFpbCI6ImRyb3BwaW4yMDIyMjNAZ21haWwuY29tIn19.DcboAIrTeQpzF7l92jtUL52RkB8L8ptiC1V9Kb8rf58'
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzU5Mjc5MzUsImp0aSI6ImQyZDMyMGNjLWY4YjItNGIyNi1iMjA1LWJiMzI3YjQ5MjMwMCIsImlhdCI6MTY3NTg0MTUzNSwibmJmIjoxNjc1ODQxNTM1LCJzdWIiOiIyYzdhMGFlMy03ODYxLTRhYWEtOWEzMC1lNjk0ODNhYmFhODYiLCJzY29wZSI6ImFwaSIsImFjY291bnQiOnsidmVyaWZpZWQiOmZhbHNlLCJvcmdhbml6YXRpb24iOiIxNDFiNTY4YS03MGYxLTQ3MjYtYTAyYy1hMDcwOWQyYjMyZjUiLCJyb2xlIjoiT1dORVIiLCJlbWFpbCI6ImRyb3BwaW4yMDIyMjNAZ21haWwuY29tIn19.wX2i0MObggqZ3cqYjcDDq2sN0FGTOX3vAg46kBwYvqs'
 
     try {
       const res = await axios.post(
@@ -45,6 +45,7 @@ const useCreateSchema = () => {
       )
       console.log(res2)
       const offerID = res2.data.id
+      console.log(offerID)
       return schemaHash
     } catch (e) {
       setIsLoading(false)

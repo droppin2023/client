@@ -7,6 +7,8 @@ export type ClaimModalProps = ModalProps & {
   badgeLogo: string | StaticImageData
   badgePrice: number
   badgeAddress: string
+  qrCode: any
+  sessionID: string
 }
 
 export enum ClaimModalPhase {
