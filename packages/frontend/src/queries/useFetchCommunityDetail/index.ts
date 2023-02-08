@@ -3,7 +3,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-import { Quest, QuestType, User } from '@queries/common'
+import { DiscordGuild, Quest, QuestType, User } from '@queries/common'
 import { BigNumber, ethers } from 'ethers'
 import { GET_COMMUNITY } from './useFetchCommunityDetail.constants'
 import {
@@ -143,6 +143,11 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
     unit: data?.totalEngage?.unit || '',
   }
 
+  const normalizedDiscord = {
+    guildId: data?.discord?.guildId || '',
+    link: data?.discord?.link || '',
+  }
+
   return {
     id: data?.id || 0,
     logo: data?.logo || '',
@@ -157,7 +162,7 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
     defaultBadge: normalizedDefaultBadge,
     repUnit: data?.repUnit || '',
     link: data?.link || '',
-    discord: data?.discord || '',
+    discord: normalizedDiscord,
   }
 }
 
@@ -179,8 +184,9 @@ const useFetchCommunityDetail = ({ communityId }: FetchCommunityDetailParams) =>
         },
       })
       .then((data) => {
-        console.log('COMMUNITY DATA RAW', data.data.data)
-        setData(data.data.data)
+        const rawData = { ...data.data.data }
+        rawData.discord = JSON.parse(rawData.discord as unknown as string) as DiscordGuild
+        setData(rawData)
       })
       .catch((err) => setError(err))
       .finally(() => setIsLoading(false))

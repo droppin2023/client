@@ -32,6 +32,9 @@ import EditCommunityForm from './components/EditCommunityForm'
 import * as sty from './DaoOverview.styles'
 import type { DaoOverviewProps } from './DaoOverview.types'
 
+import DiscordIcon from '@components/icons/DiscordIcon'
+import { LS_KEY_IS_CONNECT_DISCORD_OPEN } from '@constants/discord'
+import localStorageUtils from '@helpers/localStorageUtils'
 import placeholder from './assets/placeholder.jpeg'
 
 const DaoOverview = ({
@@ -48,9 +51,20 @@ const DaoOverview = ({
   website,
   discordLink = './assets/placeholder.jpeg',
   isLoading,
+  guildInstance = {
+    guildId: '',
+    link: '',
+  },
 }: DaoOverviewProps) => {
-  const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(false)
+  const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(() => {
+    const connectModalLastState = localStorageUtils.read(LS_KEY_IS_CONNECT_DISCORD_OPEN)
+
+    if (Object.keys(connectModalLastState || {}).length === 0) return false
+
+    return connectModalLastState.isOpen
+  })
   const [isClaimDefaultBadgeOpen, setIsCreateDefaultBadgeOpen] = useState(false)
+
   const { isAdmin, repUnit, id } = useDaoPageContext()
 
   const onHandleJoin = () => {
@@ -142,29 +156,25 @@ const DaoOverview = ({
                       variant="outline"
                       borderRadius="9999px"
                       borderColor={foreground}
+                      as="a"
+                      href={`${website}`}
+                      target="_blank"
                     >
-                      <Link href={`${website}`} target="_blank">
-                        <WebsiteIcon />
-                      </Link>
+                      <WebsiteIcon />
                     </IconButton>
-                    {/* {discordLink ? (
+                    {discordLink.length > 0 && (
                       <IconButton
                         aria-label="discord"
                         variant="outline"
                         borderRadius="9999px"
                         borderColor={foreground}
+                        as="a"
+                        href={`${discordLink}`}
+                        target="_blank"
                       >
-                        <Link href={`${discordLink}`} target="_blank">
-                          <DiscordIcon as="a" />
-                        </Link>
+                        <DiscordIcon />
                       </IconButton>
-                    ) : (
-                      isAdmin && (
-                        <Flex justifyContent={'space-between'}>
-                          <Button bg={discordPurple}>Connect Discord</Button>
-                        </Flex>
-                      )
-                    )} */}
+                    )}
                   </HStack>
                 </HStack>
               </Skeleton>
@@ -208,20 +218,25 @@ const DaoOverview = ({
           </HStack>
         </Box>
       </Box>
-      <EditCommunityForm
-        isOpen={isEditCommunityFormOpen}
-        onClose={() => setIsEditCommunityFormOpen(false)}
-        badges={badges}
-        members={memberList}
-        name={name}
-        img={imgUrl}
-        description={description}
-        chain={chain}
-        discord={''}
-        website={website as string}
-        category={category}
-        owner={owner}
-      />
+
+      {/* I open the modal this way to allow for lazy loading */}
+      {isEditCommunityFormOpen && (
+        <EditCommunityForm
+          isOpen={true}
+          onClose={() => setIsEditCommunityFormOpen(false)}
+          badges={badges}
+          members={memberList}
+          name={name}
+          img={imgUrl}
+          description={description}
+          chain={chain}
+          discord={guildInstance}
+          website={website as string}
+          category={category}
+          owner={owner}
+        />
+      )}
+
       {/* HARDCODED PROPS */}
       <BadgeClaimModal
         isOpen={isClaimDefaultBadgeOpen}

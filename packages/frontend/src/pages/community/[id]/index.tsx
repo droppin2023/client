@@ -56,7 +56,8 @@ const DaoPage = ({ id }: { id: number }) => {
           badges={communityData.badges}
           owner={communityData.owner}
           website={communityData.link}
-          discordLink={communityData.discord as string}
+          discordLink={communityData.discord.link}
+          guildInstance={communityData.discord}
           isLoading={fetchCommunityDetailLoading || checkAdminLoading}
         />
 

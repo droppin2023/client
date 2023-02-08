@@ -3,6 +3,7 @@ export interface User {
   address: string
   image: string
   name: string
+  discord?: DiscordUser
 }
 
 export interface Price {
@@ -98,4 +99,9 @@ export interface DiscordUser {
   id: string
   name: string
   discriminator: string
+}
+
+export interface DiscordGuild {
+  guildId: string
+  link: string
 }

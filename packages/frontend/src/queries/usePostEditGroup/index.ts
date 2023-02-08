@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { uploadImage } from '@helpers/imageUtils'
 import axios from 'axios'
+import { useState } from 'react'
+import { EDIT_GROUP } from './usePostEditGroup.constants'
 import type { EditGroupParams } from './usePostEditGroup.types'
-import { CREATE_GROUP } from './usePostEditGroup.constants'
 
 const usePostEditGroup = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -11,7 +12,17 @@ const usePostEditGroup = () => {
     setIsLoading(true)
 
     try {
-      const { data, status } = await axios.post(CREATE_GROUP, params)
+      // upload images here
+      const uploadUrl = await uploadImage(params.logo as string)
+
+      const { logo, discord, ...restParams } = params
+      const newParams = {
+        ...restParams,
+        logo: uploadUrl,
+        discord: JSON.stringify(discord),
+      }
+
+      const { data, status } = await axios.post(EDIT_GROUP, newParams)
 
       if (status === 200) {
         setIsLoading(false)

@@ -1,5 +1,6 @@
-import { Badge, Category, User } from '@queries/common'
+import { Badge, Category, DiscordGuild, User } from '@queries/common'
 import { memberInCommunity } from '@queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
+import { StaticImageData } from 'next/image'
 
 export interface EditCommunityFormProps {
   isOpen: boolean
@@ -7,9 +8,9 @@ export interface EditCommunityFormProps {
   badges: Badge[]
   members: memberInCommunity[]
   name: string
-  discord: string
+  discord: DiscordGuild
   website: string
-  img: string
+  img: string | StaticImageData
   description: string
   chain: string
   category: Category

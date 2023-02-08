@@ -28,6 +28,7 @@
     "add": "^2.0.6",
     "axios": "^1.2.3",
     "chakra-ui-steps": "^2.0.1",
+    "discord-api-types": "^0.37.31",
     "ethers": "^5.7.2",
     "framer-motion": "^6.5.1",
     "next": "^13.0.4",

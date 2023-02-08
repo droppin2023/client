@@ -1,4 +1,4 @@
-import { Badge, Category, User } from '@queries/common'
+import { Badge, Category, DiscordGuild, User } from '@queries/common'
 import { StaticImageData } from 'next/image'
 
 export interface DaoOverviewProps {
@@ -11,6 +11,7 @@ export interface DaoOverviewProps {
   chain: string
   website?: string
   discordLink?: string
+  guildInstance?: DiscordGuild
   description: string
   badges: Badge[]
   owner: User

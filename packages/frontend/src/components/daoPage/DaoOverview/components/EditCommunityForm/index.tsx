@@ -1,2 +1,7 @@
-export * from './EditCommunityForm'
-export { default } from './EditCommunityForm'
+import dynamic from 'next/dynamic'
+
+const EditCommunityForm = dynamic(() => import('./EditCommunityForm'), {
+  loading: () => <></>,
+})
+
+export default EditCommunityForm

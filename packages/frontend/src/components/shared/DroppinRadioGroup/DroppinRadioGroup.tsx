@@ -2,9 +2,10 @@ import { useRadioGroup, Wrap, WrapItem } from '@chakra-ui/react'
 import DroppinRadioButton from './components/DroppinRadioButton'
 import { DroppinRadioGroupProps } from './DroppinRadioGroup.types'
 
-const DroppinRadioGroup = ({ options, defaultValue, onChange }: DroppinRadioGroupProps) => {
+const DroppinRadioGroup = ({ options, defaultValue, value, onChange }: DroppinRadioGroupProps) => {
   const { getRadioProps, getRootProps } = useRadioGroup({
     defaultValue,
+    value,
     onChange,
   })
 
