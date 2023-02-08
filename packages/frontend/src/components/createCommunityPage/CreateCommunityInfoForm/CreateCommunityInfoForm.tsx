@@ -164,6 +164,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
   const handleClose = () => {
     localStorageUtils.write(LS_KEY_DISCORD_USER_GUILDS, {})
     localStorageUtils.write(LS_KEY_IS_CONNECT_DISCORD_OPEN, {})
+
+    if (onPrev) onPrev()
   }
 
   // load data from local storage
@@ -307,7 +309,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
 
         <Flex justifyContent="space-between" mt={8}>
           <Button
-            onClick={onPrev}
+            onClick={handleClose}
             alignSelf="flex-end"
             bg={primary}
             _hover={{ bg: primaryHighlight }}
