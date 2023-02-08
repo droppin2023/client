@@ -1,6 +1,5 @@
 import Image from 'next/image'
-import type { ChangeEvent } from 'react'
-import { useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import { Flex, Input } from '@chakra-ui/react'
 
@@ -27,17 +26,31 @@ const UploadImage = ({
   margin,
   loaded = '',
 }: UploadImageProps) => {
-  const [loadedImg, setLoadedImg] = useState<string>(loaded)
+  const [loadedImg, setLoadedImg] = useState<string>('')
 
   const hiddenInputRef = useRef<HTMLInputElement>(null)
 
   const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const uploadedFilePath = URL.createObjectURL(e.target.files[0])
-      setLoadedImg(uploadedFilePath)
-      onFileLoad(uploadedFilePath)
+      const reader = new FileReader()
+
+      reader.addEventListener(
+        'load',
+        () => {
+          const uploadedFilePath = reader.result
+
+          console.log('IMAGE PATH', uploadedFilePath)
+          setLoadedImg(uploadedFilePath as string)
+          onFileLoad(uploadedFilePath as string)
+        },
+        false,
+      )
+
+      reader.readAsDataURL(e.target.files[0])
     }
   }
+
+  useEffect(() => setLoadedImg(loaded), [loaded])
 
   return (
     <>

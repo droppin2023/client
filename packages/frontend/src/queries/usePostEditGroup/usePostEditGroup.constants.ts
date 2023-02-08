@@ -3,4 +3,4 @@
 import { SERVER_URL } from '@/constants/serverConfig'
 
 // server
-export const CREATE_GROUP = SERVER_URL + '/create-group'
+export const EDIT_GROUP = SERVER_URL + '/edit-group'

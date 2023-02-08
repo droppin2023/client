@@ -1,6 +1,6 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { Badge, EngageScore, Quest, User } from '@queries/common'
+import { Badge, DiscordGuild, EngageScore, Quest, User } from '@queries/common'
 
 export interface FetchCommunityDetailParams {
   communityId: number
@@ -11,7 +11,7 @@ export interface FetchCommunityDetailResponse {
   logo: string
   name: string
   category: Category
-  discord?: string
+  discord?: DiscordGuild
   description: string
   owner: User
   totalEngage: EngageScore

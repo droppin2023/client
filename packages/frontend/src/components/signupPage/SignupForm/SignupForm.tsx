@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import {
   AlertDialog,
   AlertDialogBody,
@@ -20,8 +21,6 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import localStorageUtils from '@helpers/localStorageUtils'
-import { env } from '@shared/environment'
-import NextLink from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
@@ -29,12 +28,15 @@ import TwitterIcon from '@components/icons/TwitterIcon'
 import SectionHeader from '@components/shared/SectionHeader'
 import UploadImage from '@components/shared/UploadImage'
 import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
-import { LS_KEY_DISCORD_USER } from '@constants/discord'
+import { DISCORD_REDIRECT_USER, LS_KEY_DISCORD_USER } from '@constants/discord'
+import { generateAuthUrl } from '@helpers/discord'
 import { uploadImage } from '@helpers/imageUtils'
 import usePostSignup from '@queries/usePostSignup'
 import * as globalSty from '@styles'
+import { useRouter } from 'next/router'
 import { useAccount } from 'wagmi'
 import SignupSuccess from './components/SignupSuccess'
+import { SIGNUP_PERSIST_KEY } from './SignupForm.constants'
 
 const SignupForm = () => {
   const [localImgUrl, setLocalImgUrl] = useState('')
@@ -47,9 +49,11 @@ const SignupForm = () => {
 
   const [discordUsername, setDiscordUsername] = useState('')
   const [discordDiscriminator, setDiscordDiscriminator] = useState('')
+  const [discordId, setDiscordId] = useState('')
 
   const { postSignup, isLoading, error } = usePostSignup()
   const { address } = useAccount()
+  const router = useRouter()
 
   const confirmationCancelRef = useRef(null)
 
@@ -73,17 +77,62 @@ const SignupForm = () => {
       name,
       username,
       description: bio,
-      // discord: '',
+      discord: {
+        id: discordId,
+        name: discordUsername,
+        discriminator: discordDiscriminator,
+      },
       image: uploadUrl,
+      twitter: `https://twitter.com/${twitter}`,
     }
+
+    console.log('SIGNUP PARAMS', params)
+
     const res = postSignup(params)
     setIsConfirmationOpen(false)
     setIsFinished(true)
+
+    router.replace(`/user/${username}`)
+  }
+
+  const handleConnectDiscord = () => {
+    // persist our sign up data
+    localStorageUtils.write(SIGNUP_PERSIST_KEY, {
+      localImgUrl,
+      name,
+      username,
+      bio,
+      twitter,
+    })
+
+    // open the authentication link
+    window.location.replace(generateAuthUrl(DISCORD_REDIRECT_USER) as string)
   }
 
   useEffect(() => {
-    setDiscordUsername(discordUserData.username)
-    setDiscordDiscriminator(discordUserData.discriminator)
+    if (discordUserData.id.length > 0) {
+      // reload persisted data
+      const persistedData = localStorageUtils.read(SIGNUP_PERSIST_KEY)
+      setLocalImgUrl(persistedData.localImgUrl)
+      setName(persistedData.name)
+      setUsername(persistedData.username)
+      setBio(persistedData.bio)
+      setTwitter(persistedData.twitter)
+
+      // set discord data
+      setDiscordUsername(discordUserData.username)
+      setDiscordDiscriminator(discordUserData.discriminator)
+      setDiscordId(discordUserData.id)
+
+      // clear
+      localStorageUtils.write(LS_KEY_DISCORD_USER, {})
+      localStorageUtils.write(SIGNUP_PERSIST_KEY, {})
+    }
+
+    return () => {
+      localStorageUtils.write(LS_KEY_DISCORD_USER, {})
+      localStorageUtils.write(SIGNUP_PERSIST_KEY, {})
+    }
   }, [discordUserData])
 
   return (
@@ -100,7 +149,10 @@ const SignupForm = () => {
             <SimpleGrid columns={2}>
               <FormControl>
                 <FormLabel>Profile Picture</FormLabel>
-                <UploadImage onFileLoad={(uploaded: string) => setLocalImgUrl(uploaded)} />
+                <UploadImage
+                  onFileLoad={(uploaded: string) => setLocalImgUrl(uploaded)}
+                  loaded={localImgUrl}
+                />
               </FormControl>
               <VStack>
                 <FormControl mt={4}>
@@ -141,15 +193,13 @@ const SignupForm = () => {
                         <Text>Discord</Text>
                       </HStack>
 
-                      <NextLink href={env.discordAuthUrl as string}>
-                        <Button as="a" bg={discordPurple}>
-                          {(discordUserData?.id || '').length > 0 ? (
-                            <Text as="span">{`${discordUserData.username}#${discordUserData.discriminator}`}</Text>
-                          ) : (
-                            'Connect Discord'
-                          )}
-                        </Button>
-                      </NextLink>
+                      <Button bg={discordPurple} onClick={handleConnectDiscord}>
+                        {discordDiscriminator.length > 0 ? (
+                          <Text as="span">{`${discordUsername}#${discordDiscriminator}`}</Text>
+                        ) : (
+                          'Connect Discord'
+                        )}
+                      </Button>
                     </Flex>
                     <Flex justifyContent={'space-between'} gap={3}>
                       <HStack>
@@ -162,7 +212,7 @@ const SignupForm = () => {
                         </InputLeftAddon>
                         <Input
                           variant="filled"
-                          placeholder="Write your twitter link here"
+                          placeholder="your_twitter"
                           onChange={(e) => setTwitter(e.target.value)}
                           value={twitter}
                         />
@@ -205,7 +255,7 @@ const SignupForm = () => {
         <AlertDialogOverlay>
           <AlertDialogContent bg={background2}>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Comfirm submission
+              Confirm submission
             </AlertDialogHeader>
 
             <AlertDialogBody>

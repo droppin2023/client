@@ -47,6 +47,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
           address: address as string,
           image: userData?.image as string,
           name: userData?.name as string,
+          discord: userData?.discord,
         })
         setIsLoggedIn(true)
       }

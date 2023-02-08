@@ -29,11 +29,11 @@ import { useUserContext } from '@context/UserContext'
 import * as globalSty from '@styles'
 import { useEffect, useState } from 'react'
 
+import { useRouter } from 'next/router'
 import type { QuestDetailModalProps } from './QuestDetailModal.types'
 
 const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModalProps) => {
   const { user } = useUserContext()
-  const toast = useToast()
 
   const [questFormEntry, setQuestFormEntry] = useState('')
 
@@ -41,13 +41,8 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
   const [isDiscordQualified, setIsDiscordQualified] = useState(false)
   const [discordLoading, setDiscordLoading] = useState(false)
 
-  //TODO: fetch the quest details here
-  // const data = ONE_QUEST_DETAIL
-  // const {
-  //   data,
-  //   isLoading: fetchQuestDetailLoading,
-  //   error: fetchQuestDetailError,
-  // } = useFetchQuestDetail({ questId: quest.id })
+  const toast = useToast()
+  const router = useRouter()
 
   const {
     submitQuest,
@@ -72,7 +67,7 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
       isClosable: true,
     })
 
-    onClose()
+    router.reload()
   }
 
   const handleDiscordCheck = () => {
@@ -82,6 +77,7 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
       setDiscordLoading(false)
       handleSubmit().then(() => {
         const sth = completeQuest({ questId: quest.id, username: user?.username as string })
+        router.reload()
       })
     }, 1000)
   }

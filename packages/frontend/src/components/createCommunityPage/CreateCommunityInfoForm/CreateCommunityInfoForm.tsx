@@ -29,14 +29,25 @@ import { background2, discordPurple, primary, primaryHighlight, secondary } from
 import { useCreateCommunityContext } from '@context/CreateCommunityContext'
 import * as globalSty from '@styles'
 
+import { LS_EDIT_COMMUNITY_DATA } from '@components/daoPage/DaoOverview/components/EditCommunityForm/EditCommunityForm.constants'
+import ConnectDiscordModal from '@components/shared/ConnectDiscordModal'
 import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
 import { DAO_CATEGORIES } from '@constants/categories'
+import {
+  DISCORD_REDIRECT_GET_USER_GUILDS,
+  LS_GET_USER_GUILD_DESTINATION,
+  LS_KEY_DISCORD_USER_GUILDS,
+  LS_KEY_IS_CONNECT_DISCORD_OPEN,
+} from '@constants/discord'
 import { useUserContext } from '@context/UserContext'
+import { generateAuthUrl } from '@helpers/discord'
 import { uploadImage } from '@helpers/imageUtils'
-import { Category } from '@queries/common'
+import localStorageUtils from '@helpers/localStorageUtils'
+import { truncateString } from '@helpers/stringUtils'
+import { Category, DiscordGuild, DiscordUser } from '@queries/common'
 import usePostCreateGroup from '@queries/usePostCreateGroup'
 import { useRouter } from 'next/router'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as sty from './CreateCommunityInfoForm.styles'
 import { CreateCommunityInfoFormProps } from './CreateCommunityInfoForm.types'
 
@@ -47,13 +58,15 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
     description,
     website,
     selectedCategory,
-    setLocalImgUrl,
     repUnit,
+    discord,
+    setLocalImgUrl,
     setRepUnit,
     setName,
     setDescription,
     setWebsite,
     setSelectedCategory,
+    setDiscord,
   } = useCreateCommunityContext()
 
   const { user } = useUserContext()
@@ -65,17 +78,45 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
   const [isFinished, setIsFinished] = useState(false)
   const confirmationCancelRef = useRef(null)
 
-  //TODO : Discord
-  const discord = {
-    link: 'https://via.discord.com/300',
-    guildId: 223523,
-  }
+  // we prio the local storage first, if doesn't exist then we use the props
+  const persistedCommunityData = localStorageUtils.read(LS_EDIT_COMMUNITY_DATA)
+  const cachedCommunityData =
+    JSON.stringify(persistedCommunityData ?? {}) === '{}'
+      ? {
+          localImgUrl,
+          name,
+          description,
+          website,
+          selectedCategory,
+          discord,
+          repUnit,
+        }
+      : persistedCommunityData
+
+  const guildData =
+    JSON.stringify(localStorageUtils.read(LS_KEY_DISCORD_USER_GUILDS) ?? {}) === '{}'
+      ? {
+          guilds: [],
+        }
+      : localStorageUtils.read(LS_KEY_DISCORD_USER_GUILDS)
+
+  const [isConnectDiscordOpen, setIsConnectDiscordOpen] = useState(() => {
+    const connectModalLastState = localStorageUtils.read(LS_KEY_IS_CONNECT_DISCORD_OPEN)
+
+    if (Object.keys(connectModalLastState || {}).length === 0) return false
+
+    return connectModalLastState.isOpen
+  })
+
+  const [userGuilds, setUserGuilds] = useState(() => {
+    return guildData.guilds
+  })
 
   const handleSelectCategory = (nextValue: string) => {
     setSelectedCategory(nextValue as Category)
   }
 
-  const onHandleGroupCreation = async () => {
+  const handleGroupCreation = async () => {
     // upload image
     const uploadUrl = await uploadImage(localImgUrl)
 
@@ -85,7 +126,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
       logo: uploadUrl,
       description,
       category: selectedCategory,
-      discord: JSON.stringify(discord),
+      discord: discord,
       repUnit,
     }
 
@@ -93,6 +134,48 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
 
     router.push(`/community/${res.id}`)
   }
+
+  const handleOpenConnectDiscord = () => {
+    localStorageUtils.write(LS_GET_USER_GUILD_DESTINATION, { dest: `/create` })
+
+    // store initial data in local storage
+    localStorageUtils.write(LS_EDIT_COMMUNITY_DATA, {
+      localImgUrl,
+      name,
+      description,
+      website,
+      selectedCategory,
+      discord,
+      repUnit,
+    })
+
+    window.location.replace(generateAuthUrl(DISCORD_REDIRECT_GET_USER_GUILDS))
+  }
+
+  const handleSubmitConnectDiscord = (submittedGuild: DiscordGuild) => {
+    setIsConnectDiscordOpen(false)
+    setDiscord(submittedGuild)
+
+    localStorageUtils.write(LS_KEY_DISCORD_USER_GUILDS, {})
+    localStorageUtils.write(LS_KEY_IS_CONNECT_DISCORD_OPEN, {})
+    localStorageUtils.write(LS_EDIT_COMMUNITY_DATA, {})
+  }
+
+  const handleClose = () => {
+    localStorageUtils.write(LS_KEY_DISCORD_USER_GUILDS, {})
+    localStorageUtils.write(LS_KEY_IS_CONNECT_DISCORD_OPEN, {})
+  }
+
+  // load data from local storage
+  useEffect(() => {
+    setLocalImgUrl(cachedCommunityData.localImgUrl)
+    setRepUnit(cachedCommunityData.repUnit)
+    setName(cachedCommunityData.name)
+    setDescription(cachedCommunityData.description)
+    setWebsite(cachedCommunityData.website)
+    setSelectedCategory(cachedCommunityData.selectedCategory)
+    setDiscord(cachedCommunityData.discord)
+  }, [cachedCommunityData])
 
   return (
     <>
@@ -107,7 +190,10 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
         />
         <FormControl>
           <FormLabel>Logo image</FormLabel>
-          <UploadImage onFileLoad={(uploaded: string) => setLocalImgUrl(uploaded)} />
+          <UploadImage
+            onFileLoad={(uploaded: string) => setLocalImgUrl(uploaded)}
+            loaded={localImgUrl}
+          />
         </FormControl>
 
         <FormControl mt={4}>
@@ -167,7 +253,18 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
                 <DiscordIcon />
                 <Text>Discord</Text>
               </HStack>
-              <Button bg={discordPurple}>Connect Discord</Button>
+              <Button
+                variant="filled"
+                bg={discordPurple}
+                onClick={handleOpenConnectDiscord}
+                maxWidth="200px"
+              >
+                <Text>
+                  {(discord?.guildId || '').length
+                    ? truncateString(discord.name, 20)
+                    : 'Connect Discord'}
+                </Text>
+              </Button>
             </Flex>
             <Flex justifyContent={'space-between'}>
               <HStack>
@@ -177,7 +274,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
               <Input
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
-                placeholder="yoursite.io"
+                placeholder="http://www.yoursite.io"
                 ml={8}
                 variant="filled"
               />
@@ -268,7 +365,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
                   <Button
                     bg={primary}
                     _hover={{ bg: primaryHighlight }}
-                    onClick={onHandleGroupCreation}
+                    onClick={handleGroupCreation}
                     ml={3}
                   >
                     Submit
@@ -279,6 +376,15 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
           </AlertDialogContent>
         </AlertDialogOverlay>
       </AlertDialog>
+      {isConnectDiscordOpen && (
+        <ConnectDiscordModal
+          discordUser={user?.discord as DiscordUser}
+          guilds={userGuilds}
+          isOpen={true}
+          onClose={() => setIsConnectDiscordOpen(false)}
+          onSubmit={handleSubmitConnectDiscord}
+        />
+      )}
     </>
   )
 }

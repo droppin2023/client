@@ -1,13 +1,13 @@
 // THIS FILE CONTAINS ALL THE NEEDED TYPES, USUALLY PARAMS AND RESPONSE FORMAT
 
-import { Discord } from '../useFetchCommunityDetail/useFetchCommunityDetail.types'
+import { DiscordGuild } from '@queries/common'
 
 export interface EditGroupParams {
-  communityId: number
+  id: number
   name?: string
   link?: string
   logo?: string
   description?: string
   category?: string
-  discord?: Discord
+  discord?: DiscordGuild
 }

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 
-import { Category, Quest } from '@queries/common'
+import { Category, DiscordGuild, Quest } from '@queries/common'
 
 import type {
   CreateCommunityContextValue,
@@ -18,6 +18,11 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
   const [repUnit, setRepUnit] = useState<string>('')
   const [questsDiscord, setQuestsDiscord] = useState<Quest[]>([])
   const [questsForm, setQuestsForm] = useState<Quest[]>([])
+  const [discord, setDiscord] = useState<DiscordGuild>({
+    guildId: '',
+    name: '',
+    link: '',
+  })
 
   return (
     <CreateCommunityContext.Provider
@@ -30,6 +35,7 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
         repUnit,
         questsDiscord,
         questsForm,
+        discord,
         setLocalImgUrl,
         setName,
         setDescription,
@@ -38,6 +44,7 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
         setRepUnit,
         setQuestsDiscord,
         setQuestsForm,
+        setDiscord,
       }}
     >
       {children}

@@ -34,7 +34,6 @@ import usePostCreateBadge from '@queries/usePostCreateBadge'
 import { ethers } from 'ethers'
 import { parseEther } from 'ethers/lib/utils.js'
 
-import { uploadImage } from '@helpers/imageUtils'
 import { Quest } from '@queries/common'
 import { useRouter } from 'next/router'
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
@@ -105,9 +104,6 @@ const BadgeForm = ({
     // TODO: check submission condition and error modal
     if (checkedQuestList.length >= 4 || title == '' || symbol == '') return
 
-    // upload image
-    const uploadUrl = await uploadImage(localImgUrl)
-
     // pad checked quests array if not multiple of 3
     const requiredQuests = checkedQuestList.map((quest) => quest.id)
     while (requiredQuests.length < 3) {
@@ -123,7 +119,7 @@ const BadgeForm = ({
         NFT: ethers.constants.AddressZero,
         groupId: Number(groupId),
         symbol: symbol,
-        URI: uploadUrl,
+        URI: localImgUrl,
       },
       description: description,
       name: title,
