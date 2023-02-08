@@ -104,4 +104,5 @@ export interface DiscordUser {
 export interface DiscordGuild {
   guildId: string
   link: string
+  name: string
 }

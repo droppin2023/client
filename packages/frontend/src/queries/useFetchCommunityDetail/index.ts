@@ -145,6 +145,7 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
 
   const normalizedDiscord = {
     guildId: data?.discord?.guildId || '',
+    name: data?.discord?.name || '',
     link: data?.discord?.link || '',
   }
 

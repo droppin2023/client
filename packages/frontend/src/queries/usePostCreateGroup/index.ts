@@ -17,9 +17,12 @@ const usePostCreateGroup = () => {
       const tsx = await coreContract?.createGroup(formatBytes32String(params.name))
       const transactionHash = await tsx?.wait()
 
+      const { discord, ...restParams } = params
+      const newParams = { ...restParams, discord: JSON.stringify(discord) }
+
       const res = await axios.post(CREATE_GROUP, {
         transactionHash: transactionHash.transactionHash,
-        ...params,
+        ...newParams,
       })
 
       console.log('CREATE COMMUNITY SERVER RESPONSE', res.data)

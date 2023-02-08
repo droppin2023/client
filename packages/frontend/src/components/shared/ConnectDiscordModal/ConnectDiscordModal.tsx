@@ -91,7 +91,7 @@ const ConnectDiscordModal = (props: ConnectDiscordModalProps) => {
                 <Input
                   value={link}
                   onChange={(e) => setLink(e.target.value)}
-                  placeholder="https://discord.gg/rYAEMySkdd"
+                  placeholder="https://discord.gg/your-invite-link"
                 />
               </FormControl>
             </>

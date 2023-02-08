@@ -31,9 +31,9 @@ import { background2, discordPurple, primary, primaryHighlight, secondary } from
 
 import ConnectDiscordModal from '@components/shared/ConnectDiscordModal'
 import DroppinRadioGroup from '@components/shared/DroppinRadioGroup'
-import { LS_CURRENT_COMMUNITY } from '@constants/common'
 import {
   DISCORD_REDIRECT_GET_USER_GUILDS,
+  LS_GET_USER_GUILD_DESTINATION,
   LS_KEY_DISCORD_USER_GUILDS,
   LS_KEY_IS_CONNECT_DISCORD_OPEN,
 } from '@constants/discord'
@@ -41,6 +41,7 @@ import { useDaoPageContext } from '@context/DaoPageContext'
 import { useUserContext } from '@context/UserContext'
 import { generateAuthUrl } from '@helpers/discord'
 import localStorageUtils from '@helpers/localStorageUtils'
+import { truncateString } from '@helpers/stringUtils'
 import { Category, DiscordGuild, DiscordUser } from '@queries/common'
 import usePostEditGroup from '@queries/usePostEditGroup'
 import { EditGroupParams } from '@queries/usePostEditGroup/usePostEditGroup.types'
@@ -125,15 +126,10 @@ const EditCommunityForm = (props: EditCommunityFormProps) => {
     }
     await editGroup(params)
 
-    localStorageUtils.write(LS_KEY_DISCORD_USER_GUILDS, {})
-    localStorageUtils.write(LS_KEY_IS_CONNECT_DISCORD_OPEN, {})
-
     router.reload()
   }
 
   const handleOpenConnectDiscord = () => {
-    localStorageUtils.write(LS_CURRENT_COMMUNITY, { id })
-
     // store initial data in local storage
     localStorageUtils.write(LS_EDIT_COMMUNITY_DATA, {
       localImgUrl,
@@ -143,6 +139,9 @@ const EditCommunityForm = (props: EditCommunityFormProps) => {
       selectedCategory,
       discord,
     })
+
+    localStorageUtils.write(LS_GET_USER_GUILD_DESTINATION, { dest: `/community/${id}` })
+
     window.location.replace(generateAuthUrl(DISCORD_REDIRECT_GET_USER_GUILDS))
   }
 
@@ -219,9 +218,16 @@ const EditCommunityForm = (props: EditCommunityFormProps) => {
                     <DiscordIcon />
                     <Text>Discord</Text>
                   </HStack>
-                  <Button variant="filled" bg={discordPurple} onClick={handleOpenConnectDiscord}>
+                  <Button
+                    variant="filled"
+                    bg={discordPurple}
+                    onClick={handleOpenConnectDiscord}
+                    maxWidth="200px"
+                  >
                     <Text>
-                      {(discord?.guildId || '').length ? discord.guildId : 'Connect Discord'}
+                      {(discord?.guildId || '').length
+                        ? truncateString(discord.name, 20)
+                        : 'Connect Discord'}
                     </Text>
                   </Button>
                 </Flex>
@@ -232,10 +238,10 @@ const EditCommunityForm = (props: EditCommunityFormProps) => {
                   </HStack>
                   <Input
                     value={website}
-                    placeholder="yoursite.io"
                     ml={8}
                     variant="filled"
                     onChange={(e) => setWebsite(e.target.value)}
+                    placeholder="http://www.yoursite.io"
                   />
                 </Flex>
               </VStack>
@@ -306,13 +312,15 @@ const EditCommunityForm = (props: EditCommunityFormProps) => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <ConnectDiscordModal
-        discordUser={user?.discord as DiscordUser}
-        guilds={userGuilds}
-        isOpen={isConnectDiscordOpen}
-        onClose={() => setIsConnectDiscordOpen(false)}
-        onSubmit={handleSubmitConnectDiscord}
-      />
+      {isConnectDiscordOpen && (
+        <ConnectDiscordModal
+          discordUser={user?.discord as DiscordUser}
+          guilds={userGuilds}
+          isOpen={true}
+          onClose={() => setIsConnectDiscordOpen(false)}
+          onSubmit={handleSubmitConnectDiscord}
+        />
+      )}
     </>
   )
 }

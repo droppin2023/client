@@ -1,8 +1,8 @@
 /* eslint-disable no-debugger */
 import { Flex, Spinner, Text, VStack } from '@chakra-ui/react'
-import { LS_CURRENT_COMMUNITY } from '@constants/common'
 import {
   DISCORD_REDIRECT_GET_USER_GUILDS,
+  LS_GET_USER_GUILD_DESTINATION,
   LS_KEY_DISCORD_USER_GUILDS,
   LS_KEY_IS_CONNECT_DISCORD_OPEN,
 } from '@constants/discord'
@@ -23,10 +23,10 @@ const DiscordGetUserGuildsRedirect = (props: { guilds: any[] }) => {
     localStorageUtils.write(LS_KEY_IS_CONNECT_DISCORD_OPEN, { isOpen: true })
 
     // clear community id
-    const communityId = localStorageUtils.read(LS_CURRENT_COMMUNITY)
-    localStorageUtils.write(LS_CURRENT_COMMUNITY, {})
+    const destination = localStorageUtils.read(LS_GET_USER_GUILD_DESTINATION)
+    localStorageUtils.write(LS_GET_USER_GUILD_DESTINATION, {})
 
-    router.replace(`/community/${communityId.id}`)
+    router.replace(destination.dest)
   }, [props])
 
   return (

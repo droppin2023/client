@@ -212,7 +212,7 @@ const SignupForm = () => {
                         </InputLeftAddon>
                         <Input
                           variant="filled"
-                          placeholder="Write your twitter link here"
+                          placeholder="your_twitter"
                           onChange={(e) => setTwitter(e.target.value)}
                           value={twitter}
                         />
