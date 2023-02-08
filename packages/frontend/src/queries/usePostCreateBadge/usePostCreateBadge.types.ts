@@ -9,6 +9,7 @@ export interface CreateBadgeParams {
 }
 
 export interface OnChainBadgeParams {
+  schemaHash: any
   requiredQuests: number[]
   engagePointsThreshold: number
   badgePrice: ethers.BigNumber

@@ -39,6 +39,7 @@ import { useRouter } from 'next/router'
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
 import * as sty from './BadgeForm.styles'
 import type { BadgeFormProps } from './BadgeForm.types'
+import useCreateSchema from '@queries/useCreateSchema'
 
 // TODO: checks for inputs
 const BadgeForm = ({
@@ -62,6 +63,7 @@ const BadgeForm = ({
   const toast = useToast()
   const router = useRouter()
   const { createBadge, isLoading, setIsLoading, error } = usePostCreateBadge()
+  const { createSchema } = useCreateSchema()
 
   //TODO: handleQuestCheck is not properly working when after get CheckedQuestError. Have to Fix it
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
@@ -83,6 +85,22 @@ const BadgeForm = ({
 
     setCheckedQuestError('')
     setCheckedQuestList(tempCheckedList)
+  }
+  function hexToBytes(hex: string) {
+    // eslint-disable-next-line no-var
+    for (var bytes = [], c = 0; c < hex.length; c += 2) bytes.push(parseInt(hex.substr(c, 2), 16))
+    return bytes
+  }
+
+  function fromLittleEndian(bytes: any[]) {
+    const n256 = BigInt(256)
+    let result = BigInt(0)
+    let base = BigInt(1)
+    bytes.forEach((byte) => {
+      result += base * BigInt(byte)
+      base = base * n256
+    })
+    return result
   }
 
   // reset everything when we close the modal
@@ -110,8 +128,38 @@ const BadgeForm = ({
       requiredQuests.push(0)
     }
 
+    const params_polygonID = {
+      //should get from server
+      issuerID: '141b568a-70f1-4726-a02c-a0709d2b32f5',
+      schemaBody: {
+        schema: title,
+        technicalName: title,
+        mandatoryExpiration: false,
+        attributes: [
+          {
+            name: 'engagementScore',
+            technicalName: 'engagementscore',
+            type: 'number',
+            description: 'engagementScoreThreshold',
+          },
+        ],
+      },
+      offerBody: {
+        attributes: [
+          {
+            attributeKey: 'engagementScore',
+            attributeValue: engagement,
+          },
+        ],
+      },
+    }
+    const polygonIdResponse = await createSchema(params_polygonID)
+    console.log(polygonIdResponse)
+    const schemaEnd = fromLittleEndian(hexToBytes(polygonIdResponse))
+
     const params = {
       contract: {
+        schemaHash: ethers.BigNumber.from(schemaEnd),
         requiredQuests,
         engagePointsThreshold: engagement,
         badgePrice: parseEther(price.toString()),
@@ -130,7 +178,7 @@ const BadgeForm = ({
     // TODO : Add loading modal and error modal using this data
     console.log('CLAIM BADGE CONTRACT', res, error, isLoading)
 
-    router.reload()
+    // router.reload()
   }
 
   // this useEffect helps with the toaster rendering
