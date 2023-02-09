@@ -21,6 +21,7 @@ import { ChangeEvent, useState } from 'react'
 
 const ConnectDiscordModal = (props: ConnectDiscordModalProps) => {
   const { isOpen, onClose, discordUser, guilds, onSubmit = () => {} } = props
+  console.log(guilds, discordUser, 'wagaewgawgjewagawegewaugewauawku')
 
   const [selectedGuild, setSelectedGuild] = useState<DiscordGuild | null>()
   const [link, setLink] = useState('')

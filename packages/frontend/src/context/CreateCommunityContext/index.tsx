@@ -14,6 +14,8 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [website, setWebsite] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<Category>(Category.Other)
   const [repUnit, setRepUnit] = useState<string>('')
   const [questsDiscord, setQuestsDiscord] = useState<Quest[]>([])
@@ -36,6 +38,8 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
         questsDiscord,
         questsForm,
         discord,
+        email,
+        password,
         setLocalImgUrl,
         setName,
         setDescription,
@@ -45,6 +49,8 @@ const CreateCommunityProvider = ({ children }: CreateCommunityProviderProps) => 
         setQuestsDiscord,
         setQuestsForm,
         setDiscord,
+        setEmail,
+        setPassword,
       }}
     >
       {children}

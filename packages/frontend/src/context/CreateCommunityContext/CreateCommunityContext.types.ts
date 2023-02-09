@@ -17,6 +17,8 @@ export interface CreateCommunityContextValue {
   questsDiscord: Quest[]
   questsForm: Quest[]
   discord: DiscordGuild
+  email: string
+  password: string
   setLocalImgUrl: Dispatch<SetStateAction<string>>
   setName: Dispatch<SetStateAction<string>>
   setDescription: Dispatch<SetStateAction<string>>
@@ -26,6 +28,8 @@ export interface CreateCommunityContextValue {
   setQuestsDiscord: Dispatch<SetStateAction<Quest[]>>
   setQuestsForm: Dispatch<SetStateAction<Quest[]>>
   setDiscord: Dispatch<SetStateAction<DiscordGuild>>
+  setEmail: Dispatch<SetStateAction<string>>
+  setPassword: Dispatch<SetStateAction<string>>
 }
 
 export interface CreateCommunityProviderProps {

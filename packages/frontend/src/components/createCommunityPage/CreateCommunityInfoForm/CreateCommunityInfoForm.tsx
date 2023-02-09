@@ -50,6 +50,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import * as sty from './CreateCommunityInfoForm.styles'
 import { CreateCommunityInfoFormProps } from './CreateCommunityInfoForm.types'
+import usePolygonIDInit from '@queries/usePolygonIDInit'
 
 const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProps) => {
   const {
@@ -60,6 +61,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
     selectedCategory,
     repUnit,
     discord,
+    email,
+    password,
     setLocalImgUrl,
     setRepUnit,
     setName,
@@ -67,6 +70,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
     setWebsite,
     setSelectedCategory,
     setDiscord,
+    setEmail,
+    setPassword,
   } = useCreateCommunityContext()
 
   const { user } = useUserContext()
@@ -74,12 +79,14 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
   const router = useRouter()
 
   const { createGroup, isLoading, error } = usePostCreateGroup()
+  const { initPolygonId } = usePolygonIDInit()
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
   const confirmationCancelRef = useRef(null)
 
   // we prio the local storage first, if doesn't exist then we use the props
   const persistedCommunityData = localStorageUtils.read(LS_EDIT_COMMUNITY_DATA)
+
   const cachedCommunityData =
     JSON.stringify(persistedCommunityData ?? {}) === '{}'
       ? {
@@ -90,6 +97,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
           selectedCategory,
           discord,
           repUnit,
+          email,
+          password,
         }
       : persistedCommunityData
 
@@ -109,6 +118,7 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
   })
 
   const [userGuilds, setUserGuilds] = useState(() => {
+    console.log(guildData, 'errrrrrrrrrr')
     return guildData.guilds
   })
 
@@ -119,6 +129,15 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
   const handleGroupCreation = async () => {
     // upload image
     const uploadUrl = await uploadImage(localImgUrl)
+    const params_polygon = {
+      email,
+      password,
+      displayName: name,
+      legalName: repUnit,
+      logo: localImgUrl,
+    }
+
+    const res_polygonID = await initPolygonId(params_polygon)
 
     const params = {
       name,
@@ -128,6 +147,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
       category: selectedCategory,
       discord: discord,
       repUnit,
+      issuerId: res_polygonID?.issuerId,
+      token: res_polygonID?.token,
     }
 
     const res = await createGroup(params)
@@ -147,6 +168,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
       selectedCategory,
       discord,
       repUnit,
+      email,
+      password,
     })
 
     window.location.replace(generateAuthUrl(DISCORD_REDIRECT_GET_USER_GUILDS))
@@ -177,6 +200,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
     setWebsite(cachedCommunityData.website)
     setSelectedCategory(cachedCommunityData.selectedCategory)
     setDiscord(cachedCommunityData.discord)
+    setEmail(cachedCommunityData.email)
+    setPassword(cachedCommunityData.password)
   }, [cachedCommunityData])
 
   return (
@@ -233,6 +258,30 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
             value={description}
           />
         </FormControl>
+
+        <HStack>
+          <FormControl mt={4}>
+            <FormLabel>Email</FormLabel>
+            <FormHelperText css={[globalSty.helperText]}>Email for Polygon ID</FormHelperText>
+            <Input
+              variant="filled"
+              placeholder="e.g. email@email.com"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </FormControl>
+
+          <FormControl mt={4}>
+            <FormLabel>Password</FormLabel>
+            <FormHelperText css={[globalSty.helperText]}>Password for Polygon ID</FormHelperText>
+            <Input
+              variant="filled"
+              placeholder=""
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+          </FormControl>
+        </HStack>
 
         <FormControl mt={4}>
           <FormLabel>Category</FormLabel>
