@@ -1,5 +1,4 @@
 import { User } from '@queries/common'
-import { memberInCommunity } from '@queries/useFetchCommunityDetail/useFetchCommunityDetail.types'
 import type { StaticImageData } from 'next/image'
 import type { ReactNode } from 'react'
 
@@ -14,6 +13,6 @@ export interface MemberTableRow {
 }
 
 export interface DaoMemberSectionProps {
-  members: memberInCommunity[]
+  members: any[]
   owner: User
 }

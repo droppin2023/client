@@ -4,6 +4,7 @@ import DroppinLogo from '@components/icons/DroppinLogo'
 import Search from '@components/icons/Search'
 import { background, primaryWeak } from '@constants/colors'
 import DroppinConnectButton from '../DroppinConnectButton'
+import Link from 'next/link'
 
 const Navbar = () => {
   return (
@@ -31,7 +32,10 @@ const Navbar = () => {
       </HStack>
 
       <Flex justifyContent={'flex-end'} gap="32px" alignItems="center" width="35%">
-        <Button variant="ghost">Explore</Button>
+        <Link href="/search">
+          <Button variant="ghost">Search</Button>
+        </Link>
+
         <DroppinConnectButton />
       </Flex>
     </Flex>

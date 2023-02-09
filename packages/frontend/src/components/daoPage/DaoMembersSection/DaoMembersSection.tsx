@@ -104,7 +104,7 @@ const DaoMembersSection = ({ members, owner }: DaoMemberSectionProps) => {
               quests: memberDetails.userQuests.length,
               badges: (
                 <Wrap>
-                  {badges.map((item, index) => (
+                  {badges.map((item: any, index: number) => (
                     <WrapItem key={index}>
                       <Badge color={primary}>{item.name}</Badge>
                     </WrapItem>

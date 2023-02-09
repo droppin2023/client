@@ -6,7 +6,7 @@ export interface DaoPendingRequestsProps {
 
 export interface PendingRequestsTableRow {
   name: string
-  img: StaticImageData
+  img: StaticImageData | string
   questName: string
   // TODO: engageScore why type error?
   engageScore: any

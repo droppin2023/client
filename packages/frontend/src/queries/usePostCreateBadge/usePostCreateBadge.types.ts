@@ -6,9 +6,15 @@ export interface CreateBadgeParams {
   contract: OnChainBadgeParams
   description: string
   name: string
+  offerId: string
+  schemaHash: string
+  schemaId: string
+  schemaType: string
 }
 
 export interface OnChainBadgeParams {
+  schemaHash: any
+
   requiredQuests: number[]
   engagePointsThreshold: number
   badgePrice: ethers.BigNumber

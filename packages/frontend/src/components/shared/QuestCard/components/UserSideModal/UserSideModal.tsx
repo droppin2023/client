@@ -24,8 +24,6 @@ import { HEADER_MAPPING } from './UserSideModal.constants'
 import * as sty from './UserSideModal.styles'
 import type { UserSideModalProps } from './UserSideModal.types'
 
-import { ONE_QUEST_DETAIL_TWO } from '@mockData'
-
 const UserSideModal = ({
   isOpen,
   onClose,
@@ -36,9 +34,6 @@ const UserSideModal = ({
   communityMessage,
   community,
 }: UserSideModalProps) => {
-  // TODO: fetch real data
-  const data = ONE_QUEST_DETAIL_TWO
-
   const renderBottomMap = {
     [Status.noStatus]: <></>,
     [Status.pending]: <></>,

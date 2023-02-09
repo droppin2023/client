@@ -52,9 +52,11 @@ const DaoOverview = ({
   discordLink = './assets/placeholder.jpeg',
   isLoading,
   guildInstance = {
+    name: '',
     guildId: '',
     link: '',
   },
+  defaultBadge,
 }: DaoOverviewProps) => {
   const [isEditCommunityFormOpen, setIsEditCommunityFormOpen] = useState(() => {
     const connectModalLastState = localStorageUtils.read(LS_KEY_IS_CONNECT_DISCORD_OPEN)
@@ -237,18 +239,40 @@ const DaoOverview = ({
         />
       )}
 
-      {/* HARDCODED PROPS */}
-      <BadgeClaimModal
-        isOpen={isClaimDefaultBadgeOpen}
-        onClose={() => setIsCreateDefaultBadgeOpen(false)}
-        badgeId={1}
-        badgeName={'y00ts Holder'}
-        badgeLogo={
-          'https://img-cdn.magiceden.dev/rs:fill:400:400:0:0/plain/https://bafkreicndlrqersl63a7fpk6zzw73lsklj5bwsidk74n4solbcyz2g3viq.ipfs.nftstorage.link/'
-        }
-        badgePrice={0}
-        badgeAddress={'0x3B02fF1e626Ed7a8fd6eC5299e2C54e1421B626B'}
-      ></BadgeClaimModal>
+      {/* isOpen,
+  onClose,
+  badgeId,
+  badgeName,
+  badgeLogo,
+  badgeAddress,
+  badgePrice,
+  engagementScore,
+  qrCode,
+  sessionID,
+  offerId,
+  schema, */}
+
+      {isClaimDefaultBadgeOpen && (
+        <BadgeClaimModal
+          isOpen={true}
+          onClose={() => setIsCreateDefaultBadgeOpen(false)}
+          badgeId={defaultBadge.id}
+          badgeName={defaultBadge.name}
+          badgeLogo={defaultBadge.image}
+          badgePrice={defaultBadge.badgePrice}
+          badgeAddress={defaultBadge.address}
+          engagementScore={defaultBadge.badgePrice}
+          // TODO: ADD THE FOLLOWING DATA
+          qrCode={''}
+          sessionID=""
+          offerId=""
+          schema={{
+            schemaId: '',
+            schemaType: '',
+            schemaHash: '',
+          }}
+        ></BadgeClaimModal>
+      )}
     </>
   )
 }

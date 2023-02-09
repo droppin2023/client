@@ -27,6 +27,10 @@ const usePostCreateBadge = () => {
         transactionHash: transactionHash.transactionHash,
         description: params.description,
         name: params.name,
+        offerId: params.offerId,
+        schemaHash: params.schemaHash,
+        schemaType: params.schemaType,
+        schemaId: params.schemaId,
       })
 
       if (status === 200) {

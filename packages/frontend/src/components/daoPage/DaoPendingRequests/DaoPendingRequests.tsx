@@ -47,7 +47,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
         <Tr display="flex" justifyContent={'space-between'}>
           <Td>
             <HStack>
-              {img !== 'none' ? (
+              {(img || 'none') !== 'none' ? (
                 <Image src={img} alt={name} width={24} height={24} css={[sty.memberImage]} />
               ) : (
                 <Avatar css={[sty.memberImage]} width="24px" height="24px" name={name} />
@@ -111,7 +111,7 @@ const DaoPendingRequests = ({ requests }: DaoPendingRequestsProps) => {
       <QuestReviewForm
         isOpen={isShowReviewModal}
         onClose={() => setIsShowReviewModal(false)}
-        reviewContent={reviewContent}
+        reviewContent={reviewContent as any}
       />
     </>
   )

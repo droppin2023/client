@@ -8,9 +8,13 @@ import { orange, orangeHighlight } from '@constants/colors'
 
 import bannerOrnament from './assets/banner-ornament.svg'
 
+import { SERVER_URL } from '@constants/serverConfig'
 import { useUserContext } from '@context/UserContext'
+import localStorageUtils from '@helpers/localStorageUtils'
+import useCreateQRcode from '@queries/useCreateQRcode'
+import axios from 'axios'
 import * as sty from './BadgeOverview.styles'
-import type { BadgeOverviewProps } from './BadgeOverview.types'
+import type { BadgeOverviewProps, SchemaProps } from './BadgeOverview.types'
 import ClaimModal from './components/ClaimModal'
 
 const BadgeOverview = ({
@@ -23,15 +27,36 @@ const BadgeOverview = ({
   badgeAddress,
   badgePrice,
   isLoading,
+  offerId,
+  engagementScore,
+  schema,
 }: BadgeOverviewProps) => {
-  const { isLoggedIn } = useUserContext()
+  const { isLoggedIn, user } = useUserContext()
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false)
-  const onHandleClaim = () => {
+  const [qrCode, setQrCode] = useState('')
+  const [sessionID, setSessionID] = useState('')
+  const { createQRcode } = useCreateQRcode()
+  const onHandleClaim = async () => {
     // TODO : Need API to check if user fullfilled every conditions for Badge
     const isClaimAble = true
+    console.log(isClaimAble)
+    const res = await axios.get(`${SERVER_URL}/check-badge/${user?.username}/${id}`)
+    const claimInfo = res.data
+    console.log('CLAIM INFO', claimInfo)
 
-    if (isClaimAble) {
+    // TODO: POC
+    if (claimInfo.claimable) {
+      const { token } = localStorageUtils.read('polygon_id_user')
+      console.log(schema, 'fkind schema checkgaewgwaegewagawgeegewga')
+      const params = {
+        token,
+        offerId,
+      }
+      const { srcValue, sessionID } = await createQRcode(params)
+      console.log(srcValue)
+      setQrCode(srcValue)
       setIsClaimModalOpen(true)
+      setSessionID(sessionID)
     }
   }
 
@@ -119,6 +144,11 @@ const BadgeOverview = ({
         badgeLogo={logo}
         badgeAddress={badgeAddress}
         badgePrice={badgePrice}
+        qrCode={qrCode}
+        sessionID={sessionID}
+        offerId={offerId}
+        engagementScore={engagementScore}
+        schema={schema as SchemaProps}
       />
     </>
   )

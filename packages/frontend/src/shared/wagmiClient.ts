@@ -22,7 +22,7 @@ export const getRpcUrl = (chainId: number): string => {
 }
 
 export const { chains, provider } = configureChains(
-  [chain.localhost, chain.mainnet, ...supportedChains],
+  [chain.polygonMumbai, chain.mainnet, ...supportedChains],
   [
     jsonRpcProvider({
       rpc: (chain) => {

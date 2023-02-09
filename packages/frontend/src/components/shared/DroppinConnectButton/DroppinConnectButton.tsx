@@ -11,9 +11,12 @@ import { useUserContext } from '@context/UserContext'
 import ProfileDropdown from './components/ProfileDropdown'
 
 import * as sty from './DroppinConnectButton.styles'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const DroppinConnectButton = () => {
   const { user, isLoggedIn } = useUserContext()
+  const router = useRouter()
 
   return (
     <ConnectButton.Custom>

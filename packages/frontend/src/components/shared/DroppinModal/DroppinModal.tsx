@@ -9,16 +9,12 @@ import {
 } from '@chakra-ui/react'
 
 import { background2 } from '@constants/colors'
-import { ONE_QUEST_DETAIL } from '@mockData'
 
 import Done from '@components/icons/Done'
 import Fail from '@components/icons/Fail'
 import type { DroppinModalProps } from './DroppinModal.types'
 
 const DroppinModal = ({ isOpen, onClose, modatMessage, modalStatus }: DroppinModalProps) => {
-  // TODO: fetch the quest details here
-  const data = ONE_QUEST_DETAIL
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

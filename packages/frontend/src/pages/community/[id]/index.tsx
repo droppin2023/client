@@ -11,6 +11,7 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 import { useUserContext } from '@context/UserContext'
+import localStorageUtils from '@helpers/localStorageUtils'
 import { QuestType } from '@queries/common'
 import useCheckAdmin from '@queries/useCheckAdmin'
 import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
@@ -35,6 +36,10 @@ const DaoPage = ({ id }: { id: number }) => {
 
   useEffect(() => {
     console.log('COMMUNITY DATA', communityData)
+    localStorageUtils.write('polygon_id_user', {
+      email: communityData.email,
+      password: communityData.password,
+    })
   }, [communityData])
 
   return (
@@ -63,6 +68,7 @@ const DaoPage = ({ id }: { id: number }) => {
           discordLink={communityData.discord.link}
           guildInstance={communityData.discord}
           isLoading={fetchCommunityDetailLoading || checkAdminLoading}
+          defaultBadge={communityData.defaultBadge}
         />
 
         <Box width="80%" minHeight="512px">
@@ -101,6 +107,10 @@ const DaoPage = ({ id }: { id: number }) => {
                     (item) => item.condition.type === QuestType.form,
                   )}
                   isLoading={fetchCommunityDetailLoading}
+                  issuerId={communityData.issuerId}
+                  token={communityData.token}
+                  email={communityData.email}
+                  password={communityData.password}
                 />
               </TabPanel>
               <TabPanel>

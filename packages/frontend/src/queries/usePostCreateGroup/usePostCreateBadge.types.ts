@@ -9,4 +9,9 @@ export interface CreateGroupParams {
   description: string
   category: string
   discord?: DiscordGuild
+  repUnit: string
+  issuerId: string
+  token: string
+  email: string
+  password: string
 }

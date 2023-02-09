@@ -37,6 +37,7 @@ import { useRouter } from 'next/router'
 import { useAccount } from 'wagmi'
 import SignupSuccess from './components/SignupSuccess'
 import { SIGNUP_PERSIST_KEY } from './SignupForm.constants'
+import { useUserContext } from '@context/UserContext'
 
 const SignupForm = () => {
   const [localImgUrl, setLocalImgUrl] = useState('')
@@ -51,6 +52,7 @@ const SignupForm = () => {
   const [discordDiscriminator, setDiscordDiscriminator] = useState('')
   const [discordId, setDiscordId] = useState('')
 
+  const { handleUserLogin } = useUserContext()
   const { postSignup, isLoading, error } = usePostSignup()
   const { address } = useAccount()
   const router = useRouter()
@@ -92,7 +94,9 @@ const SignupForm = () => {
     setIsConfirmationOpen(false)
     setIsFinished(true)
 
-    router.replace(`/user/${username}`)
+    await handleUserLogin(username)
+
+    router.push(`/user/${username}`)
   }
 
   const handleConnectDiscord = () => {

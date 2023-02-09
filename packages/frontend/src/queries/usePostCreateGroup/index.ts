@@ -19,7 +19,7 @@ const usePostCreateGroup = () => {
 
       const { discord, ...restParams } = params
       const newParams = { ...restParams, discord: JSON.stringify(discord) }
-
+      console.log(newParams, 'newParams')
       const res = await axios.post(CREATE_GROUP, {
         transactionHash: transactionHash.transactionHash,
         ...newParams,

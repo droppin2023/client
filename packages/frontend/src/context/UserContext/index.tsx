@@ -20,6 +20,22 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   const { checkLogin, isLoading: checkLoginLoading, error: checkLoginError } = useLazyCheckLogin()
 
+  // lazy check for user login
+  const handleUserLogin = async (username: string) => {
+    const userData = await fetchUserDetail({ username })
+    console.log('LAZY HANDLE LOGIN', userData)
+
+    // load the user data to the user state
+    setUser({
+      username: userData?.username as string,
+      address: address as string,
+      image: userData?.image as string,
+      name: userData?.name as string,
+      discord: userData?.discord,
+    })
+    setIsLoggedIn(true)
+  }
+
   const {
     fetchUserDetail,
     isLoading: fetchUserDetailLoading,
@@ -39,7 +55,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
       } else {
         const userData = await fetchUserDetail({ username: loginData?.username as string })
         console.log('USER DETAIL', userData)
-        //TODO: add discord tokens
 
         // load the user data to the user state
         setUser({
@@ -65,7 +80,12 @@ const UserProvider = ({ children }: UserProviderProps) => {
   return (
     <>
       <UserContext.Provider
-        value={{ isLoggedIn, user, isLoading: fetchUserDetailLoading || checkLoginLoading }}
+        value={{
+          isLoggedIn,
+          handleUserLogin,
+          user,
+          isLoading: fetchUserDetailLoading || checkLoginLoading,
+        }}
       >
         {children}
       </UserContext.Provider>

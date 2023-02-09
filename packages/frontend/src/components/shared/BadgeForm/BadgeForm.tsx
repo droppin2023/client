@@ -39,6 +39,7 @@ import { useRouter } from 'next/router'
 import { PRICE_TOKEN_OPTIONS } from './BadgeForm.constants'
 import * as sty from './BadgeForm.styles'
 import type { BadgeFormProps } from './BadgeForm.types'
+import useCreateSchema from '@queries/useCreateSchema'
 
 // TODO: checks for inputs
 const BadgeForm = ({
@@ -48,6 +49,10 @@ const BadgeForm = ({
   questsDiscord,
   questsSubmitForm,
   groupId,
+  issuerId,
+  token,
+  email,
+  password,
 }: BadgeFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState('')
   const [checkedQuestList, setCheckedQuestList] = useState<Quest[]>([])
@@ -62,6 +67,7 @@ const BadgeForm = ({
   const toast = useToast()
   const router = useRouter()
   const { createBadge, isLoading, setIsLoading, error } = usePostCreateBadge()
+  const { createSchema } = useCreateSchema()
 
   //TODO: handleQuestCheck is not properly working when after get CheckedQuestError. Have to Fix it
   const handleQuestCheck = (e: ChangeEvent<HTMLInputElement>) => {
@@ -83,6 +89,22 @@ const BadgeForm = ({
 
     setCheckedQuestError('')
     setCheckedQuestList(tempCheckedList)
+  }
+  function hexToBytes(hex: string) {
+    // eslint-disable-next-line no-var
+    for (var bytes = [], c = 0; c < hex.length; c += 2) bytes.push(parseInt(hex.substr(c, 2), 16))
+    return bytes
+  }
+
+  function fromLittleEndian(bytes: any[]) {
+    const n256 = BigInt(256)
+    let result = BigInt(0)
+    let base = BigInt(1)
+    bytes.forEach((byte) => {
+      result += base * BigInt(byte)
+      base = base * n256
+    })
+    return result
   }
 
   // reset everything when we close the modal
@@ -110,8 +132,41 @@ const BadgeForm = ({
       requiredQuests.push(0)
     }
 
+    const params_polygonID = {
+      //should get from server
+      issuerID: issuerId,
+      schemaBody: {
+        schema: title,
+        technicalName: title,
+        mandatoryExpiration: false,
+        attributes: [
+          {
+            name: 'engagementScore',
+            technicalName: 'engagementscore',
+            type: 'number',
+            description: 'engagementScoreThreshold',
+          },
+        ],
+      },
+      offerBody: {
+        attributes: [
+          {
+            attributeKey: 'engagementScore',
+            attributeValue: engagement,
+          },
+        ],
+      },
+      token,
+      email,
+      password,
+    }
+    const res_schema = await createSchema(params_polygonID)
+    console.log(res_schema?.schemaHash, res_schema?.offerID, 'taweighewaighaewughewauigaiuweguw')
+    const schemaEnd = fromLittleEndian(hexToBytes(res_schema?.schemaHash))
+
     const params = {
       contract: {
+        schemaHash: ethers.BigNumber.from(schemaEnd),
         requiredQuests,
         engagePointsThreshold: engagement,
         badgePrice: parseEther(price.toString()),
@@ -121,9 +176,13 @@ const BadgeForm = ({
         symbol: symbol,
         URI: localImgUrl,
       },
+      schemaHash: res_schema?.schemaHash,
+      schemaType: title.replace(' ', ''),
+      schemaId: res_schema?.schemaID,
       description: description,
       name: title,
       symbol,
+      offerId: res_schema?.offerID,
     }
     const res = await createBadge(params)
 

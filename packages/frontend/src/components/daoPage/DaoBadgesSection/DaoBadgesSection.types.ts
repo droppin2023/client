@@ -5,4 +5,8 @@ export interface DaoBadgesSectionProps {
   questsDiscord: Quest[]
   questsSubmitForm: Quest[]
   isLoading: boolean
+  issuerId: string
+  token: string
+  email: string
+  password: string
 }

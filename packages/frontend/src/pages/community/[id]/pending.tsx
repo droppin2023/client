@@ -77,7 +77,14 @@ const DaoPage = ({ id }: { id: number }) => {
           Back
         </Button>
       </HStack>
-      <DaoPageProvider isAdmin={isAdmin} repUnit={communityData.totalEngage.unit} id={id}>
+      <DaoPageProvider
+        isAdmin={isAdmin}
+        repUnit={communityData.repUnit}
+        setSubmitCount={() => {
+          return
+        }}
+        id={id}
+      >
         {/* TODO: refactor member list, quests, and badges as context */}
         {/* TODO: integrate discord */}
         <SectionHeader title="Pending Quests" subtitle={<></>} />

@@ -18,6 +18,12 @@ const normalizeData = (data: FetchBadgeDetailResponse | undefined) => {
   const image = data?.image || ''
   const groupId = data?.groupId || ''
   const symbol = data?.symbol || ''
+  const offerId = data?.offerId || ''
+  const schema = {
+    schemaHash: data?.schemaHash || '',
+    schemaId: data?.schemaId || '',
+    schemaType: data?.schemaType || '',
+  }
 
   const normalizedRequiredQuests = []
 
@@ -53,7 +59,9 @@ const normalizeData = (data: FetchBadgeDetailResponse | undefined) => {
     image,
     groupId,
     symbol,
+    offerId,
     requiredQuests: normalizedRequiredQuests,
+    schema,
   }
 }
 

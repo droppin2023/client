@@ -24,9 +24,9 @@ const normalizeData = (data: FetchPendingQuestsCommunityResponse | undefined) =>
       description: '',
     }
 
-    if (data?.pendingQuests?.[i].quest.engageScore)
+    if (data?.pendingQuests?.[i].quest.engagePoints)
       (normalizedEntry.quest as any).engageScore = BigNumber.from(
-        data?.pendingQuests?.[i].quest.engageScore,
+        data?.pendingQuests?.[i].quest.engagePoints,
       ).toNumber()
 
     normalizedEntry['requestUser'] = data?.pendingQuests?.[i].requestUser || {
