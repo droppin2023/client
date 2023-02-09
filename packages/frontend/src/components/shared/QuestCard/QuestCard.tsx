@@ -8,16 +8,33 @@ import Done from '@components/icons/Done'
 import QuestDetailModal from '@components/shared/QuestCard/components/QuestDetailModal'
 
 import { useUserContext } from '@context/UserContext'
+import localStorageUtils from '@helpers/localStorageUtils'
 import { Status } from '@queries/common'
 import useGetUserStatusInQuest from '@queries/useGetUserStatusInQuest'
+import { useRouter } from 'next/router'
 import UserSideModal from './components/UserSideModal'
+import { LS_QUEST_CARD_LOCATION } from './QuestCard.constants'
 import { colorMap } from './QuestCard.helpers'
 import type { QuestCardProps } from './QuestCard.types'
 
 const QuestCard = ({ quest, questType, showNoDetail }: QuestCardProps) => {
   const { isLoggedIn, user } = useUserContext()
+  const router = useRouter()
 
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(() => {
+    // we open the modal and encode the data in
+
+    const { discordCheck } = router.query
+    if (!discordCheck) return false
+    else {
+      const discordState = JSON.parse(Buffer.from(discordCheck as string, 'base64').toString())
+      console.log(Number(discordState.questId), Number(quest.id))
+      if (Number(discordState.questId) === Number(quest.id)) return true
+    }
+
+    return false
+  })
+
   const [isUserSideModalOpen, setIsUserSideModalOpen] = useState(false)
   const {
     data: userQuest,
@@ -25,6 +42,7 @@ const QuestCard = ({ quest, questType, showNoDetail }: QuestCardProps) => {
     error,
   } = useGetUserStatusInQuest({ questId: Number(quest.id), username: user?.username as string })
 
+  // per render computations
   const status = isLoggedIn ? userQuest.status : Status.noStatus
 
   const handleCardClick = () => {
@@ -33,6 +51,8 @@ const QuestCard = ({ quest, questType, showNoDetail }: QuestCardProps) => {
       else if (status === Status.noStatus) setIsDetailModalOpen(true)
       else setIsUserSideModalOpen(true)
     }
+
+    localStorageUtils.write(LS_QUEST_CARD_LOCATION, window.location.href)
   }
 
   useEffect(() => {
@@ -66,12 +86,14 @@ const QuestCard = ({ quest, questType, showNoDetail }: QuestCardProps) => {
       </Flex>
 
       {/* will open the quest detail modal if no status. else track the user's current status */}
-      <QuestDetailModal
-        isOpen={isDetailModalOpen}
-        onClose={() => setIsDetailModalOpen(false)}
-        questType={questType}
-        quest={quest}
-      />
+      {isDetailModalOpen && (
+        <QuestDetailModal
+          isOpen={true}
+          onClose={() => setIsDetailModalOpen(false)}
+          questType={questType}
+          quest={quest}
+        />
+      )}
 
       <UserSideModal
         isOpen={isUserSideModalOpen}

@@ -29,7 +29,7 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
         type: entry?.condition?.type || QuestType.form,
         conditionDetail: {
           guildId: entry?.condition.conditionDetail?.guildId || 0,
-          roleId: entry?.condition.conditionDetail?.guildId || 0,
+          roleId: entry?.condition.conditionDetail?.roleId || 0,
         },
       },
       symbol: entry?.symbol || '',

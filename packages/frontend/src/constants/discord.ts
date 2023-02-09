@@ -9,3 +9,4 @@ export const LS_GET_USER_GUILD_DESTINATION = 'discord_get_user_guild_destination
 
 export const DISCORD_REDIRECT_USER = `${env.url}/discord-callback/user`
 export const DISCORD_REDIRECT_GET_USER_GUILDS = `${env.url}/discord-callback/get-user-guilds`
+export const DISCORD_REDIRECT_CHECK_USER_QUEST_CONDITION = `${env.url}/discord-callback/check-user-quest-condition`

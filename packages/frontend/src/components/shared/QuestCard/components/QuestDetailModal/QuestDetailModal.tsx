@@ -24,16 +24,30 @@ import { QuestType } from '@queries/common'
 import usePostCompleteQuest from '@queries/usePostCompleteQuest'
 import usePostSubmitQuest from '@queries/usePostSubmitQuest'
 
-import { background2, discordPurple, primary, primaryHighlight, secondary } from '@constants/colors'
+import {
+  background2,
+  danger,
+  discordPurple,
+  primary,
+  primaryHighlight,
+  secondary,
+} from '@constants/colors'
 import { useUserContext } from '@context/UserContext'
 import * as globalSty from '@styles'
 import { useEffect, useState } from 'react'
 
+import { DISCORD_REDIRECT_CHECK_USER_QUEST_CONDITION } from '@constants/discord'
+import { generateAuthUrl } from '@helpers/discord'
+import localStorageUtils from '@helpers/localStorageUtils'
 import { useRouter } from 'next/router'
+import { LS_QUEST_CARD_LOCATION } from '../../QuestCard.constants'
 import type { QuestDetailModalProps } from './QuestDetailModal.types'
 
 const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModalProps) => {
   const { user } = useUserContext()
+  const router = useRouter()
+
+  // compute discord check here
 
   const [questFormEntry, setQuestFormEntry] = useState('')
 
@@ -41,8 +55,9 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
   const [isDiscordQualified, setIsDiscordQualified] = useState(false)
   const [discordLoading, setDiscordLoading] = useState(false)
 
+  const [discordCheckError, setDiscordCheckError] = useState('')
+
   const toast = useToast()
-  const router = useRouter()
 
   const {
     submitQuest,
@@ -66,32 +81,67 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
       duration: 5000,
       isClosable: true,
     })
-
-    router.reload()
   }
 
-  const handleDiscordCheck = () => {
+  const handleDiscordCheckClick = () => {
+    console.log('CONDITION DETAIL', quest.condition.conditionDetail)
+
+    const redirectState = {
+      ...quest.condition.conditionDetail,
+      questId: quest.id,
+    }
+
+    console.log('REDIRECT STATE', redirectState)
+
+    window.location.replace(
+      generateAuthUrl(DISCORD_REDIRECT_CHECK_USER_QUEST_CONDITION, redirectState),
+    )
+  }
+
+  const handleDiscordCheck = async () => {
     setDiscordLoading(true)
-    setTimeout(() => {
-      setIsDiscordQualified(true)
-      setDiscordLoading(false)
-      handleSubmit().then(() => {
-        const sth = completeQuest({ questId: quest.id, username: user?.username as string })
-        router.reload()
-      })
-    }, 1000)
+    setIsDiscordQualified(true)
+
+    await completeQuest({ questId: quest.id, username: user?.username as string })
+
+    setDiscordLoading(false)
+
+    const destination = localStorageUtils.read(LS_QUEST_CARD_LOCATION)
+    const formattedDestination = destination.split('?')
+
+    localStorageUtils.write(LS_QUEST_CARD_LOCATION, '')
+
+    console.log(destination)
+
+    router.replace(formattedDestination[0])
   }
 
+  const handleClose = () => {
+    if (isDiscordQualified) {
+      router.reload()
+    } else onClose()
+  }
+
+  // intercept redirect and determine whether to process discord conditions
   useEffect(() => {
-    console.log('QUEST', quest)
-  }, [quest])
+    const { discordCheck } = router.query
+
+    if (discordCheck) {
+      const discordState = JSON.parse(Buffer.from(discordCheck as string, 'base64').toString())
+      console.log('DISCORD STATE', discordState)
+      if (discordState.isMemberChecked && discordState.isRoleChecked) handleDiscordCheck()
+      else {
+        setDiscordCheckError(discordState.errorMsg)
+      }
+    }
+  }, [])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent bg={background2}>
         <ModalHeader>{quest.name}</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton onClick={handleClose} />
         <ModalBody pb={6}>
           <VStack spacing={2} align="left" mt={4}>
             {/* <Flex justifyContent="space-between">
@@ -129,9 +179,9 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
           {questType === QuestType.discord && (
             <FormControl mt={4}>
-              <FormLabel>Connect Discord</FormLabel>
+              <FormLabel>Check conditions on Discord</FormLabel>
               <FormHelperText css={[globalSty.helperText]}>
-                To complete this quest, you have to connect discord account
+                Click the button below to check your completion status in discord.
               </FormHelperText>
 
               {isDiscordQualified && (
@@ -143,13 +193,20 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
 
               <Button
                 bgColor={discordPurple}
-                onClick={handleDiscordCheck}
+                onClick={handleDiscordCheckClick}
                 disabled={isDiscordQualified}
                 isLoading={discordLoading}
+                width="100%"
               >
                 <DiscordIcon />
                 <Text ml={4}>Check Discord Conditions</Text>
               </Button>
+
+              {discordCheckError.length > 0 && (
+                <Text color={danger} mt={2}>
+                  {discordCheckError}
+                </Text>
+              )}
             </FormControl>
           )}
         </ModalBody>
