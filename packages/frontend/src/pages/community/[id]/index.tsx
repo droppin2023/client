@@ -14,7 +14,7 @@ import { useUserContext } from '@context/UserContext'
 import { QuestType } from '@queries/common'
 import useCheckAdmin from '@queries/useCheckAdmin'
 import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const DaoPage = ({ id }: { id: number }) => {
   const { user } = useUserContext()
@@ -32,6 +32,10 @@ const DaoPage = ({ id }: { id: number }) => {
     isLoading: checkAdminLoading,
     error: checkAdminError,
   } = useCheckAdmin({ communityId: id, username: user?.username as string })
+
+  useEffect(() => {
+    console.log('COMMUNITY DATA', communityData)
+  }, [communityData])
 
   return (
     <VStack spacing="40px" marginBottom="100px">

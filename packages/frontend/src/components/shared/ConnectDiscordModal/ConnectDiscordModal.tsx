@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   FormControl,
   FormHelperText,
@@ -12,11 +11,10 @@ import {
   ModalHeader,
   ModalOverlay,
   Select,
-  Text,
 } from '@chakra-ui/react'
-import { ConnectDiscordModalProps } from './ConnectDiscordModal.props'
+import { ConnectDiscordModalProps } from './ConnectDiscordModal.types'
 
-import { background2, primary, primaryHighlight, secondary, secondaryWeak } from '@constants/colors'
+import { background2, primary, primaryHighlight } from '@constants/colors'
 import { DiscordGuild } from '@queries/common'
 import * as globalSty from '@styles'
 import { ChangeEvent, useState } from 'react'
@@ -47,29 +45,16 @@ const ConnectDiscordModal = (props: ConnectDiscordModalProps) => {
       <ModalContent bg={background2}>
         <ModalHeader>Connect Server to Discord</ModalHeader>
         <ModalBody>
-          <FormControl>
-            <FormLabel>Discord Account</FormLabel>
-            <FormHelperText css={[globalSty.helperText]}>
-              Your connected discord account
-            </FormHelperText>
-            {(discordUser?.id || '').length > 0 ? (
-              <Box padding="8px 12px" borderRadius="8px" bg={secondaryWeak}>
-                {discordUser.name}
-                <Text as="span" color={secondary}>{`#${discordUser.discriminator}`}</Text>
-              </Box>
-            ) : (
-              <>{/* TODO: implement connect discord*/}</>
-            )}
-          </FormControl>
-          {(discordUser?.id || '').length > 0 && (
-            <>
-              <FormControl mt={4}>
-                <FormLabel>Select Server to Connect</FormLabel>
-                <FormHelperText css={[globalSty.helperText]}>
-                  Select a server to attach to this community
-                </FormHelperText>
-                <Select variant="filled" placeholder="Select server" onChange={handleSelectGuild}>
-                  {guilds.map((item) => {
+          <>
+            <FormControl mt={4}>
+              <FormLabel>Select Server to Connect</FormLabel>
+              <FormHelperText css={[globalSty.helperText]}>
+                Select a server to attach to this community
+              </FormHelperText>
+              <Select variant="filled" placeholder="Select server" onChange={handleSelectGuild}>
+                {guilds
+                  .filter((item) => item.owner)
+                  .map((item) => {
                     const value = {
                       guildId: item.id,
                       name: item.name,
@@ -81,21 +66,20 @@ const ConnectDiscordModal = (props: ConnectDiscordModalProps) => {
                       </option>
                     )
                   })}
-                </Select>
-              </FormControl>
-              <FormControl mt={4}>
-                <FormLabel>Enter invite link</FormLabel>
-                <FormHelperText css={[globalSty.helperText]}>
-                  Make sure the invite link matches and does not expire!
-                </FormHelperText>
-                <Input
-                  value={link}
-                  onChange={(e) => setLink(e.target.value)}
-                  placeholder="https://discord.gg/your-invite-link"
-                />
-              </FormControl>
-            </>
-          )}
+              </Select>
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Enter invite link</FormLabel>
+              <FormHelperText css={[globalSty.helperText]}>
+                Make sure the invite link matches and does not expire!
+              </FormHelperText>
+              <Input
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+                placeholder="https://discord.gg/your-invite-link"
+              />
+            </FormControl>
+          </>
         </ModalBody>
         <ModalFooter>
           <Button bg={primary} _hover={{ bg: primaryHighlight }} onClick={handleSubmit}>

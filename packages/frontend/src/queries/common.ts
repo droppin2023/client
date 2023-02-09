@@ -22,8 +22,8 @@ export interface Condition {
 }
 
 export interface DiscordRoleCondition {
-  guildId: number
-  roleId: number
+  guildId: number | string
+  roleId: number | string
 }
 
 export interface Quest {

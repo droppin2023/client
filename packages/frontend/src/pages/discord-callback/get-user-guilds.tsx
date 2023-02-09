@@ -66,25 +66,6 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       },
     })
 
-    // const guildInvitesPromises = []
-    // for (let i = 0; i < guildRes.data.length; i++) {
-    //   guildInvitesPromises.push(
-    //     axios.get(`${DISCORD_ENDPOINT}/guilds/${guildRes.data[i].id}/invites`, {
-    //       headers: {
-    //         Authorization: `${token_type} ${access_token}`,
-    //         'Content-Type': 'application/json',
-    //       },
-    //     }),
-    //   )
-    // }
-
-    // const guildInvites = await Promise.allSettled(guildInvitesPromises)
-
-    // console.log(
-    //   'INVITES',
-    //   guildInvites.filter((item) => item.status === 'fulfilled'),
-    // )
-
     return {
       props: {
         guilds: guildRes.data,
