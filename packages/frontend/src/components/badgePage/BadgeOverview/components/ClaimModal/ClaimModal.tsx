@@ -24,9 +24,8 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import barcodePlaceholder from './assets/barcode-placeholder.png'
-import { getTwitterTweetContent } from './ClaimModal.helpers'
+import { getTwitterTweetContent, qrProofRequestJson } from './ClaimModal.helpers'
 import { ClaimModalPhase, ClaimModalProps } from './ClaimModal.types'
-import useCreateQRcode from '@queries/useCreateQRcode'
 import useCheckAuth from '@queries/useCheckAuth'
 
 const ClaimModal = ({
@@ -37,8 +36,11 @@ const ClaimModal = ({
   badgeLogo,
   badgeAddress,
   badgePrice,
+  engagementScore,
   qrCode,
   sessionID,
+  offerId,
+  schema,
 }: ClaimModalProps) => {
   const { user } = useUserContext()
 
@@ -48,6 +50,7 @@ const ClaimModal = ({
 
   const [onchainBadge, setOnchainBadge] = useState()
   const [claimQR, setClaimQR] = useState()
+  const [verifyQR, setVerifyQR] = useState({})
   const [isClaimable, setIsClaimable] = useState(false)
   const [isAuthDone, setIsAuthDone] = useState(false)
   const [msg, setMsg] = useState('Click to check')
@@ -57,28 +60,24 @@ const ClaimModal = ({
   // const handleScanned = () => {
   //   setPhase(ClaimModalPhase.POST_IDENTIFY)
   // }
-  const { fetchClaimedBadge } = useFetchClaimedBadge({
-    badgeId,
-    badgeAddress: badgeAddress,
-    userAddress: user?.address as string,
-  })
 
-  const handleClaim = async () => {
-    const params = {
-      badgeId,
-    }
-    const res = await claimBadge(params)
-    setPhase(ClaimModalPhase.CLAIMED)
-    // TODO  : GET CLAIMED INFO
-    // const res2 = await
-  }
+  // const handleClaim = async () => {
+  //   const params = {
+  //     badgeId,
+  //   }
+
+  //   const res = await claimBadge(params)
+  //   setPhase(ClaimModalPhase.CLAIMED)
+  //   // TODO  : GET CLAIMED INFO
+  //   // const res2 = await
+  // }
 
   const handleCheck = async () => {
-    const res = await checkAuth(sessionID)
+    const res = await checkAuth(sessionID, offerId)
     console.log(res)
-    if (res.status == 'pending') {
+    if (res?.status == 'pending' || res?.status == 401) {
       setMsg('Pending')
-    } else if (res.status == 'done') {
+    } else if (res?.status == 'done') {
       setMsg('Scan, Get Claim')
       setClaimQR(res.qrcode)
       setIsAuthDone(true)
@@ -89,6 +88,33 @@ const ClaimModal = ({
     if (urlRef?.current?.value || null)
       navigator.clipboard.writeText(urlRef?.current?.value as string)
   }
+
+  const handleClaimableTrue = () => {
+    setIsClaimable(true)
+    const params = {
+      engagementScore,
+      schemaHash: schema?.schemaHash,
+      schemaName: schema?.schemaType,
+      schemaId: schema?.schemaId,
+    }
+    console.log(params, 'fking params')
+    const res = qrProofRequestJson(params)
+    console.log(res, 'fking QR')
+    setVerifyQR(res)
+  }
+
+  // useEffect(() => {
+  //   const params = {
+  //     engagementScore,
+  //     schemaHash: schema?.schemaHash,
+  //     schemaName: schema?.schemaType,
+  //     schemaId: schema?.schemaId,
+  //   }
+  //   console.log(params, 'fking params')
+  //   const res = qrProofRequestJson(params)
+  //   console.log(res, 'fking QR')
+  //   setVerifyQR(res)
+  // }, [isClaimable])
 
   const renderPolygonIdScan = () => (
     <>
@@ -103,7 +129,9 @@ const ClaimModal = ({
             Scan it, Get Badge Claim to your Polygon ID Identity
           </Text>
           {/* TODO: replace with polygon ID barcode */}
-          {isAuthDone ? (
+          {isClaimable ? (
+            <QRCode level="Q" style={{ width: 256 }} value={JSON.stringify(verifyQR)} />
+          ) : isAuthDone ? (
             <QRCode level="Q" style={{ width: 256 }} value={JSON.stringify(claimQR)} />
           ) : (
             <Image
@@ -136,26 +164,28 @@ const ClaimModal = ({
                 </FormControl> */}
 
                 {isClaimable ? (
-                  <Button
-                    size="lg"
-                    bg={primary}
-                    _hover={{ bg: primaryHighlight }}
-                    onClick={handleClaim}
-                  >
+                  <VStack>
                     <Text as="b" fontSize="lg" textAlign="center" margin={3}>
                       {/* TODO: HARDCODED DATA */}
                       {`${badgePrice} YOO`}
                     </Text>
-                    <Text fontSize="lg" textAlign="center">
-                      Claim Badge
-                    </Text>
-                  </Button>
+                    <Button
+                      size="lg"
+                      bg={primary}
+                      _hover={{ bg: primaryHighlight }}
+                      // onClick={handleClaim}
+                    >
+                      <Text fontSize="lg" textAlign="center">
+                        Claim Badge
+                      </Text>
+                    </Button>
+                  </VStack>
                 ) : isAuthDone ? (
                   <Button
                     size="lg"
                     bg={primary}
                     _hover={{ bg: primaryHighlight }}
-                    onClick={() => setIsClaimable(true)}
+                    onClick={handleClaimableTrue}
                   >
                     <Text fontSize="lg" textAlign="center">
                       Click after you get your claim
@@ -320,3 +350,6 @@ const ClaimModal = ({
 }
 
 export default ClaimModal
+function useFetchBadgeDetail(arg0: { badgeId: number }): { fetchClaimedBadge: any } {
+  throw new Error('Function not implemented.')
+}

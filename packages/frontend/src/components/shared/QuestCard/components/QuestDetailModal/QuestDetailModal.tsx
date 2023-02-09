@@ -81,6 +81,7 @@ const QuestDetailModal = ({ isOpen, onClose, questType, quest }: QuestDetailModa
       duration: 5000,
       isClosable: true,
     })
+    router.reload()
   }
 
   const handleDiscordCheckClick = () => {

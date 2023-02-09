@@ -149,6 +149,8 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
       repUnit,
       issuerId: res_polygonID?.issuerId,
       token: res_polygonID?.token,
+      email,
+      password,
     }
 
     const res = await createGroup(params)

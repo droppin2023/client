@@ -51,6 +51,8 @@ const BadgeForm = ({
   groupId,
   issuerId,
   token,
+  email,
+  password,
 }: BadgeFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState('')
   const [checkedQuestList, setCheckedQuestList] = useState<Quest[]>([])
@@ -155,10 +157,12 @@ const BadgeForm = ({
         ],
       },
       token,
+      email,
+      password,
     }
-    const polygonIdResponse = await createSchema(params_polygonID)
-    console.log(polygonIdResponse)
-    const schemaEnd = fromLittleEndian(hexToBytes(polygonIdResponse))
+    const res_schema = await createSchema(params_polygonID)
+    console.log(res_schema?.schemaHash, res_schema?.offerID, 'taweighewaighaewughewauigaiuweguw')
+    const schemaEnd = fromLittleEndian(hexToBytes(res_schema?.schemaHash))
 
     const params = {
       contract: {
@@ -172,16 +176,20 @@ const BadgeForm = ({
         symbol: symbol,
         URI: localImgUrl,
       },
+      schemaHash: res_schema?.schemaHash,
+      schemaType: title.replace(' ', ''),
+      schemaId: res_schema?.schemaID,
       description: description,
       name: title,
       symbol,
+      offerId: res_schema?.offerID,
     }
     const res = await createBadge(params)
 
     // TODO : Add loading modal and error modal using this data
     console.log('CLAIM BADGE CONTRACT', res, error, isLoading)
 
-    // router.reload()
+    router.reload()
   }
 
   // this useEffect helps with the toaster rendering

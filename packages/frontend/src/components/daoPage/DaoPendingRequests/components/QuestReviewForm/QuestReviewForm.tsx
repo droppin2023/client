@@ -30,9 +30,26 @@ import {
   secondary,
   secondaryWeak,
 } from '@constants/colors'
-import mockAvatar1 from '@mockData/assets/mock-avatar-1.png'
+import { useDaoPageContext } from '@context/DaoPageContext'
+import usePostCompleteQuest from '@queries/usePostCompleteQuest'
+import { useRouter } from 'next/router'
 
 const QuestReviewForm = ({ isOpen, onClose, reviewContent }: QuestReviewFormProps) => {
+  const { repUnit, id } = useDaoPageContext()
+
+  const { completeQuest, isLoading, error } = usePostCompleteQuest()
+
+  const router = useRouter()
+
+  const handleAccept = async () => {
+    await completeQuest({
+      questId: reviewContent.quest.id,
+      username: reviewContent.requestUser.username,
+    })
+
+    router.push(`/community/${id}`)
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -74,7 +91,7 @@ const QuestReviewForm = ({ isOpen, onClose, reviewContent }: QuestReviewFormProp
                 <Text color={secondary}>Quest Reward</Text>
                 <Text as="b" color={orange}>
                   {/* TODO: HARDCODED DATA */}
-                  {reviewContent.quest?.engageScore} YOO
+                  {reviewContent.quest?.engageScore} {repUnit}
                 </Text>
               </VStack>
             </Flex>
@@ -98,7 +115,13 @@ const QuestReviewForm = ({ isOpen, onClose, reviewContent }: QuestReviewFormProp
             <Button size="lg" colorScheme="red" flex="1">
               Reject
             </Button>
-            <Button size="lg" bg={primary} _hover={{ bg: primaryHighlight }} flex="1">
+            <Button
+              size="lg"
+              bg={primary}
+              _hover={{ bg: primaryHighlight }}
+              flex="1"
+              onClick={handleAccept}
+            >
               Accept
             </Button>
           </Flex>

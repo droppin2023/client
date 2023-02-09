@@ -5,6 +5,8 @@ export interface CreateSchemaParams {
   token: string
   schemaBody: CreateSchemaBody
   offerBody: CreateOfferBody
+  email: string
+  password: string
 }
 
 export interface CreateSchemaBody {

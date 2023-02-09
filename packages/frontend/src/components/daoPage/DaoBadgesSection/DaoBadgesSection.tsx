@@ -32,6 +32,8 @@ const DaoBadgesSection = ({
   isLoading,
   issuerId,
   token,
+  email,
+  password,
 }: DaoBadgesSectionProps) => {
   const router = useRouter()
 
@@ -183,6 +185,8 @@ const DaoBadgesSection = ({
         groupId={id}
         issuerId={issuerId}
         token={token}
+        email={email}
+        password={password}
       />
     </>
   )

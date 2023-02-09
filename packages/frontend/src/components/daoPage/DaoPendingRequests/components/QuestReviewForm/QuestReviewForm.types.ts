@@ -7,6 +7,7 @@ export interface QuestReviewFormProps {
       name: string
       engageScore: { number: number; unit: string }
       description: string
+      groupId: number
     }
     requestUser: {
       username: string

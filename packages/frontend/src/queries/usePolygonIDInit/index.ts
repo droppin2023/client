@@ -2,6 +2,8 @@ import axios from 'axios'
 import { useState } from 'react'
 import { ACTIVATE_ACCOUNT, CREATE_ISSUER, CREATE_ORG, SIGNIN } from './useCheckAuth.constants'
 import { InitPolygonIdParams } from './usePolygonIDInit.types'
+import { withAuthInstance } from '@shared/apiCommon'
+import localStorageUtils from '@helpers/localStorageUtils'
 
 const usePolygonIDInit = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +25,7 @@ const usePolygonIDInit = () => {
       })
 
       const token = res1.data.token
-      const res2 = await axios.post(
+      const res2 = await withAuthInstance.post(
         ACTIVATE_ACCOUNT,
         {},
         {
@@ -51,6 +53,13 @@ const usePolygonIDInit = () => {
         issuerId,
         token: token_final,
       }
+
+      localStorageUtils.write('polygon_id_user', {
+        email: params.email,
+        password: params.password,
+        issuerId,
+        token: token_final,
+      })
       return result
     } catch (e) {
       setIsLoading(false)

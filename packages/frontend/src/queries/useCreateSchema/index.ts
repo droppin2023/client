@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import type { CreateSchemaParams, CreateSchemaBody } from './useCreateSchema.types'
 import { CREATE_OFFER, CREATE_SCHEMA } from './useCreateSchema.constants'
+import { withAuthInstance } from '@shared/apiCommon'
 
 const useCreateSchema = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -13,7 +14,7 @@ const useCreateSchema = () => {
     const token = params.token
 
     try {
-      const res = await axios.post(
+      const res = await withAuthInstance.post(
         CREATE_SCHEMA + params.issuerID + '/schemas',
         {
           technicalName: params.schemaBody.technicalName,
@@ -31,7 +32,7 @@ const useCreateSchema = () => {
       const schemaID = res.data.id
       const schemaHash = res.data.schemaHash
 
-      const res2 = await axios.post(
+      const res2 = await withAuthInstance.post(
         CREATE_SCHEMA + params.issuerID + '/schemas/' + schemaID + '/offers',
         {
           attributes: params.offerBody.attributes,
@@ -45,7 +46,8 @@ const useCreateSchema = () => {
       console.log(res2)
       const offerID = res2.data.id
       console.log(offerID)
-      return schemaHash
+      const res_final = { schemaHash, schemaID, offerID }
+      return res_final
     } catch (e) {
       setIsLoading(false)
       setError(e)

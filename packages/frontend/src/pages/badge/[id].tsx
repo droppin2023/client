@@ -39,6 +39,9 @@ const BadgePage = ({ id }: { id: number }) => {
         badgeAddress={badgeData.address}
         badgePrice={badgeData.badgePrice}
         isLoading={loading}
+        offerId={badgeData.offerId}
+        engagementScore={badgeData.engagePointsThreshold}
+        schema={badgeData.schema}
       />
       <BadgeConditionSection
         requiredQuests={badgeData.requiredQuests}

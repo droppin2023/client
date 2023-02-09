@@ -15,6 +15,7 @@ import { QuestType } from '@queries/common'
 import useCheckAdmin from '@queries/useCheckAdmin'
 import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
 import { useEffect, useState } from 'react'
+import localStorageUtils from '@helpers/localStorageUtils'
 
 const DaoPage = ({ id }: { id: number }) => {
   const { user } = useUserContext()
@@ -35,6 +36,10 @@ const DaoPage = ({ id }: { id: number }) => {
 
   useEffect(() => {
     console.log('COMMUNITY DATA', communityData)
+    localStorageUtils.write('polygon_id_user', {
+      email: communityData.email,
+      password: communityData.password,
+    })
   }, [communityData])
 
   return (
@@ -103,6 +108,8 @@ const DaoPage = ({ id }: { id: number }) => {
                   isLoading={fetchCommunityDetailLoading}
                   issuerId={communityData.issuerId}
                   token={communityData.token}
+                  email={communityData.email}
+                  password={communityData.password}
                 />
               </TabPanel>
               <TabPanel>

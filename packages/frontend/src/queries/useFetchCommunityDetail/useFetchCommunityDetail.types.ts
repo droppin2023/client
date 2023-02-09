@@ -23,6 +23,8 @@ export interface FetchCommunityDetailResponse {
   repUnit: string
   issuerId: string
   token: string
+  email: string
+  password: string
 }
 
 export enum Category {

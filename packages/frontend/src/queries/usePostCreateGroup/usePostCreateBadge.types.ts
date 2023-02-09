@@ -12,4 +12,6 @@ export interface CreateGroupParams {
   repUnit: string
   issuerId: string
   token: string
+  email: string
+  password: string
 }

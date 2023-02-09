@@ -8,4 +8,6 @@ export interface BadgeFormProps {
   groupId: number
   issuerId: string
   token: string
+  email: string
+  password: string
 }

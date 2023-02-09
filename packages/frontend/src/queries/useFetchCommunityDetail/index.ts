@@ -168,6 +168,8 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
     discord: normalizedDiscord,
     issuerId: data?.issuerId || '',
     token: data?.token || '',
+    email: data?.email || '',
+    password: data?.password || '',
   }
 }
 

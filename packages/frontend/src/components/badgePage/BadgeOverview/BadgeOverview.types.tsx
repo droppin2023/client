@@ -1,3 +1,8 @@
+export interface SchemaProps {
+  schemaId: string
+  schemaType: string
+  schemaHash: string
+}
 export interface BadgeOverviewProps {
   id: number
   name: string
@@ -8,4 +13,7 @@ export interface BadgeOverviewProps {
   badgeAddress: string
   badgePrice: number
   isLoading: boolean
+  offerId: string
+  engagementScore: number
+  schema?: SchemaProps
 }

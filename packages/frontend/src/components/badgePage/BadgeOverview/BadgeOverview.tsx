@@ -15,6 +15,7 @@ import ClaimModal from './components/ClaimModal'
 import axios from 'axios'
 import { SERVER_URL } from '@constants/serverConfig'
 import useCreateQRcode from '@queries/useCreateQRcode'
+import localStorageUtils from '@helpers/localStorageUtils'
 
 const BadgeOverview = ({
   id,
@@ -26,6 +27,9 @@ const BadgeOverview = ({
   badgeAddress,
   badgePrice,
   isLoading,
+  offerId,
+  engagementScore,
+  schema,
 }: BadgeOverviewProps) => {
   const { isLoggedIn, user } = useUserContext()
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false)
@@ -42,7 +46,13 @@ const BadgeOverview = ({
 
     // TODO: POC
     if (claimInfo.claimable) {
-      const { srcValue, sessionID } = await createQRcode()
+      const { token } = localStorageUtils.read('polygon_id_user')
+      console.log(schema, 'fkind schema checkgaewgwaegewagawgeegewga')
+      const params = {
+        token,
+        offerId,
+      }
+      const { srcValue, sessionID } = await createQRcode(params)
       console.log(srcValue)
       setQrCode(srcValue)
       setIsClaimModalOpen(true)
@@ -136,6 +146,9 @@ const BadgeOverview = ({
         badgePrice={badgePrice}
         qrCode={qrCode}
         sessionID={sessionID}
+        offerId={offerId}
+        engagementScore={engagementScore}
+        schema={schema}
       />
     </>
   )

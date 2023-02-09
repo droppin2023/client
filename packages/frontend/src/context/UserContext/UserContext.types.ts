@@ -9,6 +9,7 @@ export interface UserContextValue {
   user: User | null
   isLoggedIn: boolean
   isLoading: boolean
+  handleUserLogin: (username: string) => Promise<void>
 }
 
 export interface UserProviderProps {
