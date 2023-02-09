@@ -12,7 +12,7 @@ import {
   ModalOverlay,
   Select,
 } from '@chakra-ui/react'
-import { ConnectDiscordModalProps } from './ConnectDiscordModal.props'
+import { ConnectDiscordModalProps } from './ConnectDiscordModal.types'
 
 import { background2, primary, primaryHighlight } from '@constants/colors'
 import { DiscordGuild } from '@queries/common'
@@ -52,18 +52,20 @@ const ConnectDiscordModal = (props: ConnectDiscordModalProps) => {
                 Select a server to attach to this community
               </FormHelperText>
               <Select variant="filled" placeholder="Select server" onChange={handleSelectGuild}>
-                {guilds.map((item) => {
-                  const value = {
-                    guildId: item.id,
-                    name: item.name,
-                  }
+                {guilds
+                  .filter((item) => item.owner)
+                  .map((item) => {
+                    const value = {
+                      guildId: item.id,
+                      name: item.name,
+                    }
 
-                  return (
-                    <option key={item.id} value={JSON.stringify(value)}>
-                      {item.name}
-                    </option>
-                  )
-                })}
+                    return (
+                      <option key={item.id} value={JSON.stringify(value)}>
+                        {item.name}
+                      </option>
+                    )
+                  })}
               </Select>
             </FormControl>
             <FormControl mt={4}>
