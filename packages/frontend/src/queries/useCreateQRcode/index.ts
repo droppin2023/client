@@ -1,10 +1,7 @@
-import axios from 'axios'
-import { useState } from 'react'
-import { CREATE_QRCODE, DOWNLOAD_QRCODE } from './useCreateQRcode.constants'
 import { withAuthInstance } from '@shared/apiCommon'
+import { useState } from 'react'
+import { CREATE_QRCODE } from './useCreateQRcode.constants'
 import { createQRcodeParams } from './useCreateQRcode.types'
-import { CREATE_SCHEMA } from '@queries/useCreateSchema/useCreateSchema.constants'
-import localStorageUtils from '@helpers/localStorageUtils'
 
 const useCreateQRcode = () => {
   const [isLoading, setIsLoading] = useState(true)
@@ -43,10 +40,12 @@ const useCreateQRcode = () => {
       )
       const base64ImageString = Buffer.from(res2.data, 'binary').toString('base64')
       const srcValue = 'data:image/png;base64,' + base64ImageString
-      return { srcValue, sessionID }
+      return { srcValue: base64ImageString || '', sessionID: res.data.sessionID || '' }
     } catch (e) {
       setIsLoading(false)
       setError(e)
+
+      return { srcValue: '', sessionID: '' }
     }
   }
 

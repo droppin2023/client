@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { QuestType } from '../common'
 import type { FetchQuestDetailParams, FetchQuestDetailResponse } from './useFetchBadgeDetail.types'
-import { GET_COMMUNITY } from './userFetchBadgeDetail.constants'
+import { QUEST_DETAIL_URL } from './userFetchBadgeDetail.constants'
 
 // THIS FUNCTION CLEANS UP THE DATA, JUST IN CASE THERE ARE NULLS
 const normalizeData = (data: FetchQuestDetailResponse | undefined) => {
@@ -38,7 +38,7 @@ const useFetchQuestDetail = ({ questId }: FetchQuestDetailParams) => {
     setIsLoading(true)
 
     axios
-      .get<FetchQuestDetailResponse>(`${GET_COMMUNITY}/${questId}`, {
+      .get<FetchQuestDetailResponse>(`${QUEST_DETAIL_URL}/${questId}`, {
         headers: {
           'Content-Type': '*/*',
           'Access-Control-Allow-Origin': '*',

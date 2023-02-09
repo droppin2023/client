@@ -91,7 +91,9 @@ const QuestReviewForm = ({ isOpen, onClose, reviewContent }: QuestReviewFormProp
                 <Text color={secondary}>Quest Reward</Text>
                 <Text as="b" color={orange}>
                   {/* TODO: HARDCODED DATA */}
-                  {reviewContent.quest?.engageScore} {repUnit}
+                  <>
+                    {reviewContent.quest?.engageScore} {repUnit}
+                  </>
                 </Text>
               </VStack>
             </Flex>

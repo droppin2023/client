@@ -26,11 +26,11 @@ const SearchPage = () => {
         <Input placeholder="Search Community" />
         <HStack spacing={2}>
           <InputGroup size="sm">
-            <InputLeftAddon children="Min" />
+            <InputLeftAddon>Min</InputLeftAddon>
             <Input placeholder="0" />
           </InputGroup>
           <InputGroup size="sm">
-            <InputLeftAddon children="Max" />
+            <InputLeftAddon>Max</InputLeftAddon>
             <Input placeholder="100" />
           </InputGroup>
         </HStack>

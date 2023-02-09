@@ -1,4 +1,4 @@
-import { ModalProps } from '@types/modal'
+import { ModalProps } from '@/types/modal'
 
 export type EditProfileModalProps = ModalProps
 

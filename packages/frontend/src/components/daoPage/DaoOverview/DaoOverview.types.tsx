@@ -16,4 +16,5 @@ export interface DaoOverviewProps {
   badges: Badge[]
   owner: User
   isLoading: boolean
+  defaultBadge: Badge
 }

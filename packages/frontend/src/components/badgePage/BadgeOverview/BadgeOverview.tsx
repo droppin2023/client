@@ -8,14 +8,14 @@ import { orange, orangeHighlight } from '@constants/colors'
 
 import bannerOrnament from './assets/banner-ornament.svg'
 
-import { useUserContext } from '@context/UserContext'
-import * as sty from './BadgeOverview.styles'
-import type { BadgeOverviewProps } from './BadgeOverview.types'
-import ClaimModal from './components/ClaimModal'
-import axios from 'axios'
 import { SERVER_URL } from '@constants/serverConfig'
-import useCreateQRcode from '@queries/useCreateQRcode'
+import { useUserContext } from '@context/UserContext'
 import localStorageUtils from '@helpers/localStorageUtils'
+import useCreateQRcode from '@queries/useCreateQRcode'
+import axios from 'axios'
+import * as sty from './BadgeOverview.styles'
+import type { BadgeOverviewProps, SchemaProps } from './BadgeOverview.types'
+import ClaimModal from './components/ClaimModal'
 
 const BadgeOverview = ({
   id,
@@ -33,8 +33,8 @@ const BadgeOverview = ({
 }: BadgeOverviewProps) => {
   const { isLoggedIn, user } = useUserContext()
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false)
-  const [qrCode, setQrCode] = useState()
-  const [sessionID, setSessionID] = useState()
+  const [qrCode, setQrCode] = useState('')
+  const [sessionID, setSessionID] = useState('')
   const { createQRcode } = useCreateQRcode()
   const onHandleClaim = async () => {
     // TODO : Need API to check if user fullfilled every conditions for Badge
@@ -148,7 +148,7 @@ const BadgeOverview = ({
         sessionID={sessionID}
         offerId={offerId}
         engagementScore={engagementScore}
-        schema={schema}
+        schema={schema as SchemaProps}
       />
     </>
   )

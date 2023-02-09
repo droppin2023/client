@@ -1,4 +1,4 @@
-import { ModalProps } from '@types/modal'
+import { ModalProps } from '@/types/modal'
 import { StaticImageData } from 'next/image'
 import { SchemaProps } from '../../BadgeOverview.types'
 

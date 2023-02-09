@@ -11,11 +11,11 @@ import type { GetServerSideProps } from 'next'
 import 'twin.macro'
 
 import { useUserContext } from '@context/UserContext'
+import localStorageUtils from '@helpers/localStorageUtils'
 import { QuestType } from '@queries/common'
 import useCheckAdmin from '@queries/useCheckAdmin'
 import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
 import { useEffect, useState } from 'react'
-import localStorageUtils from '@helpers/localStorageUtils'
 
 const DaoPage = ({ id }: { id: number }) => {
   const { user } = useUserContext()
@@ -68,6 +68,7 @@ const DaoPage = ({ id }: { id: number }) => {
           discordLink={communityData.discord.link}
           guildInstance={communityData.discord}
           isLoading={fetchCommunityDetailLoading || checkAdminLoading}
+          defaultBadge={communityData.defaultBadge}
         />
 
         <Box width="80%" minHeight="512px">

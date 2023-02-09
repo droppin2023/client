@@ -80,7 +80,9 @@ const DaoPage = ({ id }: { id: number }) => {
       <DaoPageProvider
         isAdmin={isAdmin}
         repUnit={communityData.repUnit}
-        setSubmitCount={() => {}}
+        setSubmitCount={() => {
+          return
+        }}
         id={id}
       >
         {/* TODO: refactor member list, quests, and badges as context */}

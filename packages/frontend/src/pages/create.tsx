@@ -26,12 +26,6 @@ const CreateCommunityPage = () => {
         <CreateCommunityInfoForm onNext={onNext} onPrev={onPrev} />
       ),
     },
-    // {
-    //   label: 'On-Chain Setup',
-    //   content: (onNext: () => void, onPrev: () => void) => (
-    //     <CreateCommunityOnChainForm onNext={onNext} onPrev={onPrev} />
-    //   ),
-    // },
   ]
 
   return (

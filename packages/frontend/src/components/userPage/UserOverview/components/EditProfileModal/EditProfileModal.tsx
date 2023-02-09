@@ -36,7 +36,9 @@ const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
     description: currentDescription,
   })
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => {
+    return
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -47,7 +49,12 @@ const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => {
         <ModalBody>
           <FormControl>
             <FormLabel>Display picture</FormLabel>
-            <UploadImage onFileLoad={(img) => {}} loaded={input.image} />
+            <UploadImage
+              onFileLoad={(img) => {
+                return
+              }}
+              loaded={input.image}
+            />
           </FormControl>
 
           <FormControl mt={4}>

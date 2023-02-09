@@ -1,3 +1,5 @@
+import { Quest } from '@queries/common'
+
 // TODO: better type definitions for quests
 export interface BadgeFormProps {
   isOpen: boolean

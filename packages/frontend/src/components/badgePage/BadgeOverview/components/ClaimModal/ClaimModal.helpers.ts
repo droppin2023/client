@@ -25,7 +25,7 @@ export const qrProofRequestJson = (params: qrProofRequestParams) => {
               allowed_issuers: ['*'],
               req: {
                 engagementScore: {
-                  $gt: params.engagementScore - 1,
+                  $gt: params.engagementScore,
                 },
               },
               schema: {
