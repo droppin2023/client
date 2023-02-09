@@ -3,8 +3,6 @@ import { useState } from 'react'
 
 import {
   Button,
-  Checkbox,
-  Flex,
   FormControl,
   FormHelperText,
   FormLabel,
@@ -21,14 +19,13 @@ import {
   Select,
   Text,
   Textarea,
-  VStack,
 } from '@chakra-ui/react'
 
-import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
+import { background2, primary, primaryHighlight } from '@constants/colors'
 import * as globalSty from '@styles'
 
-import DiscordIcon from '@components/icons/DiscordIcon'
 import { QuestType } from '@queries/common'
+import useFetchCommunityDetail from '@queries/useFetchCommunityDetail'
 import usePostCreateQuest from '@queries/usePostCreateQuest'
 import { formatBytes32String } from 'ethers/lib/utils.js'
 import { useRouter } from 'next/router'
@@ -43,7 +40,17 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
   const [reward, setReward] = useState(0)
   const [questCondition, setQuestCondition] = useState<QuestType>(QuestType.form)
 
+  const [discordMemberRequirement, setDiscordMemberRequirement] = useState('')
+  const [discordRoleRequirement, setDiscordRoleRequirement] = useState('')
+
   const { createQuest, isLoading, error } = usePostCreateQuest()
+
+  const {
+    data: communityData,
+    isLoading: fetchCommunityLoading,
+    error: fetchCommunityError,
+  } = useFetchCommunityDetail({ communityId: groupId })
+
   const router = useRouter()
 
   // const handleChangeSchemaHash = (e: ChangeEvent<HTMLInputElement>) => {
@@ -84,6 +91,13 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
       // TODO : Discord
       condition: {
         type: questCondition,
+        conditionDetail:
+          questCondition === QuestType.discord
+            ? {
+                guildId: communityData.discord.guildId,
+                roleId: discordRoleRequirement,
+              }
+            : undefined,
       },
       detail: questDetail,
       name: questTitle,
@@ -184,7 +198,7 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
 
             {questCondition === QuestType.discord && (
               <>
-                <FormControl mt={4}>
+                {/* <FormControl mt={4}>
                   <FormLabel>Connect Discord</FormLabel>
                   <FormHelperText css={[globalSty.helperText]}>
                     To use this condition, you have to connect discord account
@@ -193,7 +207,7 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
                     <DiscordIcon />
                     <Text ml={4}>Connect Discord</Text>
                   </Button>
-                </FormControl>
+                </FormControl> */}
 
                 <FormControl mt={4}>
                   <FormLabel>Condition detail</FormLabel>
@@ -203,20 +217,21 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
                   <Textarea
                     variant="filled"
                     placeholder="Write some more detail about the quest here"
+                    value={questDetail}
+                    onChange={handleChangeDetail}
                   />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel>Auto Verification</FormLabel>
                   <FormHelperText css={[globalSty.helperText]}>
-                    We support auto verifications for some conditions, so that you don’t have to
-                    check each quest review{' '}
+                    Please paste the role ID of the required role in the input field below if you
+                    are designating a role requirement. Otherwise, leave it blank.
                   </FormHelperText>
-                  <VStack align="left" width="100%">
+                  {/* <VStack align="left" width="100%">
                     <Flex alignItems={'space-between'} width="100%">
                       <Checkbox flex="2">Discord Role</Checkbox>
 
-                      {/* TODO: customize this according to the server */}
                       <Select variant="filled" flex="1">
                         <option value="admin">Admin</option>
                         <option value="moderator">Moderator</option>
@@ -227,14 +242,19 @@ const NewQuestForm = ({ groupId, isOpen, onClose, repUnit = 'Engagement' }: Ques
                     <Flex alignItems={'space-between'} width="100%">
                       <Checkbox flex="2">Join length</Checkbox>
 
-                      {/* TODO: customize this according to the server */}
                       <Select variant="filled" flex="1">
                         <option value="1">1 month</option>
                         <option value="3">3 months</option>
                         <option value="6">6 months</option>
                       </Select>
                     </Flex>
-                  </VStack>
+                  </VStack> */}
+
+                  <Input
+                    variant={'filled'}
+                    onChange={(e) => setDiscordRoleRequirement(e.target.value)}
+                    value={discordRoleRequirement}
+                  />
                 </FormControl>
               </>
             )}
