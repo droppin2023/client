@@ -101,6 +101,8 @@ const DaoPage = ({ id }: { id: number }) => {
                     (item) => item.condition.type === QuestType.form,
                   )}
                   isLoading={fetchCommunityDetailLoading}
+                  issuerId={communityData.issuerId}
+                  token={communityData.token}
                 />
               </TabPanel>
               <TabPanel>

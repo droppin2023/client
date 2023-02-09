@@ -49,6 +49,8 @@ const BadgeForm = ({
   questsDiscord,
   questsSubmitForm,
   groupId,
+  issuerId,
+  token,
 }: BadgeFormProps) => {
   const [localImgUrl, setLocalImgUrl] = useState('')
   const [checkedQuestList, setCheckedQuestList] = useState<Quest[]>([])
@@ -130,7 +132,7 @@ const BadgeForm = ({
 
     const params_polygonID = {
       //should get from server
-      issuerID: '141b568a-70f1-4726-a02c-a0709d2b32f5',
+      issuerID: issuerId,
       schemaBody: {
         schema: title,
         technicalName: title,
@@ -152,6 +154,7 @@ const BadgeForm = ({
           },
         ],
       },
+      token,
     }
     const polygonIdResponse = await createSchema(params_polygonID)
     console.log(polygonIdResponse)

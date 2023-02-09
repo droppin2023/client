@@ -21,6 +21,8 @@ export interface FetchCommunityDetailResponse {
   quests: Quest[]
   defaultBadge: Badge
   repUnit: string
+  issuerId: string
+  token: string
 }
 
 export enum Category {

@@ -10,8 +10,7 @@ const useCreateSchema = () => {
   const createSchema = async (params: CreateSchemaParams) => {
     setIsLoading(true)
     //should also get from server
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NzU5Mjc5MzUsImp0aSI6ImQyZDMyMGNjLWY4YjItNGIyNi1iMjA1LWJiMzI3YjQ5MjMwMCIsImlhdCI6MTY3NTg0MTUzNSwibmJmIjoxNjc1ODQxNTM1LCJzdWIiOiIyYzdhMGFlMy03ODYxLTRhYWEtOWEzMC1lNjk0ODNhYmFhODYiLCJzY29wZSI6ImFwaSIsImFjY291bnQiOnsidmVyaWZpZWQiOmZhbHNlLCJvcmdhbml6YXRpb24iOiIxNDFiNTY4YS03MGYxLTQ3MjYtYTAyYy1hMDcwOWQyYjMyZjUiLCJyb2xlIjoiT1dORVIiLCJlbWFpbCI6ImRyb3BwaW4yMDIyMjNAZ21haWwuY29tIn19.wX2i0MObggqZ3cqYjcDDq2sN0FGTOX3vAg46kBwYvqs'
+    const token = params.token
 
     try {
       const res = await axios.post(

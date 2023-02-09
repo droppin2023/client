@@ -129,6 +129,8 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
     address: data?.defaultBadge?.address || '',
     badgePrice: data?.defaultBadge?.badgePrice || 0,
     requiredQuests: normalizedRequiredDefaultQuests,
+    issuerId: data?.issuerId || '',
+    token: data?.token || '',
   }
 
   const normalizedOwner = {
@@ -164,6 +166,8 @@ const normalizeData = (data: FetchCommunityDetailResponse | undefined) => {
     repUnit: data?.repUnit || '',
     link: data?.link || '',
     discord: normalizedDiscord,
+    issuerId: data?.issuerId || '',
+    token: data?.token || '',
   }
 }
 

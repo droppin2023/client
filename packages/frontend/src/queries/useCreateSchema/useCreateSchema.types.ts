@@ -2,6 +2,7 @@
 
 export interface CreateSchemaParams {
   issuerID: string
+  token: string
   schemaBody: CreateSchemaBody
   offerBody: CreateOfferBody
 }

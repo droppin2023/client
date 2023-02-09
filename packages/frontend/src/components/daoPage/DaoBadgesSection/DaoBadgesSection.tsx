@@ -30,6 +30,8 @@ const DaoBadgesSection = ({
   questsDiscord,
   questsSubmitForm,
   isLoading,
+  issuerId,
+  token,
 }: DaoBadgesSectionProps) => {
   const router = useRouter()
 
@@ -179,6 +181,8 @@ const DaoBadgesSection = ({
         questsDiscord={questsDiscord}
         questsSubmitForm={questsSubmitForm}
         groupId={id}
+        issuerId={issuerId}
+        token={token}
       />
     </>
   )

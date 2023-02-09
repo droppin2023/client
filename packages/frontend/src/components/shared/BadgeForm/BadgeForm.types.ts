@@ -6,4 +6,6 @@ export interface BadgeFormProps {
   questsDiscord: Quest[]
   questsSubmitForm: Quest[]
   groupId: number
+  issuerId: string
+  token: string
 }
