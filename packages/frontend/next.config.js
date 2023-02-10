@@ -14,6 +14,8 @@ const nextConfig = {
       'img-cdn.magiceden.dev',
       'thumbs2.imgbox.com',
       'localhost',
+      'droppinprotocol.com',
+      'stingray-app-elafw.ondigitalocean.app',
     ],
   },
 }
