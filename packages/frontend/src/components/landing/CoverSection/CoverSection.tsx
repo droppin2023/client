@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Button, Flex, HStack, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Text, VStack } from '@chakra-ui/react'
 
 import { foreground, orange, orangeHighlight } from '@constants/colors'
 
@@ -10,7 +10,7 @@ import * as sty from './CoverSection.styles'
 
 const CoverSection = () => {
   return (
-    <div css={[sty.container]}>
+    <Box css={[sty.container]}>
       <Image src={bannerOrnamentImg} alt="banner" css={[sty.bannerOrnament]} />
       <div css={[sty.content]}>
         <Flex justifyContent={'space-between'} alignItems="center">
@@ -40,7 +40,7 @@ const CoverSection = () => {
           <Image src={coverImg} alt="Cover Image" width={450} height={421} />
         </Flex>
       </div>
-    </div>
+    </Box>
   )
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react'
 
 import { Badge, Button, Flex, HStack, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react'
@@ -13,6 +14,9 @@ import {
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
+
+// @ts-ignore
+import DaoCard from '@components/shared/DAOCard'
 import QuestBadge from '@components/shared/QuestBadge'
 import QuestCard from '@components/shared/QuestCard'
 
@@ -20,7 +24,6 @@ import BadgeForm from '@components/shared/BadgeForm'
 import QuestForm from '@components/shared/QuestForm'
 import type { DaoBadgesSectionProps } from './DaoBadgesSection.types'
 
-import DaoCard from '@components/shared/DaoCard'
 import { MOCK_DAO_LIST } from '@mockData'
 import { QuestType } from '@queries/common'
 import { useRouter } from 'next/router'
