@@ -43,7 +43,7 @@ const DaoCard = ({
 
           <HStack position="absolute" zIndex="5" bottom={2} right="8px" alignItems={'center'}>
             <HStack spacing="-12px">
-              {memberList.slice(0, 3).map((item, index) => (
+              {memberList.slice(0, 3).map((item: any, index: number) => (
                 <AvatarPreview key={index} ringColor={orange} img={item.img} />
               ))}
             </HStack>
