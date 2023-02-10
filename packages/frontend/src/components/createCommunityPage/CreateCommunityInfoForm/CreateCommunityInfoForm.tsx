@@ -45,12 +45,12 @@ import { uploadImage } from '@helpers/imageUtils'
 import localStorageUtils from '@helpers/localStorageUtils'
 import { truncateString } from '@helpers/stringUtils'
 import { Category, DiscordGuild, DiscordUser } from '@queries/common'
+import usePolygonIDInit from '@queries/usePolygonIDInit'
 import usePostCreateGroup from '@queries/usePostCreateGroup'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import * as sty from './CreateCommunityInfoForm.styles'
 import { CreateCommunityInfoFormProps } from './CreateCommunityInfoForm.types'
-import usePolygonIDInit from '@queries/usePolygonIDInit'
 
 const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProps) => {
   const {
@@ -275,12 +275,16 @@ const CreateCommunityInfoForm = ({ onNext, onPrev }: CreateCommunityInfoFormProp
 
           <FormControl mt={4}>
             <FormLabel>Password</FormLabel>
-            <FormHelperText css={[globalSty.helperText]}>Password for Polygon ID</FormHelperText>
+            <FormHelperText css={[globalSty.helperText]}>
+              Password for Polygon ID. Minimum 8 Characters and MUST include numbers and special
+              characters.
+            </FormHelperText>
             <Input
               variant="filled"
               placeholder=""
               onChange={(e) => setPassword(e.target.value)}
               value={password}
+              type="password"
             />
           </FormControl>
         </HStack>
