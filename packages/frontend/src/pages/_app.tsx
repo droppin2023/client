@@ -35,6 +35,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       {/* TODO SEO */}
+
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      </Head>
+
       <DefaultSeo
         dangerouslySetAllPagesToNoFollow={!env.isProduction}
         dangerouslySetAllPagesToNoIndex={!env.isProduction}
@@ -58,10 +64,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           handle: '@scio_xyz', // TODO
         }}
       />
-
-      <Head>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
 
       <CacheProvider value={cache}>
         <ChakraProvider theme={chakraTheme}>
