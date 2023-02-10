@@ -4,6 +4,10 @@ import mockAvatar3 from './assets/mock-avatar-3.png'
 
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
+import badge2 from './assets/badge2.png'
+import badge1 from './assets/holder.png'
+import badge3 from './assets/the_professors.png'
+
 export const MOCK_USER_LIST = [
   {
     name: 'John',
@@ -432,32 +436,32 @@ export const MOCK_DAO_LIST = [
 
 export const MOCK_BADGE_LIST = [
   {
+    daoName: 'y00ts',
+    name: 'y00ts Holder',
+    minter: '@frankdegods',
+    isLocked: false,
+    img: badge1,
+  },
+  {
+    daoName: 'y00ts',
+    name: 'Migration Contest Participated Holder',
+    minter: '@frankdegods',
+    isLocked: false,
+    img: badge2,
+  },
+  {
+    daoName: 'y00ts',
+    name: 'Funding for club : The professors',
+    minter: '@frankdegods',
+    isLocked: false,
+    img: badge3,
+  },
+  {
     daoName: 'Lepak DAO',
-    name: 'NewBie',
-    recentActivity: 'mint by @carlos',
-    minter: '@carlos',
+    name: 'Member',
+    minter: '@piapark.eth',
     isLocked: false,
-  },
-  {
-    daoName: 'Meta DAO',
-    name: 'Expert',
-    recentActivity: 'mint by @pia',
-    minter: '@pia',
-    isLocked: false,
-  },
-  {
-    daoName: 'Alpha DAO',
-    name: 'Extra Miler',
-    recentActivity: 'unlocked by @yixuan',
-    minter: '@yixuan',
-    isLocked: false,
-  },
-  {
-    daoName: 'Mamak DAO',
-    name: 'NewBie',
-    recentActivity: 'mint by @rick',
-    minter: '@rick',
-    isLocked: false,
+    img: sampleDaoAvatar1,
   },
   {
     daoName: 'Bali DAO',

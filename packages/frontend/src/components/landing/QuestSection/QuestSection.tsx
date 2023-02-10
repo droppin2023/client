@@ -36,7 +36,7 @@ const QuestSection = () => {
             </HStack>
           </Text>
           <HStack spacing={16} alignItems="center">
-            <HStack spacing={4}>
+            <HStack spacing={4} alignItems="flex-start">
               {MOCK_BADGE_LIST.slice(0, 4).map((item, index) => (
                 <QuestBadge
                   key={index}
@@ -44,6 +44,7 @@ const QuestSection = () => {
                   name={item.name}
                   recentActivity={item.recentActivity}
                   isLocked={item.isLocked}
+                  img={item?.img}
                 />
               ))}
             </HStack>

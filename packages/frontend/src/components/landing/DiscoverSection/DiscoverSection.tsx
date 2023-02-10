@@ -30,7 +30,7 @@ const DiscoverSection = () => {
           subtitle="Droppin allows you to evaluate different Communities based on real-time activities"
         />
         <div css={[sty.carouselSection]}>
-          <HStack spacing="16px">
+          <HStack spacing="16px" alignItems={'flex-start'}>
             {MOCK_DAO_LIST.slice(0, 3).map((item, index) => (
               <DaoCard
                 name={item.name}
