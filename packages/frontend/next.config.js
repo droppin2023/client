@@ -16,6 +16,7 @@ const nextConfig = {
       'localhost',
       'droppinprotocol.com',
       'stingray-app-elafw.ondigitalocean.app',
+      'api-staging.polygonid.com',
     ],
   },
 }
