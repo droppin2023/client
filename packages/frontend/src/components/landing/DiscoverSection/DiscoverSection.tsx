@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Button, HStack, Text } from '@chakra-ui/react'
 
 import People from '@components/icons/People'
 import SideScrollRight from '@components/icons/SideScrollRight'
+
+//@ts-ignore
 import DaoCard from '@components/shared/DaoCard'
 
 import SectionHeader from '@components/shared/SectionHeader'
