@@ -40,7 +40,7 @@ const useCreateQRcode = () => {
       )
       const base64ImageString = Buffer.from(res2.data, 'binary').toString('base64')
       const srcValue = 'data:image/png;base64,' + base64ImageString
-      return { srcValue: base64ImageString || '', sessionID: res.data.sessionID || '' }
+      return { srcValue: srcValue || '', sessionID: res.data.sessionID || '' }
     } catch (e) {
       setIsLoading(false)
       setError(e)
