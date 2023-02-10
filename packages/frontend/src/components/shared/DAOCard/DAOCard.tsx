@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Image from 'next/image'
 
 import { Card, CardBody, HStack, Text, VStack } from '@chakra-ui/react'
@@ -6,7 +7,11 @@ import { foreground, orange, primary } from '@constants/colors'
 
 import AvatarPreview from '../AvatarPreview'
 import placeholderImg from './assets/placeholder.jpeg'
+
+//@ts-ignore
 import * as sty from './DaoCard.styles'
+
+//@ts-ignore
 import type { DaoCardProps } from './DaoCard.types'
 
 const DaoCard = ({
