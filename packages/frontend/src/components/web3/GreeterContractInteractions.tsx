@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore
 import { Lock__factory } from '@droppin/contracts/typechain-types' // TODO
 import { useDeployments } from '@shared/useDeployments'
 import { FC } from 'react'
