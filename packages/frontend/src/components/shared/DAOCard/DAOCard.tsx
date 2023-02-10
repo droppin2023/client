@@ -7,7 +7,7 @@ import { foreground, orange, primary } from '@constants/colors'
 import AvatarPreview from '../AvatarPreview'
 import placeholderImg from './assets/placeholder.jpeg'
 import * as sty from './DaoCard.styles'
-import type { DaoCardProps } from './DAOCard.types'
+import type { DaoCardProps } from './DaoCard.types'
 
 const DaoCard = ({
   imgUrl = placeholderImg,

@@ -51,7 +51,6 @@ const DaoPage = ({ id }: { id: number }) => {
         id={id}
         setSubmitCount={setSubmitCount}
       >
-        {/* TODO: integrate discord */}
         <DaoOverview
           name={communityData.name}
           imgUrl={communityData.logo}
