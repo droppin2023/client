@@ -20,13 +20,13 @@ const QuestSection = () => {
         <SectionHeader
           title={
             <>
-              Complete a quests and get your{' '}
+              Complete quests and get your{' '}
               <Text as="span" color={orange}>
-                Badge
+                Badges
               </Text>
             </>
           }
-          subtitle="Droppin allows you to get reputation reward and quest badge, and be able to get your badge that makes you get easy access to DAO’s different activity based on your claim."
+          subtitle="Your social credit record will be standardized here, but it can be composable, transferable. Other community recognize your work in here, they can create engagements and tasks with different standard to certain groups of verified people. — Diamonds, Multi-Facet Proxy"
         />
         <div>
           <Text fontSize="2xl" as="b" lineHeight="64px" color={primary}>

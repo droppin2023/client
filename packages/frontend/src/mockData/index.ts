@@ -8,6 +8,8 @@ import badge2 from './assets/badge2.png'
 import badge1 from './assets/holder.png'
 import badge3 from './assets/the_professors.png'
 
+import yoots from './assets/y00ts.jpg'
+
 export const MOCK_USER_LIST = [
   {
     name: 'John',
@@ -85,7 +87,7 @@ export const MOCK_DAO_LIST = [
     name: 'Lepak DAO',
     img: sampleDaoAvatar1,
     minter: 'TheLepakGuys',
-    memberCount: 125,
+    memberCount: 58,
     repScore: 235235636,
     earnings: 3.4,
     chain: 'Polygon',
@@ -223,12 +225,13 @@ export const MOCK_DAO_LIST = [
     ],
   },
   {
-    name: 'Mamak DAO',
-    memberCount: 190,
+    name: 'y00ts',
+    memberCount: 20384,
     repScore: 5562636,
-    repUnit: 'MAM',
+    repUnit: 'YT',
+    img: yoots,
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
+      'y00ts is a generative art project of 15,000 NFTs. it is our love letter to the Web3 community. designed to be aesthetic. engineered to be functional. curated to contain the best community of builders and creators on the internet. welcome to y00topia.',
     members: [
       {
         name: 'John',
