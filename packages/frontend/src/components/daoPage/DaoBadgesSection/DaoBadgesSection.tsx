@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react'
 
 import { Badge, Button, Flex, HStack, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react'
@@ -13,6 +14,8 @@ import {
 import { useDaoPageContext } from '@context/DaoPageContext'
 
 import Award from '@components/icons/Award'
+
+// @ts-ignore
 import DaoCard from '@components/shared/DaoCard'
 import QuestBadge from '@components/shared/QuestBadge'
 import QuestCard from '@components/shared/QuestCard'
