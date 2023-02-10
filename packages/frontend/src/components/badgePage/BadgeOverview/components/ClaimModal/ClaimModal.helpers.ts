@@ -1,4 +1,5 @@
 import { qrProofRequestParams } from './ClaimModal.types'
+import { env } from '@shared/environment'
 
 export const getTwitterTweetContent = (badgeName: string) =>
   `Hi, I have just claimed the ${badgeName} badge via Droppin!`
@@ -10,7 +11,7 @@ export const qrProofRequestJson = (params: qrProofRequestParams) => {
     type: 'https://iden3-communication.io/proofs/1.0/contract-invoke-request',
     body: {
       transaction_data: {
-        contract_address: '0x2D066EB307681D413a836EA3554580c471fc2b54',
+        contract_address: env.droppinDiamond,
         method_id: 'b68967e2',
         chain_id: 80001,
         network: 'polygon-mumbai',
