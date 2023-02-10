@@ -40,7 +40,7 @@ const QuestBadge = ({
 
       <VStack width="200px">
         <div css={[sty.imgSlot(isLocked)]}>
-          <Image src={img} alt="Badge Image" width={200} height={200} css={[sty.img]} />
+          <Image src={img} alt="Badge Image" width={180} height={180} css={[sty.img]} />
           <Text fontSize="lg" as="b" position="absolute" top="8px" left="12px">
             {daoName}
           </Text>

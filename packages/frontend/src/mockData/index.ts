@@ -4,6 +4,12 @@ import mockAvatar3 from './assets/mock-avatar-3.png'
 
 import sampleDaoAvatar1 from './assets/sample-dao-avatar-1.png'
 
+import badge2 from './assets/badge2.png'
+import badge1 from './assets/holder.png'
+import badge3 from './assets/the_professors.png'
+
+import yoots from './assets/y00ts.jpg'
+
 export const MOCK_USER_LIST = [
   {
     name: 'John',
@@ -81,7 +87,7 @@ export const MOCK_DAO_LIST = [
     name: 'Lepak DAO',
     img: sampleDaoAvatar1,
     minter: 'TheLepakGuys',
-    memberCount: 125,
+    memberCount: 58,
     repScore: 235235636,
     earnings: 3.4,
     chain: 'Polygon',
@@ -219,12 +225,13 @@ export const MOCK_DAO_LIST = [
     ],
   },
   {
-    name: 'Mamak DAO',
-    memberCount: 190,
+    name: 'y00ts',
+    memberCount: 20384,
     repScore: 5562636,
-    repUnit: 'MAM',
+    repUnit: 'YT',
+    img: yoots,
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae tempore aliquam soluta sit minima libero asperiores voluptatibus praesentium consequatur consequuntur?',
+      'y00ts is a generative art project of 15,000 NFTs. it is our love letter to the Web3 community. designed to be aesthetic. engineered to be functional. curated to contain the best community of builders and creators on the internet. welcome to y00topia.',
     members: [
       {
         name: 'John',
@@ -432,32 +439,32 @@ export const MOCK_DAO_LIST = [
 
 export const MOCK_BADGE_LIST = [
   {
+    daoName: 'y00ts',
+    name: 'y00ts Holder',
+    minter: '@frankdegods',
+    isLocked: false,
+    img: badge1,
+  },
+  {
+    daoName: 'y00ts',
+    name: 'Migration Contest Participated Holder',
+    minter: '@frankdegods',
+    isLocked: false,
+    img: badge2,
+  },
+  {
+    daoName: 'y00ts',
+    name: 'Funding for club : The professors',
+    minter: '@frankdegods',
+    isLocked: false,
+    img: badge3,
+  },
+  {
     daoName: 'Lepak DAO',
-    name: 'NewBie',
-    recentActivity: 'mint by @carlos',
-    minter: '@carlos',
+    name: 'Member',
+    minter: '@piapark.eth',
     isLocked: false,
-  },
-  {
-    daoName: 'Meta DAO',
-    name: 'Expert',
-    recentActivity: 'mint by @pia',
-    minter: '@pia',
-    isLocked: false,
-  },
-  {
-    daoName: 'Alpha DAO',
-    name: 'Extra Miler',
-    recentActivity: 'unlocked by @yixuan',
-    minter: '@yixuan',
-    isLocked: false,
-  },
-  {
-    daoName: 'Mamak DAO',
-    name: 'NewBie',
-    recentActivity: 'mint by @rick',
-    minter: '@rick',
-    isLocked: false,
+    img: sampleDaoAvatar1,
   },
   {
     daoName: 'Bali DAO',

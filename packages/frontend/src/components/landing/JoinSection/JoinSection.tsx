@@ -1,9 +1,9 @@
-import { Button, Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 
 import Ornament from '@components/shared/Ornament'
 import SectionHeader from '@components/shared/SectionHeader'
 
-import { orange, primary, primaryHighlight } from '@constants/colors'
+import { orange } from '@constants/colors'
 import * as sty from './JoinSection.styles'
 
 const JoinSection = () => {
@@ -23,15 +23,6 @@ const JoinSection = () => {
             }
             subtitle="Droppin allows you to join community based on your zk-identity ( powered by Polygon ID ). You can use your self sovereign identity to connect different communities quests "
           />
-          <Button
-            bgColor={primary}
-            _hover={{ bg: primaryHighlight }}
-            margin="24px 0"
-            padding="0 64px"
-            size="lg"
-          >
-            Get Polygon ID
-          </Button>
         </div>
       </div>
     </div>

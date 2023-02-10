@@ -14,6 +14,7 @@ import { primaryHighlight } from '@constants/colors'
 import * as sty from './DiscoverSection.styles'
 
 // TODO: integrate real data
+import { orange } from '@constants/colors'
 import { MOCK_DAO_LIST } from '@mockData'
 
 const DiscoverSection = () => {
@@ -24,13 +25,19 @@ const DiscoverSection = () => {
           title={
             <HStack spacing={2}>
               <People />
-              <div>Discover most active Communities</div>
+              <Text>
+                Track and analyze{' '}
+                <Text as="span" color={orange}>
+                  High-Quality Engagement
+                </Text>{' '}
+                in your Community
+              </Text>
             </HStack>
           }
-          subtitle="Droppin allows you to evaluate different Communities based on real-time activities"
+          subtitle='Engagements are not the same. It is hard to define what is "high level". Our protocol can help you define your community standards better.'
         />
         <div css={[sty.carouselSection]}>
-          <HStack spacing="16px">
+          <HStack spacing="16px" alignItems={'flex-start'}>
             {MOCK_DAO_LIST.slice(0, 3).map((item, index) => (
               <DaoCard
                 name={item.name}
