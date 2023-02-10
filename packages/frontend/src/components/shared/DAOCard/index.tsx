@@ -1,3 +1,2 @@
-import DaoCard from './DaoCard'
-
-export default DaoCard
+export * from './DaoCard'
+export { default } from './DaoCard'
