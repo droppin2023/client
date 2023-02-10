@@ -10,8 +10,8 @@ import * as sty from './CoverSection.styles'
 
 const CoverSection = () => {
   return (
-    <Box css={[sty.container]} bgImage={bannerOrnamentImg}>
-      {/* <Image src={bannerOrnamentImg} alt="banner" css={[sty.bannerOrnament]} /> */}
+    <Box css={[sty.container]}>
+      <Image src={bannerOrnamentImg} alt="banner" css={[sty.bannerOrnament]} />
       <div css={[sty.content]}>
         <Flex justifyContent={'space-between'} alignItems="center">
           <VStack spacing="12px" alignItems={'left'} width="60%">

@@ -3,10 +3,13 @@ import { Button, Flex, HStack, Input, InputGroup, InputLeftElement } from '@chak
 import DroppinLogo from '@components/icons/DroppinLogo'
 import Search from '@components/icons/Search'
 import { background, primaryWeak } from '@constants/colors'
-import DroppinConnectButton from '../DroppinConnectButton'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import DroppinConnectButton from '../DroppinConnectButton'
 
 const Navbar = () => {
+  const router = useRouter()
+
   return (
     <Flex
       justifyContent={'space-between'}
@@ -18,7 +21,10 @@ const Navbar = () => {
       backgroundColor={background}
     >
       <HStack spacing={10} width="57%">
-        <DroppinLogo width="48px" height="48px" />
+        <Button variant="unstyled" onClick={() => router.push('/')}>
+          <DroppinLogo width="48px" height="48px" />
+        </Button>
+
         <InputGroup>
           <InputLeftElement pointerEvents={'none'}>
             <Search />
