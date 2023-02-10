@@ -9,12 +9,12 @@ import AvatarPreview from '../AvatarPreview'
 import placeholderImg from './assets/placeholder.jpeg'
 
 //@ts-ignore
-import * as sty from './DaoCard.styles'
+import * as sty from './DAOCard.styles'
 
 //@ts-ignore
-import type { DaoCardProps } from './DaoCard.types'
+import type { DaoCardProps } from './DAOCard.types'
 
-const DaoCard = ({
+const DAOCard = ({
   imgUrl = placeholderImg,
   name,
   memberCount,
@@ -70,4 +70,4 @@ const DaoCard = ({
   )
 }
 
-export default DaoCard
+export default DAOCard
