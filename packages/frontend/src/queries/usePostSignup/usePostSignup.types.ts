@@ -7,6 +7,7 @@ export interface SignupParams {
   name: string
   username: string
   description: string
+  email?: string
   discord?: DiscordUser
   image: string
   twitter?: string
