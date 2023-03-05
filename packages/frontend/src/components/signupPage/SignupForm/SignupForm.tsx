@@ -1,3 +1,5 @@
+import * as globalSty from '@styles'
+
 /* eslint-disable no-debugger */
 import {
   AlertDialog,
@@ -20,23 +22,22 @@ import {
   Textarea,
   VStack,
 } from '@chakra-ui/react'
-import localStorageUtils from '@helpers/localStorageUtils'
+import { DISCORD_REDIRECT_USER, LS_KEY_DISCORD_USER } from '@constants/discord'
+import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
 import { useEffect, useRef, useState } from 'react'
 
 import DiscordIcon from '@components/icons/DiscordIcon'
-import TwitterIcon from '@components/icons/TwitterIcon'
-import SectionHeader from '@components/shared/SectionHeader'
-import UploadImage from '@components/shared/UploadImage'
-import { background2, discordPurple, primary, primaryHighlight } from '@constants/colors'
-import { DISCORD_REDIRECT_USER, LS_KEY_DISCORD_USER } from '@constants/discord'
-import { generateAuthUrl } from '@helpers/discord'
-import { uploadImage } from '@helpers/imageUtils'
-import usePostSignup from '@queries/usePostSignup'
-import * as globalSty from '@styles'
-import { useRouter } from 'next/router'
-import { useAccount } from 'wagmi'
-import SignupSuccess from './components/SignupSuccess'
 import { SIGNUP_PERSIST_KEY } from './SignupForm.constants'
+import SectionHeader from '@components/shared/SectionHeader'
+import SignupSuccess from './components/SignupSuccess'
+import TwitterIcon from '@components/icons/TwitterIcon'
+import UploadImage from '@components/shared/UploadImage'
+import { generateAuthUrl } from '@helpers/discord'
+import localStorageUtils from '@helpers/localStorageUtils'
+import { uploadImage } from '@helpers/imageUtils'
+import { useAccount } from 'wagmi'
+import usePostSignup from '@queries/usePostSignup'
+import { useRouter } from 'next/router'
 import { useUserContext } from '@context/UserContext'
 
 const SignupForm = () => {
@@ -72,7 +73,7 @@ const SignupForm = () => {
     // TODO: post the twitter
 
     // upload image
-    const uploadUrl = await uploadImage(localImgUrl)
+    // const uploadUrl = await uploadImage(localImgUrl)
 
     const params = {
       address: address?.toString() as string,
@@ -84,7 +85,7 @@ const SignupForm = () => {
         name: discordUsername,
         discriminator: discordDiscriminator,
       },
-      image: uploadUrl,
+      image: '',
       twitter: `https://twitter.com/${twitter}`,
     }
 
