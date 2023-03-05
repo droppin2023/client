@@ -81,7 +81,7 @@ async function callSummonApi(
   featureKey: string,
   tenantKey: string,
 ) {
-  const apiToken = Deno.env.get('API_TOKEN')
+  const apiToken = Deno.env.get(process.env.NEXT_PUBLIC_SUMMON_API)
 
   console.log('Sending', {
     featureKey,
