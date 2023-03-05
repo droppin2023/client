@@ -34,9 +34,7 @@ const avalancheChain: Chain = {
     symbol: 'BIT',
   },
   rpcUrls: {
-    default: {
-      http: ['https://rpc.testnet.mantle.xyz'],
-    },
+    default: 'https://rpc.testnet.mantle.xyz',
   },
   blockExplorers: {
     default: { name: 'MantleExplorer', url: 'https://explorer.testnet.mantle.xyz' },
