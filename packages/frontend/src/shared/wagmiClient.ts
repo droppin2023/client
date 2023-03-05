@@ -1,8 +1,9 @@
+import { Chain, allChains, chain, configureChains, createClient } from 'wagmi'
+
+import { env } from './environment'
 import { getDefaultWallets } from '@rainbow-me/rainbowkit'
-import { allChains, chain, Chain, configureChains, createClient } from 'wagmi'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { publicProvider } from 'wagmi/providers/public'
-import { env } from './environment'
 
 /**
  * Wagmi.sh Configuration (https://wagmi.sh/docs)
@@ -21,8 +22,30 @@ export const getRpcUrl = (chainId: number): string => {
   return env.rpcUrls[chainId as keyof typeof env.rpcUrls]
 }
 
+const avalancheChain: Chain = {
+  id: 5001,
+  name: 'Mantle Testnet',
+  network: 'mantle_testnet',
+  iconUrl: 'https://example.com/icon.svg',
+  iconBackground: '#fff',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'BIT',
+    symbol: 'BIT',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://rpc.testnet.mantle.xyz'],
+    },
+  },
+  blockExplorers: {
+    default: { name: 'MantleExplorer', url: 'https://explorer.testnet.mantle.xyz' },
+  },
+  testnet: true,
+}
+
 export const { chains, provider } = configureChains(
-  [chain.polygonMumbai, chain.mainnet, ...supportedChains],
+  [chain.polygonMumbai, chain.mainnet, avalancheChain, ...supportedChains],
   [
     jsonRpcProvider({
       rpc: (chain) => {
